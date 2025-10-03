@@ -4,10 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ title if title else 'Fun Website' }}</title>
+
+  <!-- ✅ Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Your Custom Styles -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
-    .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon, .goog-te-menu-value, .goog-te-banner-frame, .goog-te-balloon-frame, #goog-gt-tt, .goog-te-gadget-simple { display:none !important; }
+    .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon, .goog-te-menu-value,
+    .goog-te-banner-frame, .goog-te-balloon-frame, #goog-gt-tt,
+    .goog-te-gadget-simple { display:none !important; }
     body { top: 0px !important; }
   </style>
 </head>
@@ -19,8 +27,13 @@
         <div class="card"><strong>{{ messages[0] }}</strong></div>
       {% endif %}
     {% endwith %}
-    {% block body %}{% endblock %}
+    <!-- ✅ Change block name from "body" to "content" for Bootstrap pages -->
+    {% block content %}{% endblock %}
   </div>
+
+  <!-- ✅ Bootstrap JS (for components like modals, dropdowns) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   <script type="text/javascript">
     function googleTranslateElementInit() {
