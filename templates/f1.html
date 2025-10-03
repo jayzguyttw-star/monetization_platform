@@ -1,38 +1,141 @@
-{% extends "base.html" %}
-{% block body %}
-<div class="card" style="max-width:720px;margin:28px auto">
-  <h2>📋 play the game by fill Form</h2>
-  <p style="color:#64748b">Please complete all sections carefully before submitting. Note do not put your real details, just use random data.</p>
-  <form method="post" style="margin-top:12px">
-    <input class="input" name="fullname" placeholder="Full Name" required>
-    <input class="input" name="dob" placeholder="Date of Birth">
-    <input class="input" name="gender" placeholder="Gender">
-    <div style="display:flex;gap:8px">
-      <input class="input" name="street" placeholder="Street">
-      <input class="input" name="city" placeholder="City">
-    </div>
-    <input class="input" name="postal" placeholder="Postal Code">
-    <input class="input" name="country" placeholder="Country">
-    <input class="input" name="qualification" placeholder="Highest Qualification">
-    <input class="input" name="institution" placeholder="Institution">
-    <input class="input" name="year" placeholder="Year Completed">
-    <input class="input" name="occupation" placeholder="Occupation">
-    <input class="input" name="company" placeholder="Company">
-    <p>Fun Preferences:</p>
-    <label><input type="checkbox" name="fun" value="own"> Feel from your own happiness</label><br>
-    <label><input type="checkbox" name="fun" value="earn"> Earn from your smile</label><br>
-    <label><input type="checkbox" name="fun" value="both"> Both</label><br>
-    <textarea class="input" name="bio" placeholder="Short bio (15-300 words)" style="min-height:100px"></textarea>
-    <p>Notification Preferences</p>
-    <label><input type="checkbox" name="notify_email"> Email Updates</label>
-    <label><input type="checkbox" name="notify_sms"> SMS Alerts</label>
-    <label><input type="checkbox" name="notify_push"> Push Notifications</label>
-    <p>Play Method</p>
-    <label><input type="checkbox" name="method" value="feeling"> feeling</label>
-    <label><input type="checkbox" name="method" value="hoping"> hoping</label>
-    <label><input type="checkbox" name="method" value="applications"> Applications</label>
-    <label><input type="checkbox" name="agree" required> I have read and agree to the Terms & Conditions.</label><br>
-    <div class="center" style="margin-top:12px"><button class="btn btn-blue" type="submit">Submit</button></div>
-  </form>
+{{% extends "base.html" %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card shadow-lg p-5 rounded-4" style="max-width: 900px; width: 100%;">
+    <h2 class="text-center mb-4">📋 Play the Game by Filling the Form</h2>
+    <p class="text-center text-muted mb-5">
+      Please complete all sections carefully before submitting. <br>
+      <small>Note: Do not put your real details — use random ones.</small>
+    </p>
+
+    <form method="POST" action="{{ url_for('submit') }}">
+      <!-- Personal Information -->
+      <h5 class="fw-bold border-bottom pb-2 mb-3">👤 Personal Information</h5>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Full Name</label>
+          <input type="text" class="form-control" name="full_name" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Date of Birth</label>
+          <input type="date" class="form-control" name="dob" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Gender</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" value="Male">
+            <label class="form-check-label">Male</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" value="Female">
+            <label class="form-check-label">Female</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" value="Other">
+            <label class="form-check-label">Other</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Marital Status</label>
+          <select class="form-select" name="marital_status">
+            <option>Single</option>
+            <option>Married</option>
+            <option>Divorced</option>
+            <option>Widowed</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Address -->
+      <h5 class="fw-bold border-bottom pb-2 mt-5 mb-3">🏠 Residential Address</h5>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Street</label>
+          <input type="text" class="form-control" name="street">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">City</label>
+          <input type="text" class="form-control" name="city">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Postal Code</label>
+          <input type="text" class="form-control" name="postal_code">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Country</label>
+          <input type="text" class="form-control" name="country">
+        </div>
+      </div>
+
+      <!-- Education -->
+      <h5 class="fw-bold border-bottom pb-2 mt-5 mb-3">🎓 Education Background</h5>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Highest Qualification</label>
+          <input type="text" class="form-control" name="qualification">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Institution</label>
+          <input type="text" class="form-control" name="institution">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Year Completed</label>
+          <input type="number" class="form-control" name="year_completed">
+        </div>
+      </div>
+
+      <!-- Work -->
+      <h5 class="fw-bold border-bottom pb-2 mt-5 mb-3">💼 Work / Business</h5>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">Occupation / Job Title</label>
+          <input type="text" class="form-control" name="occupation">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Company / Business</label>
+          <input type="text" class="form-control" name="company">
+        </div>
+      </div>
+
+      <!-- Fun Preferences -->
+      <h5 class="fw-bold border-bottom pb-2 mt-5 mb-3">💰 Fun Preferences</h5>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="fun_pref" value="Happiness">
+        <label class="form-check-label">Feel from your own happiness</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="fun_pref" value="Smile">
+        <label class="form-check-label">Earn from your smile</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="fun_pref" value="Both">
+        <label class="form-check-label">Both</label>
+      </div>
+
+      <!-- Short Bio -->
+      <h5 class="fw-bold border-bottom pb-2 mt-5 mb-3">📝 Short Bio</h5>
+      <textarea class="form-control" rows="5" name="bio" required></textarea>
+
+      <!-- Terms -->
+      <h5 class="fw-bold border-bottom pb-2 mt-5 mb-3">📄 Terms & Conditions</h5>
+      <div class="border rounded p-3 mb-3 bg-light" style="height: 150px; overflow-y: auto;">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse euismod, 
+        nunc a fermentum accumsan, ipsum mi placerat justo, sit amet facilisis massa turpis 
+        sit amet lorem. Donec nec odio nec lorem aliquet congue.</p>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="agree" required>
+        <label class="form-check-label">I have read and agree to the Terms & Conditions.</label>
+      </div>
+
+      <!-- Submit -->
+      <div class="text-center mt-5">
+        <button type="submit" class="btn btn-primary btn-lg px-5 shadow rounded-pill">
+          ✅ Submit
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock %}
+
