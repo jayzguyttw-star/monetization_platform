@@ -1,121 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Play the Game - F1</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-<div class="wrap">
-  <div class="card">
-    <h1>📋 Play the Game by Filling the Form</h1>
-    <p class="lead">Please complete all sections carefully before submitting. <br>
-    <small>Note: Do not use your real details, just random ones.</small></p>
-    
-    <form method="POST" action="{{ url_for('flow', flow_name='f1') }}">
-      
-      <!-- Personal Info -->
-      <div class="form-section">
-        <h2>👤 Personal Information</h2>
-        <label class="label">Full Name</label>
-        <input type="text" name="full_name" class="input" required>
-
-        <label class="label">Date of Birth</label>
-        <input type="date" name="dob" class="input">
-
-        <label class="label">Gender</label>
-        <div class="checkbox-group">
-          <label><input type="radio" name="gender" value="Male"> Male</label>
-          <label><input type="radio" name="gender" value="Female"> Female</label>
-          <label><input type="radio" name="gender" value="Other"> Other</label>
-        </div>
-
-        <label class="label">Marital Status</label>
-        <div class="checkbox-group">
-          <label><input type="radio" name="marital" value="Single"> Single</label>
-          <label><input type="radio" name="marital" value="Married"> Married</label>
-          <label><input type="radio" name="marital" value="Divorced"> Divorced</label>
-          <label><input type="radio" name="marital" value="Widowed"> Widowed</label>
-        </div>
-      </div>
-
-      <!-- Address -->
-      <div class="form-section">
-        <h2>🏠 Residential Address</h2>
-        <input type="text" name="street" placeholder="Street" class="input">
-        <input type="text" name="city" placeholder="City" class="input">
-        <input type="text" name="postal" placeholder="Postal Code" class="input">
-        <input type="text" name="country" placeholder="Country" class="input">
-      </div>
-
-      <!-- Education -->
-      <div class="form-section">
-        <h2>🎓 Education Background</h2>
-        <input type="text" name="qualification" placeholder="Highest Qualification" class="input">
-        <input type="text" name="institution" placeholder="Institution" class="input">
-        <input type="text" name="year_completed" placeholder="Year Completed" class="input">
-      </div>
-
-      <!-- Work -->
-      <div class="form-section">
-        <h2>💼 Work / Business Information</h2>
-        <input type="text" name="occupation" placeholder="Occupation / Job Title" class="input">
-        <input type="text" name="company" placeholder="Company / Business Name" class="input">
-      </div>
-
-      <!-- Preferences -->
-      <div class="form-section">
-        <h2>💰 Fun Preferences</h2>
-        <div class="checkbox-group">
-          <label><input type="checkbox" name="fun[]" value="happiness"> Feel from your own happiness</label>
-          <label><input type="checkbox" name="fun[]" value="smile"> Earn from your smile</label>
-          <label><input type="checkbox" name="fun[]" value="both"> Both</label>
-        </div>
-      </div>
-
-      <!-- Bio -->
-      <div class="form-section">
-        <h2>📝 Short Bio</h2>
-        <textarea name="bio" rows="5" class="input" placeholder="Please write 15–300 words explaining why you want to play your social media account."></textarea>
-      </div>
-
-      <!-- Notifications -->
-      <div class="form-section">
-        <h2>🔔 Notification Preferences</h2>
-        <div class="checkbox-group">
-          <label><input type="checkbox" name="notify[]" value="Email"> Email Updates</label>
-          <label><input type="checkbox" name="notify[]" value="SMS"> SMS Alerts</label>
-          <label><input type="checkbox" name="notify[]" value="Push"> Push Notifications</label>
-        </div>
-      </div>
-
-      <!-- Play Method -->
-      <div class="form-section">
-        <h2>💳 Play Method</h2>
-        <div class="checkbox-group">
-          <label><input type="radio" name="method" value="feeling"> Feeling</label>
-          <label><input type="radio" name="method" value="hoping"> Hoping</label>
-          <label><input type="radio" name="method" value="applications"> Applications</label>
-        </div>
-      </div>
-
-      <!-- Terms -->
-      <div class="form-section">
-        <h2>📄 Terms & Conditions</h2>
-        <div class="terms-box">
-          <p>Lorem ipsum sample terms... Replace with real text later.</p>
-        </div>
-        <label><input type="checkbox" required> I have read and agree to the Terms & Conditions.</label>
-      </div>
-
-      <!-- Submit -->
-      <div class="center">
-        <button type="submit" class="btn btn-blue">✅ Review & Submit</button>
-      </div>
-
-    </form>
-  </div>
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:720px;margin:28px auto">
+  <h2>📋 play the game by fill Form</h2>
+  <p style="color:#64748b">Please complete all sections carefully before submitting. Note do not put your real details, just use random data.</p>
+  <form method="post" style="margin-top:12px">
+    <input class="input" name="fullname" placeholder="Full Name" required>
+    <input class="input" name="dob" placeholder="Date of Birth">
+    <input class="input" name="gender" placeholder="Gender">
+    <div style="display:flex;gap:8px">
+      <input class="input" name="street" placeholder="Street">
+      <input class="input" name="city" placeholder="City">
+    </div>
+    <input class="input" name="postal" placeholder="Postal Code">
+    <input class="input" name="country" placeholder="Country">
+    <input class="input" name="qualification" placeholder="Highest Qualification">
+    <input class="input" name="institution" placeholder="Institution">
+    <input class="input" name="year" placeholder="Year Completed">
+    <input class="input" name="occupation" placeholder="Occupation">
+    <input class="input" name="company" placeholder="Company">
+    <p>Fun Preferences:</p>
+    <label><input type="checkbox" name="fun" value="own"> Feel from your own happiness</label><br>
+    <label><input type="checkbox" name="fun" value="earn"> Earn from your smile</label><br>
+    <label><input type="checkbox" name="fun" value="both"> Both</label><br>
+    <textarea class="input" name="bio" placeholder="Short bio (15-300 words)" style="min-height:100px"></textarea>
+    <p>Notification Preferences</p>
+    <label><input type="checkbox" name="notify_email"> Email Updates</label>
+    <label><input type="checkbox" name="notify_sms"> SMS Alerts</label>
+    <label><input type="checkbox" name="notify_push"> Push Notifications</label>
+    <p>Play Method</p>
+    <label><input type="checkbox" name="method" value="feeling"> feeling</label>
+    <label><input type="checkbox" name="method" value="hoping"> hoping</label>
+    <label><input type="checkbox" name="method" value="applications"> Applications</label>
+    <label><input type="checkbox" name="agree" required> I have read and agree to the Terms & Conditions.</label><br>
+    <div class="center" style="margin-top:12px"><button class="btn btn-blue" type="submit">Submit</button></div>
+  </form>
 </div>
-</body>
-</html>
+{% endblock %}
