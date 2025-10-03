@@ -30,3 +30,71 @@ pre{white-space:pre-wrap;font-family:inherit;background:transparent;border:none;
 .submission-meta{min-width:220px;font-size:13px;color:#334155}
 .icon-small{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;margin-right:8px}
 @media(max-width:680px){.btn-platform{width:100%}}
+/* === Extra Styles for f1 Page Form === */
+
+/* Section titles */
+h3 {
+  font-size: 1.2rem;
+  margin: 18px 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #111827;
+}
+
+/* Form labels */
+label {
+  display: block;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #374151;
+}
+
+/* Inputs focus effect */
+.input:focus, input:focus, textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Textarea */
+textarea.input {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Checkboxes & Radios */
+input[type="checkbox"], input[type="radio"] {
+  margin-right: 6px;
+  accent-color: #2563eb; /* modern browsers */
+}
+
+/* Submit Button */
+.btn-submit {
+  background: #2563eb;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 32px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.1s;
+}
+.btn-submit:hover {
+  background: #1e40af;
+}
+.btn-submit:active {
+  transform: scale(0.97);
+}
+
+/* Terms box */
+.terms-box {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 12px;
+  height: 120px;
+  overflow-y: auto;
+  background: #f9fafb;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
