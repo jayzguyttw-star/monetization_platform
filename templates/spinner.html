@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card center" style="flex-direction:column;align-items:center;text-align:center;padding:28px">
+  <div style="width:48px;height:48px;margin:10px auto;border-radius:50%;border:6px solid #f3f4f6;border-top-color:#111;animation:spin 1s linear infinite"></div>
+  <p>Processing…</p>
+</div>
+<script>setTimeout(function(){window.location='{{ next_url }}'}, {{ delay*1000 }})</script>
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+{% endblock %}

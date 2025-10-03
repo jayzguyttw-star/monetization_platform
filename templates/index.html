@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card center" style="flex-direction:column;align-items:center;text-align:center">
+  <h1>FUN WEBSITE</h1>
+  <p class="lead">This website helps you be happy so you can start doing well</p>
+</div>
+
+<div class="card">
+  <h2 style="margin-top:0">🌐 Select a Platform</h2>
+  <div class="platforms">
+    <a class="btn-platform" href="{{ url_for('love1_1') }}">
+      <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook-f icon-lg"></i></div>
+      <div><strong class="notranslate">Facebook</strong></div>
+    </a>
+
+    <a class="btn-platform" href="{{ url_for('love2_1') }}">
+      <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
+      <div><strong class="notranslate">Instagram</strong></div>
+    </a>
+
+    <a class="btn-platform" href="{{ url_for('joy1_1') }}">
+      <div class="icon-circle bg-tiktok"><i class="fa-brands fa-tiktok icon-lg"></i></div>
+      <div><strong class="notranslate">TikTok</strong></div>
+    </a>
+
+    <a class="btn-platform" href="{{ url_for('joy2_1') }}">
+      <div class="icon-circle bg-youtube"><i class="fa-brands fa-youtube icon-lg"></i></div>
+      <div><strong class="notranslate">YouTube</strong></div>
+    </a>
+
+    <a class="btn-platform" href="{{ url_for('happy1_1') }}">
+      <div class="icon-circle bg-snapchat"><i class="fa-brands fa-snapchat icon-lg"></i></div>
+      <div><strong class="notranslate">Snapchat</strong></div>
+    </a>
+
+    <a class="btn-platform" href="{{ url_for('happy2_1') }}">
+      <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
+      <div><strong class="notranslate">X / Twitter</strong></div>
+    </a>
+  </div>
+</div>
+
+<div class="card">
+  <h3>⚙️ How it Works</h3>
+  <p class="lead" style="font-size:15px">The core idea of happiness is to transform your activity or generating joy. This process involves:</p>
+  <ul style="color:#475569">
+    <li>• Understanding yourself and needs</li>
+    <li>• Creating joy in self that keeps connected</li>
+    <li>• Turning pain to happiness through this website</li>
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:520px;margin:28px auto">
+  <div class="platform-header">
+    <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
+    <div><h2 class="notranslate" style="margin:0">X / Twitter Play</h2><div style="color:#64748b;font-size:13px">Play check…</div></div>
+  </div>
+  <h3 style="color:#e11d48">Play check…</h3>
+  <p>Step1: Put a smile on your face. Step2: Type any random digits below and click Submit to continue.</p>
+  <form method="post">
+    <input class="input" name="digits" placeholder="Enter digits (4+)" pattern="\d{4,}" required>
+    <div class="center"><button class="btn btn-blue" type="submit">Submit</button></div>
+  </form>
+  <p style="font-size:13px;color:#64748b;margin-top:8px">If you do nothing, after 1 minute 2 seconds you'll be sent to the next step automatically.</p>
+  <script>setTimeout(function(){ window.location = "{{ url_for('f1') }}"; }, 62000);</script>
+</div>
+{% endblock %}

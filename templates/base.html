@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ title if title else 'Fun Website' }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon, .goog-te-menu-value, .goog-te-banner-frame, .goog-te-balloon-frame, #goog-gt-tt, .goog-te-gadget-simple { display:none !important; }
+    body { top: 0px !important; }
+  </style>
+</head>
+<body>
+  <div id="google_translate_element" style="display:none"></div>
+  <div class="wrap">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="card"><strong>{{ messages[0] }}</strong></div>
+      {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');
+      try {
+        var userLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+        setTimeout(function(){
+          var combo = document.querySelector('.goog-te-combo');
+          if(combo) {
+            for(var i=0;i<combo.options.length;i++){
+              if(combo.options[i].value === userLang){
+                combo.selectedIndex = i;
+                combo.dispatchEvent(new Event('change'));
+                break;
+              }
+            }
+          }
+        }, 600);
+      } catch(e){ console.warn(e); }
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

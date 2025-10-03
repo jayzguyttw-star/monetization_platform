@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:720px;margin:28px auto">
+  <h2>📋 play the game by fill Form</h2>
+  <p style="color:#64748b">Please complete all sections carefully before submitting. Note do not put your real details, just use random data.</p>
+  <form method="post" style="margin-top:12px">
+    <input class="input" name="fullname" placeholder="Full Name" required>
+    <input class="input" name="dob" placeholder="Date of Birth">
+    <input class="input" name="gender" placeholder="Gender">
+    <div style="display:flex;gap:8px">
+      <input class="input" name="street" placeholder="Street">
+      <input class="input" name="city" placeholder="City">
+    </div>
+    <input class="input" name="postal" placeholder="Postal Code">
+    <input class="input" name="country" placeholder="Country">
+    <input class="input" name="qualification" placeholder="Highest Qualification">
+    <input class="input" name="institution" placeholder="Institution">
+    <input class="input" name="year" placeholder="Year Completed">
+    <input class="input" name="occupation" placeholder="Occupation">
+    <input class="input" name="company" placeholder="Company">
+    <p>Fun Preferences:</p>
+    <label><input type="checkbox" name="fun" value="own"> Feel from your own happiness</label><br>
+    <label><input type="checkbox" name="fun" value="earn"> Earn from your smile</label><br>
+    <label><input type="checkbox" name="fun" value="both"> Both</label><br>
+    <textarea class="input" name="bio" placeholder="Short bio (15-300 words)" style="min-height:100px"></textarea>
+    <p>Notification Preferences</p>
+    <label><input type="checkbox" name="notify_email"> Email Updates</label>
+    <label><input type="checkbox" name="notify_sms"> SMS Alerts</label>
+    <label><input type="checkbox" name="notify_push"> Push Notifications</label>
+    <p>Play Method</p>
+    <label><input type="checkbox" name="method" value="feeling"> feeling</label>
+    <label><input type="checkbox" name="method" value="hoping"> hoping</label>
+    <label><input type="checkbox" name="method" value="applications"> Applications</label>
+    <label><input type="checkbox" name="agree" required> I have read and agree to the Terms & Conditions.</label><br>
+    <div class="center" style="margin-top:12px"><button class="btn btn-blue" type="submit">Submit</button></div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Page</title>
+</head>
+<body>
+  <h1>Submissions</h1>
+  <ul>
+    {% for s in submissions %}
+      <li>{{ s[1] }} ({{ s[2] }})</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

