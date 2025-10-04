@@ -155,15 +155,49 @@ document.getElementById("f1form").addEventListener("submit", function(e) {
   let errors = form.querySelectorAll(".error");
   errors.forEach(err => err.style.display = "none");
 
+  // Custom messages
+  const messages = {
+    fullname: "Please enter your full name",
+    dob: "Please select your date of birth",
+    gender: "Please select your gender",
+    marital: "Please choose your marital status",
+    street: "Enter your street address",
+    city: "Enter your city",
+    postal: "Enter your postal code",
+    country: "Enter your country",
+    qualification: "Enter your highest qualification",
+    institution: "Enter your institution name",
+    year_completed: "Enter the year you completed",
+    occupation: "Enter your occupation or job title",
+    company: "Enter your company or business name",
+    fun: "Select at least one fun preference",
+    bio: "Write a short bio (15–300 words)",
+    notify: "Select at least one notification preference",
+    method: "Choose a play method",
+    terms: "You must agree to the Terms & Conditions"
+  };
+
   let fields = form.querySelectorAll("input, textarea, select");
   let valid = true;
 
   fields.forEach(el => {
     if (!el.checkValidity()) {
       valid = false;
+      let fieldName = el.name;
+      let msg = messages[fieldName] || "⚠️ This field is required";
+
+      // find the correct error container
       let errorDiv = el.nextElementSibling;
-      if (errorDiv && errorDiv.classList.contains("error")) {
-        errorDiv.textContent = "⚠️ This field is required";
+      // if input is inside a group (like radios), target the group's .error
+      if (!errorDiv || !errorDiv.classList.contains("error")) {
+        let parentError = el.closest("div")?.nextElementSibling;
+        if (parentError && parentError.classList.contains("error")) {
+          errorDiv = parentError;
+        }
+      }
+
+      if (errorDiv) {
+        errorDiv.textContent = msg;
         errorDiv.style.display = "block";
       }
       el.classList.add("error-field");
