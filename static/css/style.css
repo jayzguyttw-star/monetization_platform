@@ -21,8 +21,8 @@ body {
 
 .card {
   background:#fff;
-  border-radius:18px;
-  box-shadow:0 10px 30px rgba(15,23,42,0.06);
+  border-radius:22px;
+  box-shadow:0 10px 40px rgba(15,23,42,0.06);
   padding:22px;
   margin-bottom:16px;
   border:1px solid rgba(2,6,23,0.04);
@@ -45,20 +45,20 @@ p.lead { color:#475569; margin:0 0 14px; }
   align-items:center;
   gap:14px;
   padding:14px 18px;
-  border-radius:18px;
+  border-radius:22px;
   border:1px solid rgba(255,255,255,0.4);
   text-decoration:none;
   color:inherit;
-  background:rgba(255,255,255,0.55);
-  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,0.5);
+  backdrop-filter:blur(14px);
   transition:transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
-  box-shadow:0 6px 18px rgba(2,6,23,0.06);
+  box-shadow:0 8px 22px rgba(2,6,23,0.06);
 }
 
 .btn-platform:hover {
-  transform:scale(1.02);
+  transform:scale(1.025);
   background:rgba(255,255,255,0.75);
-  box-shadow:0 14px 32px rgba(15,23,42,0.14);
+  box-shadow:0 16px 40px rgba(15,23,42,0.12);
 }
 
 .btn-platform:active {
@@ -66,30 +66,30 @@ p.lead { color:#475569; margin:0 0 14px; }
   box-shadow:0 8px 18px rgba(15,23,42,0.1);
 }
 
-/* === Glass Tint Per Brand === */
-.bg-facebook:hover { background:rgba(24,119,242,0.16); }
-.bg-instagram:hover { background:linear-gradient(145deg,rgba(253,41,123,0.18),rgba(131,58,180,0.18)); }
-.bg-tiktok:hover { background:linear-gradient(145deg,rgba(255,0,80,0.16),rgba(0,242,234,0.16)); }
-.bg-youtube:hover { background:rgba(255,0,0,0.16); }
-.bg-snapchat:hover { background:rgba(255,252,0,0.2); }
-.bg-twitter:hover { background:rgba(0,0,0,0.16); }
-
-/* === Icon Styling (Exact Brand Look) === */
+/* === Icon Styling (Exact Brand Look + Glow) === */
 .icon-circle {
-  background:none;
-  width:auto;
-  height:auto;
+  width:58px;
+  height:58px;
+  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
+  flex-shrink:0;
+  transition:all 0.3s ease;
 }
 
-.icon-lg { font-size:34px; font-weight:700; }
-.notranslate { unicode-bidi:isolate; }
-
-/* === Official Brand Colors === */
+/* Facebook */
+.bg-facebook .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(24,119,242,0.15), 0 0 14px rgba(24,119,242,0.25);
+}
 .bg-facebook i { color:#1877F2; }
 
+/* Instagram */
+.bg-instagram .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(193,53,132,0.15), 0 0 14px rgba(225,48,108,0.25);
+}
 .bg-instagram i {
   background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
   -webkit-background-clip:text;
@@ -97,35 +97,64 @@ p.lead { color:#475569; margin:0 0 14px; }
   font-weight:800;
 }
 
+/* TikTok */
+.bg-tiktok .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(0,0,0,0.1),
+             0 0 16px rgba(255,0,80,0.25),
+             0 0 16px rgba(0,242,234,0.25);
+}
 .bg-tiktok i {
   color:#000;
   text-shadow:-1.8px 0 #00f2ea, 1.8px 0 #ff0050;
   font-weight:800;
 }
 
+/* YouTube */
+.bg-youtube .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(255,0,0,0.18), 0 0 14px rgba(255,0,0,0.28);
+}
 .bg-youtube i { color:#FF0000; font-weight:800; }
 
+/* Snapchat */
+.bg-snapchat .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(255,252,0,0.22), 0 0 18px rgba(255,252,0,0.35);
+}
 .bg-snapchat i {
   color:#FFFC00;
   -webkit-text-stroke:1.5px #000;
   font-weight:800;
 }
 
+/* Twitter / X */
+.bg-twitter .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(0,0,0,0.12), 0 0 16px rgba(0,0,0,0.22);
+}
 .bg-twitter i { color:#000; font-weight:800; }
 
-/* === Animated Inner Glow Pulse === */
+.icon-lg { font-size:34px; }
+.notranslate { unicode-bidi:isolate; }
+
+/* === Glow Animation === */
 @keyframes pulseGlow {
-  0% { text-shadow:0 0 8px rgba(255,255,255,0.0); }
-  50% { text-shadow:0 0 12px rgba(255,255,255,0.8); }
-  100% { text-shadow:0 0 8px rgba(255,255,255,0.0); }
+  0% { transform:scale(1); }
+  50% { transform:scale(1.1); filter:brightness(1.3); }
+  100% { transform:scale(1); }
 }
 
-.btn-platform:hover i {
-  transform:scale(1.12);
-  animation:pulseGlow 1.4s infinite ease-in-out;
+.btn-platform:hover .icon-circle {
+  animation:pulseGlow 1.8s infinite ease-in-out;
 }
 
-/* === Other site styles === */
+/* === Soft corner + shadow improvements === */
+.card, .btn-platform {
+  box-shadow:0 10px 25px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.03);
+}
+
+/* === Form Styles === */
 .platform-header {
   display:flex;
   align-items:center;
@@ -148,10 +177,7 @@ p.lead { color:#475569; margin:0 0 14px; }
   box-shadow:0 0 0 3px rgba(37,99,235,0.2);
 }
 
-textarea.input {
-  min-height:120px;
-  resize:vertical;
-}
+textarea.input { min-height:120px; resize:vertical; }
 
 input[type="checkbox"], input[type="radio"] {
   margin-right:6px;
@@ -177,7 +203,7 @@ input[type="checkbox"], input[type="radio"] {
   font-size:16px;
   font-weight:600;
   padding:12px 32px;
-  border-radius:10px;
+  border-radius:12px;
   cursor:pointer;
   transition:background 0.3s, transform 0.1s;
 }
@@ -204,7 +230,6 @@ pre { white-space:pre-wrap; font-family:inherit; background:transparent; border:
 
 @media(max-width:680px){ .btn-platform { width:100%; } }
 
-/* === f1 Form Styles === */
 h3 {
   font-size:1.2rem;
   margin:18px 0 8px;
