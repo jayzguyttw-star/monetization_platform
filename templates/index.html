@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card center" style="flex-direction:column;align-items:center;text-align:center">
-  <h1>FUN WEBSITE</h1>
-  <p class="lead">This website helps you be happy so you can start doing well</p>
+<div class="card center" style="flex-direction:column;align-items:center;text-align:center;padding:48px">
+  <h1 style="font-size:32px;font-weight:800;margin-bottom:12px;color:#0f172a">✨ FUN WEBSITE</h1>
+  <p class="lead" style="max-width:600px;font-size:16px;line-height:1.6">
+    Welcome! This website is designed to help you discover happiness, 
+    transform your daily activity, and spark joy in new ways.
+  </p>
 </div>
 
-<div class="card">
-  <h2 style="margin-top:0">🌐 Select a Platform</h2>
+<div class="card" style="padding:32px">
+  <h2 style="margin-top:0;font-weight:700;font-size:22px;color:#0f172a;margin-bottom:18px">🌐 Select a Platform</h2>
   <div class="platforms">
     <a class="btn-platform" href="{{ url_for('love1_1') }}">
       <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook-f icon-lg"></i></div>
@@ -40,13 +43,16 @@
   </div>
 </div>
 
-<div class="card">
-  <h3>⚙️ How it Works</h3>
-  <p class="lead" style="font-size:15px">The core idea of happiness is to transform your activity or generating joy. This process involves:</p>
-  <ul style="color:#475569">
-    <li>• Understanding yourself and needs</li>
-    <li>• Creating joy in self that keeps connected</li>
-    <li>• Turning pain to happiness through this website</li>
+<div class="card" style="padding:32px">
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;color:#0f172a">⚙️ How it Works</h3>
+  <p style="color:#475569;font-size:15px;line-height:1.6;margin-bottom:16px">
+    The core idea of happiness is to transform your activities into positive energy and lasting joy.  
+    Here’s how it works:
+  </p>
+  <ul style="color:#334155;line-height:1.7;margin:0;padding-left:18px;font-size:15px">
+    <li><strong>Understand yourself</strong> – learn your needs and aspirations.</li>
+    <li><strong>Create joy within</strong> – cultivate habits that keep you connected and uplifted.</li>
+    <li><strong>Transform challenges</strong> – turn pain into happiness through mindful practice here.</li>
   </ul>
 </div>
 {% endblock %}
