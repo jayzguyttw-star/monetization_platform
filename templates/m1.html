@@ -6,15 +6,6 @@
   <h2 class="success-title animate-title">🎉 Congratulations!</h2>
   <p class="success-subtitle animate-subtitle">You are about to be happy... please wait</p>
 
-  <!-- Success Checkmark -->
-  <div class="checkmark animate-check">
-    <svg viewBox="0 0 52 52">
-      <circle class="checkmark-bg" cx="26" cy="26" r="25"/>
-      <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-      <path class="checkmark-check" fill="none" d="M14 27l7 7 16-16"/>
-    </svg>
-  </div>
-
   <!-- Endless Spinner -->
   <div class="loader animate-spinner"></div>
 
@@ -58,82 +49,19 @@
     to   { opacity: 1; }
   }
 
-  /* Checkmark container */
-  .checkmark {
-    width: 90px;
-    height: 90px;
-    stroke-width: 4;
-    stroke-miterlimit: 10;
-    margin: 0 auto 25px;
-    opacity: 0;
-  }
-  .checkmark svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  /* Background fill */
-  .checkmark-bg {
-    fill: #16a34a;
-    opacity: 0;
-    transform: scale(0);
-    transform-origin: 50% 50%;
-    animation: fill-bg 0.4s ease-out forwards;
-    animation-delay: 0.6s;
-  }
-  @keyframes fill-bg {
-    0% { opacity: 0; transform: scale(0); }
-    100% { opacity: 0.15; transform: scale(1); }
-  }
-
-  /* Circle stroke */
-  .checkmark-circle {
-    stroke: #16a34a;
-    stroke-dasharray: 166;
-    stroke-dashoffset: 166;
-    stroke-width: 4;
-    stroke-miterlimit: 10;
-    fill: none;
-    animation: stroke 0.6s forwards;
-  }
-
-  /* Tick mark */
-  .checkmark-check {
-    transform-origin: 50% 50%;
-    stroke: #16a34a;
-    stroke-dasharray: 48;
-    stroke-dashoffset: 48;
-    animation: stroke 0.4s forwards 0.6s;
-  }
-
-  .animate-check {
-    animation: fadeIn 0.6s ease forwards, bounce 0.6s ease forwards;
-    animation-delay: 1s, 1.2s;
-  }
-
-  @keyframes stroke {
-    100% { stroke-dashoffset: 0; }
-  }
-  @keyframes bounce {
-    0%   { transform: scale(1); }
-    30%  { transform: scale(1.2); }
-    60%  { transform: scale(0.9); }
-    100% { transform: scale(1); }
-  }
-
   /* Spinner */
   .loader {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    border: 6px solid #f3f4f6;
+    border: 8px solid #f3f4f6;
     border-top-color: #16a34a;
     margin: 0 auto 20px;
     opacity: 0;
   }
   .animate-spinner {
     animation: spin 1s linear infinite, fadeIn 0.8s ease forwards;
-    animation-delay: 1.8s, 1.8s;
+    animation-delay: 1.2s, 1.2s;
   }
   @keyframes spin {
     to { transform: rotate(360deg); }
@@ -148,7 +76,7 @@
   }
   .animate-note {
     animation: fadeIn 1s ease forwards;
-    animation-delay: 2.6s;
+    animation-delay: 2.2s;
   }
 </style>
 {% endblock %}
