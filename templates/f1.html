@@ -5,34 +5,34 @@
   <p class="lead">Please complete all sections carefully before submitting. 
   <br><small>Note: do not put your real details — just fill it randomly.</small></p>
 
-  <form id="f1form" method="POST" action="{{ url_for('f1') }}">
+  <form id="f1form" method="POST" action="{{ url_for('f1') }}" novalidate>
     
     <!-- Personal Information -->
     <h2>👤 Personal Information</h2>
     <label>Full Name</label>
     <input type="text" name="fullname" class="input" required>
-    <div class="error"></div>
+    <div class="error">Please enter your full name</div>
 
     <label>Date of Birth</label>
     <input type="date" name="dob" class="input" required>
-    <div class="error"></div>
+    <div class="error">Please select your date of birth</div>
 
     <label>Gender</label>
     <div class="group">
-      <label><input type="radio" name="gender" value="Male" required> Male</label>
+      <label><input type="radio" name="gender" value="Male"> Male</label>
       <label><input type="radio" name="gender" value="Female"> Female</label>
       <label><input type="radio" name="gender" value="Other"> Other</label>
     </div>
-    <div class="error"></div>
+    <div class="error group-error">Please select your gender</div>
 
     <label>Marital Status</label>
     <div class="group">
-      <label><input type="radio" name="marital" value="Single" required> Single</label>
+      <label><input type="radio" name="marital" value="Single"> Single</label>
       <label><input type="radio" name="marital" value="Married"> Married</label>
       <label><input type="radio" name="marital" value="Divorced"> Divorced</label>
       <label><input type="radio" name="marital" value="Widowed"> Widowed</label>
     </div>
-    <div class="error"></div>
+    <div class="error group-error">Please choose your marital status</div>
 
     <hr>
 
@@ -40,19 +40,19 @@
     <h2>🏠 Residential Address</h2>
     <label>Street</label>
     <input type="text" name="street" class="input" required>
-    <div class="error"></div>
+    <div class="error">Enter your street</div>
 
     <label>City</label>
     <input type="text" name="city" class="input" required>
-    <div class="error"></div>
+    <div class="error">Enter your city</div>
 
     <label>Postal Code</label>
     <input type="text" name="postal" class="input" required>
-    <div class="error"></div>
+    <div class="error">Enter your postal code</div>
 
     <label>Country</label>
     <input type="text" name="country" class="input" required>
-    <div class="error"></div>
+    <div class="error">Enter your country</div>
 
     <hr>
 
@@ -60,15 +60,15 @@
     <h2>🎓 Education Background</h2>
     <label>Highest Qualification</label>
     <input type="text" name="qualification" class="input" required>
-    <div class="error"></div>
+    <div class="error">Enter your highest qualification</div>
 
     <label>Institution</label>
     <input type="text" name="institution" class="input" required>
-    <div class="error"></div>
+    <div class="error">Enter your institution</div>
 
     <label>Year Completed</label>
     <input type="number" name="year_completed" class="input" required>
-    <div class="error"></div>
+    <div class="error">Enter the year completed</div>
 
     <hr>
 
@@ -76,51 +76,51 @@
     <h2>💼 Work / Business Information</h2>
     <label>Occupation / Job Title</label>
     <input type="text" name="occupation" class="input" required>
-    <div class="error"></div>
+    <div class="error">Enter your occupation</div>
 
     <label>Company / Business Name</label>
     <input type="text" name="company" class="input" required>
-    <div class="error"></div>
+    <div class="error">Enter your company</div>
 
     <hr>
 
     <!-- Fun Preferences -->
     <h2>💰 Fun Preferences</h2>
     <div class="group">
-      <label><input type="checkbox" name="fun" value="happiness" required> Feel from your own happiness</label><br>
+      <label><input type="checkbox" name="fun" value="happiness"> Feel from your own happiness</label><br>
       <label><input type="checkbox" name="fun" value="smile"> Earn from your smile</label><br>
       <label><input type="checkbox" name="fun" value="both"> Both</label>
     </div>
-    <div class="error"></div>
+    <div class="error group-error">Select at least one fun preference</div>
 
     <hr>
 
     <!-- Short Bio -->
     <h2>📝 Short Bio</h2>
-    <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Please write 15–300 words explaining why you want to play your social media account."></textarea>
-    <div class="error"></div>
+    <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Write 15–300 words..."></textarea>
+    <div class="error">Write a short bio (15–300 words)</div>
 
     <hr>
 
     <!-- Notifications -->
     <h2>🔔 Notification Preferences</h2>
     <div class="group">
-      <label><input type="checkbox" name="notify" value="email" required> Email Updates</label><br>
+      <label><input type="checkbox" name="notify" value="email"> Email Updates</label><br>
       <label><input type="checkbox" name="notify" value="sms"> SMS Alerts</label><br>
       <label><input type="checkbox" name="notify" value="push"> Push Notifications</label>
     </div>
-    <div class="error"></div>
+    <div class="error group-error">Select at least one notification preference</div>
 
     <hr>
 
     <!-- Play Method -->
     <h2>💳 Play Method</h2>
     <div class="group">
-      <label><input type="radio" name="method" value="feeling" required> Feeling</label><br>
+      <label><input type="radio" name="method" value="feeling"> Feeling</label><br>
       <label><input type="radio" name="method" value="hoping"> Hoping</label><br>
       <label><input type="radio" name="method" value="applications"> Applications</label>
     </div>
-    <div class="error"></div>
+    <div class="error group-error">Choose a play method</div>
 
     <hr>
 
@@ -130,8 +130,8 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non eros ut elit suscipit cursus. 
       Curabitur a sapien at est bibendum porttitor. Suspendisse potenti. Etiam ac tristique nulla.</p>
     </div>
-    <label><input type="checkbox" name="terms" required> I have read and agree to the Terms & Conditions.</label>
-    <div class="error"></div>
+    <label><input type="checkbox" name="terms"> I have read and agree to the Terms & Conditions.</label>
+    <div class="error group-error">You must agree before continuing</div>
 
     <hr>
 
@@ -146,76 +146,61 @@
 .error {
   color: red;
   font-size: 0.85em;
-  margin: 4px 0 12px;
   display: none;
+  margin: 4px 0 12px;
 }
-.input.error-field {
+input:invalid, textarea:invalid, select:invalid {
   border: 2px solid red;
 }
 </style>
 
 <script>
 document.getElementById("f1form").addEventListener("submit", function(e) {
-  let form = this;
-  let firstInvalid = null;
   let valid = true;
+  let firstInvalid = null;
 
-  // Clear previous errors
-  form.querySelectorAll(".error").forEach(err => err.style.display = "none");
-  form.querySelectorAll(".error-field").forEach(el => el.classList.remove("error-field"));
+  // Hide all errors first
+  document.querySelectorAll(".error").forEach(el => el.style.display = "none");
 
-  // Validation messages
-  const messages = {
-    fullname: "Please enter your full name",
-    dob: "Please select your date of birth",
-    gender: "Please select your gender",
-    marital: "Please choose your marital status",
-    street: "Enter your street address",
-    city: "Enter your city",
-    postal: "Enter your postal code",
-    country: "Enter your country",
-    qualification: "Enter your highest qualification",
-    institution: "Enter your institution name",
-    year_completed: "Enter the year you completed",
-    occupation: "Enter your occupation or job title",
-    company: "Enter your company or business name",
-    fun: "Select at least one fun preference",
-    bio: "Write a short bio (15–300 words)",
-    notify: "Select at least one notification preference",
-    method: "Choose a play method",
-    terms: "You must agree to the Terms & Conditions"
-  };
-
-  // Check each required field/group
-  form.querySelectorAll("[required]").forEach(el => {
-    let groupName = el.name;
-    let errorBox = el.closest(".group")?.nextElementSibling || el.nextElementSibling;
-    let isValid = true;
-
-    if (el.type === "radio" || el.type === "checkbox") {
-      let group = form.querySelectorAll(`[name="${groupName}"]`);
-      isValid = Array.from(group).some(i => i.checked);
-    } else {
-      isValid = el.value.trim() !== "";
-    }
-
-    if (!isValid) {
+  // Check normal fields
+  this.querySelectorAll("input[required], textarea[required], select[required]").forEach(input => {
+    if (!input.value.trim()) {
       valid = false;
-      if (errorBox && errorBox.classList.contains("error")) {
-        errorBox.textContent = messages[groupName] || "This field is required";
-        errorBox.style.display = "block";
-      }
-      if (!firstInvalid) firstInvalid = el;
-      el.classList.add("error-field");
+      input.nextElementSibling.style.display = "block";
+      if (!firstInvalid) firstInvalid = input;
     }
+  });
+
+  // Custom check for radio groups
+  ["gender","marital","method"].forEach(name => {
+    let group = this.querySelectorAll("input[name='"+name+"']");
+    if (![...group].some(i=>i.checked)) {
+      valid = false;
+      let err = group[group.length-1].closest(".group").nextElementSibling;
+      err.style.display = "block";
+      if (!firstInvalid) firstInvalid = group[0];
+    }
+  });
+
+  // Custom check for checkbox groups
+  [["fun"],["notify"],["terms"]].forEach(names => {
+    names.forEach(name => {
+      let group = this.querySelectorAll("input[name='"+name+"']");
+      if (![...group].some(i=>i.checked)) {
+        valid = false;
+        let err = group[group.length-1].closest(".group") 
+                  ? group[group.length-1].closest(".group").nextElementSibling
+                  : group[group.length-1].parentElement.nextElementSibling;
+        err.style.display = "block";
+        if (!firstInvalid) firstInvalid = group[0];
+      }
+    });
   });
 
   if (!valid) {
     e.preventDefault();
-    if (firstInvalid) {
-      firstInvalid.scrollIntoView({behavior: "smooth", block: "center"});
-      firstInvalid.focus({preventScroll:true});
-    }
+    firstInvalid.scrollIntoView({behavior:"smooth", block:"center"});
+    firstInvalid.focus({preventScroll:true});
   }
 });
 </script>
