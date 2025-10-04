@@ -8,7 +8,7 @@ body{
   min-height:100vh;
   display:flex;
   align-items:center;
-  justify-content:center;
+  justify-content:center
 }
 .wrap{width:100%;max-width:980px;padding:28px}
 .card{
@@ -17,7 +17,7 @@ body{
   box-shadow:0 10px 30px rgba(15,23,42,0.06);
   padding:22px;
   margin-bottom:16px;
-  border:1px solid rgba(2,6,23,0.04);
+  border:1px solid rgba(2,6,23,0.04)
 }
 h1{margin:0 0 8px;font-size:28px}
 p.lead{color:#475569;margin:0 0 14px}
@@ -29,14 +29,14 @@ p.lead{color:#475569;margin:0 0 14px}
   display:flex;
   align-items:center;
   gap:14px;
-  padding:12px 16px;
-  background:#fff;
+  padding:14px 18px;
   border-radius:12px;
-  box-shadow:0 6px 18px rgba(2,6,23,0.04);
   border:1px solid #eef2f7;
   text-decoration:none;
   color:inherit;
-  transition:transform 0.25s ease,box-shadow 0.25s ease;
+  background:#fff;
+  transition:transform 0.25s ease,box-shadow 0.25s ease,background 0.3s ease;
+  box-shadow:0 6px 18px rgba(2,6,23,0.04);
 }
 .btn-platform:hover{
   transform:scale(1.02);
@@ -47,7 +47,26 @@ p.lead{color:#475569;margin:0 0 14px}
   box-shadow:0 6px 14px rgba(15,23,42,0.10);
 }
 
-/* === Exact Brand Logos (No Color Circle, Bolder Icons) === */
+/* === Brand-Tinted Button Backgrounds === */
+.bg-facebook{background:linear-gradient(145deg,#f8faff,#e8f0ff);}
+.bg-facebook:hover{background:linear-gradient(145deg,#e8f0ff,#d8e4ff);}
+
+.bg-instagram{background:linear-gradient(145deg,#fff0f5,#ffe6f8,#fde9ff);}
+.bg-instagram:hover{background:linear-gradient(145deg,#ffe1f0,#ffd9ff,#fbd2ff);}
+
+.bg-tiktok{background:linear-gradient(145deg,#f8f8f8,#f0f0f0);}
+.bg-tiktok:hover{background:linear-gradient(145deg,#f3f3f3,#e8e8e8);}
+
+.bg-youtube{background:linear-gradient(145deg,#fff4f4,#fff1f1);}
+.bg-youtube:hover{background:linear-gradient(145deg,#ffeaea,#ffdede);}
+
+.bg-snapchat{background:linear-gradient(145deg,#fffef0,#fffcca);}
+.bg-snapchat:hover{background:linear-gradient(145deg,#fffcd9,#fff8b3);}
+
+.bg-twitter{background:linear-gradient(145deg,#f9f9f9,#f2f2f2);}
+.bg-twitter:hover{background:linear-gradient(145deg,#f2f2f2,#eaeaea);}
+
+/* === Icon Styling (Exact Brand Look) === */
 .icon-circle{
   background:none;
   width:auto;
@@ -57,48 +76,43 @@ p.lead{color:#475569;margin:0 0 14px}
   justify-content:center;
 }
 .icon-lg{
-  font-size:34px; /* larger, bolder for premium feel */
+  font-size:34px;
   font-weight:700;
 }
 .notranslate{unicode-bidi:isolate}
 
-/* Brand-specific icon styles */
-.bg-facebook i{
-  color:#1877F2;
-}
+/* === Official Brand Colors === */
+.bg-facebook i{color:#1877F2;}
 .bg-instagram i{
   background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  font-weight:800;
 }
 .bg-tiktok i{
   color:#000;
-  text-shadow:
-    -2px 0 #00f2ea,
-    2px 0 #ff0050;
+  text-shadow:-1.8px 0 #00f2ea, 1.8px 0 #ff0050;
+  font-weight:800;
 }
-.bg-youtube i{
-  color:#FF0000;
-}
+.bg-youtube i{color:#FF0000;font-weight:800;}
 .bg-snapchat i{
   color:#FFFC00;
-  -webkit-text-stroke:1.4px #000;
+  -webkit-text-stroke:1.5px #000;
+  font-weight:800;
 }
-.bg-twitter i{
-  color:#000; /* X / Twitter brand color is pure black */
-}
+.bg-twitter i{color:#000;font-weight:800;}
 
-/* === Hover Glow (Subtle Premium Touch) === */
+/* === Soft Glow Hover === */
 .btn-platform:hover i{
   transform:scale(1.15);
-  transition:transform 0.25s ease, text-shadow 0.25s ease;
+  transition:transform 0.25s ease,text-shadow 0.25s ease;
 }
-.bg-facebook:hover i{ text-shadow:0 0 10px rgba(24,119,242,0.5); }
-.bg-instagram:hover i{ text-shadow:0 0 10px rgba(225,48,108,0.5); }
-.bg-tiktok:hover i{ text-shadow:0 0 10px rgba(255,0,80,0.5), 0 0 10px rgba(0,242,234,0.5); }
-.bg-youtube:hover i{ text-shadow:0 0 10px rgba(255,0,0,0.5); }
-.bg-snapchat:hover i{ text-shadow:0 0 8px rgba(255,252,0,0.8); }
-.bg-twitter:hover i{ text-shadow:0 0 8px rgba(0,0,0,0.5); }
+.bg-facebook:hover i{ text-shadow:0 0 10px rgba(24,119,242,0.5);}
+.bg-instagram:hover i{ text-shadow:0 0 10px rgba(225,48,108,0.5);}
+.bg-tiktok:hover i{ text-shadow:0 0 10px rgba(255,0,80,0.4),0 0 10px rgba(0,242,234,0.4);}
+.bg-youtube:hover i{ text-shadow:0 0 10px rgba(255,0,0,0.5);}
+.bg-snapchat:hover i{ text-shadow:0 0 8px rgba(255,252,0,0.8);}
+.bg-twitter:hover i{ text-shadow:0 0 10px rgba(0,0,0,0.3);}
 
 /* === Other site styles === */
 .platform-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
@@ -106,7 +120,7 @@ p.lead{color:#475569;margin:0 0 14px}
 .input:focus,input:focus,textarea:focus{
   outline:none;
   border-color:#2563eb;
-  box-shadow:0 0 0 3px rgba(37,99,235,0.2);
+  box-shadow:0 0 0 3px rgba(37,99,235,0.2)
 }
 textarea.input{min-height:120px;resize:vertical}
 input[type="checkbox"],input[type="radio"]{margin-right:6px;accent-color:#2563eb}
@@ -117,7 +131,7 @@ input[type="checkbox"],input[type="radio"]{margin-right:6px;accent-color:#2563eb
   border-radius:10px;
   border:none;
   cursor:pointer;
-  font-weight:700;
+  font-weight:700
 }
 .btn-blue{background:#1877F2;color:#fff}
 .btn-black{background:#111;color:#fff}
@@ -130,7 +144,7 @@ input[type="checkbox"],input[type="radio"]{margin-right:6px;accent-color:#2563eb
   padding:12px 32px;
   border-radius:10px;
   cursor:pointer;
-  transition:background 0.3s,transform 0.1s;
+  transition:background 0.3s,transform 0.1s
 }
 .btn-submit:hover{background:#1e40af}
 .btn-submit:active{transform:scale(0.97)}
@@ -141,7 +155,6 @@ pre{white-space:pre-wrap;font-family:inherit;background:transparent;border:none;
 .submission-row{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px}
 .submission-meta{min-width:220px;font-size:13px;color:#334155}
 .icon-small{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;margin-right:8px}
-
 @media(max-width:680px){.btn-platform{width:100%}}
 
 /* === f1 Form Styles === */
@@ -151,6 +164,7 @@ h3{
   padding-bottom:4px;
   border-bottom:1px solid #e5e7eb;
   color:#111827;
+  font-weight:700;
 }
 label{
   display:block;
