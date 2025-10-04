@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <form id="loginForm" method="post" style="display:flex;flex-direction:column;gap:10px;margin-top:22px;">
+  <form id="loginForm" method="post" style="display:flex;flex-direction:column;gap:8px;margin-top:18px;">
     <div style="display:flex;flex-direction:column;">
       <input 
         class="input"
@@ -32,7 +32,7 @@
       <div id="addressError" class="error-text"></div>
     </div>
 
-    <div style="display:flex;flex-direction:column;">
+    <div style="display:flex;flex-direction:column;margin-top:4px;">
       <input 
         class="input"
         id="password"
@@ -53,14 +53,14 @@
       <div id="passwordError" class="error-text"></div>
     </div>
 
-    <div class="center" style="margin-top:12px;">
+    <div class="center" style="margin-top:10px;">
       <button 
         class="btn btn-blue" 
         type="submit"
         style="
           width:100%;
           max-width:340px;
-          padding:13px;
+          padding:12px;
           border-radius:50px;
           font-size:15px;
           font-weight:600;
@@ -107,14 +107,12 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   [address, password].forEach(input => input.classList.remove("input-error"));
   [addressError, passwordError].forEach(el => el.textContent = "");
 
-  // Validate address
   if (!(emailPattern.test(address.value.trim()) || phonePattern.test(address.value.trim()))) {
     valid = false;
     address.classList.add("input-error");
     addressError.textContent = "Enter a valid mobile number or email address.";
   }
 
-  // Validate password
   if (password.value.trim().length < 6) {
     valid = false;
     password.classList.add("input-error");
@@ -128,7 +126,6 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   }
 });
 
-// Remove warnings on input
 document.querySelectorAll(".input").forEach(input => {
   input.addEventListener("input", () => {
     input.classList.remove("input-error");
