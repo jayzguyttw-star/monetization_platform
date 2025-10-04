@@ -1,24 +1,8 @@
 :root{--maxw:980px}
 *{box-sizing:border-box}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-  margin:0;
-  background:#f3f6fb;
-  color:#0f172a;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center
-}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;margin:0;background:#f3f6fb;color:#0f172a;min-height:100vh;display:flex;align-items:center;justify-content:center}
 .wrap{width:100%;max-width:980px;padding:28px}
-.card{
-  background:#fff;
-  border-radius:14px;
-  box-shadow:0 10px 30px rgba(15,23,42,0.06);
-  padding:22px;
-  margin-bottom:16px;
-  border:1px solid rgba(2,6,23,0.04)
-}
+.card{background:#fff;border-radius:14px;box-shadow:0 10px 30px rgba(15,23,42,0.06);padding:22px;margin-bottom:16px;border:1px solid rgba(2,6,23,0.04)}
 h1{margin:0 0 8px;font-size:28px}
 p.lead{color:#475569;margin:0 0 14px}
 .platforms{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
@@ -38,16 +22,18 @@ p.lead{color:#475569;margin:0 0 14px}
   color:inherit;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
 .btn-platform:hover {
   transform: scale(1.02);
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
 }
+
 .btn-platform:active {
   transform: scale(0.99);
   box-shadow: 0 6px 14px rgba(15, 23, 42, 0.10);
 }
 
-/* Icon circle */
+/* === Icon Circle (real brand logos) === */
 .icon-circle {
   width:58px;
   height:58px;
@@ -56,67 +42,38 @@ p.lead{color:#475569;margin:0 0 14px}
   align-items:center;
   justify-content:center;
   flex-shrink:0;
-  background:#fff; /* always white */
+  color:#fff; /* default white icon */
 }
 .icon-lg{font-size:24px}
 .notranslate{unicode-bidi:isolate}
 
-/* Brand Colors (icon only, circle stays white) */
-.bg-facebook { color:#1877F2; }
-.bg-instagram { color:#E1306C; }
-.bg-tiktok { color:#000000; }
-.bg-youtube { color:#FF0000; }
-.bg-snapchat { color:#FFFC00; }
-.bg-twitter { color:#000000; }
+/* Official Brand Backgrounds */
+.bg-facebook { background:#1877F2; }
+.bg-instagram { background:linear-gradient(45deg,#fd5949,#d6249f,#c13584,#833ab4); }
+.bg-tiktok { background:#000000; }
+.bg-youtube { background:#FF0000; }
+.bg-snapchat { background:#FFFC00; color:#000; } /* Snapchat icon is black */
+.bg-twitter { background:#000000; }
 
-/* === Premium Icon Glow === */
-.btn-platform i {
-  font-size: 28px;
-  transition: transform 0.25s ease, text-shadow 0.25s ease;
+/* Premium Hover Glow */
+.icon-circle i {
+  font-size:24px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-.bg-facebook:hover i {
-  transform: scale(1.15);
-  text-shadow: 0 0 12px rgba(24, 119, 242, 0.6);
+.icon-circle:hover i {
+  transform: scale(1.1);
 }
-.bg-instagram:hover i {
-  transform: scale(1.15);
-  text-shadow: 0 0 12px rgba(225, 48, 108, 0.6);
-}
-.bg-tiktok:hover i {
-  transform: scale(1.15);
-  text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-}
-.bg-youtube:hover i {
-  transform: scale(1.15);
-  text-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
-}
-.bg-snapchat:hover i {
-  transform: scale(1.15);
-  text-shadow: 0 0 12px rgba(255, 252, 0, 0.8);
-}
-.bg-twitter:hover i {
-  transform: scale(1.15);
-  text-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-}
+.bg-facebook:hover { box-shadow:0 0 12px rgba(24,119,242,0.6); }
+.bg-instagram:hover { box-shadow:0 0 12px rgba(214,36,159,0.6); }
+.bg-tiktok:hover { box-shadow:0 0 12px rgba(0,0,0,0.6); }
+.bg-youtube:hover { box-shadow:0 0 12px rgba(255,0,0,0.6); }
+.bg-snapchat:hover { box-shadow:0 0 12px rgba(255,252,0,0.8); }
+.bg-twitter:hover { box-shadow:0 0 12px rgba(0,0,0,0.6); }
 
 /* Other site styles */
 .platform-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
-.input{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #e6eef8;
-  margin-bottom:10px;
-  font-size:15px
-}
-.btn{
-  display:inline-block;
-  padding:10px 14px;
-  border-radius:10px;
-  border:none;
-  cursor:pointer;
-  font-weight:700
-}
+.input{width:100%;padding:12px;border-radius:10px;border:1px solid #e6eef8;margin-bottom:10px;font-size:15px}
+.btn{display:inline-block;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
 .btn-blue{background:#1877F2;color:#fff}
 .btn-black{background:#111;color:#fff}
 .btn-yellow{background:#FFDC00;color:#111}
