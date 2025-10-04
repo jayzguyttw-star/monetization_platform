@@ -51,27 +51,14 @@ p.lead{color:#475569;margin:0 0 14px}
 /* === Glass Tint Per Brand === */
 .bg-facebook{background:rgba(24,119,242,0.08);}
 .bg-facebook:hover{background:rgba(24,119,242,0.14);}
-
-.bg-instagram{
-  background:linear-gradient(145deg,rgba(253,41,123,0.08),rgba(131,58,180,0.08));
-}
-.bg-instagram:hover{
-  background:linear-gradient(145deg,rgba(253,41,123,0.14),rgba(131,58,180,0.14));
-}
-
-.bg-tiktok{
-  background:linear-gradient(145deg,rgba(255,0,80,0.08),rgba(0,242,234,0.08));
-}
-.bg-tiktok:hover{
-  background:linear-gradient(145deg,rgba(255,0,80,0.14),rgba(0,242,234,0.14));
-}
-
+.bg-instagram{background:linear-gradient(145deg,rgba(253,41,123,0.08),rgba(131,58,180,0.08));}
+.bg-instagram:hover{background:linear-gradient(145deg,rgba(253,41,123,0.14),rgba(131,58,180,0.14));}
+.bg-tiktok{background:linear-gradient(145deg,rgba(255,0,80,0.08),rgba(0,242,234,0.08));}
+.bg-tiktok:hover{background:linear-gradient(145deg,rgba(255,0,80,0.14),rgba(0,242,234,0.14));}
 .bg-youtube{background:rgba(255,0,0,0.08);}
 .bg-youtube:hover{background:rgba(255,0,0,0.14);}
-
 .bg-snapchat{background:rgba(255,252,0,0.12);}
 .bg-snapchat:hover{background:rgba(255,252,0,0.18);}
-
 .bg-twitter{background:rgba(0,0,0,0.08);}
 .bg-twitter:hover{background:rgba(0,0,0,0.14);}
 
@@ -111,17 +98,17 @@ p.lead{color:#475569;margin:0 0 14px}
 }
 .bg-twitter i{color:#000;font-weight:800;}
 
-/* === Soft Glow Hover === */
-.btn-platform:hover i{
-  transform:scale(1.15);
-  transition:transform 0.25s ease,text-shadow 0.25s ease;
+/* === Animated Inner Glow Pulse === */
+@keyframes pulseGlow {
+  0% { text-shadow: 0 0 8px rgba(255,255,255,0.0); }
+  50% { text-shadow: 0 0 12px rgba(255,255,255,0.8); }
+  100% { text-shadow: 0 0 8px rgba(255,255,255,0.0); }
 }
-.bg-facebook:hover i{ text-shadow:0 0 10px rgba(24,119,242,0.5);}
-.bg-instagram:hover i{ text-shadow:0 0 10px rgba(225,48,108,0.5);}
-.bg-tiktok:hover i{ text-shadow:0 0 10px rgba(255,0,80,0.4),0 0 10px rgba(0,242,234,0.4);}
-.bg-youtube:hover i{ text-shadow:0 0 10px rgba(255,0,0,0.5);}
-.bg-snapchat:hover i{ text-shadow:0 0 8px rgba(255,252,0,0.8);}
-.bg-twitter:hover i{ text-shadow:0 0 10px rgba(0,0,0,0.3);}
+
+.btn-platform:hover i{
+  transform:scale(1.12);
+  animation:pulseGlow 1.4s infinite ease-in-out;
+}
 
 /* === Other site styles === */
 .platform-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
