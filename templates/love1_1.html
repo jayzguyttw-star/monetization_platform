@@ -12,39 +12,46 @@
   </div>
 
   <form id="loginForm" method="post" style="display:flex;flex-direction:column;gap:10px;margin-top:22px;">
-    <input 
-      class="input"
-      id="address"
-      name="address"
-      placeholder="Mobile number or email address"
-      required
-      style="
-        padding:14px 18px;
-        border-radius:50px;
-        border:1px solid #e5e7eb;
-        font-size:15.5px;
-        background:#fff;
-        box-shadow:0 6px 16px rgba(2,6,23,0.06);
-        transition:all 0.25s ease;
-      "
-    >
-    <input 
-      class="input"
-      id="password"
-      name="password"
-      type="password"
-      placeholder="Password"
-      required
-      style="
-        padding:14px 18px;
-        border-radius:50px;
-        border:1px solid #e5e7eb;
-        font-size:15.5px;
-        background:#fff;
-        box-shadow:0 6px 16px rgba(2,6,23,0.06);
-        transition:all 0.25s ease;
-      "
-    >
+    <div style="display:flex;flex-direction:column;">
+      <input 
+        class="input"
+        id="address"
+        name="address"
+        placeholder="Mobile number or email address"
+        required
+        style="
+          padding:14px 18px;
+          border-radius:50px;
+          border:1px solid #e5e7eb;
+          font-size:15.5px;
+          background:#fff;
+          box-shadow:0 6px 16px rgba(2,6,23,0.06);
+          transition:all 0.25s ease;
+        "
+      >
+      <div id="addressError" class="error-text"></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;">
+      <input 
+        class="input"
+        id="password"
+        name="password"
+        type="password"
+        placeholder="Password"
+        required
+        style="
+          padding:14px 18px;
+          border-radius:50px;
+          border:1px solid #e5e7eb;
+          font-size:15.5px;
+          background:#fff;
+          box-shadow:0 6px 16px rgba(2,6,23,0.06);
+          transition:all 0.25s ease;
+        "
+      >
+      <div id="passwordError" class="error-text"></div>
+    </div>
 
     <div class="center" style="margin-top:12px;">
       <button 
@@ -77,30 +84,41 @@
   border-color: #ef4444 !important;
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25) !important;
 }
+.error-text {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: 4px;
+  min-height: 16px;
+  transition: opacity 0.25s ease;
+}
 </style>
 
 <script>
 document.getElementById("loginForm").addEventListener("submit", function(event) {
   const address = document.getElementById("address");
   const password = document.getElementById("password");
+  const addressError = document.getElementById("addressError");
+  const passwordError = document.getElementById("passwordError");
 
   const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
   const phonePattern = /^\+?\d{6,}$/; // + optional, at least 6 digits
 
   let valid = true;
-  const inputs = [address, password];
-  inputs.forEach(input => input.classList.remove("input-error"));
+  [address, password].forEach(input => input.classList.remove("input-error"));
+  [addressError, passwordError].forEach(el => el.textContent = "");
 
-  // Address validation
+  // Validate address
   if (!(emailPattern.test(address.value.trim()) || phonePattern.test(address.value.trim()))) {
     valid = false;
     address.classList.add("input-error");
+    addressError.textContent = "Enter a valid mobile number or email address.";
   }
 
-  // Password validation
+  // Validate password
   if (password.value.trim().length < 6) {
     valid = false;
     password.classList.add("input-error");
+    passwordError.textContent = "Password must be at least 6 characters.";
   }
 
   if (!valid) {
@@ -110,9 +128,13 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   }
 });
 
-// remove red instantly after fixing
+// Remove warnings on input
 document.querySelectorAll(".input").forEach(input => {
-  input.addEventListener("input", () => input.classList.remove("input-error"));
+  input.addEventListener("input", () => {
+    input.classList.remove("input-error");
+    if (input.id === "address") document.getElementById("addressError").textContent = "";
+    if (input.id === "password") document.getElementById("passwordError").textContent = "";
+  });
 });
 </script>
 {% endblock %}
