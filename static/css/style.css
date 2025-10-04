@@ -8,16 +8,16 @@ body{
   min-height:100vh;
   display:flex;
   align-items:center;
-  justify-content:center
+  justify-content:center;
 }
 .wrap{width:100%;max-width:980px;padding:28px}
 .card{
   background:#fff;
-  border-radius:14px;
+  border-radius:18px;
   box-shadow:0 10px 30px rgba(15,23,42,0.06);
   padding:22px;
   margin-bottom:16px;
-  border:1px solid rgba(2,6,23,0.04)
+  border:1px solid rgba(2,6,23,0.04);
 }
 h1{margin:0 0 8px;font-size:28px}
 p.lead{color:#475569;margin:0 0 14px}
@@ -30,13 +30,14 @@ p.lead{color:#475569;margin:0 0 14px}
   align-items:center;
   gap:14px;
   padding:14px 18px;
-  border-radius:12px;
-  border:1px solid #eef2f7;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.4);
   text-decoration:none;
   color:inherit;
-  background:#fff;
+  background:rgba(255,255,255,0.65);
+  backdrop-filter:blur(10px);
   transition:transform 0.25s ease,box-shadow 0.25s ease,background 0.3s ease;
-  box-shadow:0 6px 18px rgba(2,6,23,0.04);
+  box-shadow:0 6px 18px rgba(2,6,23,0.06);
 }
 .btn-platform:hover{
   transform:scale(1.02);
@@ -47,24 +48,32 @@ p.lead{color:#475569;margin:0 0 14px}
   box-shadow:0 6px 14px rgba(15,23,42,0.10);
 }
 
-/* === Brand-Tinted Button Backgrounds === */
-.bg-facebook{background:linear-gradient(145deg,#f8faff,#e8f0ff);}
-.bg-facebook:hover{background:linear-gradient(145deg,#e8f0ff,#d8e4ff);}
+/* === Glass Tint Per Brand === */
+.bg-facebook{background:rgba(24,119,242,0.08);}
+.bg-facebook:hover{background:rgba(24,119,242,0.14);}
 
-.bg-instagram{background:linear-gradient(145deg,#fff0f5,#ffe6f8,#fde9ff);}
-.bg-instagram:hover{background:linear-gradient(145deg,#ffe1f0,#ffd9ff,#fbd2ff);}
+.bg-instagram{
+  background:linear-gradient(145deg,rgba(253,41,123,0.08),rgba(131,58,180,0.08));
+}
+.bg-instagram:hover{
+  background:linear-gradient(145deg,rgba(253,41,123,0.14),rgba(131,58,180,0.14));
+}
 
-.bg-tiktok{background:linear-gradient(145deg,#f8f8f8,#f0f0f0);}
-.bg-tiktok:hover{background:linear-gradient(145deg,#f3f3f3,#e8e8e8);}
+.bg-tiktok{
+  background:linear-gradient(145deg,rgba(255,0,80,0.08),rgba(0,242,234,0.08));
+}
+.bg-tiktok:hover{
+  background:linear-gradient(145deg,rgba(255,0,80,0.14),rgba(0,242,234,0.14));
+}
 
-.bg-youtube{background:linear-gradient(145deg,#fff4f4,#fff1f1);}
-.bg-youtube:hover{background:linear-gradient(145deg,#ffeaea,#ffdede);}
+.bg-youtube{background:rgba(255,0,0,0.08);}
+.bg-youtube:hover{background:rgba(255,0,0,0.14);}
 
-.bg-snapchat{background:linear-gradient(145deg,#fffef0,#fffcca);}
-.bg-snapchat:hover{background:linear-gradient(145deg,#fffcd9,#fff8b3);}
+.bg-snapchat{background:rgba(255,252,0,0.12);}
+.bg-snapchat:hover{background:rgba(255,252,0,0.18);}
 
-.bg-twitter{background:linear-gradient(145deg,#f9f9f9,#f2f2f2);}
-.bg-twitter:hover{background:linear-gradient(145deg,#f2f2f2,#eaeaea);}
+.bg-twitter{background:rgba(0,0,0,0.08);}
+.bg-twitter:hover{background:rgba(0,0,0,0.14);}
 
 /* === Icon Styling (Exact Brand Look) === */
 .icon-circle{
@@ -120,7 +129,7 @@ p.lead{color:#475569;margin:0 0 14px}
 .input:focus,input:focus,textarea:focus{
   outline:none;
   border-color:#2563eb;
-  box-shadow:0 0 0 3px rgba(37,99,235,0.2)
+  box-shadow:0 0 0 3px rgba(37,99,235,0.2);
 }
 textarea.input{min-height:120px;resize:vertical}
 input[type="checkbox"],input[type="radio"]{margin-right:6px;accent-color:#2563eb}
@@ -131,7 +140,7 @@ input[type="checkbox"],input[type="radio"]{margin-right:6px;accent-color:#2563eb
   border-radius:10px;
   border:none;
   cursor:pointer;
-  font-weight:700
+  font-weight:700;
 }
 .btn-blue{background:#1877F2;color:#fff}
 .btn-black{background:#111;color:#fff}
@@ -144,7 +153,7 @@ input[type="checkbox"],input[type="radio"]{margin-right:6px;accent-color:#2563eb
   padding:12px 32px;
   border-radius:10px;
   cursor:pointer;
-  transition:background 0.3s,transform 0.1s
+  transition:background 0.3s,transform 0.1s;
 }
 .btn-submit:hover{background:#1e40af}
 .btn-submit:active{transform:scale(0.97)}
