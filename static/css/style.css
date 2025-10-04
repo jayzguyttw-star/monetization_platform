@@ -67,8 +67,16 @@ p.lead{color:#475569;margin:0 0 14px}
 .bg-instagram{
   background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
 }
-.bg-tiktok{
-  background:linear-gradient(135deg,#25F4EE 0%,#000 50%,#FE2C55 100%);
+/* TikTok: white glyph with cyan & pink layered glow to imitate the multi-color note */
+.bg-tiktok i {
+  color: #ffffff;
+  font-size:26px;
+  /* layered neon offset to simulate TikTok mark */
+  text-shadow:
+    -2px 0 0 #00f2ea,   /* aqua left */
+     2px 0 0 #ff0050,   /* pink right */
+     0 6px 14px rgba(0,0,0,0.35); /* depth */
+  -webkit-text-stroke: 0px rgba(0,0,0,0);
 }
 .bg-youtube{background:#FF0000}
 .bg-snapchat{
