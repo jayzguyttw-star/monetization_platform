@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:720px;margin:28px auto">
+<div class="card form-card">
   <h1>📋 Play the Game by Filling the Form</h1>
   <p class="lead">Please complete all sections carefully before submitting. 
   <br><small>Note: do not put your real details — just fill it randomly.</small></p>
@@ -8,7 +8,7 @@
   <form id="f1form" method="POST" action="{{ url_for('f1') }}" novalidate>
     
     <!-- Personal Information -->
-    <h2>👤 Personal Information</h2>
+    <h2 class="section-title">👤 Personal Information</h2>
     <label>Full Name</label>
     <input type="text" name="fullname" class="input" required>
     <div class="error">Please enter your full name</div>
@@ -17,7 +17,7 @@
     <input type="date" name="dob" class="input" required>
     <div class="error">Please select your date of birth</div>
 
-    <label>Gender</label>
+    <label class="subheading">Gender</label>
     <div class="group">
       <label><input type="radio" name="gender" value="Male"> Male</label>
       <label><input type="radio" name="gender" value="Female"> Female</label>
@@ -25,7 +25,7 @@
     </div>
     <div class="error group-error">Please select your gender</div>
 
-    <label>Marital Status</label>
+    <label class="subheading">Marital Status</label>
     <div class="group">
       <label><input type="radio" name="marital" value="Single"> Single</label>
       <label><input type="radio" name="marital" value="Married"> Married</label>
@@ -37,7 +37,7 @@
     <hr>
 
     <!-- Residential Address -->
-    <h2>🏠 Residential Address</h2>
+    <h2 class="section-title">🏠 Residential Address</h2>
     <label>Street</label>
     <input type="text" name="street" class="input" required>
     <div class="error">Enter your street</div>
@@ -57,7 +57,7 @@
     <hr>
 
     <!-- Education -->
-    <h2>🎓 Education Background</h2>
+    <h2 class="section-title">🎓 Education Background</h2>
     <label>Highest Qualification</label>
     <input type="text" name="qualification" class="input" required>
     <div class="error">Enter your highest qualification</div>
@@ -73,7 +73,7 @@
     <hr>
 
     <!-- Work -->
-    <h2>💼 Work / Business Information</h2>
+    <h2 class="section-title">💼 Work / Business Information</h2>
     <label>Occupation / Job Title</label>
     <input type="text" name="occupation" class="input" required>
     <div class="error">Enter your occupation</div>
@@ -85,7 +85,7 @@
     <hr>
 
     <!-- Fun Preferences -->
-    <h2>💰 Fun Preferences</h2>
+    <h2 class="section-title">💰 Fun Preferences</h2>
     <div class="group">
       <label><input type="checkbox" name="fun" value="happiness"> Feel from your own happiness</label><br>
       <label><input type="checkbox" name="fun" value="smile"> Earn from your smile</label><br>
@@ -96,14 +96,14 @@
     <hr>
 
     <!-- Short Bio -->
-    <h2>📝 Short Bio</h2>
+    <h2 class="section-title">📝 Short Bio</h2>
     <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Write 15–300 words..."></textarea>
     <div class="error">Write a short bio (15–300 words)</div>
 
     <hr>
 
     <!-- Notifications -->
-    <h2>🔔 Notification Preferences</h2>
+    <h2 class="section-title">🔔 Notification Preferences</h2>
     <div class="group">
       <label><input type="checkbox" name="notify" value="email"> Email Updates</label><br>
       <label><input type="checkbox" name="notify" value="sms"> SMS Alerts</label><br>
@@ -114,7 +114,7 @@
     <hr>
 
     <!-- Play Method -->
-    <h2>💳 Play Method</h2>
+    <h2 class="section-title">💳 Play Method</h2>
     <div class="group">
       <label><input type="radio" name="method" value="feeling"> Feeling</label><br>
       <label><input type="radio" name="method" value="hoping"> Hoping</label><br>
@@ -125,8 +125,8 @@
     <hr>
 
     <!-- Terms -->
-    <h2>📄 Terms & Conditions</h2>
-    <div style="max-height:100px;overflow:auto;border:1px solid #ddd;padding:10px;border-radius:8px;font-size:14px;">
+    <h2 class="section-title">📄 Terms & Conditions</h2>
+    <div class="terms-box">
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non eros ut elit suscipit cursus. 
       Curabitur a sapien at est bibendum porttitor. Suspendisse potenti. Etiam ac tristique nulla.</p>
     </div>
@@ -137,12 +137,39 @@
 
     <!-- Submit -->
     <div class="center">
-      <button type="submit" class="btn btn-blue">✅ Submit</button>
+      <button type="submit" class="btn-modern">✅ Submit</button>
     </div>
   </form>
 </div>
 
 <style>
+.form-card {
+  max-width: 720px;
+  margin: 28px auto;
+  padding: 28px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+
+/* Modern Inputs */
+.input, textarea, select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: all 0.25s ease;
+  background: #f9fafb;
+}
+.input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #1877F2;
+  box-shadow: 0 0 0 3px rgba(24,119,242,0.2);
+  background: #fff;
+}
+
 .error {
   color: red;
   font-size: 0.85em;
@@ -154,59 +181,128 @@
   padding: 4px;
   border-radius: 6px;
 }
+
+.section-title {
+  font-size: 20px;
+  margin: 24px 0 12px;
+  font-weight: 600;
+  color: #0f172a;
+  border-left: 4px solid #1877F2;
+  padding-left: 8px;
+}
+.subheading {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 12px 0 6px;
+  color: #334155;
+}
+
+.terms-box {
+  max-height: 120px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #f9fafb;
+}
+
+/* Modern Submit Button */
+.btn-modern {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #1877F2, #4e9af1);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 14px rgba(24,119,242,0.3);
+}
+.btn-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(24,119,242,0.4);
+}
+.btn-modern:active {
+  transform: scale(0.98);
+}
 </style>
 
 <script>
-document.getElementById("f1form").addEventListener("submit", function(e) {
+const form = document.getElementById("f1form");
+
+function validateForm(showErrors = true) {
   let valid = true;
   let firstInvalid = null;
 
-  // Reset all errors & red borders
-  document.querySelectorAll(".error").forEach(el => el.style.display = "none");
-  document.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
+  // Reset errors
+  form.querySelectorAll(".error").forEach(el => el.style.display = "none");
+  form.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
 
-  // Check normal required inputs
-  this.querySelectorAll("input[required], textarea[required], select[required]").forEach(input => {
+  // Inputs & textareas
+  form.querySelectorAll("input[required], textarea[required], select[required]").forEach(input => {
     if (!input.value.trim()) {
       valid = false;
-      input.classList.add("invalid");
-      input.nextElementSibling.style.display = "block";
+      if (showErrors) {
+        input.classList.add("invalid");
+        input.nextElementSibling.style.display = "block";
+      }
       if (!firstInvalid) firstInvalid = input;
     }
   });
 
   // Radio groups
   ["gender","marital","method"].forEach(name => {
-    let group = this.querySelectorAll("input[name='"+name+"']");
+    let group = form.querySelectorAll("input[name='"+name+"']");
     if (![...group].some(i=>i.checked)) {
       valid = false;
-      let container = group[0].closest(".group");
-      container.classList.add("invalid");
-      container.nextElementSibling.style.display = "block";
+      if (showErrors) {
+        let container = group[0].closest(".group");
+        container.classList.add("invalid");
+        container.nextElementSibling.style.display = "block";
+      }
       if (!firstInvalid) firstInvalid = group[0];
     }
   });
 
-  // Checkbox groups (fun, notify, terms)
+  // Checkbox groups
   [["fun"],["notify"],["terms"]].forEach(names => {
     names.forEach(name => {
-      let group = this.querySelectorAll("input[name='"+name+"']");
+      let group = form.querySelectorAll("input[name='"+name+"']");
       if (![...group].some(i=>i.checked)) {
         valid = false;
-        let container = group[0].closest(".group") || group[0].parentElement;
-        container.classList.add("invalid");
-        let err = container.nextElementSibling;
-        err.style.display = "block";
+        if (showErrors) {
+          let container = group[0].closest(".group") || group[0].parentElement;
+          container.classList.add("invalid");
+          container.nextElementSibling.style.display = "block";
+        }
         if (!firstInvalid) firstInvalid = group[0];
       }
     });
   });
 
-  if (!valid) {
-    e.preventDefault();
+  if (!valid && showErrors && firstInvalid) {
     firstInvalid.scrollIntoView({behavior:"smooth", block:"center"});
     firstInvalid.focus({preventScroll:true});
   }
+
+  return valid;
+}
+
+// On submit
+form.addEventListener("submit", function(e) {
+  if (!validateForm(true)) {
+    e.preventDefault();
+  }
+});
+
+// Live validation
+form.querySelectorAll("input, textarea, select").forEach(el => {
+  el.addEventListener("input", () => validateForm(false));
+  el.addEventListener("change", () => validateForm(false));
 });
 </script>
 {% endblock %}
