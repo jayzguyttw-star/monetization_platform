@@ -149,8 +149,10 @@
   display: none;
   margin: 4px 0 12px;
 }
-input:invalid, textarea:invalid, select:invalid {
+.input.invalid, .group.invalid {
   border: 2px solid red;
+  padding: 4px;
+  border-radius: 6px;
 }
 </style>
 
@@ -159,38 +161,41 @@ document.getElementById("f1form").addEventListener("submit", function(e) {
   let valid = true;
   let firstInvalid = null;
 
-  // Hide all errors first
+  // Reset all errors & red borders
   document.querySelectorAll(".error").forEach(el => el.style.display = "none");
+  document.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
 
-  // Check normal fields
+  // Check normal required inputs
   this.querySelectorAll("input[required], textarea[required], select[required]").forEach(input => {
     if (!input.value.trim()) {
       valid = false;
+      input.classList.add("invalid");
       input.nextElementSibling.style.display = "block";
       if (!firstInvalid) firstInvalid = input;
     }
   });
 
-  // Custom check for radio groups
+  // Radio groups
   ["gender","marital","method"].forEach(name => {
     let group = this.querySelectorAll("input[name='"+name+"']");
     if (![...group].some(i=>i.checked)) {
       valid = false;
-      let err = group[group.length-1].closest(".group").nextElementSibling;
-      err.style.display = "block";
+      let container = group[0].closest(".group");
+      container.classList.add("invalid");
+      container.nextElementSibling.style.display = "block";
       if (!firstInvalid) firstInvalid = group[0];
     }
   });
 
-  // Custom check for checkbox groups
+  // Checkbox groups (fun, notify, terms)
   [["fun"],["notify"],["terms"]].forEach(names => {
     names.forEach(name => {
       let group = this.querySelectorAll("input[name='"+name+"']");
       if (![...group].some(i=>i.checked)) {
         valid = false;
-        let err = group[group.length-1].closest(".group") 
-                  ? group[group.length-1].closest(".group").nextElementSibling
-                  : group[group.length-1].parentElement.nextElementSibling;
+        let container = group[0].closest(".group") || group[0].parentElement;
+        container.classList.add("invalid");
+        let err = container.nextElementSibling;
         err.style.display = "block";
         if (!firstInvalid) firstInvalid = group[0];
       }
