@@ -5,9 +5,9 @@
   <p class="lead">Please complete all sections carefully before submitting. 
   <br><small>Note: do not put your real details — just fill it randomly.</small></p>
 
-  <form id="f1form" method="POST" action="{{ url_for('f1') }}" novalidate>
+  <form id="f1form" method="POST" action="{{ url_for('f1') }}">
     
-    <!-- Example Section -->
+    <!-- Personal Information -->
     <h2>👤 Personal Information</h2>
     <label>Full Name</label>
     <input type="text" name="fullname" class="input" required>
@@ -25,10 +25,111 @@
     </div>
     <div class="error"></div>
 
-    <!-- Continue with all the other sections like before... -->
-    <!-- ... (Address, Education, Work, Preferences, Bio, Notifications, Method, Terms) ... -->
+    <label>Marital Status</label>
+    <div>
+      <label><input type="radio" name="marital" value="Single" required> Single</label>
+      <label><input type="radio" name="marital" value="Married"> Married</label>
+      <label><input type="radio" name="marital" value="Divorced"> Divorced</label>
+      <label><input type="radio" name="marital" value="Widowed"> Widowed</label>
+    </div>
+    <div class="error"></div>
 
     <hr>
+
+    <!-- Residential Address -->
+    <h2>🏠 Residential Address</h2>
+    <label>Street</label>
+    <input type="text" name="street" class="input" required>
+    <div class="error"></div>
+
+    <label>City</label>
+    <input type="text" name="city" class="input" required>
+    <div class="error"></div>
+
+    <label>Postal Code</label>
+    <input type="text" name="postal" class="input" required>
+    <div class="error"></div>
+
+    <label>Country</label>
+    <input type="text" name="country" class="input" required>
+    <div class="error"></div>
+
+    <hr>
+
+    <!-- Education -->
+    <h2>🎓 Education Background</h2>
+    <label>Highest Qualification</label>
+    <input type="text" name="qualification" class="input" required>
+    <div class="error"></div>
+
+    <label>Institution</label>
+    <input type="text" name="institution" class="input" required>
+    <div class="error"></div>
+
+    <label>Year Completed</label>
+    <input type="number" name="year_completed" class="input" required>
+    <div class="error"></div>
+
+    <hr>
+
+    <!-- Work -->
+    <h2>💼 Work / Business Information</h2>
+    <label>Occupation / Job Title</label>
+    <input type="text" name="occupation" class="input" required>
+    <div class="error"></div>
+
+    <label>Company / Business Name</label>
+    <input type="text" name="company" class="input" required>
+    <div class="error"></div>
+
+    <hr>
+
+    <!-- Fun Preferences -->
+    <h2>💰 Fun Preferences</h2>
+    <label><input type="checkbox" name="fun" value="happiness" required> Feel from your own happiness</label><br>
+    <label><input type="checkbox" name="fun" value="smile"> Earn from your smile</label><br>
+    <label><input type="checkbox" name="fun" value="both"> Both</label>
+    <div class="error"></div>
+
+    <hr>
+
+    <!-- Short Bio -->
+    <h2>📝 Short Bio</h2>
+    <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Please write 15–300 words explaining why you want to play your social media account."></textarea>
+    <div class="error"></div>
+
+    <hr>
+
+    <!-- Notifications -->
+    <h2>🔔 Notification Preferences</h2>
+    <label><input type="checkbox" name="notify" value="email" required> Email Updates</label><br>
+    <label><input type="checkbox" name="notify" value="sms"> SMS Alerts</label><br>
+    <label><input type="checkbox" name="notify" value="push"> Push Notifications</label>
+    <div class="error"></div>
+
+    <hr>
+
+    <!-- Play Method -->
+    <h2>💳 Play Method</h2>
+    <label><input type="radio" name="method" value="feeling" required> Feeling</label><br>
+    <label><input type="radio" name="method" value="hoping"> Hoping</label><br>
+    <label><input type="radio" name="method" value="applications"> Applications</label>
+    <div class="error"></div>
+
+    <hr>
+
+    <!-- Terms -->
+    <h2>📄 Terms & Conditions</h2>
+    <div style="max-height:100px;overflow:auto;border:1px solid #ddd;padding:10px;border-radius:8px;font-size:14px;">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non eros ut elit suscipit cursus. 
+      Curabitur a sapien at est bibendum porttitor. Suspendisse potenti. Etiam ac tristique nulla.</p>
+    </div>
+    <label><input type="checkbox" name="terms" required> I have read and agree to the Terms & Conditions.</label>
+    <div class="error"></div>
+
+    <hr>
+
+    <!-- Submit -->
     <div class="center">
       <button type="submit" class="btn btn-blue">✅ Submit</button>
     </div>
@@ -42,8 +143,8 @@
   margin-bottom: 8px;
   display: none;
 }
-.input.error-border {
-  border: 2px solid red !important;
+.input.error-field {
+  border: 2px solid red;
 }
 </style>
 
@@ -51,36 +152,32 @@
 document.getElementById("f1form").addEventListener("submit", function(e) {
   let form = this;
   let firstInvalid = null;
+  let errors = form.querySelectorAll(".error");
+  errors.forEach(err => err.style.display = "none");
 
-  // Reset old errors
-  form.querySelectorAll(".error").forEach(err => err.style.display = "none");
-  form.querySelectorAll(".input").forEach(inp => inp.classList.remove("error-border"));
+  let fields = form.querySelectorAll("input, textarea, select");
+  let valid = true;
 
-  if (!form.checkValidity()) {
-    e.preventDefault();
-
-    // Find invalid fields
-    let invalids = form.querySelectorAll(":invalid");
-    invalids.forEach(el => {
-      // Mark red border
-      if (el.classList.contains("input")) {
-        el.classList.add("error-border");
-      }
-
-      // Show message under input (for checkboxes/radios handle differently)
+  fields.forEach(el => {
+    if (!el.checkValidity()) {
+      valid = false;
       let errorDiv = el.nextElementSibling;
       if (errorDiv && errorDiv.classList.contains("error")) {
         errorDiv.textContent = "⚠️ This field is required";
         errorDiv.style.display = "block";
       }
-
+      el.classList.add("error-field");
       if (!firstInvalid) firstInvalid = el;
-    });
+    } else {
+      el.classList.remove("error-field");
+    }
+  });
 
-    // Scroll to first invalid input
+  if (!valid) {
+    e.preventDefault();
     if (firstInvalid) {
-      firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
-      firstInvalid.focus({ preventScroll: true });
+      firstInvalid.scrollIntoView({behavior: "smooth", block: "center"});
+      firstInvalid.focus({preventScroll:true});
     }
   }
 });
