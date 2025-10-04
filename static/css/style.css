@@ -1,258 +1,261 @@
-:root {
-  --maxw: 980px;
-}
+:root { --maxw:980px; }
 
-/* === Base Layout === */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing:border-box; }
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  margin: 0;
-  background: #f3f6fb;
-  color: #0f172a;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.wrap {
-  width: 100%;
-  max-width: var(--maxw);
-  padding: 28px;
-}
-.card {
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-  padding: 22px;
-  margin-bottom: 16px;
-  border: 1px solid rgba(2, 6, 23, 0.04);
-}
-h1 {
-  margin: 0 0 8px;
-  font-size: 28px;
-}
-p.lead {
-  color: #475569;
-  margin: 0 0 14px;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  margin:0;
+  background:#f3f6fb;
+  color:#0f172a;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-/* === Platforms Grid === */
-.platforms {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
+.wrap {
+  width:100%;
+  max-width:980px;
+  padding:28px;
 }
+
+.card {
+  background:#fff;
+  border-radius:22px;
+  box-shadow:0 10px 40px rgba(15,23,42,0.06);
+  padding:22px;
+  margin-bottom:16px;
+  border:1px solid rgba(2,6,23,0.04);
+}
+
+h1 { margin:0 0 8px; font-size:28px; }
+p.lead { color:#475569; margin:0 0 14px; }
 
 /* === Premium Platform Buttons === */
+.platforms {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:center;
+}
+
 .btn-platform {
-  width: 340px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.04);
-  border: 1px solid #eef2f7;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  width:340px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:14px 18px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,0.4);
+  text-decoration:none;
+  color:inherit;
+  background:rgba(255,255,255,0.5);
+  backdrop-filter:blur(14px);
+  transition:transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
+  box-shadow:0 8px 22px rgba(2,6,23,0.06);
+  perspective:1000px;
 }
 
 .btn-platform:hover {
-  transform: scale(1.02);
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+  transform:scale(1.025);
+  background:rgba(255,255,255,0.75);
+  box-shadow:0 16px 40px rgba(15,23,42,0.12);
 }
 
 .btn-platform:active {
-  transform: scale(0.99);
-  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.10);
+  transform:scale(0.985);
+  box-shadow:0 8px 18px rgba(15,23,42,0.1);
 }
 
-/* === Icon Circle Rings === */
+/* === Icon Styling (Exact Brand Look + Glow) === */
 .icon-circle {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 26px;
-  background: #fff;
-  border: 3px solid transparent;
-  transition: all 0.25s ease;
-  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.04);
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  transition:all 0.4s ease;
+  transform-style:preserve-3d;
 }
 
-/* === Brand Rings (matte, tinted) === */
-.bg-facebook {
-  color: #1877F2;
-  border-color: rgba(24, 119, 242, 0.2);
+/* Facebook */
+.bg-facebook .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(24,119,242,0.15), 0 0 14px rgba(24,119,242,0.25);
 }
-.bg-instagram {
-  color: #E1306C;
-  border-color: rgba(225, 48, 108, 0.25);
+.bg-facebook i { color:#1877F2; }
+
+/* Instagram */
+.bg-instagram .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(193,53,132,0.15), 0 0 14px rgba(225,48,108,0.25);
 }
-.bg-tiktok {
-  color: #000;
-  border-color: rgba(0, 0, 0, 0.15);
-  background: radial-gradient(circle at 40% 40%, #fff 60%, rgba(255, 0, 85, 0.08) 80%);
-}
-.bg-youtube {
-  color: #FF0000;
-  border-color: rgba(255, 0, 0, 0.25);
-}
-.bg-snapchat {
-  color: #000;
-  border-color: rgba(255, 235, 0, 0.4);
-  background: #fffce0;
-}
-.bg-twitter {
-  color: #000;
-  border-color: rgba(0, 0, 0, 0.25);
-  background: #fff;
+.bg-instagram i {
+  background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-weight:800;
 }
 
-/* === Icon Hover Glow === */
-.icon-circle:hover {
-  box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.05), 0 0 10px rgba(0, 0, 0, 0.08);
-  transform: scale(1.05);
+/* TikTok */
+.bg-tiktok .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(0,0,0,0.1),
+             0 0 16px rgba(255,0,80,0.25),
+             0 0 16px rgba(0,242,234,0.25);
 }
-.icon-circle i {
-  transition: transform 0.25s ease, text-shadow 0.25s ease;
-}
-.icon-circle:hover i {
-  transform: scale(1.1);
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+.bg-tiktok i {
+  color:#000;
+  text-shadow:-1.8px 0 #00f2ea, 1.8px 0 #ff0050;
+  font-weight:800;
 }
 
-/* === Input + Buttons === */
+/* YouTube */
+.bg-youtube .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(255,0,0,0.18), 0 0 14px rgba(255,0,0,0.28);
+}
+.bg-youtube i { color:#FF0000; font-weight:800; }
+
+/* Snapchat */
+.bg-snapchat .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(255,252,0,0.22), 0 0 18px rgba(255,252,0,0.35);
+}
+.bg-snapchat i {
+  color:#FFFC00;
+  -webkit-text-stroke:1.5px #000;
+  font-weight:800;
+}
+
+/* Twitter / X */
+.bg-twitter .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(0,0,0,0.12), 0 0 16px rgba(0,0,0,0.22);
+}
+.bg-twitter i { color:#000; font-weight:800; }
+
+.icon-lg { font-size:34px; }
+.notranslate { unicode-bidi:isolate; }
+
+/* === Glow Animation + 3D Tilt === */
+.btn-platform:hover .icon-circle {
+  animation:pulseGlow 1.8s infinite ease-in-out;
+  transform:rotateY(10deg) rotateX(8deg) scale(1.07);
+}
+
+@keyframes pulseGlow {
+  0% { transform:scale(1) rotateY(0) rotateX(0); }
+  50% { transform:scale(1.08) rotateY(10deg) rotateX(8deg); filter:brightness(1.3); }
+  100% { transform:scale(1) rotateY(0) rotateX(0); }
+}
+
+/* === Soft corner + shadow improvements === */
+.card, .btn-platform {
+  box-shadow:0 10px 25px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.03);
+}
+
+/* === Form Styles === */
+.platform-header {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:12px;
+}
+
 .input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #e6eef8;
-  margin-bottom: 10px;
-  font-size: 15px;
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #e6eef8;
+  margin-bottom:10px;
+  font-size:15px;
 }
-.input:focus {
-  outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+
+.input:focus, input:focus, textarea:focus {
+  outline:none;
+  border-color:#2563eb;
+  box-shadow:0 0 0 3px rgba(37,99,235,0.2);
 }
-textarea.input {
-  min-height: 120px;
-  resize: vertical;
-}
+
+textarea.input { min-height:120px; resize:vertical; }
+
 input[type="checkbox"], input[type="radio"] {
-  margin-right: 6px;
-  accent-color: #2563eb;
+  margin-right:6px;
+  accent-color:#2563eb;
 }
 
 .btn {
-  display: inline-block;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  font-weight: 700;
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
 }
-.btn-blue {
-  background: #1877F2;
-  color: #fff;
-}
-.btn-black {
-  background: #111;
-  color: #fff;
-}
-.btn-yellow {
-  background: #FFDC00;
-  color: #111;
-}
-.center {
-  display: flex;
-  justify-content: center;
-}
+
+.btn-blue { background:#1877F2; color:#fff; }
+.btn-black { background:#111; color:#fff; }
+.btn-yellow { background:#FFDC00; color:#111; }
 
 .btn-submit {
-  background: #2563eb;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 12px 32px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.1s;
+  background:#2563eb;
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+  padding:12px 32px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:background 0.3s, transform 0.1s;
 }
-.btn-submit:hover { background: #1e40af; }
-.btn-submit:active { transform: scale(0.97); }
+.btn-submit:hover { background:#1e40af; }
+.btn-submit:active { transform:scale(0.97); }
 
-/* === f1 Section Titles === */
-h3 {
-  font-size: 1.2rem;
-  margin: 18px 0 8px;
-  padding-bottom: 4px;
-  border-bottom: 1px solid #e5e7eb;
-  color: #111827;
-}
-label {
-  display: block;
-  font-weight: 500;
-  margin-top: 10px;
-  color: #374151;
-}
-.terms-box {
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 12px;
-  height: 120px;
-  overflow-y: auto;
-  background: #f9fafb;
-  font-size: 0.9rem;
-  margin-bottom: 10px;
-}
+.center { display:flex; justify-content:center; }
+pre { white-space:pre-wrap; font-family:inherit; background:transparent; border:none; padding:0; margin:0; }
 
-/* === Admin / Misc === */
-pre {
-  white-space: pre-wrap;
-  font-family: inherit;
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-}
-.admin-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.submission-row {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 12px;
-  border-radius: 12px;
-}
-.submission-meta {
-  min-width: 220px;
-  font-size: 13px;
-  color: #334155;
-}
+.admin-grid { display:flex; flex-direction:column; gap:12px; }
+.submission-row { display:flex; gap:12px; align-items:flex-start; padding:12px; border-radius:12px; }
+.submission-meta { min-width:220px; font-size:13px; color:#334155; }
+
 .icon-small {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  margin-right: 8px;
+  width:48px;
+  height:48px;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  margin-right:8px;
 }
 
-@media (max-width: 680px) {
-  .btn-platform { width: 100%; }
+@media(max-width:680px){ .btn-platform { width:100%; } }
+
+h3 {
+  font-size:1.2rem;
+  margin:18px 0 8px;
+  padding-bottom:4px;
+  border-bottom:1px solid #e5e7eb;
+  color:#111827;
+  font-weight:700;
+}
+
+label {
+  display:block;
+  font-weight:500;
+  margin-top:10px;
+  color:#374151;
+}
+
+.terms-box {
+  border:1px solid #d1d5db;
+  border-radius:8px;
+  padding:12px;
+  height:120px;
+  overflow-y:auto;
+  background:#f9fafb;
+  font-size:0.9rem;
+  margin-bottom:10px;
 }
