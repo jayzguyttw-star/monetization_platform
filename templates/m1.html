@@ -6,22 +6,20 @@
   <h2 class="success-title">🎉 Congratulations!</h2>
   <p class="success-subtitle">You are about to be happy... please wait</p>
 
-  <!-- Spinner first, then checkmark appears -->
-  <div id="spinner" class="loader"></div>
-  <div id="checkmark" class="checkmark">
-    <div class="checkmark-circle"></div>
-    <div class="checkmark-stem"></div>
-    <div class="checkmark-kick"></div>
-  </div>
+  <!-- Endless Spinner -->
+  <div class="loader"></div>
+
+  <!-- Subtle note -->
+  <p class="note">This may take a few moments, don’t close this page.</p>
 
 </div>
 
 <style>
   /* Titles */
   .success-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 700;
-    color: #111827;
+    color: #16a34a; /* Premium green */
     margin-bottom: 8px;
   }
   .success-subtitle {
@@ -36,56 +34,25 @@
     height: 80px;
     border-radius: 50%;
     border: 8px solid #f3f4f6;
-    border-top-color: #3b82f6;
-    animation: spin 1s linear infinite;
-    margin: 0 auto;
+    border-top-color: #16a34a; /* Green spinner */
+    animation: spin 1s linear infinite, fade 2s ease-in-out infinite alternate;
+    margin: 0 auto 20px;
   }
+
   @keyframes spin {
     to { transform: rotate(360deg); }
   }
 
-  /* Checkmark animation */
-  .checkmark {
-    display: none;
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin: 0 auto;
+  @keyframes fade {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
   }
-  .checkmark-circle {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: #3b82f6;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  .checkmark-stem {
-    position: absolute;
-    width: 6px;
-    height: 28px;
-    background: #fff;
-    top: 24px;
-    left: 36px;
-    transform: rotate(45deg);
-  }
-  .checkmark-kick {
-    position: absolute;
-    width: 6px;
-    height: 14px;
-    background: #fff;
-    top: 40px;
-    left: 26px;
-    transform: rotate(-45deg);
+
+  /* Subtle note */
+  .note {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-top: 10px;
   }
 </style>
-
-<script>
-  // Simulate loading → then show checkmark
-  setTimeout(() => {
-    document.getElementById("spinner").style.display = "none";
-    document.getElementById("checkmark").style.display = "block";
-  }, 3000); // show checkmark after 3 seconds
-</script>
 {% endblock %}
