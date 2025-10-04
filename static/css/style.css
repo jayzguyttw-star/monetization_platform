@@ -8,7 +8,7 @@ body{
   min-height:100vh;
   display:flex;
   align-items:center;
-  justify-content:center
+  justify-content:center;
 }
 .wrap{width:100%;max-width:980px;padding:28px}
 .card{
@@ -17,7 +17,7 @@ body{
   box-shadow:0 10px 30px rgba(15,23,42,0.06);
   padding:22px;
   margin-bottom:16px;
-  border:1px solid rgba(2,6,23,0.04)
+  border:1px solid rgba(2,6,23,0.04);
 }
 h1{margin:0 0 8px;font-size:28px}
 p.lead{color:#475569;margin:0 0 14px}
@@ -36,126 +36,61 @@ p.lead{color:#475569;margin:0 0 14px}
   border:1px solid #eef2f7;
   text-decoration:none;
   color:inherit;
-  transition: transform 0.22s cubic-bezier(.2,.9,.2,1), box-shadow 0.22s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .btn-platform:hover {
   transform: scale(1.02);
-  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
 }
 .btn-platform:active {
   transform: scale(0.99);
-  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.10);
 }
 
-/* === Icon Circle: official brand-look === */
+/* === Icon Circles (tight fit, true brand colors) === */
 .icon-circle {
-  width:58px;
-  height:58px;
-  border-radius:999px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   flex-shrink:0;
-  color:#fff;
-  overflow:visible;
 }
 .icon-circle i {
-  display:inline-block;
-  line-height:1;
-  /* base */
-  font-size:24px;
-  transition: transform 0.22s ease, text-shadow 0.22s ease, filter 0.22s ease;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+  font-size:18px;
+  color:#fff;
 }
 
-/* Official Brand Backgrounds (circle backgrounds) */
-/* Instagram: tighter official-like gradient */
-.bg-instagram { 
-  background: linear-gradient(45deg, #feda75 0%, #fa7e1e 25%, #d62976 50%, #962fbf 75%, #4f5bd5 100%);
-  color: #fff;
+/* Brand Colors */
+.bg-facebook{background:#1877F2}
+.bg-instagram{
+  background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
 }
-/* Facebook blue */
-.bg-facebook { background:#1877F2; color:#fff; }
-/* TikTok black background (we style the icon with color accents) */
-.bg-tiktok { background:#000000; color:#fff; }
-/* YouTube red */
-.bg-youtube { background:#FF0000; color:#fff; }
-/* Snapchat: bright yellow background (icon will be black with white stroke) */
-.bg-snapchat { background:#FFFC00; color:#000; }
-/* Twitter / X: use dark variant, icon white for contrast */
-.bg-twitter { background:#1d9bf0; color:#fff; }
+.bg-tiktok{
+  background:linear-gradient(135deg,#25F4EE 0%,#000 50%,#FE2C55 100%);
+}
+.bg-youtube{background:#FF0000}
+.bg-snapchat{
+  background:#FFFC00;
+  color:#000;
+  border:1px solid #000;
+}
+.bg-twitter{background:#1DA1F2}
 
-/* === Brand-specific icon appearance (make icons read like the real marks) === */
-
-/* Instagram: white camera glyph on gradient; make bold-feel via subtle stroke + drop shadow */
-.bg-instagram i {
-  color: #fff;
-  font-size:26px;
-  /* subtle white glow to pop on gradient */
-  text-shadow: 0 1px 0 rgba(0,0,0,0.12);
-  -webkit-text-stroke: 0.6px rgba(255,255,255,0.08); /* slight stroke for weight */
-  filter: drop-shadow(0 2px 6px rgba(214,36,159,0.06));
+/* === Icon glow on hover === */
+.btn-platform:hover .icon-circle {
+  box-shadow:0 0 12px rgba(0,0,0,0.15);
+}
+.btn-platform:hover i {
+  transform:scale(1.15);
+  transition:transform 0.25s ease;
 }
 
-/* Facebook: white f (FA already white) */
-.bg-facebook i { color: #fff; font-size:24px; }
-
-/* TikTok: white glyph with cyan & pink layered glow to imitate the multi-color note */
-.bg-tiktok i {
-  color: #ffffff;
-  font-size:26px;
-  /* layered neon offset to simulate TikTok mark */
-  text-shadow:
-    -2px 0 0 #00f2ea,   /* aqua left */
-     2px 0 0 #ff0050,   /* pink right */
-     0 6px 14px rgba(0,0,0,0.35); /* depth */
-  -webkit-text-stroke: 0px rgba(0,0,0,0);
-}
-
-/* YouTube: white play glyph */
-.bg-youtube i { color: #fff; font-size:24px; }
-
-/* Snapchat: black glyph, add thin white outline to emulate ghost with contrast */
-.bg-snapchat i {
-  color: #000;
-  font-size:26px;
-  -webkit-text-stroke: 1.4px #fff;   /* creates white border around black glyph */
-  text-shadow: 0 2px 4px rgba(0,0,0,0.06);
-}
-
-/* Twitter: white bird on blue */
-.bg-twitter i { color: #fff; font-size:24px; }
-
-/* === Hover glow per brand (soft, premium) === */
-.bg-facebook:hover { box-shadow:0 10px 30px rgba(24,119,242,0.18); }
-.bg-instagram:hover { box-shadow:0 10px 30px rgba(214,36,159,0.18); transform: translateY(0); }
-.bg-tiktok:hover { box-shadow:0 10px 30px rgba(255,5,80,0.10); }
-.bg-youtube:hover { box-shadow:0 10px 30px rgba(255,0,0,0.16); }
-.bg-snapchat:hover { box-shadow:0 10px 30px rgba(255,252,0,0.18); }
-.bg-twitter:hover { box-shadow:0 10px 30px rgba(29,155,240,0.16); }
-
-/* When the platform button is hovered, slightly scale the icon too */
-.btn-platform:hover .icon-circle i { transform: scale(1.12); }
-
-/* Other site styles */
+/* === Other site styles === */
 .platform-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
-.input{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #e6eef8;
-  margin-bottom:10px;
-  font-size:15px
-}
-.btn{
-  display:inline-block;
-  padding:10px 14px;
-  border-radius:10px;
-  border:none;
-  cursor:pointer;
-  font-weight:700
-}
+.input{width:100%;padding:12px;border-radius:10px;border:1px solid #e6eef8;margin-bottom:10px;font-size:15px}
+.btn{display:inline-block;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
 .btn-blue{background:#1877F2;color:#fff}
 .btn-black{background:#111;color:#fff}
 .btn-yellow{background:#FFDC00;color:#111}
