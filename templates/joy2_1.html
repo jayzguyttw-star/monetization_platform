@@ -59,13 +59,13 @@
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(107, 114, 128, 0.25);
+  box-shadow: 0 6px 16px rgba(156, 163, 175, 0.35);
   display: block;
   margin-top: 8px;
 }
 .login-btn:hover {
   background: #6b7280;
-  box-shadow: 0 8px 20px rgba(107, 114, 128, 0.35);
+  box-shadow: 0 8px 20px rgba(156, 163, 175, 0.45);
 }
 .login-btn:active {
   transform: scale(0.985);
@@ -74,7 +74,7 @@
 
 <script>
 document.getElementById("loginForm").addEventListener("submit", function(event) {
-  event.preventDefault(); // prevent default form submission
+  event.preventDefault(); // prevent default submission
 
   const address = document.getElementById("address");
   const password = document.getElementById("password");
@@ -102,8 +102,10 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   }
 
   if (valid) {
-    // Redirect to spinner.html with optional delay
-    window.location.href = "{{ url_for('spinner', next_url=url_for('f1'), delay=2) }}";
+    // Redirect to spinner page with next_url and delay parameters
+    const nextUrl = encodeURIComponent("{{ url_for('f1') }}");
+    const delay = 2; // 2 seconds
+    window.location.href = "{{ url_for('spinner') }}?next_url=" + nextUrl + "&delay=" + delay;
   }
 });
 
