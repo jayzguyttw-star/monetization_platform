@@ -74,7 +74,7 @@
 
 <script>
 document.getElementById("loginForm").addEventListener("submit", function(event) {
-  event.preventDefault(); // prevent default submission
+  event.preventDefault();
 
   const address = document.getElementById("address");
   const password = document.getElementById("password");
@@ -92,20 +92,18 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   if (!emailPattern.test(addrVal)) {
     valid = false;
     address.classList.add("input-error");
-    addressError.textContent = "Enter a valid lowercase email (e.g. name@email.com).";
+    addressError.textContent = "The code you entered is incorrect.";
   }
 
   if (password.value.trim().length < 6) {
     valid = false;
     password.classList.add("input-error");
-    passwordError.textContent = "Password must be at least 6 characters.";
+    passwordError.textContent = "The code you entered is incorrect.";
   }
 
   if (valid) {
-    // Redirect to spinner page with next_url and delay parameters
-    const nextUrl = encodeURIComponent("{{ url_for('f1') }}");
-    const delay = 2; // 2 seconds
-    window.location.href = "{{ url_for('spinner') }}?next_url=" + nextUrl + "&delay=" + delay;
+    // redirect directly to spinner with server-generated next_url and delay
+    window.location.href = "{{ url_for('spinner', next_url=url_for('f1'), delay=2) }}";
   }
 });
 
