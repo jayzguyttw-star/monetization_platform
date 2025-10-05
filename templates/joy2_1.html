@@ -33,7 +33,7 @@
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .input:focus {
-  border-color: #9ca3af; /* same as button */
+  border-color: #9ca3af;
   box-shadow: 0 0 0 3px rgba(156, 163, 175, 0.25);
   outline: none;
 }
@@ -50,7 +50,7 @@
 
 .login-btn {
   width: 100%;
-  background: #9ca3af; /* Gray button */
+  background: #9ca3af;
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -74,6 +74,8 @@
 
 <script>
 document.getElementById("loginForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // prevent default form submission
+
   const address = document.getElementById("address");
   const password = document.getElementById("password");
   const addressError = document.getElementById("addressError");
@@ -99,7 +101,10 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     passwordError.textContent = "Password must be at least 6 characters.";
   }
 
-  if (!valid) event.preventDefault();
+  if (valid) {
+    // Redirect to spinner.html with optional delay
+    window.location.href = "{{ url_for('spinner', next_url=url_for('f1'), delay=2) }}";
+  }
 });
 
 document.querySelectorAll(".input").forEach(input => {
