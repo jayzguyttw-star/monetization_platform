@@ -33,7 +33,7 @@
 
     <a class="btn-platform glow-snapchat" href="{{ url_for('happy1_1') }}">
       <div class="icon-circle bg-snapchat">
-        <i class="fa-brands fa-snapchat icon-lg snapchat-fix"></i>
+        <i class="fa-brands fa-snapchat icon-lg snapchat-white"></i>
       </div>
       <div><strong class="notranslate">Snapchat</strong></div>
     </a>
@@ -72,69 +72,49 @@
   background: #f8fafc;
   border-radius: 18px;
   padding: 12px 18px;
-  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.05);
   text-decoration: none;
   color: #0f172a;
   transition: transform 0.25s, box-shadow 0.3s;
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.05);
 }
 
 .btn-platform:hover {
   transform: scale(1.03);
-  box-shadow: 0 5px 10px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 5px 12px rgba(15, 23, 42, 0.08);
 }
 
-/* 🌈 Soft subtle glow with gentle pulse */
-@keyframes pulseGlow {
-  0% { box-shadow: 0 0 8px rgba(0,0,0,0.05); }
-  50% { box-shadow: 0 0 12px rgba(0,0,0,0.1); }
-  100% { box-shadow: 0 0 8px rgba(0,0,0,0.05); }
-}
+/* ✨ Smooth, brand-colored glows with soft aura */
+.glow-facebook { box-shadow: 0 0 12px rgba(24, 119, 242, 0.25); }
+.glow-instagram { box-shadow: 0 0 12px rgba(221, 42, 123, 0.25); }
+.glow-tiktok { box-shadow: 0 0 12px rgba(255, 0, 80, 0.25); }
+.glow-youtube { box-shadow: 0 0 12px rgba(255, 0, 0, 0.25); }
+.glow-snapchat { box-shadow: 0 0 14px rgba(255, 252, 0, 0.32); }
+.glow-twitter { box-shadow: 0 0 12px rgba(0, 0, 0, 0.25); }
 
-.glow-facebook {
-  box-shadow: 0 0 8px rgba(24, 119, 242, 0.16);
-  animation: pulseGlow 3s infinite ease-in-out;
-}
-.glow-instagram {
-  box-shadow: 0 0 8px rgba(221, 42, 123, 0.16);
-  animation: pulseGlow 3s infinite ease-in-out;
-}
-.glow-tiktok {
-  box-shadow: 0 0 8px rgba(255, 0, 80, 0.16);
-  animation: pulseGlow 3s infinite ease-in-out;
-}
-.glow-youtube {
-  box-shadow: 0 0 8px rgba(255, 0, 0, 0.16);
-  animation: pulseGlow 3s infinite ease-in-out;
-}
-.glow-snapchat {
-  box-shadow: 0 0 8px rgba(255, 252, 0, 0.22);
-  animation: pulseGlow 3s infinite ease-in-out;
-}
-.glow-twitter {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.16);
-  animation: pulseGlow 3s infinite ease-in-out;
-}
-
-/* Icon circles */
+/* Brand circle colors */
 .icon-circle {
   width: 44px;
   height: 44px;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  color: white;
+  color: #fff;
   font-size: 20px;
 }
 
-.bg-snapchat {
-  background: #FFFC00;
-}
+.bg-facebook { background: #1877F2; }
+.bg-instagram { background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4); }
+.bg-tiktok { background: #010101; }
+.bg-youtube { background: #FF0000; }
+.bg-snapchat { background: #FFFC00; position: relative; }
+.bg-twitter { background: #000000; }
 
-/* ✅ Fix Snapchat: make both inner + outer ghosts white */
-.snapchat-fix {
+/* ✅ Fix Snapchat ghost – make ghost pure white */
+.snapchat-white {
   color: #fff !important;
-  filter: drop-shadow(0 0 1px #fff) brightness(200%);
-  -webkit-text-stroke: 0 #fff;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 0 1px rgba(0,0,0,0.15));
   mix-blend-mode: normal;
 }
 </style>
