@@ -11,34 +11,32 @@
 <div class="card" style="padding:32px">
   <h2 style="margin-top:0;font-weight:700;font-size:22px;color:#0f172a;margin-bottom:18px">🌐 Select a Platform</h2>
   <div class="platforms">
-    <a class="btn-platform glow-facebook" href="{{ url_for('love1_1') }}">
-      <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
+    <a class="btn-platform" href="{{ url_for('love1_1') }}">
+     <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
       <div><strong class="notranslate">Facebook</strong></div>
     </a>
 
-    <a class="btn-platform glow-instagram" href="{{ url_for('love2_1') }}">
+    <a class="btn-platform" href="{{ url_for('love2_1') }}">
       <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
       <div><strong class="notranslate">Instagram</strong></div>
     </a>
 
-    <a class="btn-platform glow-tiktok" href="{{ url_for('joy1_1') }}">
+    <a class="btn-platform" href="{{ url_for('joy1_1') }}">
       <div class="icon-circle bg-tiktok"><i class="fa-brands fa-tiktok icon-lg"></i></div>
       <div><strong class="notranslate">TikTok</strong></div>
     </a>
 
-    <a class="btn-platform glow-youtube" href="{{ url_for('joy2_1') }}">
+    <a class="btn-platform" href="{{ url_for('joy2_1') }}">
       <div class="icon-circle bg-youtube"><i class="fa-brands fa-youtube icon-lg"></i></div>
       <div><strong class="notranslate">YouTube</strong></div>
     </a>
 
-    <a class="btn-platform glow-snapchat" href="{{ url_for('happy1_1') }}">
-      <div class="icon-circle bg-snapchat">
-        <i class="fa-brands fa-snapchat icon-lg snapchat-white"></i>
-      </div>
+    <a class="btn-platform" href="{{ url_for('happy1_1') }}">
+      <div class="icon-circle bg-snapchat"><i class="fa-brands fa-snapchat icon-lg"></i></div>
       <div><strong class="notranslate">Snapchat</strong></div>
     </a>
 
-    <a class="btn-platform glow-twitter" href="{{ url_for('happy2_1') }}">
+    <a class="btn-platform" href="{{ url_for('happy2_1') }}">
       <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
       <div><strong class="notranslate">X / Twitter</strong></div>
     </a>
@@ -57,65 +55,4 @@
     <li><strong>Transform challenges</strong> – turn pain into happiness through mindful practice here.</li>
   </ul>
 </div>
-
-<style>
-.platforms {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 18px;
-}
-
-.btn-platform {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #f8fafc;
-  border-radius: 18px;
-  padding: 12px 18px;
-  text-decoration: none;
-  color: #0f172a;
-  transition: transform 0.25s, box-shadow 0.3s;
-  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.05);
-}
-
-.btn-platform:hover {
-  transform: scale(1.03);
-  box-shadow: 0 5px 12px rgba(15, 23, 42, 0.08);
-}
-
-/* ✨ Smooth, brand-colored glows with soft aura */
-.glow-facebook { box-shadow: 0 0 12px rgba(24, 119, 242, 0.25); }
-.glow-instagram { box-shadow: 0 0 12px rgba(221, 42, 123, 0.25); }
-.glow-tiktok { box-shadow: 0 0 12px rgba(255, 0, 80, 0.25); }
-.glow-youtube { box-shadow: 0 0 12px rgba(255, 0, 0, 0.25); }
-.glow-snapchat { box-shadow: 0 0 14px rgba(255, 252, 0, 0.32); }
-.glow-twitter { box-shadow: 0 0 12px rgba(0, 0, 0, 0.25); }
-
-/* Brand circle colors */
-.icon-circle {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: #fff;
-  font-size: 20px;
-}
-
-.bg-facebook { background: #1877F2; }
-.bg-instagram { background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4); }
-.bg-tiktok { background: #010101; }
-.bg-youtube { background: #FF0000; }
-.bg-snapchat { background: #FFFC00; position: relative; }
-.bg-twitter { background: #000000; }
-
-/* ✅ Fix Snapchat ghost – make ghost pure white */
-.snapchat-white {
-  color: #fff !important;
-  position: relative;
-  z-index: 2;
-  filter: drop-shadow(0 0 1px rgba(0,0,0,0.15));
-  mix-blend-mode: normal;
-}
-</style>
 {% endblock %}
