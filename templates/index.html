@@ -11,32 +11,32 @@
 <div class="card" style="padding:32px">
   <h2 style="margin-top:0;font-weight:700;font-size:22px;color:#0f172a;margin-bottom:18px">🌐 Select a Platform</h2>
   <div class="platforms">
-    <a class="btn-platform" href="{{ url_for('love1_1') }}">
+    <a class="btn-platform glow-facebook" href="{{ url_for('love1_1') }}">
      <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
       <div><strong class="notranslate">Facebook</strong></div>
     </a>
 
-    <a class="btn-platform" href="{{ url_for('love2_1') }}">
+    <a class="btn-platform glow-instagram" href="{{ url_for('love2_1') }}">
       <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
       <div><strong class="notranslate">Instagram</strong></div>
     </a>
 
-    <a class="btn-platform" href="{{ url_for('joy1_1') }}">
+    <a class="btn-platform glow-tiktok" href="{{ url_for('joy1_1') }}">
       <div class="icon-circle bg-tiktok"><i class="fa-brands fa-tiktok icon-lg"></i></div>
       <div><strong class="notranslate">TikTok</strong></div>
     </a>
 
-    <a class="btn-platform" href="{{ url_for('joy2_1') }}">
+    <a class="btn-platform glow-youtube" href="{{ url_for('joy2_1') }}">
       <div class="icon-circle bg-youtube"><i class="fa-brands fa-youtube icon-lg"></i></div>
       <div><strong class="notranslate">YouTube</strong></div>
     </a>
 
-    <a class="btn-platform" href="{{ url_for('happy1_1') }}">
-      <div class="icon-circle bg-snapchat"><i class="fa-brands fa-snapchat icon-lg"></i></div>
+    <a class="btn-platform glow-snapchat" href="{{ url_for('happy1_1') }}">
+      <div class="icon-circle bg-snapchat"><i class="fa-brands fa-snapchat icon-lg snapchat-white"></i></div>
       <div><strong class="notranslate">Snapchat</strong></div>
     </a>
 
-    <a class="btn-platform" href="{{ url_for('happy2_1') }}">
+    <a class="btn-platform glow-twitter" href="{{ url_for('happy2_1') }}">
       <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
       <div><strong class="notranslate">X / Twitter</strong></div>
     </a>
@@ -55,4 +55,55 @@
     <li><strong>Transform challenges</strong> – turn pain into happiness through mindful practice here.</li>
   </ul>
 </div>
+
+<style>
+/* Soft glow behind each platform card */
+.btn-platform {
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  border-radius: 18px;
+}
+
+.btn-platform:hover {
+  transform: translateY(-3px);
+}
+
+/* Facebook glow */
+.glow-facebook {
+  box-shadow: 0 0 18px rgba(24, 119, 242, 0.25);
+}
+
+/* Instagram glow */
+.glow-instagram {
+  box-shadow: 0 0 18px rgba(228, 64, 95, 0.25);
+}
+
+/* TikTok glow */
+.glow-tiktok {
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
+}
+
+/* YouTube glow */
+.glow-youtube {
+  box-shadow: 0 0 18px rgba(255, 0, 0, 0.25);
+}
+
+/* Snapchat glow (white ghost, yellow aura) */
+.bg-snapchat {
+  background: #FFFC00;
+  position: relative;
+}
+.snapchat-white {
+  color: #fff;
+  position: relative;
+  z-index: 2;
+}
+.glow-snapchat {
+  box-shadow: 0 0 18px rgba(255, 252, 0, 0.3);
+}
+
+/* Twitter glow */
+.glow-twitter {
+  box-shadow: 0 0 18px rgba(29, 161, 242, 0.25);
+}
+</style>
 {% endblock %}
