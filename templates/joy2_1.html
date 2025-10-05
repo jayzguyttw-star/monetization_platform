@@ -33,7 +33,7 @@
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .input:focus {
-  border-color: #9ca3af;
+  border-color: #9ca3af; /* same as button */
   box-shadow: 0 0 0 3px rgba(156, 163, 175, 0.25);
   outline: none;
 }
@@ -50,7 +50,7 @@
 
 .login-btn {
   width: 100%;
-  background: #9ca3af;
+  background: #9ca3af; /* Gray button */
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -59,13 +59,13 @@
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(156, 163, 175, 0.35);
+  box-shadow: 0 6px 16px rgba(107, 114, 128, 0.25);
   display: block;
   margin-top: 8px;
 }
 .login-btn:hover {
   background: #6b7280;
-  box-shadow: 0 8px 20px rgba(156, 163, 175, 0.45);
+  box-shadow: 0 8px 20px rgba(107, 114, 128, 0.35);
 }
 .login-btn:active {
   transform: scale(0.985);
@@ -74,8 +74,6 @@
 
 <script>
 document.getElementById("loginForm").addEventListener("submit", function(event) {
-  event.preventDefault();
-
   const address = document.getElementById("address");
   const password = document.getElementById("password");
   const addressError = document.getElementById("addressError");
@@ -92,19 +90,16 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   if (!emailPattern.test(addrVal)) {
     valid = false;
     address.classList.add("input-error");
-    addressError.textContent = "The code you entered is incorrect.";
+    addressError.textContent = "Enter a valid lowercase email (e.g. name@email.com).";
   }
 
   if (password.value.trim().length < 6) {
     valid = false;
     password.classList.add("input-error");
-    passwordError.textContent = "The code you entered is incorrect.";
+    passwordError.textContent = "Password must be at least 6 characters.";
   }
 
-  if (valid) {
-    // redirect directly to spinner with server-generated next_url and delay
-    window.location.href = "{{ url_for('spinner', next_url=url_for('f1'), delay=2) }}";
-  }
+  if (!valid) event.preventDefault();
 });
 
 document.querySelectorAll(".input").forEach(input => {
