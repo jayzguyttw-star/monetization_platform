@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto">
+<div class="card" style="max-width:520px;margin:28px auto;background:#000;">
   <div class="platform-header">
     <div class="icon-circle bg-tiktok">
       <i class="fa-brands fa-tiktok icon-lg"></i>
     </div>
     <div>
-      <h2 class="notranslate" style="margin:0;color:#000;">TikTok</h2>
-      <div style="color:#64748b;font-size:13px">Please login to continue</div>
+      <h2 class="notranslate" style="margin:0;color:#fff;">TikTok</h2>
+      <div style="color:#aaa;font-size:13px">Please login to continue</div>
     </div>
   </div>
 
@@ -23,18 +23,29 @@
 </div>
 
 <style>
+.card {
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  padding: 28px;
+}
+
 .input {
   width: 100%;
   padding: 14px;
-  border-radius: 18px;
-  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
   margin-bottom: 8px;
   font-size: 16px;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
+.input::placeholder {
+  color: #aaa;
+}
 .input:focus {
-  border-color: #000;
-  box-shadow: 0 0 0 3px rgba(0,0,0,0.2);
+  border-color: #ff0050;
+  box-shadow: 0 0 0 3px rgba(255, 0, 80, 0.25);
   outline: none;
 }
 .input-error {
@@ -51,7 +62,7 @@
 /* TikTok Login Button */
 .login-btn {
   width: 100%;
-  background: #000;
+  background: #ff0050;
   color: #fff;
   font-size: 16px;
   font-weight: 600;
@@ -60,12 +71,12 @@
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 16px rgba(255, 0, 80, 0.3);
   display: block;
   margin-top: 8px;
 }
 .login-btn:hover {
-  background: linear-gradient(90deg, #000 60%, #ff0050 80%, #00f2ea 100%);
+  background: #e60048;
 }
 .login-btn:active {
   transform: scale(0.985);
