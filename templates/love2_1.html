@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;transition:none;transform:none;">
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(221,42,123,0.25);border-radius:16px;">
   <div class="platform-header">
     <div class="icon-circle bg-instagram">
       <i class="fa-brands fa-instagram icon-lg"></i>
@@ -34,7 +34,7 @@
 }
 .input:focus {
   border-color: #E4405F;
-  box-shadow: 0 0 0 3px rgba(228, 64, 95, 0.2);
+  box-shadow: 0 0 0 3px rgba(228, 64, 95, 0.25);
   outline: none;
 }
 .input-error {
@@ -53,18 +53,19 @@
   background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
   color: #fff;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   padding: 12px;
   border-radius: 25px;
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(221, 42, 123, 0.25);
+  box-shadow: 0 6px 16px rgba(221, 42, 123, 0.35);
   display: block;
   margin-top: 8px;
 }
 .login-btn:hover {
   background: linear-gradient(45deg, #fd5949, #d6249f, #c13584, #833ab4);
+  box-shadow: 0 8px 20px rgba(221, 42, 123, 0.45);
 }
 .login-btn:active {
   transform: scale(0.985);
@@ -78,7 +79,6 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   const addressError = document.getElementById("addressError");
   const passwordError = document.getElementById("passwordError");
 
-  // Validation patterns
   const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.(com|net|org|co|io|me|info|biz)$/;
   const phonePattern = /^\+?\d{6,}$/;
 
