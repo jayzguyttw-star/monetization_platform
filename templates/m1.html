@@ -6,10 +6,8 @@
   <h2 class="success-title animate-title">🎉 Congratulations!</h2>
   <p class="success-subtitle animate-subtitle">You are about to be happy... please wait</p>
 
-  <!-- Endless Spinner with Glow -->
-  <div class="loader-wrapper">
-    <div class="loader animate-spinner"></div>
-  </div>
+  <!-- Endless Spinner -->
+  <div class="loader animate-spinner"></div>
 
   <!-- Subtle note -->
   <p class="note animate-note">This may take a few moments, don’t close this page.</p>
@@ -51,26 +49,6 @@
     to   { opacity: 1; }
   }
 
-  /* Spinner with glow wrapper */
-  .loader-wrapper {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin-bottom: 20px;
-  }
-
-  .loader-wrapper::before {
-    content: "";
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 120px; height: 120px;
-    background: rgba(22,163,74,0.2);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    filter: blur(16px);
-    z-index: 0;
-  }
-
   /* Spinner */
   .loader {
     width: 80px;
@@ -78,10 +56,8 @@
     border-radius: 50%;
     border: 8px solid #f3f4f6;
     border-top-color: #16a34a;
-    margin: 0 auto;
+    margin: 0 auto 20px;
     opacity: 0;
-    position: relative;
-    z-index: 1;
   }
   .animate-spinner {
     animation: spin 1s linear infinite, fadeIn 0.8s ease forwards;
