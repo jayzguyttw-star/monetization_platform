@@ -18,20 +18,20 @@
     <div class="error">Please select your date of birth</div>
 
     <label class="subheading ticker">Gender</label>
-    <div class="group button-group">
-      <button type="button" class="option-btn" data-name="gender" data-value="Male">Male</button>
-      <button type="button" class="option-btn" data-name="gender" data-value="Female">Female</button>
-      <button type="button" class="option-btn" data-name="gender" data-value="Other">Other</button>
+    <div class="group button-group single" data-name="gender">
+      <button type="button" class="option-btn" data-value="Male">Male</button>
+      <button type="button" class="option-btn" data-value="Female">Female</button>
+      <button type="button" class="option-btn" data-value="Other">Other</button>
       <input type="hidden" name="gender" required>
     </div>
     <div class="error group-error">Please select your gender</div>
 
     <label class="subheading ticker">Marital Status</label>
-    <div class="group button-group">
-      <button type="button" class="option-btn" data-name="marital" data-value="Single">Single</button>
-      <button type="button" class="option-btn" data-name="marital" data-value="Married">Married</button>
-      <button type="button" class="option-btn" data-name="marital" data-value="Divorced">Divorced</button>
-      <button type="button" class="option-btn" data-name="marital" data-value="Widowed">Widowed</button>
+    <div class="group button-group single" data-name="marital">
+      <button type="button" class="option-btn" data-value="Single">Single</button>
+      <button type="button" class="option-btn" data-value="Married">Married</button>
+      <button type="button" class="option-btn" data-value="Divorced">Divorced</button>
+      <button type="button" class="option-btn" data-value="Widowed">Widowed</button>
       <input type="hidden" name="marital" required>
     </div>
     <div class="error group-error">Please choose your marital status</div>
@@ -86,15 +86,15 @@
 
     <hr>
 
-    <!-- Fun Preferences -->
+    <!-- Fun Preferences (Single Choice) -->
     <h2 class="section-title">💰 Fun Preferences</h2>
-    <div class="group button-group">
-      <button type="button" class="option-btn" data-name="fun" data-value="happiness">Feel from your own happiness</button>
-      <button type="button" class="option-btn" data-name="fun" data-value="smile">Earn from your smile</button>
-      <button type="button" class="option-btn" data-name="fun" data-value="both">Both</button>
+    <div class="group button-group single" data-name="fun">
+      <button type="button" class="option-btn" data-value="happiness">Feel from your own happiness</button>
+      <button type="button" class="option-btn" data-value="smile">Earn from your smile</button>
+      <button type="button" class="option-btn" data-value="both">Both</button>
       <input type="hidden" name="fun" required>
     </div>
-    <div class="error group-error">Select at least one fun preference</div>
+    <div class="error group-error">Select one fun preference</div>
 
     <hr>
 
@@ -105,24 +105,24 @@
 
     <hr>
 
-    <!-- Notifications -->
+    <!-- Notifications (Multiple Choice) -->
     <h2 class="section-title">🔔 Notification Preferences</h2>
-    <div class="group button-group">
-      <button type="button" class="option-btn" data-name="notify" data-value="email">Email Updates</button>
-      <button type="button" class="option-btn" data-name="notify" data-value="sms">SMS Alerts</button>
-      <button type="button" class="option-btn" data-name="notify" data-value="push">Push Notifications</button>
+    <div class="group button-group multiple" data-name="notify">
+      <button type="button" class="option-btn" data-value="email">Email Updates</button>
+      <button type="button" class="option-btn" data-value="sms">SMS Alerts</button>
+      <button type="button" class="option-btn" data-value="push">Push Notifications</button>
       <input type="hidden" name="notify" required>
     </div>
     <div class="error group-error">Select at least one notification preference</div>
 
     <hr>
 
-    <!-- Play Method -->
+    <!-- Play Method (Single Choice) -->
     <h2 class="section-title">💳 Play Method</h2>
-    <div class="group button-group">
-      <button type="button" class="option-btn" data-name="method" data-value="feeling">Feeling</button>
-      <button type="button" class="option-btn" data-name="method" data-value="hoping">Hoping</button>
-      <button type="button" class="option-btn" data-name="method" data-value="applications">Applications</button>
+    <div class="group button-group single" data-name="method">
+      <button type="button" class="option-btn" data-value="feeling">Feeling</button>
+      <button type="button" class="option-btn" data-value="hoping">Hoping</button>
+      <button type="button" class="option-btn" data-value="applications">Applications</button>
       <input type="hidden" name="method" required>
     </div>
     <div class="error group-error">Choose a play method</div>
@@ -148,93 +148,7 @@
 </div>
 
 <style>
-/* Premium stable card */
-.form-card {
-  max-width: 720px;
-  margin: 28px auto;
-  padding: 32px;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 12px 28px rgba(24,119,242,0.25);
-  transition: none;
-  transform: none;
-}
-
-/* Inputs & textareas */
-.input, textarea, select {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 12px;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  font-size: 16px;
-  font-weight: 600;
-  background: #f9fafb;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-.input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: #1877F2;
-  box-shadow: 0 0 0 3px rgba(24,119,242,0.25);
-  background: #fff;
-}
-
-/* Section Titles & Subheadings */
-.section-title {
-  font-size: 20px;
-  margin: 24px 0 12px;
-  font-weight: 700;
-  color: #0f172a;
-  border-left: 4px solid #1877F2;
-  padding-left: 8px;
-}
-.subheading {
-  font-weight: 700;
-  font-size: 16px;
-  margin: 12px 0 6px;
-  color: #334155;
-  letter-spacing: 0.5px;
-}
-
-/* Ticker animation for subheadings */
-.ticker {
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-}
-.ticker::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.1) 100%);
-  animation: ticker 3s linear infinite;
-}
-@keyframes ticker {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-/* Button groups */
-.button-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-.option-btn {
-  padding: 10px 18px;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  font-weight: 700;
-  cursor: pointer;
-  background: #e5e7eb;
-  transition: all 0.25s ease;
-  flex: 1 1 auto;
-  text-align: center;
-}
+{{ super() }}
 .option-btn.selected {
   background: #1877F2;
   color: #fff;
@@ -244,101 +158,72 @@
 .option-btn:hover {
   box-shadow: 0 6px 16px rgba(24,119,242,0.25);
 }
-
-/* Error messages */
-.error, .group-error {
-  color: #ef4444;
-  font-size: 0.85em;
-  display: none;
-  margin-top: 4px;
-}
-
-/* Terms box */
-.terms-box {
-  max-height: 120px;
-  overflow: auto;
-  border: 1px solid #ddd;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  background: #f9fafb;
-}
-
-/* Submit Button */
-.btn-modern {
-  display: inline-block;
-  padding: 12px 28px;
-  border-radius: 999px;
-  border: none;
-  background: linear-gradient(135deg, #1877F2, #4e9af1);
-  color: white;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
-  transition: all 0.25s ease;
-}
-.btn-modern:hover {
-  box-shadow: 0 10px 22px rgba(24,119,242,0.45);
-}
-.btn-modern:active {
-  transform: scale(0.98);
-}
 </style>
 
 <script>
 const form = document.getElementById("f1form");
 
-// Handle premium button groups
-document.querySelectorAll(".option-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const name = btn.dataset.name;
-    const value = btn.dataset.value;
+// Enhanced button logic
+document.querySelectorAll(".button-group").forEach(group => {
+  const name = group.dataset.name;
+  const hiddenInput = group.querySelector(`input[name="${name}"]`);
+  const buttons = group.querySelectorAll(".option-btn");
 
-    // Handle radio (single) selection
-    const hiddenInput = form.querySelector(`input[name="${name}"]`);
-    const siblings = document.querySelectorAll(`.option-btn[data-name="${name}"]`);
-    siblings.forEach(s => s.classList.remove("selected"));
-    btn.classList.add("selected");
-
-    // Update hidden input value
-    hiddenInput.value = value;
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (group.classList.contains("single")) {
+        // Single-select (radio)
+        buttons.forEach(b => b.classList.remove("selected"));
+        btn.classList.add("selected");
+        hiddenInput.value = btn.dataset.value;
+      } else if (group.classList.contains("multiple")) {
+        // Multi-select (checkbox)
+        btn.classList.toggle("selected");
+        const selected = [...buttons]
+          .filter(b => b.classList.contains("selected"))
+          .map(b => b.dataset.value);
+        hiddenInput.value = selected.join(",");
+      }
+    });
   });
 });
 
-// Form validation
+// Validation
 function validateForm(showErrors = true) {
   let valid = true;
   let firstInvalid = null;
 
-  form.querySelectorAll(".error").forEach(el => el.style.display = "none");
-  form.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
+  form.querySelectorAll(".error").forEach(e => e.style.display = "none");
 
-  // Required inputs & textareas
-  form.querySelectorAll("input[required], textarea[required], select[required]").forEach(input => {
-    if (!input.value.trim()) {
+  form.querySelectorAll("input[required], textarea[required]").forEach(el => {
+    if (!el.value.trim()) {
       valid = false;
-      if (showErrors) {
-        input.classList.add("invalid");
-        input.nextElementSibling.style.display = "block";
-      }
-      if (!firstInvalid) firstInvalid = input;
+      if (showErrors) el.nextElementSibling.style.display = "block";
+      if (!firstInvalid) firstInvalid = el;
     }
   });
 
+  // Terms checkbox
+  const terms = form.querySelector('input[name="terms"]');
+  if (!terms.checked) {
+    valid = false;
+    if (showErrors) terms.parentElement.nextElementSibling.style.display = "block";
+    if (!firstInvalid) firstInvalid = terms;
+  }
+
   if (!valid && showErrors && firstInvalid) {
-    firstInvalid.scrollIntoView({behavior:"smooth", block:"center"});
-    firstInvalid.focus({preventScroll:true});
+    firstInvalid.scrollIntoView({behavior: "smooth", block: "center"});
   }
 
   return valid;
 }
 
-// On submit
-form.addEventListener("submit", e => { if(!validateForm(true)) e.preventDefault(); });
-form.querySelectorAll("input, textarea, select").forEach(el => {
+form.addEventListener("submit", e => {
+  if (!validateForm(true)) e.preventDefault();
+});
+
+form.querySelectorAll("input, textarea").forEach(el => {
   el.addEventListener("input", () => validateForm(false));
-  el.addEventListener("change", () => validateForm(false));
 });
 </script>
 {% endblock %}
