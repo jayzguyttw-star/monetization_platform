@@ -1,6 +1,3 @@
-
-this is my current f1.html
-
 {% extends "base.html" %}
 {% block body %}
 <div class="card form-card">
@@ -21,7 +18,7 @@ this is my current f1.html
     <div class="error">Please select your date of birth</div>
 
     <label class="subheading ticker">Gender</label>
-    <div class="group button-group">
+    <div class="group button-group" data-group="gender">
       <button type="button" class="option-btn" data-name="gender" data-value="Male">Male</button>
       <button type="button" class="option-btn" data-name="gender" data-value="Female">Female</button>
       <button type="button" class="option-btn" data-name="gender" data-value="Other">Other</button>
@@ -30,7 +27,7 @@ this is my current f1.html
     <div class="error group-error">Please select your gender</div>
 
     <label class="subheading ticker">Marital Status</label>
-    <div class="group button-group">
+    <div class="group button-group" data-group="marital">
       <button type="button" class="option-btn" data-name="marital" data-value="Single">Single</button>
       <button type="button" class="option-btn" data-name="marital" data-value="Married">Married</button>
       <button type="button" class="option-btn" data-name="marital" data-value="Divorced">Divorced</button>
@@ -91,7 +88,7 @@ this is my current f1.html
 
     <!-- Fun Preferences -->
     <h2 class="section-title">💰 Fun Preferences</h2>
-    <div class="group button-group">
+    <div class="group button-group" data-group="fun">
       <button type="button" class="option-btn" data-name="fun" data-value="happiness">Feel from your own happiness</button>
       <button type="button" class="option-btn" data-name="fun" data-value="smile">Earn from your smile</button>
       <button type="button" class="option-btn" data-name="fun" data-value="both">Both</button>
@@ -110,7 +107,7 @@ this is my current f1.html
 
     <!-- Notifications -->
     <h2 class="section-title">🔔 Notification Preferences</h2>
-    <div class="group button-group">
+    <div class="group button-group" data-group="notify">
       <button type="button" class="option-btn" data-name="notify" data-value="email">Email Updates</button>
       <button type="button" class="option-btn" data-name="notify" data-value="sms">SMS Alerts</button>
       <button type="button" class="option-btn" data-name="notify" data-value="push">Push Notifications</button>
@@ -122,7 +119,7 @@ this is my current f1.html
 
     <!-- Play Method -->
     <h2 class="section-title">💳 Play Method</h2>
-    <div class="group button-group">
+    <div class="group button-group" data-group="method">
       <button type="button" class="option-btn" data-name="method" data-value="feeling">Feeling</button>
       <button type="button" class="option-btn" data-name="method" data-value="hoping">Hoping</button>
       <button type="button" class="option-btn" data-name="method" data-value="applications">Applications</button>
@@ -138,7 +135,7 @@ this is my current f1.html
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non eros ut elit suscipit cursus. 
       Curabitur a sapien at est bibendum porttitor. Suspendisse potenti. Etiam ac tristique nulla.</p>
     </div>
-    <label><input type="checkbox" name="terms"> I have read and agree to the Terms & Conditions.</label>
+    <label><input type="checkbox" name="terms" required> I have read and agree to the Terms & Conditions.</label>
     <div class="error group-error">You must agree before continuing</div>
 
     <hr>
@@ -151,7 +148,6 @@ this is my current f1.html
 </div>
 
 <style>
-/* Premium stable card */
 .form-card {
   max-width: 720px;
   margin: 28px auto;
@@ -159,11 +155,7 @@ this is my current f1.html
   border-radius: 16px;
   background: #fff;
   box-shadow: 0 12px 28px rgba(24,119,242,0.25);
-  transition: none;
-  transform: none;
 }
-
-/* Inputs & textareas */
 .input, textarea, select {
   width: 100%;
   padding: 14px;
@@ -175,14 +167,22 @@ this is my current f1.html
   background: #f9fafb;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.input:focus, textarea:focus, select:focus {
+.input:focus, textarea:focus {
   outline: none;
   border-color: #1877F2;
   box-shadow: 0 0 0 3px rgba(24,119,242,0.25);
   background: #fff;
 }
-
-/* Section Titles & Subheadings */
+.invalid {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.25) !important;
+}
+.group.invalid {
+  border: 1px solid #ef4444;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.25);
+  border-radius: 12px;
+  padding: 8px;
+}
 .section-title {
   font-size: 20px;
   margin: 24px 0 12px;
@@ -196,130 +196,83 @@ this is my current f1.html
   font-size: 16px;
   margin: 12px 0 6px;
   color: #334155;
-  letter-spacing: 0.5px;
 }
-
-/* Ticker animation for subheadings */
-.ticker {
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-}
+.ticker {position: relative;display: inline-block;overflow: hidden;}
 .ticker::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.1) 100%);
+  top: 0; left: -100%;
+  width: 200%; height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
   animation: ticker 3s linear infinite;
 }
-@keyframes ticker {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-/* Button groups */
-.button-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 12px;
-}
+@keyframes ticker {0%{left:-100%;}100%{left:100%;}}
+.button-group {display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;}
 .option-btn {
-  padding: 10px 18px;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  font-weight: 700;
-  cursor: pointer;
-  background: #e5e7eb;
-  transition: all 0.25s ease;
-  flex: 1 1 auto;
-  text-align: center;
+  padding: 10px 18px; border-radius: 12px; border: 1px solid #ccc;
+  font-weight: 700; cursor: pointer; background: #e5e7eb;
+  transition: all 0.25s ease; flex: 1 1 auto; text-align: center;
 }
-.option-btn.selected {
-  background: #1877F2;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(24,119,242,0.35);
-  transform: translateY(-1px);
-}
-.option-btn:hover {
-  box-shadow: 0 6px 16px rgba(24,119,242,0.25);
-}
-
-/* Error messages */
-.error, .group-error {
-  color: #ef4444;
-  font-size: 0.85em;
-  display: none;
-  margin-top: 4px;
-}
-
-/* Terms box */
-.terms-box {
-  max-height: 120px;
-  overflow: auto;
-  border: 1px solid #ddd;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  background: #f9fafb;
-}
-
-/* Submit Button */
+.option-btn.selected {background:#1877F2;color:#fff;box-shadow:0 4px 12px rgba(24,119,242,0.35);transform:translateY(-1px);}
+.error, .group-error {color:#ef4444;font-size:0.85em;display:none;margin-top:4px;}
 .btn-modern {
-  display: inline-block;
-  padding: 12px 28px;
-  border-radius: 999px;
-  border: none;
-  background: linear-gradient(135deg, #1877F2, #4e9af1);
-  color: white;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
-  transition: all 0.25s ease;
+  display:inline-block;padding:12px 28px;border-radius:999px;border:none;
+  background:linear-gradient(135deg,#1877F2,#4e9af1);color:white;font-weight:700;
+  font-size:16px;cursor:pointer;box-shadow:0 6px 16px rgba(24,119,242,0.35);
+  transition:all 0.25s ease;
 }
-.btn-modern:hover {
-  box-shadow: 0 10px 22px rgba(24,119,242,0.45);
-}
-.btn-modern:active {
-  transform: scale(0.98);
-}
+.btn-modern:hover {box-shadow:0 10px 22px rgba(24,119,242,0.45);}
+.btn-modern:active {transform:scale(0.98);}
+.terms-box {max-height:120px;overflow:auto;border:1px solid #ddd;padding:12px;border-radius:8px;font-size:14px;background:#f9fafb;}
 </style>
 
 <script>
 const form = document.getElementById("f1form");
 
-// Handle premium button groups
 document.querySelectorAll(".option-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const name = btn.dataset.name;
-    const value = btn.dataset.value;
-
-    // Handle radio (single) selection
-    const hiddenInput = form.querySelector(`input[name="${name}"]`);
+    const hidden = form.querySelector(`input[name="${name}"]`);
     const siblings = document.querySelectorAll(`.option-btn[data-name="${name}"]`);
-    siblings.forEach(s => s.classList.remove("selected"));
+    siblings.forEach(b => b.classList.remove("selected"));
     btn.classList.add("selected");
+    hidden.value = btn.dataset.value;
 
-    // Update hidden input value
-    hiddenInput.value = value;
+    const group = form.querySelector(`.button-group[data-group="${name}"]`);
+    group.classList.remove("invalid");
+    group.nextElementSibling.style.display = "none";
   });
 });
 
-// Form validation
 function validateForm(showErrors = true) {
   let valid = true;
   let firstInvalid = null;
 
-  form.querySelectorAll(".error").forEach(el => el.style.display = "none");
-  form.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
+  form.querySelectorAll(".error, .group-error").forEach(e => e.style.display = "none");
+  form.querySelectorAll(".invalid").forEach(e => e.classList.remove("invalid"));
 
-  // Required inputs & textareas
-  form.querySelectorAll("input[required], textarea[required], select[required]").forEach(input => {
-    if (!input.value.trim()) {
+  form.querySelectorAll("input[required], textarea[required]").forEach(input => {
+    const isHidden = input.type === "hidden";
+    const isCheckbox = input.type === "checkbox";
+
+    if (isHidden) {
+      if (!input.value.trim()) {
+        valid = false;
+        const group = input.closest(".group");
+        if (showErrors) {
+          group.classList.add("invalid");
+          group.nextElementSibling.style.display = "block";
+        }
+        if (!firstInvalid) firstInvalid = group;
+      }
+    } else if (isCheckbox) {
+      if (!input.checked) {
+        valid = false;
+        const err = input.closest("label").nextElementSibling;
+        if (showErrors && err) err.style.display = "block";
+        if (!firstInvalid) firstInvalid = input.closest("label");
+      }
+    } else if (!input.value.trim()) {
       valid = false;
       if (showErrors) {
         input.classList.add("invalid");
@@ -330,16 +283,15 @@ function validateForm(showErrors = true) {
   });
 
   if (!valid && showErrors && firstInvalid) {
-    firstInvalid.scrollIntoView({behavior:"smooth", block:"center"});
-    firstInvalid.focus({preventScroll:true});
+    firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   return valid;
 }
 
-// On submit
-form.addEventListener("submit", e => { if(!validateForm(true)) e.preventDefault(); });
-form.querySelectorAll("input, textarea, select").forEach(el => {
+form.addEventListener("submit", e => { if (!validateForm(true)) e.preventDefault(); });
+
+form.querySelectorAll("input, textarea").forEach(el => {
   el.addEventListener("input", () => validateForm(false));
   el.addEventListener("change", () => validateForm(false));
 });
