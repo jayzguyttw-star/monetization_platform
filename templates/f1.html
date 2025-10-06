@@ -19,7 +19,7 @@
       <div class="error">Please select your date of birth</div>
 
       <label class="subheading">Gender</label>
-      <div class="group">
+      <div class="group radio-group">
         <label><input type="radio" name="gender" value="Male"> Male</label>
         <label><input type="radio" name="gender" value="Female"> Female</label>
         <label><input type="radio" name="gender" value="Other"> Other</label>
@@ -27,7 +27,7 @@
       <div class="error group-error">Please select your gender</div>
 
       <label class="subheading">Marital Status</label>
-      <div class="group">
+      <div class="group radio-group">
         <label><input type="radio" name="marital" value="Single"> Single</label>
         <label><input type="radio" name="marital" value="Married"> Married</label>
         <label><input type="radio" name="marital" value="Divorced"> Divorced</label>
@@ -95,9 +95,9 @@
     <!-- Fun Preferences -->
     <div class="form-section">
       <h2 class="section-title">💰 Fun Preferences</h2>
-      <div class="group">
-        <label><input type="checkbox" name="fun" value="happiness"> Feel from your own happiness</label><br>
-        <label><input type="checkbox" name="fun" value="smile"> Earn from your smile</label><br>
+      <div class="group checkbox-group">
+        <label><input type="checkbox" name="fun" value="happiness"> Feel from your own happiness</label>
+        <label><input type="checkbox" name="fun" value="smile"> Earn from your smile</label>
         <label><input type="checkbox" name="fun" value="both"> Both</label>
       </div>
       <div class="error group-error">Select at least one fun preference</div>
@@ -117,9 +117,9 @@
     <!-- Notifications -->
     <div class="form-section">
       <h2 class="section-title">🔔 Notification Preferences</h2>
-      <div class="group">
-        <label><input type="checkbox" name="notify" value="email"> Email Updates</label><br>
-        <label><input type="checkbox" name="notify" value="sms"> SMS Alerts</label><br>
+      <div class="group checkbox-group">
+        <label><input type="checkbox" name="notify" value="email"> Email Updates</label>
+        <label><input type="checkbox" name="notify" value="sms"> SMS Alerts</label>
         <label><input type="checkbox" name="notify" value="push"> Push Notifications</label>
       </div>
       <div class="error group-error">Select at least one notification preference</div>
@@ -130,9 +130,9 @@
     <!-- Play Method -->
     <div class="form-section">
       <h2 class="section-title">💳 Play Method</h2>
-      <div class="group">
-        <label><input type="radio" name="method" value="feeling"> Feeling</label><br>
-        <label><input type="radio" name="method" value="hoping"> Hoping</label><br>
+      <div class="group radio-group">
+        <label><input type="radio" name="method" value="feeling"> Feeling</label>
+        <label><input type="radio" name="method" value="hoping"> Hoping</label>
         <label><input type="radio" name="method" value="applications"> Applications</label>
       </div>
       <div class="error group-error">Choose a play method</div>
@@ -162,30 +162,21 @@
 </div>
 
 <style>
-/* Card */
+/* Card and stability like love1_1 */
 .form-card {
   max-width: 720px;
   margin: 28px auto;
   padding: 32px;
   border-radius: 16px;
   background: #fff;
-  box-shadow: 0 12px 28px rgba(24,119,242,0.2);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.form-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 36px rgba(24,119,242,0.25);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  transition: none;
+  transform: none;
 }
 
 /* Section hover */
 .form-section {
   padding: 12px 0;
-  border-radius: 12px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.form-section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(24,119,242,0.1);
 }
 
 /* Inputs */
@@ -202,7 +193,7 @@
 .input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: #1877F2;
-  box-shadow: 0 0 0 3px rgba(24,119,242,0.25);
+  box-shadow: 0 0 0 3px rgba(24,119,242,0.2);
   background: #fff;
 }
 
@@ -214,7 +205,6 @@ label {
   margin-bottom: 6px;
   font-size: 15px;
 }
-
 .subheading {
   font-weight: 600;
   font-size: 15px;
@@ -243,7 +233,7 @@ label {
   background: #f9fafb;
 }
 
-/* Submit button */
+/* Modern Submit Button */
 .btn-modern {
   display: inline-block;
   padding: 12px 28px;
@@ -255,14 +245,27 @@ label {
   font-size: 16px;
   cursor: pointer;
   transition: all 0.25s ease;
-  box-shadow: 0 6px 14px rgba(24,119,242,0.35);
+  box-shadow: 0 6px 14px rgba(24,119,242,0.3);
 }
 .btn-modern:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 10px 22px rgba(24,119,242,0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(24,119,242,0.4);
 }
 .btn-modern:active {
   transform: scale(0.98);
+}
+
+/* Radio & Checkbox styling */
+.radio-group input[type="radio"], .checkbox-group input[type="checkbox"] {
+  accent-color: #1877F2;
+  cursor: pointer;
+  margin-right: 6px;
+  width: 18px;
+  height: 18px;
+  transition: all 0.2s ease;
+}
+.radio-group input[type="radio"]:hover, .checkbox-group input[type="checkbox"]:hover {
+  transform: scale(1.1);
 }
 
 /* Errors */
@@ -274,7 +277,6 @@ label {
 }
 .input.invalid, .group.invalid {
   border: 2px solid red;
-  padding: 4px;
   border-radius: 6px;
 }
 </style>
