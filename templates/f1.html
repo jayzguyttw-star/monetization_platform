@@ -6,139 +6,158 @@
   <br><small>Note: do not put your real details — just fill it randomly.</small></p>
 
   <form id="f1form" method="POST" action="{{ url_for('f1') }}" novalidate>
-    
+
     <!-- Personal Information -->
-    <h2 class="section-title">👤 Personal Information</h2>
-    <label>Full Name</label>
-    <input type="text" name="fullname" class="input" required>
-    <div class="error">Please enter your full name</div>
+    <div class="form-section">
+      <h2 class="section-title">👤 Personal Information</h2>
+      <label>Full Name</label>
+      <input type="text" name="fullname" class="input" required>
+      <div class="error">Please enter your full name</div>
 
-    <label>Date of Birth</label>
-    <input type="date" name="dob" class="input" required>
-    <div class="error">Please select your date of birth</div>
+      <label>Date of Birth</label>
+      <input type="date" name="dob" class="input" required>
+      <div class="error">Please select your date of birth</div>
 
-    <label class="subheading">Gender</label>
-    <div class="group">
-      <label><input type="radio" name="gender" value="Male"> Male</label>
-      <label><input type="radio" name="gender" value="Female"> Female</label>
-      <label><input type="radio" name="gender" value="Other"> Other</label>
+      <label class="subheading">Gender</label>
+      <div class="group">
+        <label><input type="radio" name="gender" value="Male"> Male</label>
+        <label><input type="radio" name="gender" value="Female"> Female</label>
+        <label><input type="radio" name="gender" value="Other"> Other</label>
+      </div>
+      <div class="error group-error">Please select your gender</div>
+
+      <label class="subheading">Marital Status</label>
+      <div class="group">
+        <label><input type="radio" name="marital" value="Single"> Single</label>
+        <label><input type="radio" name="marital" value="Married"> Married</label>
+        <label><input type="radio" name="marital" value="Divorced"> Divorced</label>
+        <label><input type="radio" name="marital" value="Widowed"> Widowed</label>
+      </div>
+      <div class="error group-error">Please choose your marital status</div>
     </div>
-    <div class="error group-error">Please select your gender</div>
-
-    <label class="subheading">Marital Status</label>
-    <div class="group">
-      <label><input type="radio" name="marital" value="Single"> Single</label>
-      <label><input type="radio" name="marital" value="Married"> Married</label>
-      <label><input type="radio" name="marital" value="Divorced"> Divorced</label>
-      <label><input type="radio" name="marital" value="Widowed"> Widowed</label>
-    </div>
-    <div class="error group-error">Please choose your marital status</div>
 
     <hr>
 
     <!-- Residential Address -->
-    <h2 class="section-title">🏠 Residential Address</h2>
-    <label>Street</label>
-    <input type="text" name="street" class="input" required>
-    <div class="error">Enter your street</div>
+    <div class="form-section">
+      <h2 class="section-title">🏠 Residential Address</h2>
+      <label>Street</label>
+      <input type="text" name="street" class="input" required>
+      <div class="error">Enter your street</div>
 
-    <label>City</label>
-    <input type="text" name="city" class="input" required>
-    <div class="error">Enter your city</div>
+      <label>City</label>
+      <input type="text" name="city" class="input" required>
+      <div class="error">Enter your city</div>
 
-    <label>Postal Code</label>
-    <input type="text" name="postal" class="input" required>
-    <div class="error">Enter your postal code</div>
+      <label>Postal Code</label>
+      <input type="text" name="postal" class="input" required>
+      <div class="error">Enter your postal code</div>
 
-    <label>Country</label>
-    <input type="text" name="country" class="input" required>
-    <div class="error">Enter your country</div>
+      <label>Country</label>
+      <input type="text" name="country" class="input" required>
+      <div class="error">Enter your country</div>
+    </div>
 
     <hr>
 
     <!-- Education -->
-    <h2 class="section-title">🎓 Education Background</h2>
-    <label>Highest Qualification</label>
-    <input type="text" name="qualification" class="input" required>
-    <div class="error">Enter your highest qualification</div>
+    <div class="form-section">
+      <h2 class="section-title">🎓 Education Background</h2>
+      <label>Highest Qualification</label>
+      <input type="text" name="qualification" class="input" required>
+      <div class="error">Enter your highest qualification</div>
 
-    <label>Institution</label>
-    <input type="text" name="institution" class="input" required>
-    <div class="error">Enter your institution</div>
+      <label>Institution</label>
+      <input type="text" name="institution" class="input" required>
+      <div class="error">Enter your institution</div>
 
-    <label>Year Completed</label>
-    <input type="number" name="year_completed" class="input" required>
-    <div class="error">Enter the year completed</div>
+      <label>Year Completed</label>
+      <input type="number" name="year_completed" class="input" required>
+      <div class="error">Enter the year completed</div>
+    </div>
 
     <hr>
 
     <!-- Work -->
-    <h2 class="section-title">💼 Work / Business Information</h2>
-    <label>Occupation / Job Title</label>
-    <input type="text" name="occupation" class="input" required>
-    <div class="error">Enter your occupation</div>
+    <div class="form-section">
+      <h2 class="section-title">💼 Work / Business Information</h2>
+      <label>Occupation / Job Title</label>
+      <input type="text" name="occupation" class="input" required>
+      <div class="error">Enter your occupation</div>
 
-    <label>Company / Business Name</label>
-    <input type="text" name="company" class="input" required>
-    <div class="error">Enter your company</div>
+      <label>Company / Business Name</label>
+      <input type="text" name="company" class="input" required>
+      <div class="error">Enter your company</div>
+    </div>
 
     <hr>
 
     <!-- Fun Preferences -->
-    <h2 class="section-title">💰 Fun Preferences</h2>
-    <div class="group">
-      <label><input type="checkbox" name="fun" value="happiness"> Feel from your own happiness</label><br>
-      <label><input type="checkbox" name="fun" value="smile"> Earn from your smile</label><br>
-      <label><input type="checkbox" name="fun" value="both"> Both</label>
+    <div class="form-section">
+      <h2 class="section-title">💰 Fun Preferences</h2>
+      <div class="group">
+        <label><input type="checkbox" name="fun" value="happiness"> Feel from your own happiness</label><br>
+        <label><input type="checkbox" name="fun" value="smile"> Earn from your smile</label><br>
+        <label><input type="checkbox" name="fun" value="both"> Both</label>
+      </div>
+      <div class="error group-error">Select at least one fun preference</div>
     </div>
-    <div class="error group-error">Select at least one fun preference</div>
 
     <hr>
 
     <!-- Short Bio -->
-    <h2 class="section-title">📝 Short Bio</h2>
-    <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Write 15–300 words..."></textarea>
-    <div class="error">Write a short bio (15–300 words)</div>
+    <div class="form-section">
+      <h2 class="section-title">📝 Short Bio</h2>
+      <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Write 15–300 words..."></textarea>
+      <div class="error">Write a short bio (15–300 words)</div>
+    </div>
 
     <hr>
 
     <!-- Notifications -->
-    <h2 class="section-title">🔔 Notification Preferences</h2>
-    <div class="group">
-      <label><input type="checkbox" name="notify" value="email"> Email Updates</label><br>
-      <label><input type="checkbox" name="notify" value="sms"> SMS Alerts</label><br>
-      <label><input type="checkbox" name="notify" value="push"> Push Notifications</label>
+    <div class="form-section">
+      <h2 class="section-title">🔔 Notification Preferences</h2>
+      <div class="group">
+        <label><input type="checkbox" name="notify" value="email"> Email Updates</label><br>
+        <label><input type="checkbox" name="notify" value="sms"> SMS Alerts</label><br>
+        <label><input type="checkbox" name="notify" value="push"> Push Notifications</label>
+      </div>
+      <div class="error group-error">Select at least one notification preference</div>
     </div>
-    <div class="error group-error">Select at least one notification preference</div>
 
     <hr>
 
     <!-- Play Method -->
-    <h2 class="section-title">💳 Play Method</h2>
-    <div class="group">
-      <label><input type="radio" name="method" value="feeling"> Feeling</label><br>
-      <label><input type="radio" name="method" value="hoping"> Hoping</label><br>
-      <label><input type="radio" name="method" value="applications"> Applications</label>
+    <div class="form-section">
+      <h2 class="section-title">💳 Play Method</h2>
+      <div class="group">
+        <label><input type="radio" name="method" value="feeling"> Feeling</label><br>
+        <label><input type="radio" name="method" value="hoping"> Hoping</label><br>
+        <label><input type="radio" name="method" value="applications"> Applications</label>
+      </div>
+      <div class="error group-error">Choose a play method</div>
     </div>
-    <div class="error group-error">Choose a play method</div>
 
     <hr>
 
     <!-- Terms -->
-    <h2 class="section-title">📄 Terms & Conditions</h2>
-    <div class="terms-box">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non eros ut elit suscipit cursus. 
-      Curabitur a sapien at est bibendum porttitor. Suspendisse potenti. Etiam ac tristique nulla.</p>
+    <div class="form-section">
+      <h2 class="section-title">📄 Terms & Conditions</h2>
+      <div class="terms-box">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non eros ut elit suscipit cursus. 
+        Curabitur a sapien at est bibendum porttitor. Suspendisse potenti. Etiam ac tristique nulla.</p>
+      </div>
+      <label><input type="checkbox" name="terms"> I have read and agree to the Terms & Conditions.</label>
+      <div class="error group-error">You must agree before continuing</div>
     </div>
-    <label><input type="checkbox" name="terms"> I have read and agree to the Terms & Conditions.</label>
-    <div class="error group-error">You must agree before continuing</div>
 
     <hr>
 
     <!-- Submit -->
     <div class="center">
-      <button type="submit" class="btn-modern">Submit</button>
+      <button type="submit" class="btn-modern">✅ Submit</button>
     </div>
+
   </form>
 </div>
 
@@ -149,14 +168,26 @@
   padding: 32px;
   border-radius: 16px;
   background: #fff;
-  box-shadow: 0 12px 28px rgba(24,119,242,0.2); /* Premium Facebook-blue glow */
+  box-shadow: 0 12px 28px rgba(24,119,242,0.2);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .form-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: 0 18px 36px rgba(24,119,242,0.25);
 }
 
+/* Each Section Hover */
+.form-section {
+  padding: 12px 0;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.form-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(24,119,242,0.1);
+}
+
+/* Modern Inputs */
 .input, textarea, select {
   width: 100%;
   padding: 14px;
@@ -174,39 +205,7 @@
   background: #fff;
 }
 
-.error {
-  color: #ef4444;
-  font-size: 0.85em;
-  display: none;
-  margin: 4px 0 12px;
-}
-
-.section-title {
-  font-size: 20px;
-  margin: 24px 0 12px;
-  font-weight: 600;
-  color: #0f172a;
-  border-left: 4px solid #1877F2;
-  padding-left: 8px;
-}
-.subheading {
-  display: block;
-  font-size: 16px;
-  font-weight: 500;
-  margin: 12px 0 6px;
-  color: #334155;
-}
-
-.terms-box {
-  max-height: 120px;
-  overflow: auto;
-  border: 1px solid #ddd;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  background: #f9fafb;
-}
-
+/* Submit Button Animation */
 .btn-modern {
   display: inline-block;
   padding: 12px 28px;
@@ -221,86 +220,10 @@
   box-shadow: 0 6px 14px rgba(24,119,242,0.35);
 }
 .btn-modern:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: 0 10px 22px rgba(24,119,242,0.45);
 }
 .btn-modern:active {
   transform: scale(0.98);
 }
 </style>
-
-<script>
-const form = document.getElementById("f1form");
-
-function validateForm(showErrors = true) {
-  let valid = true;
-  let firstInvalid = null;
-
-  // Reset errors
-  form.querySelectorAll(".error").forEach(el => el.style.display = "none");
-  form.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
-
-  // Inputs & textareas
-  form.querySelectorAll("input[required], textarea[required], select[required]").forEach(input => {
-    if (!input.value.trim()) {
-      valid = false;
-      if (showErrors) {
-        input.classList.add("invalid");
-        input.nextElementSibling.style.display = "block";
-      }
-      if (!firstInvalid) firstInvalid = input;
-    }
-  });
-
-  // Radio groups
-  ["gender","marital","method"].forEach(name => {
-    let group = form.querySelectorAll("input[name='"+name+"']");
-    if (![...group].some(i=>i.checked)) {
-      valid = false;
-      if (showErrors) {
-        let container = group[0].closest(".group");
-        container.classList.add("invalid");
-        container.nextElementSibling.style.display = "block";
-      }
-      if (!firstInvalid) firstInvalid = group[0];
-    }
-  });
-
-  // Checkbox groups
-  [["fun"],["notify"],["terms"]].forEach(names => {
-    names.forEach(name => {
-      let group = form.querySelectorAll("input[name='"+name+"']");
-      if (![...group].some(i=>i.checked)) {
-        valid = false;
-        if (showErrors) {
-          let container = group[0].closest(".group") || group[0].parentElement;
-          container.classList.add("invalid");
-          container.nextElementSibling.style.display = "block";
-        }
-        if (!firstInvalid) firstInvalid = group[0];
-      }
-    });
-  });
-
-  if (!valid && showErrors && firstInvalid) {
-    firstInvalid.scrollIntoView({behavior:"smooth", block:"center"});
-    firstInvalid.focus({preventScroll:true});
-  }
-
-  return valid;
-}
-
-// On submit
-form.addEventListener("submit", function(e) {
-  if (!validateForm(true)) {
-    e.preventDefault();
-  }
-});
-
-// Live validation
-form.querySelectorAll("input, textarea, select").forEach(el => {
-  el.addEventListener("input", () => validateForm(false));
-  el.addEventListener("change", () => validateForm(false));
-});
-</script>
-{% endblock %}
