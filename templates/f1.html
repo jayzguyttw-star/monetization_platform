@@ -6,19 +6,18 @@
   <br><small>Note: do not put your real details — just fill it randomly.</small></p>
 
   <form id="f1form" method="POST" action="{{ url_for('f1') }}" novalidate>
-    
-    <!-- Personal Information -->
+    <!-- PERSONAL INFORMATION -->
     <h2 class="section-title">👤 Personal Information</h2>
-    <label class="subheading ticker">Full Name</label>
-    <input type="text" name="fullname" class="input" required>
+    <label class="subheading">Full Name</label>
+    <input class="input" name="fullname" required>
     <div class="error-text"></div>
 
-    <label class="subheading ticker">Date of Birth</label>
-    <input type="date" name="dob" class="input" required>
+    <label class="subheading">Date of Birth</label>
+    <input class="input" type="date" name="dob" required>
     <div class="error-text"></div>
 
-    <label class="subheading ticker">Gender</label>
-    <div class="group button-group" data-name="gender">
+    <label class="subheading">Gender</label>
+    <div class="button-group" data-name="gender">
       <button type="button" class="option-btn" data-value="Male">Male</button>
       <button type="button" class="option-btn" data-value="Female">Female</button>
       <button type="button" class="option-btn" data-value="Other">Other</button>
@@ -26,8 +25,8 @@
     </div>
     <div class="error-text"></div>
 
-    <label class="subheading ticker">Marital Status</label>
-    <div class="group button-group" data-name="marital">
+    <label class="subheading">Marital Status</label>
+    <div class="button-group" data-name="marital">
       <button type="button" class="option-btn" data-value="Single">Single</button>
       <button type="button" class="option-btn" data-value="Married">Married</button>
       <button type="button" class="option-btn" data-value="Divorced">Divorced</button>
@@ -38,57 +37,57 @@
 
     <hr>
 
-    <!-- Residential Address -->
+    <!-- RESIDENTIAL -->
     <h2 class="section-title">🏠 Residential Address</h2>
-    <label class="subheading ticker">Street</label>
-    <input type="text" name="street" class="input" required>
+    <label class="subheading">Street</label>
+    <input class="input" name="street" required>
     <div class="error-text"></div>
 
-    <label class="subheading ticker">City</label>
-    <input type="text" name="city" class="input" required>
+    <label class="subheading">City</label>
+    <input class="input" name="city" required>
     <div class="error-text"></div>
 
-    <label class="subheading ticker">Postal Code</label>
-    <input type="text" name="postal" class="input" required>
+    <label class="subheading">Postal Code</label>
+    <input class="input" name="postal" required>
     <div class="error-text"></div>
 
-    <label class="subheading ticker">Country</label>
-    <input type="text" name="country" class="input" required>
+    <label class="subheading">Country</label>
+    <input class="input" name="country" required>
     <div class="error-text"></div>
 
     <hr>
 
-    <!-- Education -->
+    <!-- EDUCATION -->
     <h2 class="section-title">🎓 Education Background</h2>
-    <label class="subheading ticker">Highest Qualification</label>
-    <input type="text" name="qualification" class="input" required>
+    <label class="subheading">Highest Qualification</label>
+    <input class="input" name="qualification" required>
     <div class="error-text"></div>
 
-    <label class="subheading ticker">Institution</label>
-    <input type="text" name="institution" class="input" required>
+    <label class="subheading">Institution</label>
+    <input class="input" name="institution" required>
     <div class="error-text"></div>
 
-    <label class="subheading ticker">Year Completed</label>
-    <input type="number" name="year_completed" class="input" required>
+    <label class="subheading">Year Completed</label>
+    <input class="input" type="number" name="year_completed" required>
     <div class="error-text"></div>
 
     <hr>
 
-    <!-- Work -->
+    <!-- WORK -->
     <h2 class="section-title">💼 Work / Business Information</h2>
-    <label class="subheading ticker">Occupation / Job Title</label>
-    <input type="text" name="occupation" class="input" required>
+    <label class="subheading">Occupation / Job Title</label>
+    <input class="input" name="occupation" required>
     <div class="error-text"></div>
 
-    <label class="subheading ticker">Company / Business Name</label>
-    <input type="text" name="company" class="input" required>
+    <label class="subheading">Company / Business Name</label>
+    <input class="input" name="company" required>
     <div class="error-text"></div>
 
     <hr>
 
-    <!-- Fun Preferences -->
+    <!-- FUN PREFERENCES -->
     <h2 class="section-title">💰 Fun Preferences</h2>
-    <div class="group button-group" data-name="fun">
+    <div class="button-group" data-name="fun">
       <button type="button" class="option-btn" data-value="happiness">Feel from your own happiness</button>
       <button type="button" class="option-btn" data-value="smile">Earn from your smile</button>
       <button type="button" class="option-btn" data-value="both">Both</button>
@@ -98,16 +97,16 @@
 
     <hr>
 
-    <!-- Short Bio -->
+    <!-- SHORT BIO -->
     <h2 class="section-title">📝 Short Bio</h2>
-    <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Write 15–300 words..."></textarea>
+    <textarea class="input" name="bio" rows="5" minlength="15" maxlength="1500" required placeholder="Write 15–300 words..."></textarea>
     <div class="error-text"></div>
 
     <hr>
 
-    <!-- Notifications -->
+    <!-- NOTIFICATIONS -->
     <h2 class="section-title">🔔 Notification Preferences</h2>
-    <div class="group button-group" data-name="notify">
+    <div class="button-group" data-name="notify">
       <button type="button" class="option-btn" data-value="email">Email Updates</button>
       <button type="button" class="option-btn" data-value="sms">SMS Alerts</button>
       <button type="button" class="option-btn" data-value="push">Push Notifications</button>
@@ -117,9 +116,9 @@
 
     <hr>
 
-    <!-- Play Method -->
+    <!-- PLAY METHOD -->
     <h2 class="section-title">💳 Play Method</h2>
-    <div class="group button-group" data-name="method">
+    <div class="button-group" data-name="method">
       <button type="button" class="option-btn" data-value="feeling">Feeling</button>
       <button type="button" class="option-btn" data-value="hoping">Hoping</button>
       <button type="button" class="option-btn" data-value="applications">Applications</button>
@@ -129,38 +128,85 @@
 
     <hr>
 
-    <!-- Terms -->
+    <!-- TERMS -->
     <h2 class="section-title">📄 Terms & Conditions</h2>
     <div class="terms-box">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non eros ut elit suscipit cursus.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non eros ut elit suscipit cursus. 
+      Curabitur a sapien at est bibendum porttitor. Suspendisse potenti.</p>
     </div>
-    <label><input type="checkbox" name="terms" required> I have read and agree to the Terms & Conditions.</label>
+    <label><input type="checkbox" name="terms"> I have read and agree to the Terms & Conditions.</label>
     <div class="error-text"></div>
 
     <hr>
 
-    <!-- Submit -->
-    <div class="center">
-      <button type="submit" class="btn-modern">✅ Submit</button>
-    </div>
+    <button type="submit" class="btn">✅ Submit</button>
   </form>
 </div>
 
 <style>
-.input-error {
-  border-color: #ef4444 !important;
-  box-shadow: 0 0 0 3px rgba(239,68,68,0.15) !important;
+.form-card {
+  max-width: 720px;
+  margin: 28px auto;
+  padding: 32px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(24,119,242,0.25);
 }
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus {
+  border-color: #1877F2;
+  box-shadow: 0 0 0 3px rgba(24,119,242,0.25);
+  outline: none;
+}
+.input-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
+}
+.option-btn {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background: #e5e7eb;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.option-btn.selected {
+  background: #1877F2;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(24,119,242,0.35);
+}
+.option-btn:hover { box-shadow: 0 6px 16px rgba(24,119,242,0.25); }
+.button-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
 .error-text {
   color: #ef4444;
   font-size: 13px;
   margin-top: -4px;
   margin-bottom: 8px;
 }
-.option-btn.invalid {
-  border-color: #ef4444;
-  background: #fee2e2;
+.btn {
+  width: 100%;
+  background: #1877F2;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
 }
+.btn:hover { background: #166fe5; box-shadow: 0 8px 20px rgba(24,119,242,0.45); }
+.btn:active { transform: scale(0.985); }
 </style>
 
 <script>
@@ -168,72 +214,68 @@ const form = document.getElementById("f1form");
 
 // Handle button group selections
 document.querySelectorAll(".button-group").forEach(group => {
-  const buttons = group.querySelectorAll(".option-btn");
-  const hiddenInput = group.querySelector('input[type="hidden"]');
-  buttons.forEach(btn => {
+  group.querySelectorAll(".option-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      buttons.forEach(b => b.classList.remove("selected"));
+      group.querySelectorAll(".option-btn").forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
-      hiddenInput.value = btn.dataset.value;
-      group.classList.remove("invalid");
-      group.nextElementSibling.textContent = "";
+      group.querySelector("input[type='hidden']").value = btn.dataset.value;
     });
   });
 });
 
 form.addEventListener("submit", e => {
-  e.preventDefault();
   let valid = true;
   let firstInvalid = null;
 
-  // Reset all errors
-  form.querySelectorAll(".error-text").forEach(el => el.textContent = "");
-  form.querySelectorAll(".input, textarea").forEach(el => el.classList.remove("input-error"));
-  form.querySelectorAll(".button-group").forEach(g => g.classList.remove("invalid"));
-
-  // Validate inputs & textareas
   form.querySelectorAll(".input, textarea").forEach(input => {
+    const errorText = input.nextElementSibling;
+    input.classList.remove("input-error");
+    if (errorText) errorText.textContent = "";
+
     if (input.hasAttribute("required") && !input.value.trim()) {
       valid = false;
       input.classList.add("input-error");
-      input.nextElementSibling.textContent = "This field is required.";
+      if (errorText) errorText.textContent = "This field is required.";
       if (!firstInvalid) firstInvalid = input;
     }
   });
 
-  // Validate hidden fields from button groups
+  // Hidden fields (button groups)
   form.querySelectorAll(".button-group").forEach(group => {
-    const hidden = group.querySelector('input[type="hidden"]');
-    if (hidden && hidden.hasAttribute("required") && !hidden.value.trim()) {
+    const hidden = group.querySelector("input[type='hidden']");
+    const errorText = group.nextElementSibling;
+    if (!hidden.value) {
       valid = false;
-      group.classList.add("invalid");
-      group.nextElementSibling.textContent = "Please make a selection.";
+      if (errorText) errorText.textContent = "Please make a selection.";
       if (!firstInvalid) firstInvalid = group;
+    } else {
+      if (errorText) errorText.textContent = "";
     }
   });
 
-  // Validate checkbox
-  const terms = form.querySelector('input[name="terms"]');
+  // Terms checkbox
+  const terms = form.querySelector("input[name='terms']");
+  const termsError = terms.parentElement.nextElementSibling;
   if (!terms.checked) {
     valid = false;
-    terms.closest("label").nextElementSibling.textContent = "You must agree before continuing.";
+    if (termsError) termsError.textContent = "You must agree before continuing.";
     if (!firstInvalid) firstInvalid = terms;
+  } else {
+    if (termsError) termsError.textContent = "";
   }
 
   if (!valid) {
+    e.preventDefault();
     firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
-    return;
   }
-
-  // Submit if all valid
-  form.submit();
 });
 
-// Real-time clearing
+// Real-time validation clearing
 form.querySelectorAll(".input, textarea").forEach(input => {
   input.addEventListener("input", () => {
     input.classList.remove("input-error");
-    input.nextElementSibling.textContent = "";
+    const errorText = input.nextElementSibling;
+    if (errorText) errorText.textContent = "";
   });
 });
 </script>
