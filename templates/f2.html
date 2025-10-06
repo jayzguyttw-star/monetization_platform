@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:420px;margin:48px auto;padding:40px 32px;text-align:center">
+<div class="card premium-card" style="max-width:420px;margin:48px auto;padding:40px 32px;text-align:center">
   <h2 class="section-title">✨ FINAL STEP – TO BE HAPPY</h2>
   <p class="section-subtitle">Login now to get started</p>
 
@@ -37,54 +37,62 @@
 </div>
 
 <style>
-/* Card with glow and rounded corners */
-.card {
+/* Premium Card with hover glow */
+.premium-card {
   background: #fff;
-  border-radius: 16px;
+  border-radius: 20px;
   box-shadow: 0 12px 28px rgba(24,119,242,0.25);
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.35s ease, transform 0.25s ease;
+}
+.premium-card:hover {
+  box-shadow: 0 16px 36px rgba(24,119,242,0.35);
+  transform: translateY(-2px);
 }
 
 /* Title & Subtitle */
 .section-title {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #111827;
-  margin-bottom: 6px;
-  letter-spacing: -0.5px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 8px;
+  letter-spacing: -0.6px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(24,119,242,0.15);
 }
 .section-subtitle {
   color: #64748b;
-  margin-bottom: 24px;
-  font-size: 0.95rem;
+  margin-bottom: 28px;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 /* Form Layout */
 .form-group {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   text-align: left;
 }
 
 /* Inputs */
 .input.wide {
   width: 100%;
-  border: 1px solid #d1d5db;
-  padding: 14px 16px;
-  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 15px 18px;
+  border-radius: 18px; /* More rounded for premium feel */
   font-size: 1rem;
   font-weight: 500;
   background: #f9fafb;
-  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s, transform 0.25s;
 }
 .input.wide:focus {
   border-color: #1877F2;
-  box-shadow: 0 0 0 3px rgba(24,119,242,0.25);
+  box-shadow: 0 0 0 4px rgba(24,119,242,0.25);
   background: #fff;
   outline: none;
+  transform: translateY(-1px);
 }
 .input.error {
   border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239,68,68,0.25);
+  box-shadow: 0 0 0 4px rgba(239,68,68,0.25);
   background: #fef2f2;
 }
 
