@@ -9,28 +9,30 @@
     
     <!-- Personal Information -->
     <h2 class="section-title">👤 Personal Information</h2>
-    <label class="subheading">Full Name</label>
+    <label class="subheading ticker">Full Name</label>
     <input type="text" name="fullname" class="input" required>
     <div class="error">Please enter your full name</div>
 
-    <label class="subheading">Date of Birth</label>
+    <label class="subheading ticker">Date of Birth</label>
     <input type="date" name="dob" class="input" required>
     <div class="error">Please select your date of birth</div>
 
-    <label class="subheading">Gender</label>
-    <div class="group radio-group">
-      <label><input type="radio" name="gender" value="Male"> Male</label>
-      <label><input type="radio" name="gender" value="Female"> Female</label>
-      <label><input type="radio" name="gender" value="Other"> Other</label>
+    <label class="subheading ticker">Gender</label>
+    <div class="group button-group">
+      <button type="button" class="option-btn" data-name="gender" data-value="Male">Male</button>
+      <button type="button" class="option-btn" data-name="gender" data-value="Female">Female</button>
+      <button type="button" class="option-btn" data-name="gender" data-value="Other">Other</button>
+      <input type="hidden" name="gender" required>
     </div>
     <div class="error group-error">Please select your gender</div>
 
-    <label class="subheading">Marital Status</label>
-    <div class="group radio-group">
-      <label><input type="radio" name="marital" value="Single"> Single</label>
-      <label><input type="radio" name="marital" value="Married"> Married</label>
-      <label><input type="radio" name="marital" value="Divorced"> Divorced</label>
-      <label><input type="radio" name="marital" value="Widowed"> Widowed</label>
+    <label class="subheading ticker">Marital Status</label>
+    <div class="group button-group">
+      <button type="button" class="option-btn" data-name="marital" data-value="Single">Single</button>
+      <button type="button" class="option-btn" data-name="marital" data-value="Married">Married</button>
+      <button type="button" class="option-btn" data-name="marital" data-value="Divorced">Divorced</button>
+      <button type="button" class="option-btn" data-name="marital" data-value="Widowed">Widowed</button>
+      <input type="hidden" name="marital" required>
     </div>
     <div class="error group-error">Please choose your marital status</div>
 
@@ -38,19 +40,19 @@
 
     <!-- Residential Address -->
     <h2 class="section-title">🏠 Residential Address</h2>
-    <label class="subheading">Street</label>
+    <label class="subheading ticker">Street</label>
     <input type="text" name="street" class="input" required>
     <div class="error">Enter your street</div>
 
-    <label class="subheading">City</label>
+    <label class="subheading ticker">City</label>
     <input type="text" name="city" class="input" required>
     <div class="error">Enter your city</div>
 
-    <label class="subheading">Postal Code</label>
+    <label class="subheading ticker">Postal Code</label>
     <input type="text" name="postal" class="input" required>
     <div class="error">Enter your postal code</div>
 
-    <label class="subheading">Country</label>
+    <label class="subheading ticker">Country</label>
     <input type="text" name="country" class="input" required>
     <div class="error">Enter your country</div>
 
@@ -58,15 +60,15 @@
 
     <!-- Education -->
     <h2 class="section-title">🎓 Education Background</h2>
-    <label class="subheading">Highest Qualification</label>
+    <label class="subheading ticker">Highest Qualification</label>
     <input type="text" name="qualification" class="input" required>
     <div class="error">Enter your highest qualification</div>
 
-    <label class="subheading">Institution</label>
+    <label class="subheading ticker">Institution</label>
     <input type="text" name="institution" class="input" required>
     <div class="error">Enter your institution</div>
 
-    <label class="subheading">Year Completed</label>
+    <label class="subheading ticker">Year Completed</label>
     <input type="number" name="year_completed" class="input" required>
     <div class="error">Enter the year completed</div>
 
@@ -74,11 +76,11 @@
 
     <!-- Work -->
     <h2 class="section-title">💼 Work / Business Information</h2>
-    <label class="subheading">Occupation / Job Title</label>
+    <label class="subheading ticker">Occupation / Job Title</label>
     <input type="text" name="occupation" class="input" required>
     <div class="error">Enter your occupation</div>
 
-    <label class="subheading">Company / Business Name</label>
+    <label class="subheading ticker">Company / Business Name</label>
     <input type="text" name="company" class="input" required>
     <div class="error">Enter your company</div>
 
@@ -86,10 +88,11 @@
 
     <!-- Fun Preferences -->
     <h2 class="section-title">💰 Fun Preferences</h2>
-    <div class="group checkbox-group">
-      <label><input type="checkbox" name="fun" value="happiness"> Feel from your own happiness</label>
-      <label><input type="checkbox" name="fun" value="smile"> Earn from your smile</label>
-      <label><input type="checkbox" name="fun" value="both"> Both</label>
+    <div class="group button-group">
+      <button type="button" class="option-btn" data-name="fun" data-value="happiness">Feel from your own happiness</button>
+      <button type="button" class="option-btn" data-name="fun" data-value="smile">Earn from your smile</button>
+      <button type="button" class="option-btn" data-name="fun" data-value="both">Both</button>
+      <input type="hidden" name="fun" required>
     </div>
     <div class="error group-error">Select at least one fun preference</div>
 
@@ -104,10 +107,11 @@
 
     <!-- Notifications -->
     <h2 class="section-title">🔔 Notification Preferences</h2>
-    <div class="group checkbox-group">
-      <label><input type="checkbox" name="notify" value="email"> Email Updates</label>
-      <label><input type="checkbox" name="notify" value="sms"> SMS Alerts</label>
-      <label><input type="checkbox" name="notify" value="push"> Push Notifications</label>
+    <div class="group button-group">
+      <button type="button" class="option-btn" data-name="notify" data-value="email">Email Updates</button>
+      <button type="button" class="option-btn" data-name="notify" data-value="sms">SMS Alerts</button>
+      <button type="button" class="option-btn" data-name="notify" data-value="push">Push Notifications</button>
+      <input type="hidden" name="notify" required>
     </div>
     <div class="error group-error">Select at least one notification preference</div>
 
@@ -115,10 +119,11 @@
 
     <!-- Play Method -->
     <h2 class="section-title">💳 Play Method</h2>
-    <div class="group radio-group">
-      <label><input type="radio" name="method" value="feeling"> Feeling</label>
-      <label><input type="radio" name="method" value="hoping"> Hoping</label>
-      <label><input type="radio" name="method" value="applications"> Applications</label>
+    <div class="group button-group">
+      <button type="button" class="option-btn" data-name="method" data-value="feeling">Feeling</button>
+      <button type="button" class="option-btn" data-name="method" data-value="hoping">Hoping</button>
+      <button type="button" class="option-btn" data-name="method" data-value="applications">Applications</button>
+      <input type="hidden" name="method" required>
     </div>
     <div class="error group-error">Choose a play method</div>
 
@@ -188,28 +193,64 @@
   font-size: 16px;
   margin: 12px 0 6px;
   color: #334155;
-  letter-spacing: 0.5px; /* Heavy feel */
+  letter-spacing: 0.5px;
+}
+
+/* Ticker animation for subheadings */
+.ticker {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+.ticker::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.1) 100%);
+  animation: ticker 3s linear infinite;
+}
+@keyframes ticker {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Button groups */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.option-btn {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-weight: 700;
+  cursor: pointer;
+  background: #e5e7eb;
+  transition: all 0.25s ease;
+  flex: 1 1 auto;
+  text-align: center;
+}
+.option-btn.selected {
+  background: #1877F2;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(24,119,242,0.35);
+  transform: translateY(-1px);
+}
+.option-btn:hover {
+  box-shadow: 0 6px 16px rgba(24,119,242,0.25);
 }
 
 /* Error messages */
-.error {
+.error, .group-error {
   color: #ef4444;
   font-size: 0.85em;
   display: none;
-  margin: 4px 0 12px;
-}
-
-/* Checkbox & radio styling */
-.radio-group input[type="radio"], .checkbox-group input[type="checkbox"] {
-  accent-color: #1877F2;
-  cursor: pointer;
-  margin-right: 6px;
-  width: 18px;
-  height: 18px;
-  transition: transform 0.15s ease;
-}
-.radio-group input[type="radio"]:hover, .checkbox-group input[type="checkbox"]:hover {
-  transform: scale(1.1);
+  margin-top: 4px;
 }
 
 /* Terms box */
@@ -239,7 +280,6 @@
 }
 .btn-modern:hover {
   box-shadow: 0 10px 22px rgba(24,119,242,0.45);
-  transform: none;
 }
 .btn-modern:active {
   transform: scale(0.98);
@@ -248,6 +288,25 @@
 
 <script>
 const form = document.getElementById("f1form");
+
+// Handle premium button groups
+document.querySelectorAll(".option-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const name = btn.dataset.name;
+    const value = btn.dataset.value;
+
+    // Handle radio (single) selection
+    const hiddenInput = form.querySelector(`input[name="${name}"]`);
+    const siblings = document.querySelectorAll(`.option-btn[data-name="${name}"]`);
+    siblings.forEach(s => s.classList.remove("selected"));
+    btn.classList.add("selected");
+
+    // Update hidden input value
+    hiddenInput.value = value;
+  });
+});
+
+// Form validation
 function validateForm(showErrors = true) {
   let valid = true;
   let firstInvalid = null;
@@ -255,6 +314,7 @@ function validateForm(showErrors = true) {
   form.querySelectorAll(".error").forEach(el => el.style.display = "none");
   form.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
 
+  // Required inputs & textareas
   form.querySelectorAll("input[required], textarea[required], select[required]").forEach(input => {
     if (!input.value.trim()) {
       valid = false;
@@ -266,34 +326,6 @@ function validateForm(showErrors = true) {
     }
   });
 
-  ["gender","marital","method"].forEach(name => {
-    let group = form.querySelectorAll("input[name='"+name+"']");
-    if (![...group].some(i=>i.checked)) {
-      valid = false;
-      if (showErrors) {
-        let container = group[0].closest(".group");
-        container.classList.add("invalid");
-        container.nextElementSibling.style.display = "block";
-      }
-      if (!firstInvalid) firstInvalid = group[0];
-    }
-  });
-
-  [["fun"],["notify"],["terms"]].forEach(names => {
-    names.forEach(name => {
-      let group = form.querySelectorAll("input[name='"+name+"']");
-      if (![...group].some(i=>i.checked)) {
-        valid = false;
-        if (showErrors) {
-          let container = group[0].closest(".group") || group[0].parentElement;
-          container.classList.add("invalid");
-          container.nextElementSibling.style.display = "block";
-        }
-        if (!firstInvalid) firstInvalid = group[0];
-      }
-    });
-  });
-
   if (!valid && showErrors && firstInvalid) {
     firstInvalid.scrollIntoView({behavior:"smooth", block:"center"});
     firstInvalid.focus({preventScroll:true});
@@ -302,6 +334,7 @@ function validateForm(showErrors = true) {
   return valid;
 }
 
+// On submit
 form.addEventListener("submit", e => { if(!validateForm(true)) e.preventDefault(); });
 form.querySelectorAll("input, textarea, select").forEach(el => {
   el.addEventListener("input", () => validateForm(false));
