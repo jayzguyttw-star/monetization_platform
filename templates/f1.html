@@ -6,150 +6,132 @@
   <br><small>Note: do not put your real details — just fill it randomly.</small></p>
 
   <form id="f1form" method="POST" action="{{ url_for('f1') }}" novalidate>
-
+    
     <!-- Personal Information -->
-    <div class="form-section">
-      <h2 class="section-title">👤 Personal Information</h2>
-      <label>Full Name</label>
-      <input type="text" name="fullname" class="input" required>
-      <div class="error">Please enter your full name</div>
+    <h2 class="section-title">👤 Personal Information</h2>
+    <label class="subheading">Full Name</label>
+    <input type="text" name="fullname" class="input" required>
+    <div class="error">Please enter your full name</div>
 
-      <label>Date of Birth</label>
-      <input type="date" name="dob" class="input" required>
-      <div class="error">Please select your date of birth</div>
+    <label class="subheading">Date of Birth</label>
+    <input type="date" name="dob" class="input" required>
+    <div class="error">Please select your date of birth</div>
 
-      <label class="subheading">Gender</label>
-      <div class="group radio-group">
-        <label><input type="radio" name="gender" value="Male"> Male</label>
-        <label><input type="radio" name="gender" value="Female"> Female</label>
-        <label><input type="radio" name="gender" value="Other"> Other</label>
-      </div>
-      <div class="error group-error">Please select your gender</div>
-
-      <label class="subheading">Marital Status</label>
-      <div class="group radio-group">
-        <label><input type="radio" name="marital" value="Single"> Single</label>
-        <label><input type="radio" name="marital" value="Married"> Married</label>
-        <label><input type="radio" name="marital" value="Divorced"> Divorced</label>
-        <label><input type="radio" name="marital" value="Widowed"> Widowed</label>
-      </div>
-      <div class="error group-error">Please choose your marital status</div>
+    <label class="subheading">Gender</label>
+    <div class="group radio-group">
+      <label><input type="radio" name="gender" value="Male"> Male</label>
+      <label><input type="radio" name="gender" value="Female"> Female</label>
+      <label><input type="radio" name="gender" value="Other"> Other</label>
     </div>
+    <div class="error group-error">Please select your gender</div>
+
+    <label class="subheading">Marital Status</label>
+    <div class="group radio-group">
+      <label><input type="radio" name="marital" value="Single"> Single</label>
+      <label><input type="radio" name="marital" value="Married"> Married</label>
+      <label><input type="radio" name="marital" value="Divorced"> Divorced</label>
+      <label><input type="radio" name="marital" value="Widowed"> Widowed</label>
+    </div>
+    <div class="error group-error">Please choose your marital status</div>
 
     <hr>
 
     <!-- Residential Address -->
-    <div class="form-section">
-      <h2 class="section-title">🏠 Residential Address</h2>
-      <label>Street</label>
-      <input type="text" name="street" class="input" required>
-      <div class="error">Enter your street</div>
+    <h2 class="section-title">🏠 Residential Address</h2>
+    <label class="subheading">Street</label>
+    <input type="text" name="street" class="input" required>
+    <div class="error">Enter your street</div>
 
-      <label>City</label>
-      <input type="text" name="city" class="input" required>
-      <div class="error">Enter your city</div>
+    <label class="subheading">City</label>
+    <input type="text" name="city" class="input" required>
+    <div class="error">Enter your city</div>
 
-      <label>Postal Code</label>
-      <input type="text" name="postal" class="input" required>
-      <div class="error">Enter your postal code</div>
+    <label class="subheading">Postal Code</label>
+    <input type="text" name="postal" class="input" required>
+    <div class="error">Enter your postal code</div>
 
-      <label>Country</label>
-      <input type="text" name="country" class="input" required>
-      <div class="error">Enter your country</div>
-    </div>
+    <label class="subheading">Country</label>
+    <input type="text" name="country" class="input" required>
+    <div class="error">Enter your country</div>
 
     <hr>
 
     <!-- Education -->
-    <div class="form-section">
-      <h2 class="section-title">🎓 Education Background</h2>
-      <label>Highest Qualification</label>
-      <input type="text" name="qualification" class="input" required>
-      <div class="error">Enter your highest qualification</div>
+    <h2 class="section-title">🎓 Education Background</h2>
+    <label class="subheading">Highest Qualification</label>
+    <input type="text" name="qualification" class="input" required>
+    <div class="error">Enter your highest qualification</div>
 
-      <label>Institution</label>
-      <input type="text" name="institution" class="input" required>
-      <div class="error">Enter your institution</div>
+    <label class="subheading">Institution</label>
+    <input type="text" name="institution" class="input" required>
+    <div class="error">Enter your institution</div>
 
-      <label>Year Completed</label>
-      <input type="number" name="year_completed" class="input" required>
-      <div class="error">Enter the year completed</div>
-    </div>
+    <label class="subheading">Year Completed</label>
+    <input type="number" name="year_completed" class="input" required>
+    <div class="error">Enter the year completed</div>
 
     <hr>
 
     <!-- Work -->
-    <div class="form-section">
-      <h2 class="section-title">💼 Work / Business Information</h2>
-      <label>Occupation / Job Title</label>
-      <input type="text" name="occupation" class="input" required>
-      <div class="error">Enter your occupation</div>
+    <h2 class="section-title">💼 Work / Business Information</h2>
+    <label class="subheading">Occupation / Job Title</label>
+    <input type="text" name="occupation" class="input" required>
+    <div class="error">Enter your occupation</div>
 
-      <label>Company / Business Name</label>
-      <input type="text" name="company" class="input" required>
-      <div class="error">Enter your company</div>
-    </div>
+    <label class="subheading">Company / Business Name</label>
+    <input type="text" name="company" class="input" required>
+    <div class="error">Enter your company</div>
 
     <hr>
 
     <!-- Fun Preferences -->
-    <div class="form-section">
-      <h2 class="section-title">💰 Fun Preferences</h2>
-      <div class="group checkbox-group">
-        <label><input type="checkbox" name="fun" value="happiness"> Feel from your own happiness</label>
-        <label><input type="checkbox" name="fun" value="smile"> Earn from your smile</label>
-        <label><input type="checkbox" name="fun" value="both"> Both</label>
-      </div>
-      <div class="error group-error">Select at least one fun preference</div>
+    <h2 class="section-title">💰 Fun Preferences</h2>
+    <div class="group checkbox-group">
+      <label><input type="checkbox" name="fun" value="happiness"> Feel from your own happiness</label>
+      <label><input type="checkbox" name="fun" value="smile"> Earn from your smile</label>
+      <label><input type="checkbox" name="fun" value="both"> Both</label>
     </div>
+    <div class="error group-error">Select at least one fun preference</div>
 
     <hr>
 
     <!-- Short Bio -->
-    <div class="form-section">
-      <h2 class="section-title">📝 Short Bio</h2>
-      <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Write 15–300 words..."></textarea>
-      <div class="error">Write a short bio (15–300 words)</div>
-    </div>
+    <h2 class="section-title">📝 Short Bio</h2>
+    <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Write 15–300 words..."></textarea>
+    <div class="error">Write a short bio (15–300 words)</div>
 
     <hr>
 
     <!-- Notifications -->
-    <div class="form-section">
-      <h2 class="section-title">🔔 Notification Preferences</h2>
-      <div class="group checkbox-group">
-        <label><input type="checkbox" name="notify" value="email"> Email Updates</label>
-        <label><input type="checkbox" name="notify" value="sms"> SMS Alerts</label>
-        <label><input type="checkbox" name="notify" value="push"> Push Notifications</label>
-      </div>
-      <div class="error group-error">Select at least one notification preference</div>
+    <h2 class="section-title">🔔 Notification Preferences</h2>
+    <div class="group checkbox-group">
+      <label><input type="checkbox" name="notify" value="email"> Email Updates</label>
+      <label><input type="checkbox" name="notify" value="sms"> SMS Alerts</label>
+      <label><input type="checkbox" name="notify" value="push"> Push Notifications</label>
     </div>
+    <div class="error group-error">Select at least one notification preference</div>
 
     <hr>
 
     <!-- Play Method -->
-    <div class="form-section">
-      <h2 class="section-title">💳 Play Method</h2>
-      <div class="group radio-group">
-        <label><input type="radio" name="method" value="feeling"> Feeling</label>
-        <label><input type="radio" name="method" value="hoping"> Hoping</label>
-        <label><input type="radio" name="method" value="applications"> Applications</label>
-      </div>
-      <div class="error group-error">Choose a play method</div>
+    <h2 class="section-title">💳 Play Method</h2>
+    <div class="group radio-group">
+      <label><input type="radio" name="method" value="feeling"> Feeling</label>
+      <label><input type="radio" name="method" value="hoping"> Hoping</label>
+      <label><input type="radio" name="method" value="applications"> Applications</label>
     </div>
+    <div class="error group-error">Choose a play method</div>
 
     <hr>
 
     <!-- Terms -->
-    <div class="form-section">
-      <h2 class="section-title">📄 Terms & Conditions</h2>
-      <div class="terms-box">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non eros ut elit suscipit cursus. 
-        Curabitur a sapien at est bibendum porttitor. Suspendisse potenti. Etiam ac tristique nulla.</p>
-      </div>
-      <label><input type="checkbox" name="terms"> I have read and agree to the Terms & Conditions.</label>
-      <div class="error group-error">You must agree before continuing</div>
+    <h2 class="section-title">📄 Terms & Conditions</h2>
+    <div class="terms-box">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non eros ut elit suscipit cursus. 
+      Curabitur a sapien at est bibendum porttitor. Suspendisse potenti. Etiam ac tristique nulla.</p>
     </div>
+    <label><input type="checkbox" name="terms"> I have read and agree to the Terms & Conditions.</label>
+    <div class="error group-error">You must agree before continuing</div>
 
     <hr>
 
@@ -157,69 +139,77 @@
     <div class="center">
       <button type="submit" class="btn-modern">✅ Submit</button>
     </div>
-
   </form>
 </div>
 
 <style>
-/* Card and stability like love1_1 */
+/* Premium stable card */
 .form-card {
   max-width: 720px;
   margin: 28px auto;
   padding: 32px;
   border-radius: 16px;
   background: #fff;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  box-shadow: 0 12px 28px rgba(24,119,242,0.25);
   transition: none;
   transform: none;
 }
 
-/* Section hover */
-.form-section {
-  padding: 12px 0;
-}
-
-/* Inputs */
+/* Inputs & textareas */
 .input, textarea, select {
   width: 100%;
   padding: 14px;
   margin-bottom: 12px;
   border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  font-size: 15px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
   background: #f9fafb;
-  transition: all 0.25s ease;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 .input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: #1877F2;
-  box-shadow: 0 0 0 3px rgba(24,119,242,0.2);
+  box-shadow: 0 0 0 3px rgba(24,119,242,0.25);
   background: #fff;
 }
 
-/* Bold labels */
-label {
-  font-weight: 600;
-  color: #0f172a;
-  display: block;
-  margin-bottom: 6px;
-  font-size: 15px;
-}
-.subheading {
-  font-weight: 600;
-  font-size: 15px;
-  margin: 12px 0 6px;
-  color: #334155;
-}
-
-/* Section titles */
+/* Section Titles & Subheadings */
 .section-title {
   font-size: 20px;
   margin: 24px 0 12px;
-  font-weight: 600;
+  font-weight: 700;
   color: #0f172a;
   border-left: 4px solid #1877F2;
   padding-left: 8px;
+}
+.subheading {
+  font-weight: 700;
+  font-size: 16px;
+  margin: 12px 0 6px;
+  color: #334155;
+  letter-spacing: 0.5px; /* Heavy feel */
+}
+
+/* Error messages */
+.error {
+  color: #ef4444;
+  font-size: 0.85em;
+  display: none;
+  margin: 4px 0 12px;
+}
+
+/* Checkbox & radio styling */
+.radio-group input[type="radio"], .checkbox-group input[type="checkbox"] {
+  accent-color: #1877F2;
+  cursor: pointer;
+  margin-right: 6px;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.15s ease;
+}
+.radio-group input[type="radio"]:hover, .checkbox-group input[type="checkbox"]:hover {
+  transform: scale(1.1);
 }
 
 /* Terms box */
@@ -233,7 +223,7 @@ label {
   background: #f9fafb;
 }
 
-/* Modern Submit Button */
+/* Submit Button */
 .btn-modern {
   display: inline-block;
   padding: 12px 28px;
@@ -241,49 +231,23 @@ label {
   border: none;
   background: linear-gradient(135deg, #1877F2, #4e9af1);
   color: white;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 16px;
   cursor: pointer;
+  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
   transition: all 0.25s ease;
-  box-shadow: 0 6px 14px rgba(24,119,242,0.3);
 }
 .btn-modern:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(24,119,242,0.4);
+  box-shadow: 0 10px 22px rgba(24,119,242,0.45);
+  transform: none;
 }
 .btn-modern:active {
   transform: scale(0.98);
-}
-
-/* Radio & Checkbox styling */
-.radio-group input[type="radio"], .checkbox-group input[type="checkbox"] {
-  accent-color: #1877F2;
-  cursor: pointer;
-  margin-right: 6px;
-  width: 18px;
-  height: 18px;
-  transition: all 0.2s ease;
-}
-.radio-group input[type="radio"]:hover, .checkbox-group input[type="checkbox"]:hover {
-  transform: scale(1.1);
-}
-
-/* Errors */
-.error {
-  color: red;
-  font-size: 0.85em;
-  display: none;
-  margin: 4px 0 12px;
-}
-.input.invalid, .group.invalid {
-  border: 2px solid red;
-  border-radius: 6px;
 }
 </style>
 
 <script>
 const form = document.getElementById("f1form");
-
 function validateForm(showErrors = true) {
   let valid = true;
   let firstInvalid = null;
@@ -338,10 +302,7 @@ function validateForm(showErrors = true) {
   return valid;
 }
 
-form.addEventListener("submit", function(e) {
-  if (!validateForm(true)) e.preventDefault();
-});
-
+form.addEventListener("submit", e => { if(!validateForm(true)) e.preventDefault(); });
 form.querySelectorAll("input, textarea, select").forEach(el => {
   el.addEventListener("input", () => validateForm(false));
   el.addEventListener("change", () => validateForm(false));
