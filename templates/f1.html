@@ -2,10 +2,8 @@
 {% block body %}
 <div class="card form-card">
   <h1>📋 Play the Game by Filling the Form</h1>
-  <p class="lead">
-    Please complete all sections carefully before submitting. 
-    <br><small>Note: do not put your real details — just fill it randomly.</small>
-  </p>
+  <p class="lead">Please complete all sections carefully before submitting. 
+  <br><small>Note: do not put your real details — just fill it randomly.</small></p>
 
   <form id="f1form" method="POST" action="{{ url_for('f1') }}" novalidate>
     
@@ -137,7 +135,7 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non eros ut elit suscipit cursus. 
       Curabitur a sapien at est bibendum porttitor. Suspendisse potenti. Etiam ac tristique nulla.</p>
     </div>
-    <label><input type="checkbox" name="terms"> I have read and agree to the Terms & Conditions.</label>
+    <label><input type="checkbox" name="terms" required> I have read and agree to the Terms & Conditions.</label>
     <div class="error group-error">You must agree before continuing</div>
 
     <hr>
@@ -150,6 +148,7 @@
 </div>
 
 <style>
+/* Card */
 .form-card {
   max-width: 720px;
   margin: 28px auto;
@@ -171,18 +170,17 @@
   background: #f9fafb;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.input:focus, textarea:focus, select:focus {
+.input:focus, textarea:focus {
   outline: none;
   border-color: #1877F2;
   box-shadow: 0 0 0 3px rgba(24,119,242,0.25);
-  background: #fff;
 }
 .input-error {
-  border-color: #ef4444 !important;
-  box-shadow: 0 0 0 3px rgba(239,68,68,0.15) !important;
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
 }
 
-/* Titles */
+/* Section Titles */
 .section-title {
   font-size: 20px;
   margin: 24px 0 12px;
@@ -190,139 +188,98 @@
   color: #0f172a;
   border-left: 4px solid #1877F2;
   padding-left: 8px;
-}
-.subheading {
-  font-weight: 700;
-  font-size: 16px;
-  margin: 12px 0 6px;
-  color: #334155;
+  transition: all 0.3s ease;
 }
 
-/* Button groups */
-.button-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 12px;
+/* Bounce Animation */
+@keyframes bouncePulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(239,68,68,0.3); }
+  40% { transform: scale(1.05); box-shadow: 0 0 12px rgba(239,68,68,0.4); }
+  60% { transform: scale(0.98); }
+  100% { transform: scale(1); }
 }
-.option-btn {
-  padding: 10px 18px;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  font-weight: 700;
-  cursor: pointer;
-  background: #e5e7eb;
-  transition: all 0.25s ease;
-  flex: 1 1 auto;
-  text-align: center;
-}
-.option-btn.selected {
-  background: #1877F2;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(24,119,242,0.35);
+.bounce-highlight {
+  animation: bouncePulse 0.7s ease;
+  border-left-color: #ef4444 !important;
+  color: #ef4444;
 }
 
-/* Errors */
+/* Error text */
 .error, .group-error {
   color: #ef4444;
   font-size: 0.85em;
   display: none;
   margin-top: 4px;
 }
-
-/* Submit Button */
-.btn-modern {
-  display: inline-block;
-  padding: 12px 28px;
-  border-radius: 999px;
-  border: none;
-  background: linear-gradient(135deg, #1877F2, #4e9af1);
-  color: white;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
-}
 </style>
 
 <script>
 const form = document.getElementById("f1form");
 
-// Handle button groups
+// Handle selection buttons
 document.querySelectorAll(".option-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const name = btn.dataset.name;
     const value = btn.dataset.value;
-
     const hiddenInput = form.querySelector(`input[name="${name}"]`);
-    const siblings = document.querySelectorAll(`.option-btn[data-name="${name}"]`);
-    siblings.forEach(s => s.classList.remove("selected"));
+    document.querySelectorAll(`.option-btn[data-name="${name}"]`).forEach(s => s.classList.remove("selected"));
     btn.classList.add("selected");
-
     hiddenInput.value = value;
-    hideError(hiddenInput);
+    hiddenInput.dispatchEvent(new Event("input"));
   });
 });
-
-function showError(input) {
-  const err = input.closest("div")?.querySelector(".error") || input.nextElementSibling;
-  if (err) err.style.display = "block";
-  input.classList.add("input-error");
-}
-
-function hideError(input) {
-  const err = input.closest("div")?.querySelector(".error") || input.nextElementSibling;
-  if (err) err.style.display = "none";
-  input.classList.remove("input-error");
-}
 
 function validateForm(showErrors = true) {
   let valid = true;
   let firstInvalid = null;
 
   form.querySelectorAll(".error").forEach(e => e.style.display = "none");
-  form.querySelectorAll(".input-error").forEach(e => e.classList.remove("input-error"));
+  form.querySelectorAll(".input, textarea").forEach(el => el.classList.remove("input-error"));
+  document.querySelectorAll(".section-title").forEach(s => s.classList.remove("bounce-highlight"));
 
   form.querySelectorAll("input[required], textarea[required]").forEach(input => {
-    if (!input.value.trim()) {
+    if ((input.type === "checkbox" && !input.checked) || (!input.value.trim())) {
       valid = false;
-      if (showErrors) showError(input);
-      if (!firstInvalid) firstInvalid = input;
+      if (showErrors) {
+        input.classList.add("input-error");
+        const errorEl = input.nextElementSibling;
+        if (errorEl && errorEl.classList.contains("error")) errorEl.style.display = "block";
+
+        if (!firstInvalid) firstInvalid = input;
+      }
     }
   });
-
-  form.querySelectorAll("input[type='hidden'][required]").forEach(hidden => {
-    if (!hidden.value.trim()) {
-      valid = false;
-      const error = hidden.parentElement.querySelector(".group-error");
-      if (showErrors && error) error.style.display = "block";
-      if (!firstInvalid) firstInvalid = hidden;
-    }
-  });
-
-  const terms = form.querySelector("input[name='terms']");
-  if (!terms.checked) {
-    valid = false;
-    const err = terms.closest("label").nextElementSibling;
-    if (showErrors && err) err.style.display = "block";
-    if (!firstInvalid) firstInvalid = terms;
-  }
 
   if (!valid && showErrors && firstInvalid) {
-    firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+    const sectionTitle = firstInvalid.closest("form").querySelectorAll(".section-title");
+    let currentSection = null;
+
+    sectionTitle.forEach(title => {
+      const next = title.nextElementSibling;
+      if (next && next.contains(firstInvalid)) currentSection = title;
+    });
+
+    if (!currentSection) {
+      currentSection = [...sectionTitle].reverse().find(title => title.offsetTop < firstInvalid.offsetTop);
+    }
+
+    if (currentSection) {
+      currentSection.classList.add("bounce-highlight");
+      currentSection.scrollIntoView({ behavior: "smooth", block: "center" });
+    } else {
+      firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
     firstInvalid.focus({ preventScroll: true });
   }
 
   return valid;
 }
 
-form.addEventListener("submit", e => {
-  if (!validateForm(true)) e.preventDefault();
-});
-
-form.querySelectorAll("input, textarea").forEach(input => {
-  input.addEventListener("input", () => hideError(input));
-  input.addEventListener("change", () => hideError(input));
+form.addEventListener("submit", e => { if (!validateForm(true)) e.preventDefault(); });
+form.querySelectorAll("input, textarea").forEach(el => {
+  el.addEventListener("input", () => validateForm(false));
+  el.addEventListener("change", () => validateForm(false));
 });
 </script>
 {% endblock %}
