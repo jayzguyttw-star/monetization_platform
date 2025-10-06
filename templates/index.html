@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="card center" style="flex-direction:column;align-items:center;text-align:center;padding:48px">
-  <h1 style="font-size:32px;font-weight:800;margin-bottom:12px;color:#0f172a">✨ FUN WEBSITE</h1>
-  <p class="lead" style="max-width:600px;font-size:16px;line-height:1.6">
+  <h1 style="font-size:36px;font-weight:900;margin-bottom:12px;color:#0f172a;letter-spacing:1px">✨ FUN WEBSITE</h1>
+  <p class="lead" style="max-width:600px;font-size:16px;line-height:1.6;color:#475569">
     Welcome! This website is designed to help you discover happiness, 
     transform your daily activity, and spark joy in new ways.
   </p>
 </div>
 
 <div class="card" style="padding:32px">
-  <h2 style="margin-top:0;font-weight:700;font-size:22px;color:#0f172a;margin-bottom:18px">🌐 Select a Platform</h2>
+  <h2 style="margin-top:0;font-weight:900;font-size:24px;color:#0f172a;margin-bottom:18px;letter-spacing:0.5px">🌐 Select a Platform</h2>
   <div class="platforms">
     <a class="btn-platform glow-facebook" href="{{ url_for('love1_1') }}">
-     <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
+      <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
       <div><strong class="notranslate">Facebook</strong></div>
     </a>
 
@@ -44,12 +44,12 @@
 </div>
 
 <div class="card" style="padding:32px">
-  <h3 style="font-size:20px;font-weight:700;margin-bottom:12px;color:#0f172a">⚙️ How it Works</h3>
-  <p style="color:#475569;font-size:15px;line-height:1.6;margin-bottom:16px">
+  <h3 style="font-size:22px;font-weight:900;margin-bottom:16px;color:#0f172a;letter-spacing:0.5px">⚙️ How it Works</h3>
+  <p style="color:#475569;font-size:15px;line-height:1.7;margin-bottom:20px">
     The core idea of happiness is to transform your activities into positive energy and lasting joy.  
     Here’s how it works:
   </p>
-  <ul style="color:#334155;line-height:1.7;margin:0;padding-left:18px;font-size:15px">
+  <ul class="premium-list">
     <li><strong>Understand yourself</strong> – learn your needs and aspirations.</li>
     <li><strong>Create joy within</strong> – cultivate habits that keep you connected and uplifted.</li>
     <li><strong>Transform challenges</strong> – turn pain into happiness through mindful practice here.</li>
@@ -62,48 +62,48 @@
   transition: box-shadow 0.3s ease, transform 0.2s ease;
   border-radius: 18px;
 }
-
 .btn-platform:hover {
   transform: translateY(-3px);
 }
 
-/* Facebook glow */
-.glow-facebook {
-  box-shadow: 0 0 18px rgba(24, 119, 242, 0.25);
-}
+/* Platform glow colors */
+.glow-facebook { box-shadow: 0 0 18px rgba(24, 119, 242, 0.25); }
+.glow-instagram { box-shadow: 0 0 18px rgba(228, 64, 95, 0.25); }
+.glow-tiktok { box-shadow: 0 0 18px rgba(0, 0, 0, 0.25); }
+.glow-youtube { box-shadow: 0 0 18px rgba(255, 0, 0, 0.25); }
+.bg-snapchat { background: #FFFC00; position: relative; }
+.snapchat-white { color: #fff; position: relative; z-index: 2; }
+.glow-snapchat { box-shadow: 0 0 18px rgba(255, 252, 0, 0.3); }
+.glow-twitter { box-shadow: 0 0 18px rgba(29, 161, 242, 0.25); }
 
-/* Instagram glow */
-.glow-instagram {
-  box-shadow: 0 0 18px rgba(228, 64, 95, 0.25);
+/* Premium list styling */
+.premium-list {
+  color: #334155;
+  font-size: 16px;
+  line-height: 2;
+  padding-left: 22px;
+  list-style: none;
 }
-
-/* TikTok glow */
-.glow-tiktok {
-  box-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
-}
-
-/* YouTube glow */
-.glow-youtube {
-  box-shadow: 0 0 18px rgba(255, 0, 0, 0.25);
-}
-
-/* Snapchat glow (white ghost, yellow aura) */
-.bg-snapchat {
-  background: #FFFC00;
+.premium-list li {
   position: relative;
+  margin-bottom: 12px;
+  font-weight: 500;
 }
-.snapchat-white {
-  color: #fff;
-  position: relative;
-  z-index: 2;
+.premium-list li strong {
+  font-weight: 800;
+  letter-spacing: 0.3px;
 }
-.glow-snapchat {
-  box-shadow: 0 0 18px rgba(255, 252, 0, 0.3);
-}
-
-/* Twitter glow */
-.glow-twitter {
-  box-shadow: 0 0 18px rgba(29, 161, 242, 0.25);
+/* Gradient bullets */
+.premium-list li::before {
+  content: '•';
+  position: absolute;
+  left: -22px;
+  top: 0;
+  font-size: 20px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ff5858, #f09819);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 </style>
 {% endblock %}
