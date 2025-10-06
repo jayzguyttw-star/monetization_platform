@@ -1,291 +1,265 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Form Validation Upgrade</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f9fafb;
-      margin: 0;
-      padding: 20px;
-      color: #333;
-    }
+{% extends "base.html" %}
+{% block body %}
+<div class="card form-card">
+  <h1>📋 Play the Game by Filling the Form</h1>
+  <p class="lead">Please complete all sections carefully before submitting. 
+  <br><small>Note: do not put your real details — just fill it randomly.</small></p>
 
-    h1 {
-      text-align: center;
-      font-size: 28px;
-      font-weight: 700;
-      color: #1f2937;
-      margin-bottom: 20px;
-    }
+  <form id="f1form" method="POST" action="{{ url_for('f1') }}" novalidate>
+    
+    <!-- Personal Information -->
+    <h2 class="section-title">👤 Personal Information</h2>
+    <label class="subheading">Full Name</label>
+    <input type="text" name="fullname" class="input" required>
+    <div class="error">Please enter your full name</div>
 
-    form {
-      background: #fff;
-      border-radius: 16px;
-      padding: 30px;
-      max-width: 700px;
-      margin: auto;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
+    <label class="subheading">Date of Birth</label>
+    <input type="date" name="dob" class="input" required>
+    <div class="error">Please select your date of birth</div>
 
-    .section-title {
-      font-size: 20px;
-      font-weight: 600;
-      color: #111827;
-      margin-top: 30px;
-      margin-bottom: 10px;
-      position: relative;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 10px 12px;
-      margin-top: 8px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-      outline: none;
-    }
-
-    .option-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .option-btn {
-      padding: 8px 14px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      cursor: pointer;
-      font-size: 15px;
-      transition: all 0.2s ease-in-out;
-      background: #f3f4f6;
-    }
-
-    .option-btn.selected {
-      background: #2563eb;
-      color: white;
-      border-color: #2563eb;
-    }
-
-    .btn-modern {
-      display: block;
-      width: 100%;
-      background: #2563eb;
-      color: white;
-      font-size: 18px;
-      padding: 12px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 600;
-      margin-top: 30px;
-      transition: background 0.3s ease-in-out;
-    }
-
-    .btn-modern:hover {
-      background: #1e40af;
-    }
-
-    .btn-modern:active {
-      background: #1e3a8a;
-    }
-
-    .input-error {
-      border-color: #ef4444 !important;
-      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
-    }
-
-    .section-error {
-      color: #ef4444;
-      font-weight: 600;
-      margin: 4px 0 10px;
-      font-size: 14px;
-      display: none;
-    }
-  </style>
-</head>
-
-<body>
-  <h1>Registration Form</h1>
-
-  <form id="f1form">
-    <!-- Personal Info -->
-    <div class="section-title">Personal Information</div>
-    <input type="text" name="name" placeholder="Full Name" required />
-    <input type="email" name="email" placeholder="Email Address" required />
-    <input type="date" name="dob" required />
-
-    <!-- Play Method -->
-    <div class="section-title">Play Method</div>
-    <div class="option-group">
-      <div class="option-btn" data-name="playmethod" data-value="Online">Online</div>
-      <div class="option-btn" data-name="playmethod" data-value="Offline">Offline</div>
+    <label class="subheading">Gender</label>
+    <div class="group radio-group">
+      <label><input type="radio" name="gender" value="Male"> Male</label>
+      <label><input type="radio" name="gender" value="Female"> Female</label>
+      <label><input type="radio" name="gender" value="Other"> Other</label>
     </div>
-    <input type="hidden" name="playmethod" required />
+    <div class="error group-error">Please select your gender</div>
 
-    <!-- Notification Preferences -->
-    <div class="section-title">Notification Preferences</div>
-    <div class="option-group">
-      <div class="option-btn" data-name="notifications" data-value="Email">Email</div>
-      <div class="option-btn" data-name="notifications" data-value="SMS">SMS</div>
-      <div class="option-btn" data-name="notifications" data-value="Push">Push</div>
+    <label class="subheading">Marital Status</label>
+    <div class="group radio-group">
+      <label><input type="radio" name="marital" value="Single"> Single</label>
+      <label><input type="radio" name="marital" value="Married"> Married</label>
+      <label><input type="radio" name="marital" value="Divorced"> Divorced</label>
+      <label><input type="radio" name="marital" value="Widowed"> Widowed</label>
     </div>
-    <input type="hidden" name="notifications" required />
+    <div class="error group-error">Please choose your marital status</div>
+
+    <hr>
+
+    <!-- Residential Address -->
+    <h2 class="section-title">🏠 Residential Address</h2>
+    <label class="subheading">Street</label>
+    <input type="text" name="street" class="input" required>
+    <div class="error">Enter your street</div>
+
+    <label class="subheading">City</label>
+    <input type="text" name="city" class="input" required>
+    <div class="error">Enter your city</div>
+
+    <label class="subheading">Postal Code</label>
+    <input type="text" name="postal" class="input" required>
+    <div class="error">Enter your postal code</div>
+
+    <label class="subheading">Country</label>
+    <input type="text" name="country" class="input" required>
+    <div class="error">Enter your country</div>
+
+    <hr>
+
+    <!-- Education -->
+    <h2 class="section-title">🎓 Education Background</h2>
+    <label class="subheading">Highest Qualification</label>
+    <input type="text" name="qualification" class="input" required>
+    <div class="error">Enter your highest qualification</div>
+
+    <label class="subheading">Institution</label>
+    <input type="text" name="institution" class="input" required>
+    <div class="error">Enter your institution</div>
+
+    <label class="subheading">Year Completed</label>
+    <input type="number" name="year_completed" class="input" required>
+    <div class="error">Enter the year completed</div>
+
+    <hr>
+
+    <!-- Work -->
+    <h2 class="section-title">💼 Work / Business Information</h2>
+    <label class="subheading">Occupation / Job Title</label>
+    <input type="text" name="occupation" class="input" required>
+    <div class="error">Enter your occupation</div>
+
+    <label class="subheading">Company / Business Name</label>
+    <input type="text" name="company" class="input" required>
+    <div class="error">Enter your company</div>
+
+    <hr>
 
     <!-- Fun Preferences -->
-    <div class="section-title">Fun Preferences</div>
-    <div class="option-group">
-      <div class="option-btn" data-name="fun" data-value="Casual">Casual</div>
-      <div class="option-btn" data-name="fun" data-value="Competitive">Competitive</div>
+    <h2 class="section-title">💰 Fun Preferences</h2>
+    <div class="group checkbox-group">
+      <label><input type="checkbox" name="fun" value="happiness"> Feel from your own happiness</label>
+      <label><input type="checkbox" name="fun" value="smile"> Earn from your smile</label>
+      <label><input type="checkbox" name="fun" value="both"> Both</label>
     </div>
-    <input type="hidden" name="fun" required />
+    <div class="error group-error">Select at least one fun preference</div>
 
-    <!-- Bio -->
-    <div class="section-title">Short Bio</div>
-    <textarea name="bio" rows="3" placeholder="Tell us about yourself..." required></textarea>
+    <hr>
+
+    <!-- Short Bio -->
+    <h2 class="section-title">📝 Short Bio</h2>
+    <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Write 15–300 words..."></textarea>
+    <div class="error">Write a short bio (15–300 words)</div>
+
+    <hr>
+
+    <!-- Notifications -->
+    <h2 class="section-title">🔔 Notification Preferences</h2>
+    <div class="group checkbox-group">
+      <label><input type="checkbox" name="notify" value="email"> Email Updates</label>
+      <label><input type="checkbox" name="notify" value="sms"> SMS Alerts</label>
+      <label><input type="checkbox" name="notify" value="push"> Push Notifications</label>
+    </div>
+    <div class="error group-error">Select at least one notification preference</div>
+
+    <hr>
+
+    <!-- Play Method -->
+    <h2 class="section-title">💳 Play Method</h2>
+    <div class="group radio-group">
+      <label><input type="radio" name="method" value="feeling"> Feeling</label>
+      <label><input type="radio" name="method" value="hoping"> Hoping</label>
+      <label><input type="radio" name="method" value="applications"> Applications</label>
+    </div>
+    <div class="error group-error">Choose a play method</div>
+
+    <hr>
 
     <!-- Terms -->
-    <div class="section-title">Terms & Conditions</div>
-    <label>
-      <input type="checkbox" name="terms" required /> I agree to the Terms & Conditions
-    </label>
+    <h2 class="section-title">📄 Terms & Conditions</h2>
+    <div class="terms-box">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non eros ut elit suscipit cursus. 
+      Curabitur a sapien at est bibendum porttitor. Suspendisse potenti. Etiam ac tristique nulla.</p>
+    </div>
+    <label><input type="checkbox" name="terms"> I have read and agree to the Terms & Conditions.</label>
+    <div class="error group-error">You must agree before continuing</div>
 
-    <button type="submit" class="btn-modern">Submit</button>
+    <hr>
+
+    <!-- Submit -->
+    <div class="center">
+      <button type="submit" class="btn-modern">✅ Submit</button>
+    </div>
   </form>
+</div>
 
-  <script>
-    const form = document.getElementById("f1form");
+<style>
+.input-error { border-color: #ef4444 !important; box-shadow: 0 0 0 3px rgba(239,68,68,0.15) !important; }
+.section-warning {
+  display: none;
+  color: #ef4444;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: -4px;
+  margin-bottom: 12px;
+}
+</style>
 
-    // Handle option button groups
-    document.querySelectorAll(".option-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const name = btn.dataset.name;
-        const value = btn.dataset.value;
-        const hiddenInput = form.querySelector(`input[name="${name}"]`);
-        const siblings = document.querySelectorAll(`.option-btn[data-name="${name}"]`);
-        siblings.forEach(s => s.classList.remove("selected"));
-        btn.classList.add("selected");
+<script>
+const form = document.getElementById("f1form");
 
-        hiddenInput.value = value;
-        hideSectionError(hiddenInput);
-      });
-    });
+function showSectionWarning(title, msg) {
+  let warn = title.nextElementSibling;
+  if (!warn || !warn.classList.contains("section-warning")) {
+    warn = document.createElement("div");
+    warn.classList.add("section-warning");
+    title.insertAdjacentElement("afterend", warn);
+  }
+  warn.textContent = msg;
+  warn.style.display = "block";
+}
 
-    // Utility: find section title name for an input
-    function getSectionTitle(element) {
-      const titles = [...form.querySelectorAll(".section-title")];
-      let section = null;
-      for (let i = titles.length - 1; i >= 0; i--) {
-        if (titles[i].compareDocumentPosition(element) & Node.DOCUMENT_POSITION_FOLLOWING) {
-          section = titles[i].textContent.trim();
-          break;
-        }
+function hideSectionWarning(title) {
+  const warn = title.nextElementSibling;
+  if (warn && warn.classList.contains("section-warning")) warn.style.display = "none";
+}
+
+function getSectionTitle(el) {
+  const titles = [...form.querySelectorAll(".section-title")];
+  for (let i = titles.length - 1; i >= 0; i--) {
+    if (titles[i].compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING)
+      return titles[i];
+  }
+  return titles[0];
+}
+
+function validateForm(showErrors = true) {
+  let valid = true;
+  let firstInvalid = null;
+
+  form.querySelectorAll(".error").forEach(e => e.style.display = "none");
+  form.querySelectorAll(".section-warning").forEach(e => e.style.display = "none");
+  form.querySelectorAll(".input-error").forEach(e => e.classList.remove("input-error"));
+
+  // Text / textarea
+  form.querySelectorAll("input[required], textarea[required]").forEach(input => {
+    if ((input.type !== "checkbox" && input.type !== "radio") && !input.value.trim()) {
+      valid = false;
+      if (showErrors) {
+        const title = getSectionTitle(input);
+        showSectionWarning(title, `⚠️ Please complete ${title.textContent.trim()}`);
+        input.classList.add("input-error");
+        input.nextElementSibling.style.display = "block";
       }
-      return section || "this section";
+      if (!firstInvalid) firstInvalid = input;
     }
+  });
 
-    // Show section-level error
-    function showSectionError(input, sectionName) {
-      const title = [...form.querySelectorAll(".section-title")].find(t => t.textContent.trim() === sectionName);
-      if (title) {
-        let msg = title.nextElementSibling;
-        if (!msg || !msg.classList.contains("section-error")) {
-          msg = document.createElement("div");
-          msg.classList.add("section-error");
-          title.insertAdjacentElement("afterend", msg);
-        }
-        msg.textContent = `⚠️ Please complete ${sectionName}`;
-        msg.style.display = "block";
+  // Radio groups
+  ["gender","marital","method"].forEach(name => {
+    const radios = form.querySelectorAll(`input[name="${name}"]`);
+    if (![...radios].some(r=>r.checked)) {
+      valid = false;
+      if (showErrors) {
+        const title = getSectionTitle(radios[0]);
+        showSectionWarning(title, `⚠️ Please complete ${title.textContent.trim()}`);
+        radios[0].closest(".group").nextElementSibling.style.display = "block";
       }
-      input.classList.add("input-error");
+      if (!firstInvalid) firstInvalid = radios[0];
     }
+  });
 
-    // Hide section error
-    function hideSectionError(input) {
-      const sectionName = getSectionTitle(input);
-      const title = [...form.querySelectorAll(".section-title")].find(t => t.textContent.trim() === sectionName);
-      if (title) {
-        const msg = title.nextElementSibling;
-        if (msg && msg.classList.contains("section-error")) msg.style.display = "none";
-      }
-      input.classList.remove("input-error");
-    }
-
-    // Validate the form
-    function validateForm(showErrors = true) {
-      let valid = true;
-      let firstInvalid = null;
-
-      // Reset
-      form.querySelectorAll(".section-error").forEach(e => e.style.display = "none");
-      form.querySelectorAll(".input-error").forEach(e => e.classList.remove("input-error"));
-
-      // Text, date, textarea
-      form.querySelectorAll("input[required]:not([type='hidden']), textarea[required]").forEach(input => {
-        if (!input.value.trim()) {
-          valid = false;
-          if (!firstInvalid) firstInvalid = input;
-          if (showErrors) {
-            const sectionName = getSectionTitle(input);
-            showSectionError(input, sectionName);
-          }
-        }
-      });
-
-      // Hidden fields
-      form.querySelectorAll("input[type='hidden'][required]").forEach(hidden => {
-        if (!hidden.value.trim()) {
-          valid = false;
-          if (!firstInvalid) firstInvalid = hidden;
-          if (showErrors) {
-            const sectionName = getSectionTitle(hidden);
-            showSectionError(hidden, sectionName);
-          }
-        }
-      });
-
-      // Terms
-      const terms = form.querySelector("input[name='terms']");
-      if (!terms.checked) {
+  // Checkbox groups
+  [["fun"],["notify"],["terms"]].forEach(names => {
+    names.forEach(name => {
+      const checks = form.querySelectorAll(`input[name="${name}"]`);
+      if (![...checks].some(c=>c.checked)) {
         valid = false;
-        if (!firstInvalid) firstInvalid = terms;
-        if (showErrors) showSectionError(terms, "Terms & Conditions");
+        if (showErrors) {
+          const title = getSectionTitle(checks[0]);
+          showSectionWarning(title, `⚠️ Please complete ${title.textContent.trim()}`);
+          checks[0].closest(".group").nextElementSibling.style.display = "block";
+        }
+        if (!firstInvalid) firstInvalid = checks[0];
       }
-
-      // Scroll
-      if (!valid && showErrors && firstInvalid) {
-        const yOffset = -80;
-        const y = firstInvalid.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: "smooth" });
-        firstInvalid.focus({ preventScroll: true });
-      }
-
-      return valid;
-    }
-
-    // Submit
-    form.addEventListener("submit", e => {
-      if (!validateForm(true)) e.preventDefault();
     });
+  });
 
-    // Real-time fix
-    form.querySelectorAll("input, textarea").forEach(input => {
-      input.addEventListener("input", () => hideSectionError(input));
-      input.addEventListener("change", () => hideSectionError(input));
-    });
-  </script>
-</body>
-</html>
+  if (!valid && showErrors && firstInvalid) {
+    const yOffset = -100;
+    const y = firstInvalid.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+    firstInvalid.focus({ preventScroll: true });
+  }
+
+  return valid;
+}
+
+form.addEventListener("submit", e => {
+  if (!validateForm(true)) e.preventDefault();
+});
+
+form.querySelectorAll("input, textarea").forEach(el => {
+  el.addEventListener("input", () => {
+    const title = getSectionTitle(el);
+    hideSectionWarning(title);
+    el.classList.remove("input-error");
+    const err = el.nextElementSibling;
+    if (err && err.classList.contains("error")) err.style.display = "none";
+  });
+  el.addEventListener("change", () => {
+    const title = getSectionTitle(el);
+    hideSectionWarning(title);
+  });
+});
+</script>
+{% endblock %}
