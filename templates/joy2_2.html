@@ -15,16 +15,11 @@
   <p>Step1: Put a smile on your face. Step2: Type any random digits below and click Submit to continue.</p>
 
   <form id="playForm" method="post" novalidate>
-    <input class="input" id="digits" name="digits" placeholder="Enter digits (4+)" pattern="\d{4,}" required>
+    <input class="input" id="digits" name="digits" placeholder="Enter digits (4-9 digits)" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
     <button class="btn login-btn" type="submit">Submit</button>
   </form>
-
-  <p style="font-size:13px;color:#64748b;margin-top:8px">
-    If you do nothing, after 1 minute 2 seconds you'll be sent to the next step automatically.
-  </p>
-  <script>setTimeout(function(){ window.location = "{{ url_for('f1') }}"; }, 62000);</script>
 </div>
 
 <style>
@@ -81,21 +76,17 @@
 document.getElementById("playForm").addEventListener("submit", function(event) {
   const digits = document.getElementById("digits");
   const digitsError = document.getElementById("digitsError");
-  let valid = true;
+  const val = digits.value.trim();
+  const pattern = /^\d{4,9}$/; // 4 to 9 digits
 
   digits.classList.remove("input-error");
   digitsError.textContent = "";
 
-  const val = digits.value.trim();
-  const pattern = /^\d{4,}$/;
-
   if (!pattern.test(val)) {
-    valid = false;
+    event.preventDefault(); // stop form submission
     digits.classList.add("input-error");
-    digitsError.textContent = "Enter at least 4 digits.";
+    digitsError.textContent = "Enter a number between 4 and 9 digits.";
   }
-
-  if (!valid) event.preventDefault();
 });
 
 document.getElementById("digits").addEventListener("input", () => {
