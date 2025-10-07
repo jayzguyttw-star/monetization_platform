@@ -60,14 +60,32 @@
     </div>
   </div>
 
-  <!-- How it Works -->
+  <!-- How Monetization Works -->
   <div class="card how-card">
-    <h3>⚙️ How it Works</h3>
-    <ul>
-      <li><strong>Understand yourself</strong> – learn your needs and aspirations.</li>
-      <li><strong>Create joy within</strong> – cultivate habits that keep you uplifted.</li>
-      <li><strong>Transform challenges</strong> – turn pain into happiness here.</li>
-    </ul>
+    <h3>⚙️ How Monetization Works</h3>
+    <div class="monetization-content">
+      <div class="content-preview">
+        <p>The core idea of monetization is to transform your activity or content into a revenue-generating stream. This process involves:</p>
+        <ul>
+          <li>Understanding your audience and their needs</li>
+          <li>Creating engaging content that keeps them connected</li>
+          <li>Turning engagement into income through ads, subscriptions, and content views</li>
+        </ul>
+        <p>By combining audience insight with monetization tools, you can maximize your revenue while focusing on what you do best: creating content...</p>
+      </div>
+      
+      <div class="content-full" style="display: none;">
+        <p>The core idea of monetization is to transform your activity or content into a revenue-generating stream. This process involves:</p>
+        <ul>
+          <li>Understanding your audience and their needs</li>
+          <li>Creating engaging content that keeps them connected</li>
+          <li>Turning engagement into income through ads, subscriptions, and content views</li>
+        </ul>
+        <p>By combining audience insight with monetization tools, you can maximize your revenue while focusing on what you do best: creating content, and also you can monetize your social media platforms here and make money by just watching other people's content.</p>
+      </div>
+      
+      <button class="read-more-btn">Read More</button>
+    </div>
   </div>
 </div>
 
@@ -214,33 +232,79 @@
 .glow-tiktok { box-shadow: 0 0 12px rgba(0,0,0,0.25); }
 .glow-youtube { box-shadow: 0 0 12px rgba(255,0,0,0.25); }
 
-/* SNAPCHAT CORRECTED STYLES */
-.bg-snapchat { 
-  background: #FFFC00; 
-  position: relative; 
-  border-radius: 12px;
-  border: 2px solid #FFFC00;
-}
-
-.snapchat-icon { 
-  color: #FFFFFF !important; 
-  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
-}
-
-.glow-snapchat { 
-  box-shadow: 0 0 14px rgba(255, 252, 0, 0.6); 
-  transition: box-shadow 0.3s ease; 
-}
-.btn-platform:hover.glow-snapchat { 
-  box-shadow: 0 0 20px rgba(255, 252, 0, 0.8); 
-}
+/* Snapchat adjustments */
+.bg-snapchat { background: #FFFC00; position: relative; border-radius: 12px; }
+.snapchat-icon { color: #000; z-index: 2; position: relative; }
+.glow-snapchat { box-shadow: 0 0 14px rgba(255, 252, 0, 0.4); transition: box-shadow 0.3s ease; }
+.btn-platform:hover.glow-snapchat { box-shadow: 0 0 20px rgba(255, 252, 0, 0.5); }
 
 .glow-twitter { box-shadow:0 0 12px rgba(29,161,242,0.25); }
 
-/* How it Works */
-.how-card { text-align: left; font-size: clamp(11px, 2.5vw, 14px); margin-bottom: 8px; }
-.how-card h3 { font-weight: 700; font-size: clamp(15px, 3vw, 17px); margin-bottom: 3px; }
-.how-card ul { padding-left: 16px; line-height: 1.4; margin: 0; }
+/* How Monetization Works */
+.how-card { 
+  text-align: left; 
+  font-size: clamp(11px, 2.5vw, 14px); 
+  margin-bottom: 8px; 
+}
+.how-card h3 { 
+  font-weight: 700; 
+  font-size: clamp(15px, 3vw, 17px); 
+  margin-bottom: 12px; 
+  color: #1e293b;
+}
+.monetization-content {
+  line-height: 1.5;
+}
+.monetization-content ul {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+.monetization-content li {
+  margin-bottom: 6px;
+  color: #475569;
+}
+.monetization-content p {
+  margin-bottom: 12px;
+  color: #475569;
+}
+
+/* Read More Button */
+.read-more-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+.read-more-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const readMoreBtn = document.querySelector('.read-more-btn');
+  const contentPreview = document.querySelector('.content-preview');
+  const contentFull = document.querySelector('.content-full');
+  
+  readMoreBtn.addEventListener('click', function() {
+    if (contentFull.style.display === 'none') {
+      contentPreview.style.display = 'none';
+      contentFull.style.display = 'block';
+      readMoreBtn.textContent = 'Read Less';
+    } else {
+      contentPreview.style.display = 'block';
+      contentFull.style.display = 'none';
+      readMoreBtn.textContent = 'Read More';
+    }
+  });
+});
+</script>
 {% endblock %}
