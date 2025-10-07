@@ -19,33 +19,40 @@
     </div>
   </div>
 
-  <!-- Platform Buttons -->
+  <!-- Platform Buttons 3x3 -->
   <div class="card platform-card">
     <div class="platforms">
-      <a class="btn-platform bg-facebook" href="{{ url_for('love1_1') }}">
-        <div class="icon-circle"><i class="fa-brands fa-facebook icon-lg"></i></div>
-        <strong>Facebook</strong>
-      </a>
-      <a class="btn-platform bg-instagram" href="{{ url_for('love2_1') }}">
-        <div class="icon-circle"><i class="fa-brands fa-instagram icon-lg"></i></div>
-        <strong>Instagram</strong>
-      </a>
-      <a class="btn-platform bg-tiktok" href="{{ url_for('joy1_1') }}">
-        <div class="icon-circle"><i class="fa-brands fa-tiktok icon-lg"></i></div>
-        <strong>TikTok</strong>
-      </a>
-      <a class="btn-platform bg-youtube" href="{{ url_for('joy2_1') }}">
-        <div class="icon-circle"><i class="fa-brands fa-youtube icon-lg"></i></div>
-        <strong>YouTube</strong>
-      </a>
-      <a class="btn-platform bg-snapchat" href="{{ url_for('happy1_1') }}">
-        <div class="icon-circle"><i class="fa-brands fa-snapchat icon-lg"></i></div>
-        <strong>Snapchat</strong>
-      </a>
-      <a class="btn-platform bg-twitter" href="{{ url_for('happy2_1') }}">
-        <div class="icon-circle"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
-        <strong>X / Twitter</strong>
-      </a>
+      <!-- First Row -->
+      <div class="platform-row">
+        <a class="btn-platform" href="{{ url_for('love1_1') }}">
+          <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
+          <div><strong>Facebook</strong></div>
+        </a>
+        <a class="btn-platform" href="{{ url_for('love2_1') }}">
+          <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
+          <div><strong>Instagram</strong></div>
+        </a>
+        <a class="btn-platform" href="{{ url_for('joy1_1') }}">
+          <div class="icon-circle bg-tiktok"><i class="fa-brands fa-tiktok icon-lg"></i></div>
+          <div><strong>TikTok</strong></div>
+        </a>
+      </div>
+
+      <!-- Second Row -->
+      <div class="platform-row">
+        <a class="btn-platform" href="{{ url_for('joy2_1') }}">
+          <div class="icon-circle bg-youtube"><i class="fa-brands fa-youtube icon-lg"></i></div>
+          <div><strong>YouTube</strong></div>
+        </a>
+        <a class="btn-platform" href="{{ url_for('happy1_1') }}">
+          <div class="icon-circle bg-snapchat"><i class="fa-brands fa-snapchat icon-lg snapchat-white"></i></div>
+          <div><strong>Snapchat</strong></div>
+        </a>
+        <a class="btn-platform" href="{{ url_for('happy2_1') }}">
+          <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
+          <div><strong>X / Twitter</strong></div>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -59,4 +66,14 @@
     </ul>
   </div>
 </div>
+
+<style>
+.platform-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+</style>
 {% endblock %}
