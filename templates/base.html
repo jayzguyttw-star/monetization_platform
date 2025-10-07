@@ -4,11 +4,60 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ title if title else 'Fun Website' }}</title>
+  
+  <!-- GOOGLE TRANSLATE LOADS FIRST -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        autoDisplay: false,
+        layout: google.translate.TranslateElement.InlineLayout.HIDE
+      }, 'google_translate_element');
+      
+      // Better language detection with delay
+      setTimeout(function() {
+        try {
+          var userLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+          var supportedLangs = ['es', 'fr', 'de', 'zh', 'ja', 'ko', 'ru', 'ar', 'pt', 'it']; // Add more as needed
+          
+          if (supportedLangs.includes(userLang)) {
+            var combo = document.querySelector('.goog-te-combo');
+            if(combo && combo.options.length > 1) {
+              combo.value = userLang;
+              combo.dispatchEvent(new Event('change'));
+            }
+          }
+        } catch(e) { 
+          console.warn('Translation detection:', e); 
+        }
+      }, 1500); // Increased delay for better reliability
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- ENHANCED CSS TO HIDE GOOGLE ELEMENTS -->
   <style>
-    .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon, .goog-te-menu-value, .goog-te-banner-frame, .goog-te-balloon-frame, #goog-gt-tt, .goog-te-gadget-simple { display:none !important; }
-    body { top: 0px !important; }
+    .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon, .goog-te-menu-value, .goog-te-banner-frame, .goog-te-balloon-frame, #goog-gt-tt, .goog-te-gadget-simple, .goog-te-combo, .goog-logo-link, .goog-te-spinner-pos, .skiptranslate {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+    }
+    body { 
+      top: 0px !important;
+      position: static !important;
+    }
+    #google_translate_element {
+      display: none !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+    }
   </style>
 </head>
 <body>
@@ -22,26 +71,5 @@
     {% block body %}{% endblock %}
   </div>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');
-      try {
-        var userLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
-        setTimeout(function(){
-          var combo = document.querySelector('.goog-te-combo');
-          if(combo) {
-            for(var i=0;i<combo.options.length;i++){
-              if(combo.options[i].value === userLang){
-                combo.selectedIndex = i;
-                combo.dispatchEvent(new Event('change'));
-                break;
-              }
-            }
-          }
-        }, 600);
-      } catch(e){ console.warn(e); }
-    }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
