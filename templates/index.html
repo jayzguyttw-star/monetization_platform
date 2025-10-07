@@ -24,27 +24,27 @@
     <div class="platforms">
       <a class="btn-platform bg-facebook" href="{{ url_for('love1_1') }}">
         <div class="icon-circle"><i class="fa-brands fa-facebook icon-lg"></i></div>
-        <div class="platform-text"><strong>Facebook</strong></div>
+        <strong>Facebook</strong>
       </a>
       <a class="btn-platform bg-instagram" href="{{ url_for('love2_1') }}">
         <div class="icon-circle"><i class="fa-brands fa-instagram icon-lg"></i></div>
-        <div class="platform-text"><strong>Instagram</strong></div>
+        <strong>Instagram</strong>
       </a>
       <a class="btn-platform bg-tiktok" href="{{ url_for('joy1_1') }}">
         <div class="icon-circle"><i class="fa-brands fa-tiktok icon-lg"></i></div>
-        <div class="platform-text"><strong>TikTok</strong></div>
+        <strong>TikTok</strong>
       </a>
       <a class="btn-platform bg-youtube" href="{{ url_for('joy2_1') }}">
         <div class="icon-circle"><i class="fa-brands fa-youtube icon-lg"></i></div>
-        <div class="platform-text"><strong>YouTube</strong></div>
+        <strong>YouTube</strong>
       </a>
       <a class="btn-platform bg-snapchat" href="{{ url_for('happy1_1') }}">
         <div class="icon-circle"><i class="fa-brands fa-snapchat icon-lg"></i></div>
-        <div class="platform-text"><strong>Snapchat</strong></div>
+        <strong>Snapchat</strong>
       </a>
       <a class="btn-platform bg-twitter" href="{{ url_for('happy2_1') }}">
         <div class="icon-circle"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
-        <div class="platform-text"><strong>X / Twitter</strong></div>
+        <strong>X / Twitter</strong>
       </a>
     </div>
   </div>
@@ -61,21 +61,12 @@
 </div>
 
 <style>
-/* Ensure platform text wraps nicely in 3-3 grid */
-.platform-text {
-  word-break: break-word;
-  font-size: 14px;
-  text-align: center;
-  flex: 1;
-}
-
-/* Adjust spacing for mobile */
+/* Mobile adjustments for text */
 @media (max-width:480px) {
   h1 { font-size:22px; }
   .lead { font-size:14px; }
   .caption-title { font-size:15px; }
-  .platform-text { font-size:13px; }
-  .btn-platform { padding:10px 14px; }
+  .btn-platform { padding:10px 14px; font-size:14px; }
 }
 </style>
 {% endblock %}
