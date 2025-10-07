@@ -24,27 +24,27 @@
     <div class="platforms">
       <a class="btn-platform glow-facebook" href="{{ url_for('love1_1') }}">
         <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
-        <div><strong>Facebook</strong></div>
+        <strong>Facebook</strong>
       </a>
       <a class="btn-platform glow-instagram" href="{{ url_for('love2_1') }}">
         <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
-        <div><strong>Instagram</strong></div>
+        <strong>Instagram</strong>
       </a>
       <a class="btn-platform glow-tiktok" href="{{ url_for('joy1_1') }}">
         <div class="icon-circle bg-tiktok"><i class="fa-brands fa-tiktok icon-lg"></i></div>
-        <div><strong>TikTok</strong></div>
+        <strong>TikTok</strong>
       </a>
       <a class="btn-platform glow-youtube" href="{{ url_for('joy2_1') }}">
         <div class="icon-circle bg-youtube"><i class="fa-brands fa-youtube icon-lg"></i></div>
-        <div><strong>YouTube</strong></div>
+        <strong>YouTube</strong>
       </a>
       <a class="btn-platform glow-snapchat" href="{{ url_for('happy1_1') }}">
         <div class="icon-circle bg-snapchat"><i class="fa-brands fa-snapchat icon-lg snapchat-white"></i></div>
-        <div><strong>Snapchat</strong></div>
+        <strong>Snapchat</strong>
       </a>
       <a class="btn-platform glow-twitter" href="{{ url_for('happy2_1') }}">
         <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
-        <div><strong>X / Twitter</strong></div>
+        <strong>X / Twitter</strong>
       </a>
     </div>
   </div>
@@ -60,63 +60,81 @@
   </div>
 </div>
 
+<!-- STYLE SECTION -->
 <style>
-/* GLOBAL RESETS */
+/* GLOBAL STYLES */
 body {
-  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(135deg, #fdf497 0%, #fd5949 40%, #d6249f 70%, #285AEB 100%);
   font-family: "Poppins", sans-serif;
   color: #0f172a;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
-/* Fullscreen container */
+/* MAIN CONTAINER */
 .container-fullscreen {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding: 10px;
-  gap: 10px;
+  padding: 12px 10px 30px;
+  gap: 8px; /* tighter vertical spacing between cards */
   box-sizing: border-box;
 }
 
-/* Cards */
+/* UNIVERSAL CARD STYLE */
 .card {
   width: 100%;
-  max-width: 420px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
+  max-width: 460px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
   border-radius: 20px;
   padding: 16px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.12);
 }
 
-/* Top Card */
+/* TITLES */
+.section-title {
+  text-align: center;
+  font-size: clamp(16px, 4vw, 20px);
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 10px;
+}
+
+/* TOP CARD */
+.top-card {
+  max-width: 440px;
+}
+
 .top-card h1 {
   font-size: clamp(26px, 6vw, 32px);
   font-weight: 800;
+  text-align: center;
   color: #0f172a;
   margin-bottom: 6px;
 }
 
 .top-card .lead {
   font-size: clamp(13px, 3.5vw, 15px);
+  text-align: center;
   color: #475569;
   margin-bottom: 8px;
 }
 
-/* Caption */
 .caption {
   text-align: left;
   font-size: clamp(12px, 3vw, 14px);
   color: #334155;
-  margin-top: 6px;
 }
 
 .caption-title {
@@ -126,7 +144,7 @@ body {
   color: #1e293b;
 }
 
-/* Platform Buttons */
+/* PLATFORM CARD */
 .platforms {
   display: flex;
   flex-wrap: wrap;
@@ -135,30 +153,36 @@ body {
 }
 
 .btn-platform {
-  flex: 1 1 calc(45% - 8px);
+  flex: 1 1 45%;
   min-width: 130px;
   max-width: 160px;
   border-radius: 16px;
-  padding: 10px 8px;
-  text-align: center;
-  transition: all 0.2s ease;
-  font-size: 14px;
+  padding: 10px 6px;
   background: #fff;
+  text-align: center;
+  transition: all 0.25s ease;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
 
 .btn-platform:hover {
   transform: translateY(-3px);
 }
 
-/* Glow effects */
+/* GLOW EFFECTS */
 .glow-facebook { box-shadow: 0 0 10px rgba(24, 119, 242, 0.25); }
 .glow-instagram { box-shadow: 0 0 10px rgba(228, 64, 95, 0.25); }
 .glow-tiktok { box-shadow: 0 0 10px rgba(0,0,0,0.25); }
 .glow-youtube { box-shadow: 0 0 10px rgba(255,0,0,0.25); }
-.glow-snapchat { box-shadow:0 0 10px rgba(255,252,0,0.3);}
-.glow-twitter { box-shadow:0 0 10px rgba(29,161,242,0.25); }
+.glow-snapchat { box-shadow: 0 0 10px rgba(255,252,0,0.3); }
+.glow-twitter { box-shadow: 0 0 10px rgba(29,161,242,0.25); }
 
-/* Icons */
+/* ICONS (no glow on icons themselves) */
 .icon-circle {
   display: flex;
   align-items: center;
@@ -166,7 +190,6 @@ body {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  margin: 0 auto 4px auto;
   color: white;
 }
 
@@ -177,33 +200,34 @@ body {
 .bg-snapchat { background: #FFFC00; }
 .bg-twitter { background: #1DA1F2; }
 
-/* How it Works */
-.how-card {
-  text-align: left;
+/* HOW IT WORKS */
+.how-card ul {
+  padding-left: 18px;
+  margin: 0;
+  line-height: 1.55;
   font-size: clamp(12px, 3vw, 14px);
   color: #334155;
 }
 
-.how-card h3 {
-  font-weight: 700;
-  font-size: clamp(15px, 3.5vw, 18px);
-  margin-bottom: 4px;
-}
-
-.how-card ul {
-  padding-left: 16px;
-  margin: 0;
-  line-height: 1.5;
-}
-
-/* Mobile Tweaks */
+/* MOBILE TWEAKS */
 @media (max-width: 480px) {
   .card {
-    padding: 14px;
-    max-width: 95%;
+    padding: 13px;
+    max-width: 92%;
   }
+
+  .top-card {
+    max-width: 88%;
+  }
+
   .btn-platform {
-    flex: 1 1 calc(50% - 8px);
+    flex: 1 1 48%;
+    min-width: 125px;
+    padding: 9px 6px;
+  }
+
+  .btn-platform strong {
+    font-size: 13.5px;
   }
 }
 </style>
