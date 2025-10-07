@@ -31,7 +31,7 @@ body {
 h1 { margin:0 0 8px; font-size:28px; font-weight:900; letter-spacing:-0.02em; }
 p.lead { color:#475569; margin:0 0 14px; }
 
-/* === Premium Platform Buttons === */
+/* === Platform Buttons (3 per row) === */
 .platforms {
   display:flex;
   flex-wrap:wrap;
@@ -40,34 +40,37 @@ p.lead { color:#475569; margin:0 0 14px; }
 }
 
 .btn-platform {
-  width:340px;
+  flex: 1 1 calc(33% - 12px); /* 3 per row */
+  max-width:140px;
+  min-width:90px;
   display:flex;
+  flex-direction:column;
   align-items:center;
-  gap:14px;
-  padding:14px 18px;
-  border-radius:22px;
-  border:1px solid rgba(255,255,255,0.4);
-  text-decoration:none;
-  color:inherit;
-  background:rgba(255,255,255,0.5);
-  backdrop-filter:blur(14px);
-  transition:transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
-  box-shadow:0 8px 22px rgba(2,6,23,0.06);
-  perspective:1000px;
+  justify-content:center;
+  gap:8px;
+  padding:10px 6px;
+  border-radius:14px;
+  border:1px solid #e2e8f0;
+  background:#ffffff;
+  text-align:center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-platform:hover {
-  transform:scale(1.025);
-  background:rgba(255,255,255,0.75);
-  box-shadow:0 16px 40px rgba(15,23,42,0.12);
+  transform: translateY(-2px);
 }
 
-.btn-platform:active {
-  transform:scale(0.985);
-  box-shadow:0 8px 18px rgba(15,23,42,0.1);
+/* Platform name */
+.platform-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  font-size: clamp(11px, 2.5vw, 13px);
+  text-align: center;
 }
 
-/* === Icon Styling (Removed Glow/Color Background) === */
+/* Icon circle styling */
 .icon-circle {
   width:58px;
   height:58px;
@@ -76,61 +79,91 @@ p.lead { color:#475569; margin:0 0 14px; }
   align-items:center;
   justify-content:center;
   flex-shrink:0;
-  transition:all 0.4s ease;
-  transform-style:preserve-3d;
+  transition: all 0.3s ease;
 }
 
-/* Facebook (slightly bigger) */
-.bg-facebook .icon-circle {
-  width:64px;
-  height:64px;
-}
+/* Facebook icon slightly bigger */
+.bg-facebook .icon-circle { width:64px; height:64px; }
+
+/* Icon brand colors */
 .bg-facebook i { color:#1877F2; }
-
-/* Instagram */
-.bg-instagram .icon-circle {}
-.bg-instagram i {
-  background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  font-weight:800;
-}
-
-/* TikTok */
-.bg-tiktok .icon-circle {}
-.bg-tiktok i {
-  color:#000;
-  text-shadow:-1.8px 0 #00f2ea, 1.8px 0 #ff0050;
-  font-weight:800;
-}
-
-/* YouTube */
-.bg-youtube .icon-circle {}
-.bg-youtube i { color:#FF0000; font-weight:800; }
-
-/* Snapchat */
-.bg-snapchat .icon-circle {}
-.bg-snapchat i {
-  color:#FFFC00;
-  -webkit-text-stroke:1.5px #000;
-  font-weight:800;
-}
-
-/* Twitter / X */
-.bg-twitter .icon-circle {}
-.bg-twitter i { color:#000; font-weight:800; }
+.bg-instagram i { background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.bg-tiktok i { color:#000; text-shadow:-1.8px 0 #00f2ea, 1.8px 0 #ff0050; }
+.bg-youtube i { color:#FF0000; }
+.bg-snapchat i { color:#FFFC00; -webkit-text-stroke:1.5px #000; }
+.bg-twitter i { color:#1DA1F2; }
 
 .icon-lg { font-size:34px; }
 
+/* Cards shadow */
 .card, .btn-platform {
   box-shadow:0 10px 25px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.03);
 }
 
-/* === Mobile Optimizations === */
-@media (max-width:680px) {
-  .wrap { padding: 12px; }
-  .card { margin-bottom: 12px; width:100%; }
-  .btn-platform { width:100%; padding:12px 16px; font-size:14px; }
+/* How it Works */
+.how-card {
+  text-align:left;
+  font-size:clamp(11px,2.5vw,14px);
+  margin-bottom:8px;
+}
+.how-card h3 {
+  font-weight:700;
+  font-size:clamp(15px,3vw,17px);
+  margin-bottom:3px;
+}
+.how-card ul {
+  padding-left:16px;
+  line-height:1.4;
+  margin:0;
+}
+
+/* Top card */
+.top-card {
+  margin-top:2px;
+}
+.top-card h1 {
+  font-size:clamp(26px,5vw,32px);
+  font-weight:800;
+  margin-bottom:4px;
+  color:#0f172a;
+}
+.top-card .lead {
+  font-size:clamp(12px,3vw,16px);
+  line-height:1.4;
+  margin-bottom:8px;
+}
+
+/* Caption */
+.caption {
+  text-align:left;
+  font-size:clamp(11px,2.5vw,14px);
+  line-height:1.4;
+  color:#334155;
+  margin-top:2px;
+}
+.caption-title {
+  font-weight:700;
+  font-size:clamp(15px,3vw,17px);
+  margin-bottom:4px;
+}
+
+/* Fullscreen container */
+.container-fullscreen {
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  min-height:100vh;
+  padding:4px 8px 10px 8px;
+  box-sizing:border-box;
+  background-color:#f8fafc;
+}
+
+/* Responsive adjustments */
+@media(max-width:680px) {
+  .wrap { padding:12px; }
+  .card { margin-bottom:12px; width:100%; }
+  .btn-platform { flex: 1 1 calc(50% - 8px); max-width:48%; padding:10px; font-size:13px; } /* 2 per row on mobile */
   h1 { font-size:24px; }
   .caption-title { font-size:16px; }
   .how-card h3 { font-size:16px; }
