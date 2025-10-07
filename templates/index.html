@@ -61,17 +61,19 @@
 </div>
 
 <style>
-/* Make platform text wrap nicely on small screens */
+/* Ensure platform text wraps nicely in 3-3 grid */
 .platform-text {
   word-break: break-word;
   font-size: 14px;
+  text-align: center;
+  flex: 1;
 }
 
-/* Optional: adjust small spacing for captions on mobile */
+/* Adjust spacing for mobile */
 @media (max-width:480px) {
-  .caption-title { font-size:15px; }
-  .lead { font-size:14px; }
   h1 { font-size:22px; }
+  .lead { font-size:14px; }
+  .caption-title { font-size:15px; }
   .platform-text { font-size:13px; }
   .btn-platform { padding:10px 14px; }
 }
