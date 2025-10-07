@@ -65,26 +65,29 @@
 .container-fullscreen {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* content closer to top */
+  justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
-  padding: 8px 8px 10px 8px; /* reduced padding */
+  padding: 4px 8px 10px 8px; /* tighter top space */
   box-sizing: border-box;
 }
 
 /* Cards */
 .card {
   width: 100%;
-  max-width: 500px;
+  max-width: 600px; /* wider on screen */
   text-align: center;
-  margin-bottom: 4px; /* slightly tighter */
+  margin-bottom: 4px;
 }
 
 /* Top Card */
+.top-card {
+  margin-top: 2px; /* very close to top */
+}
 .top-card h1 {
   font-size: clamp(26px, 5vw, 32px);
   font-weight: 800;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   color: #0f172a;
 }
 .top-card .lead {
@@ -114,7 +117,7 @@
 .platforms {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px; /* slightly tighter gap */
+  gap: 5px;
   justify-content: center;
 }
 .btn-platform {
@@ -159,7 +162,7 @@
 .how-card {
   text-align: left;
   font-size: clamp(11px, 2.5vw, 14px);
-  margin-bottom: 8px; /* closer to screen bottom */
+  margin-bottom: 8px;
 }
 .how-card h3 {
   font-weight: 700;
