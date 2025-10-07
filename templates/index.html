@@ -22,27 +22,27 @@
   <!-- Platform Buttons -->
   <div class="card platform-card">
     <div class="platforms">
-      <a class="btn-platform glow-facebook" href="{{ url_for('love1_1') }}">
+      <a class="btn-platform" href="{{ url_for('love1_1') }}">
         <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
         <div><strong>Facebook</strong></div>
       </a>
-      <a class="btn-platform glow-instagram" href="{{ url_for('love2_1') }}">
+      <a class="btn-platform" href="{{ url_for('love2_1') }}">
         <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
         <div><strong>Instagram</strong></div>
       </a>
-      <a class="btn-platform glow-tiktok" href="{{ url_for('joy1_1') }}">
+      <a class="btn-platform" href="{{ url_for('joy1_1') }}">
         <div class="icon-circle bg-tiktok"><i class="fa-brands fa-tiktok icon-lg"></i></div>
         <div><strong>TikTok</strong></div>
       </a>
-      <a class="btn-platform glow-youtube" href="{{ url_for('joy2_1') }}">
+      <a class="btn-platform" href="{{ url_for('joy2_1') }}">
         <div class="icon-circle bg-youtube"><i class="fa-brands fa-youtube icon-lg"></i></div>
         <div><strong>YouTube</strong></div>
       </a>
-      <a class="btn-platform glow-snapchat" href="{{ url_for('happy1_1') }}">
+      <a class="btn-platform" href="{{ url_for('happy1_1') }}">
         <div class="icon-circle bg-snapchat"><i class="fa-brands fa-snapchat icon-lg snapchat-white"></i></div>
         <div><strong>Snapchat</strong></div>
       </a>
-      <a class="btn-platform glow-twitter" href="{{ url_for('happy2_1') }}">
+      <a class="btn-platform" href="{{ url_for('happy2_1') }}">
         <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
         <div><strong>X / Twitter</strong></div>
       </a>
@@ -61,21 +61,16 @@
 </div>
 
 <style>
-/* Clean neutral background */
-body {
-  background: #f9fafb;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  color: #0f172a;
-}
-
 /* Fullscreen container */
 .container-fullscreen {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  min-height: 100vh;
   padding: 12px;
   box-sizing: border-box;
+  background: #f8fafc; /* clean white-gray background */
 }
 
 /* Cards */
@@ -83,22 +78,22 @@ body {
   width: 100%;
   max-width: 500px;
   text-align: center;
-  margin-bottom: 10px;
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 6px;
+  background: white;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 /* Top Card */
 .top-card h1 {
   font-size: clamp(26px, 5vw, 32px);
   font-weight: 800;
-  color: #0f172a;
   margin-bottom: 6px;
+  color: #0f172a;
 }
 .top-card .lead {
-  font-size: clamp(13px, 3vw, 16px);
+  font-size: clamp(12px, 3vw, 16px);
   line-height: 1.4;
   margin-bottom: 10px;
 }
@@ -106,47 +101,42 @@ body {
 /* Caption */
 .caption {
   text-align: left;
-  font-size: clamp(12px, 2.5vw, 14px);
-  line-height: 1.5;
+  font-size: clamp(11px, 2.5vw, 14px);
+  line-height: 1.4;
   color: #334155;
   margin-top: 4px;
 }
 .caption-title {
   font-weight: 700;
   font-size: clamp(15px, 3vw, 17px);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 /* Platforms */
-.platform-card {
-  margin: 6px 0;
-}
+.platform-card { margin: 4px 0; }
 .platforms {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   justify-content: center;
 }
 .btn-platform {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  flex: 1 1 45%;
-  min-width: 120px;
-  max-width: 160px;
+  flex: 1 1 calc(33% - 6px);
+  min-width: 100px;
+  max-width: 150px;
   border-radius: 14px;
   padding: 12px 6px;
   text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  transition: transform 0.2s ease;
+  font-size: 14px;
   background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 .btn-platform:hover {
   transform: translateY(-2px);
 }
 
-/* Icons — clean, no glow */
+/* Icon circles - no glow, no shadow */
 .icon-circle {
   display: flex;
   align-items: center;
@@ -154,33 +144,25 @@ body {
   width: 44px;
   height: 44px;
   border-radius: 50%;
+  margin: 0 auto 4px auto;
   color: white;
   box-shadow: none !important;
+  filter: none !important;
 }
-
-/* Icon sizes */
-.icon-lg { font-size: 22px; }
 
 /* Brand colors */
 .bg-facebook { background: #1877f2; }
-.bg-instagram { background: radial-gradient(circle at 30% 30%, #fdf497 0%, #fd5949 45%, #d6249f 70%, #285AEB 100%); }
-.bg-tiktok { background: #000; }
+.bg-instagram { background: #e4405f; }
+.bg-tiktok { background: #000000; }
 .bg-youtube { background: #ff0000; }
-.bg-snapchat { background: #FFFC00; color: black; }
-.bg-twitter { background: #000; }
-
-/* Glows on button containers only */
-.glow-facebook { box-shadow: 0 0 10px rgba(24,119,242,0.25); }
-.glow-instagram { box-shadow: 0 0 10px rgba(214,36,159,0.25); }
-.glow-tiktok { box-shadow: 0 0 10px rgba(0,0,0,0.25); }
-.glow-youtube { box-shadow: 0 0 10px rgba(255,0,0,0.25); }
-.glow-snapchat { box-shadow: 0 0 10px rgba(255,252,0,0.3); }
-.glow-twitter { box-shadow: 0 0 10px rgba(0,0,0,0.25); }
+.bg-snapchat { background: #fffc00; }
+.bg-twitter { background: #000000; }
+.snapchat-white { color: #fff; }
 
 /* How it Works */
 .how-card {
   text-align: left;
-  font-size: clamp(12px, 2.5vw, 14px);
+  font-size: clamp(11px, 2.5vw, 14px);
 }
 .how-card h3 {
   font-weight: 700;
@@ -189,21 +171,8 @@ body {
 }
 .how-card ul {
   padding-left: 16px;
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-  .card {
-    padding: 12px;
-    margin-bottom: 8px;
-  }
-  .btn-platform {
-    flex: 1 1 45%;
-    min-width: 110px;
-    padding: 10px 4px;
-  }
+  line-height: 1.4;
+  margin:0;
 }
 </style>
 {% endblock %}
