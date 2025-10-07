@@ -68,21 +68,30 @@
   justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
-  padding: 4px 8px 10px 8px; /* tighter top space */
+  padding: 4px 8px 10px 8px;
   box-sizing: border-box;
+  background-color: #f8fafc; /* very light neutral backdrop */
 }
 
 /* Cards */
 .card {
   width: 100%;
-  max-width: 600px; /* wider on screen */
+  max-width: 600px;
   text-align: center;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  background: #ffffff;
+  border-radius: 14px; /* slightly rounded */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* soft, subtle shadow */
+  padding: 10px 14px;
+  transition: box-shadow 0.2s ease;
+}
+.card:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
 }
 
 /* Top Card */
 .top-card {
-  margin-top: 2px; /* very close to top */
+  margin-top: 2px;
 }
 .top-card h1 {
   font-size: clamp(26px, 5vw, 32px);
@@ -133,6 +142,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: #ffffff;
 }
 .btn-platform:hover {
   transform: translateY(-2px);
