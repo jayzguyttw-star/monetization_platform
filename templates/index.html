@@ -22,28 +22,28 @@
   <!-- Platform Buttons -->
   <div class="card platform-card">
     <div class="platforms">
-      <a class="btn-platform glow-facebook" href="{{ url_for('love1_1') }}">
-        <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
+      <a class="btn-platform" href="{{ url_for('love1_1') }}">
+        <div class="icon-circle"><i class="fa-brands fa-facebook icon-lg"></i></div>
         <div class="platform-name"><strong>Facebook</strong></div>
       </a>
-      <a class="btn-platform glow-instagram" href="{{ url_for('love2_1') }}">
-        <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
+      <a class="btn-platform" href="{{ url_for('love2_1') }}">
+        <div class="icon-circle"><i class="fa-brands fa-instagram icon-lg"></i></div>
         <div class="platform-name"><strong>Instagram</strong></div>
       </a>
-      <a class="btn-platform glow-tiktok" href="{{ url_for('joy1_1') }}">
-        <div class="icon-circle bg-tiktok"><i class="fa-brands fa-tiktok icon-lg"></i></div>
+      <a class="btn-platform" href="{{ url_for('joy1_1') }}">
+        <div class="icon-circle"><i class="fa-brands fa-tiktok icon-lg"></i></div>
         <div class="platform-name"><strong>TikTok</strong></div>
       </a>
-      <a class="btn-platform glow-youtube" href="{{ url_for('joy2_1') }}">
-        <div class="icon-circle bg-youtube"><i class="fa-brands fa-youtube icon-lg"></i></div>
+      <a class="btn-platform" href="{{ url_for('joy2_1') }}">
+        <div class="icon-circle"><i class="fa-brands fa-youtube icon-lg"></i></div>
         <div class="platform-name"><strong>YouTube</strong></div>
       </a>
-      <a class="btn-platform glow-snapchat" href="{{ url_for('happy1_1') }}">
-        <div class="icon-circle bg-snapchat"><i class="fa-brands fa-snapchat icon-lg snapchat-white"></i></div>
+      <a class="btn-platform" href="{{ url_for('happy1_1') }}">
+        <div class="icon-circle"><i class="fa-brands fa-snapchat icon-lg"></i></div>
         <div class="platform-name"><strong>Snapchat</strong></div>
       </a>
-      <a class="btn-platform glow-twitter" href="{{ url_for('happy2_1') }}">
-        <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
+      <a class="btn-platform" href="{{ url_for('happy2_1') }}">
+        <div class="icon-circle"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
         <div class="platform-name"><strong>X / Twitter</strong></div>
       </a>
     </div>
@@ -70,7 +70,7 @@
   min-height: 100vh;
   padding: 4px 8px 10px 8px;
   box-sizing: border-box;
-  background-color: #f8fafc; /* very light neutral backdrop */
+  background-color: #f8fafc;
 }
 
 /* Cards */
@@ -80,8 +80,8 @@
   text-align: center;
   margin-bottom: 6px;
   background: #ffffff;
-  border-radius: 14px; /* slightly rounded */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* soft, subtle shadow */
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   padding: 10px 14px;
   transition: box-shadow 0.2s ease;
 }
@@ -136,13 +136,14 @@
   border-radius: 12px;
   padding: 8px 5px;
   text-align: center;
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  transition: transform 0.2s ease;
   font-size: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #ffffff;
+  border: 1px solid #e2e8f0;
 }
 .btn-platform:hover {
   transform: translateY(-2px);
@@ -157,16 +158,6 @@
   font-size: clamp(11px, 2.5vw, 13px);
   text-align: center;
 }
-
-/* Glow effects */
-.glow-facebook { box-shadow: 0 0 12px rgba(24, 119, 242, 0.25); }
-.glow-instagram { box-shadow: 0 0 12px rgba(228, 64, 95, 0.25); }
-.glow-tiktok { box-shadow: 0 0 12px rgba(0,0,0,0.25); }
-.glow-youtube { box-shadow: 0 0 12px rgba(255,0,0,0.25); }
-.bg-snapchat { background: #FFFC00; position: relative; }
-.snapchat-white { color: #fff; position: relative; z-index:2; }
-.glow-snapchat { box-shadow:0 0 12px rgba(255,252,0,0.3);}
-.glow-twitter { box-shadow:0 0 12px rgba(29,161,242,0.25);}
 
 /* How it Works */
 .how-card {
