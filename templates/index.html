@@ -77,7 +77,7 @@
   width: 100%;
   max-width: 500px;
   text-align: center;
-  margin-bottom: 2px; /* tighter spacing */
+  margin-bottom: 2px; /* tight spacing */
 }
 
 /* Top Card */
@@ -109,7 +109,7 @@
 
 /* Platforms */
 .platform-card {
-  margin: 2px 0; /* slightly closer */
+  margin: 2px 0;
 }
 .platforms {
   display: flex;
@@ -119,13 +119,13 @@
 }
 .btn-platform {
   flex: 1 1 calc(33% - 6px);
-  min-width: 100px;
-  max-width: 150px;
-  border-radius: 14px;
-  padding: 10px 6px;
+  min-width: 90px;
+  max-width: 130px;
+  border-radius: 12px;
+  padding: 8px 5px; /* smaller height */
   text-align: center;
   transition: box-shadow 0.3s ease, transform 0.2s ease;
-  font-size: 13px;
+  font-size: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -135,13 +135,13 @@
   transform: translateY(-2px);
 }
 
-/* Fit social media names perfectly */
+/* Platform name */
 .platform-name {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
-  font-size: clamp(12px, 3vw, 14px);
+  font-size: clamp(11px, 2.5vw, 13px);
   text-align: center;
 }
 
