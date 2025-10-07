@@ -70,7 +70,7 @@
   min-height: 100vh;
   padding: 4px 8px 10px 8px;
   box-sizing: border-box;
-  background-color: #f8fafc; /* very light neutral backdrop */
+  background-color: #f8fafc;
 }
 
 /* Cards */
@@ -80,8 +80,8 @@
   text-align: center;
   margin-bottom: 6px;
   background: #ffffff;
-  border-radius: 14px; /* slightly rounded */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* soft, subtle shadow */
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   padding: 10px 14px;
   transition: box-shadow 0.2s ease;
 }
@@ -126,26 +126,27 @@
 .platforms {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
   justify-content: center;
 }
 .btn-platform {
-  flex: 1 1 calc(33% - 5px);
+  flex: 1 1 calc(33% - 6px);
   min-width: 90px;
   max-width: 130px;
-  border-radius: 12px;
-  padding: 8px 5px;
+  border-radius: 14px;
+  padding: 10px 5px;
   text-align: center;
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  transition: all 0.25s ease;
   font-size: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #ffffff;
+  transform-style: preserve-3d;
 }
 .btn-platform:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px) scale(1.03);
 }
 
 /* Platform name */
@@ -158,15 +159,37 @@
   text-align: center;
 }
 
-/* Glow effects */
-.glow-facebook { box-shadow: 0 0 12px rgba(24, 119, 242, 0.25); }
-.glow-instagram { box-shadow: 0 0 12px rgba(228, 64, 95, 0.25); }
-.glow-tiktok { box-shadow: 0 0 12px rgba(0,0,0,0.25); }
-.glow-youtube { box-shadow: 0 0 12px rgba(255,0,0,0.25); }
-.bg-snapchat { background: #FFFC00; position: relative; }
-.snapchat-white { color: #fff; position: relative; z-index:2; }
-.glow-snapchat { box-shadow:0 0 12px rgba(255,252,0,0.3);}
-.glow-twitter { box-shadow:0 0 12px rgba(29,161,242,0.25);}
+/* Glow + brand backgrounds */
+.icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.bg-facebook { background: #1877f2; }
+.bg-instagram { background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); }
+.bg-tiktok { background: #000; }
+.bg-youtube { background: #ff0000; }
+.bg-snapchat { background: #fffc00; color: #000; }
+.bg-twitter { background: #1da1f2; }
+
+.glow-facebook { box-shadow: 0 0 14px rgba(24, 119, 242, 0.35); }
+.glow-instagram { box-shadow: 0 0 14px rgba(214, 41, 118, 0.35); }
+.glow-tiktok { box-shadow: 0 0 14px rgba(0,0,0,0.25); }
+.glow-youtube { box-shadow: 0 0 14px rgba(255,0,0,0.35); }
+.glow-snapchat { box-shadow: 0 0 14px rgba(255,252,0,0.4); }
+.glow-twitter { box-shadow: 0 0 14px rgba(29,161,242,0.35); }
+
+/* Soft halo animation */
+.btn-platform:hover .icon-circle {
+  filter: brightness(1.1) drop-shadow(0 0 10px rgba(255,255,255,0.4));
+}
 
 /* How it Works */
 .how-card {
