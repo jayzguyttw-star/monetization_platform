@@ -67,7 +67,7 @@ p.lead { color:#475569; margin:0 0 14px; }
   box-shadow:0 8px 18px rgba(15,23,42,0.1);
 }
 
-/* === Icon Styling (Brand Look + Glow) === */
+/* === Icon Styling (Removed Glow/Color Background) === */
 .icon-circle {
   width:58px;
   height:58px;
@@ -80,18 +80,15 @@ p.lead { color:#475569; margin:0 0 14px; }
   transform-style:preserve-3d;
 }
 
-/* Facebook */
+/* Facebook (slightly bigger) */
 .bg-facebook .icon-circle {
-  background:#fff;
-  box-shadow:0 0 0 4px rgba(24,119,242,0.15), 0 0 14px rgba(24,119,242,0.25);
+  width:64px;
+  height:64px;
 }
 .bg-facebook i { color:#1877F2; }
 
 /* Instagram */
-.bg-instagram .icon-circle {
-  background:#fff;
-  box-shadow:0 0 0 4px rgba(193,53,132,0.15), 0 0 14px rgba(225,48,108,0.25);
-}
+.bg-instagram .icon-circle {}
 .bg-instagram i {
   background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
   -webkit-background-clip:text;
@@ -100,12 +97,7 @@ p.lead { color:#475569; margin:0 0 14px; }
 }
 
 /* TikTok */
-.bg-tiktok .icon-circle {
-  background:#fff;
-  box-shadow:0 0 0 4px rgba(0,0,0,0.1),
-             0 0 16px rgba(255,0,80,0.25),
-             0 0 16px rgba(0,242,234,0.25);
-}
+.bg-tiktok .icon-circle {}
 .bg-tiktok i {
   color:#000;
   text-shadow:-1.8px 0 #00f2ea, 1.8px 0 #ff0050;
@@ -113,17 +105,11 @@ p.lead { color:#475569; margin:0 0 14px; }
 }
 
 /* YouTube */
-.bg-youtube .icon-circle {
-  background:#fff;
-  box-shadow:0 0 0 4px rgba(255,0,0,0.18), 0 0 14px rgba(255,0,0,0.28);
-}
+.bg-youtube .icon-circle {}
 .bg-youtube i { color:#FF0000; font-weight:800; }
 
 /* Snapchat */
-.bg-snapchat .icon-circle {
-  background:#fff;
-  box-shadow:0 0 0 4px rgba(255,252,0,0.22), 0 0 18px rgba(255,252,0,0.35);
-}
+.bg-snapchat .icon-circle {}
 .bg-snapchat i {
   color:#FFFC00;
   -webkit-text-stroke:1.5px #000;
@@ -131,44 +117,13 @@ p.lead { color:#475569; margin:0 0 14px; }
 }
 
 /* Twitter / X */
-.bg-twitter .icon-circle {
-  background:#fff;
-  box-shadow:0 0 0 4px rgba(0,0,0,0.12), 0 0 16px rgba(0,0,0,0.22);
-}
+.bg-twitter .icon-circle {}
 .bg-twitter i { color:#000; font-weight:800; }
 
 .icon-lg { font-size:34px; }
 
-/* === Glow Animation + 3D Tilt === */
-.btn-platform:hover .icon-circle {
-  animation:pulseGlow 1.8s infinite ease-in-out;
-  transform:rotateY(10deg) rotateX(8deg) scale(1.07);
-}
-
-@keyframes pulseGlow {
-  0% { transform:scale(1) rotateY(0) rotateX(0); }
-  50% { transform:scale(1.08) rotateY(10deg) rotateX(8deg); filter:brightness(1.3); }
-  100% { transform:scale(1) rotateY(0) rotateX(0); }
-}
-
 .card, .btn-platform {
   box-shadow:0 10px 25px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.03);
-}
-
-/* === Dark Mode === */
-@media (prefers-color-scheme: dark) {
-  body { background:#0f172a; color:#e2e8f0; }
-  .card {
-    background:#1e293b;
-    border-color:rgba(255,255,255,0.05);
-    box-shadow:0 8px 20px rgba(0,0,0,0.5);
-  }
-  .btn-platform {
-    background:rgba(30,41,59,0.85);
-    color:#f8fafc;
-    border-color:rgba(255,255,255,0.08);
-  }
-  .btn-platform:hover { background:rgba(51,65,85,0.9); }
 }
 
 /* === Mobile Optimizations === */
