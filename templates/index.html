@@ -24,27 +24,27 @@
     <div class="platforms">
       <a class="btn-platform glow-facebook" href="{{ url_for('love1_1') }}">
         <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
-        <strong>Facebook</strong>
+        <div><strong>Facebook</strong></div>
       </a>
       <a class="btn-platform glow-instagram" href="{{ url_for('love2_1') }}">
         <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
-        <strong>Instagram</strong>
+        <div><strong>Instagram</strong></div>
       </a>
       <a class="btn-platform glow-tiktok" href="{{ url_for('joy1_1') }}">
         <div class="icon-circle bg-tiktok"><i class="fa-brands fa-tiktok icon-lg"></i></div>
-        <strong>TikTok</strong>
+        <div><strong>TikTok</strong></div>
       </a>
       <a class="btn-platform glow-youtube" href="{{ url_for('joy2_1') }}">
         <div class="icon-circle bg-youtube"><i class="fa-brands fa-youtube icon-lg"></i></div>
-        <strong>YouTube</strong>
+        <div><strong>YouTube</strong></div>
       </a>
       <a class="btn-platform glow-snapchat" href="{{ url_for('happy1_1') }}">
         <div class="icon-circle bg-snapchat"><i class="fa-brands fa-snapchat icon-lg snapchat-white"></i></div>
-        <strong>Snapchat</strong>
+        <div><strong>Snapchat</strong></div>
       </a>
       <a class="btn-platform glow-twitter" href="{{ url_for('happy2_1') }}">
         <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
-        <strong>X / Twitter</strong>
+        <div><strong>X / Twitter</strong></div>
       </a>
     </div>
   </div>
@@ -60,129 +60,93 @@
   </div>
 </div>
 
-<!-- STYLE SECTION -->
 <style>
-/* GLOBAL STYLES */
+/* Clean neutral background */
 body {
-  background: linear-gradient(135deg, #fdf497 0%, #fd5949 40%, #d6249f 70%, #285AEB 100%);
-  font-family: "Poppins", sans-serif;
-  color: #0f172a;
+  background: #f9fafb;
   margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  background-attachment: fixed;
-  background-size: cover;
+  font-family: 'Poppins', sans-serif;
+  color: #0f172a;
 }
 
-/* MAIN CONTAINER */
+/* Fullscreen container */
 .container-fullscreen {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  padding: 12px 10px 30px;
-  gap: 8px; /* tighter vertical spacing between cards */
+  padding: 12px;
   box-sizing: border-box;
 }
 
-/* UNIVERSAL CARD STYLE */
+/* Cards */
 .card {
   width: 100%;
-  max-width: 460px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
+  max-width: 500px;
+  text-align: center;
+  margin-bottom: 10px;
+  background: #ffffff;
   border-radius: 20px;
   padding: 16px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.12);
-}
-
-/* TITLES */
-.section-title {
-  text-align: center;
-  font-size: clamp(16px, 4vw, 20px);
-  font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 10px;
-}
-
-/* TOP CARD */
-.top-card {
-  max-width: 440px;
-}
-
+/* Top Card */
 .top-card h1 {
-  font-size: clamp(26px, 6vw, 32px);
+  font-size: clamp(26px, 5vw, 32px);
   font-weight: 800;
-  text-align: center;
   color: #0f172a;
   margin-bottom: 6px;
 }
-
 .top-card .lead {
-  font-size: clamp(13px, 3.5vw, 15px);
-  text-align: center;
-  color: #475569;
-  margin-bottom: 8px;
+  font-size: clamp(13px, 3vw, 16px);
+  line-height: 1.4;
+  margin-bottom: 10px;
 }
 
+/* Caption */
 .caption {
   text-align: left;
-  font-size: clamp(12px, 3vw, 14px);
+  font-size: clamp(12px, 2.5vw, 14px);
+  line-height: 1.5;
   color: #334155;
+  margin-top: 4px;
 }
-
 .caption-title {
   font-weight: 700;
-  font-size: clamp(15px, 3.5vw, 18px);
-  margin-bottom: 4px;
-  color: #1e293b;
+  font-size: clamp(15px, 3vw, 17px);
+  margin-bottom: 6px;
 }
 
-/* PLATFORM CARD */
+/* Platforms */
+.platform-card {
+  margin: 6px 0;
+}
 .platforms {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
 }
-
 .btn-platform {
-  flex: 1 1 45%;
-  min-width: 130px;
-  max-width: 160px;
-  border-radius: 16px;
-  padding: 10px 6px;
-  background: #fff;
-  text-align: center;
-  transition: all 0.25s ease;
-  font-size: 15px;
-  font-weight: 600;
-  color: #1e293b;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  gap: 6px;
+  flex: 1 1 45%;
+  min-width: 120px;
+  max-width: 160px;
+  border-radius: 14px;
+  padding: 12px 6px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  background: #fff;
 }
-
 .btn-platform:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
-/* GLOW EFFECTS */
-.glow-facebook { box-shadow: 0 0 10px rgba(24, 119, 242, 0.25); }
-.glow-instagram { box-shadow: 0 0 10px rgba(228, 64, 95, 0.25); }
-.glow-tiktok { box-shadow: 0 0 10px rgba(0,0,0,0.25); }
-.glow-youtube { box-shadow: 0 0 10px rgba(255,0,0,0.25); }
-.glow-snapchat { box-shadow: 0 0 10px rgba(255,252,0,0.3); }
-.glow-twitter { box-shadow: 0 0 10px rgba(29,161,242,0.25); }
-
-/* ICONS (no glow on icons themselves) */
+/* Icons — clean, no glow */
 .icon-circle {
   display: flex;
   align-items: center;
@@ -191,43 +155,54 @@ body {
   height: 44px;
   border-radius: 50%;
   color: white;
+  box-shadow: none !important;
 }
 
+/* Icon sizes */
+.icon-lg { font-size: 22px; }
+
+/* Brand colors */
 .bg-facebook { background: #1877f2; }
-.bg-instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%,#d6249f 60%,#285AEB 90%); }
+.bg-instagram { background: radial-gradient(circle at 30% 30%, #fdf497 0%, #fd5949 45%, #d6249f 70%, #285AEB 100%); }
 .bg-tiktok { background: #000; }
 .bg-youtube { background: #ff0000; }
-.bg-snapchat { background: #FFFC00; }
-.bg-twitter { background: #1DA1F2; }
+.bg-snapchat { background: #FFFC00; color: black; }
+.bg-twitter { background: #000; }
 
-/* HOW IT WORKS */
+/* Glows on button containers only */
+.glow-facebook { box-shadow: 0 0 10px rgba(24,119,242,0.25); }
+.glow-instagram { box-shadow: 0 0 10px rgba(214,36,159,0.25); }
+.glow-tiktok { box-shadow: 0 0 10px rgba(0,0,0,0.25); }
+.glow-youtube { box-shadow: 0 0 10px rgba(255,0,0,0.25); }
+.glow-snapchat { box-shadow: 0 0 10px rgba(255,252,0,0.3); }
+.glow-twitter { box-shadow: 0 0 10px rgba(0,0,0,0.25); }
+
+/* How it Works */
+.how-card {
+  text-align: left;
+  font-size: clamp(12px, 2.5vw, 14px);
+}
+.how-card h3 {
+  font-weight: 700;
+  font-size: clamp(15px, 3vw, 17px);
+  margin-bottom: 4px;
+}
 .how-card ul {
-  padding-left: 18px;
+  padding-left: 16px;
+  line-height: 1.5;
   margin: 0;
-  line-height: 1.55;
-  font-size: clamp(12px, 3vw, 14px);
-  color: #334155;
 }
 
-/* MOBILE TWEAKS */
+/* Responsive */
 @media (max-width: 480px) {
   .card {
-    padding: 13px;
-    max-width: 92%;
+    padding: 12px;
+    margin-bottom: 8px;
   }
-
-  .top-card {
-    max-width: 88%;
-  }
-
   .btn-platform {
-    flex: 1 1 48%;
-    min-width: 125px;
-    padding: 9px 6px;
-  }
-
-  .btn-platform strong {
-    font-size: 13.5px;
+    flex: 1 1 45%;
+    min-width: 110px;
+    padding: 10px 4px;
   }
 }
 </style>
