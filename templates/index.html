@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="wrap">
+<div class="container-fullscreen">
   <!-- Top Card -->
   <div class="card top-card">
     <h1>✨ FUN WEBSITE</h1>
@@ -24,27 +24,27 @@
     <div class="platforms">
       <a class="btn-platform" href="{{ url_for('love1_1') }}">
         <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
-        <div><strong>Facebook</strong></div>
+        <div class="platform-name"><strong>Facebook</strong></div>
       </a>
       <a class="btn-platform" href="{{ url_for('love2_1') }}">
         <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
-        <div><strong>Instagram</strong></div>
+        <div class="platform-name"><strong>Instagram</strong></div>
       </a>
       <a class="btn-platform" href="{{ url_for('joy1_1') }}">
         <div class="icon-circle bg-tiktok"><i class="fa-brands fa-tiktok icon-lg"></i></div>
-        <div><strong>TikTok</strong></div>
+        <div class="platform-name"><strong>TikTok</strong></div>
       </a>
       <a class="btn-platform" href="{{ url_for('joy2_1') }}">
         <div class="icon-circle bg-youtube"><i class="fa-brands fa-youtube icon-lg"></i></div>
-        <div><strong>YouTube</strong></div>
+        <div class="platform-name"><strong>YouTube</strong></div>
       </a>
       <a class="btn-platform" href="{{ url_for('happy1_1') }}">
         <div class="icon-circle bg-snapchat"><i class="fa-brands fa-snapchat icon-lg"></i></div>
-        <div><strong>Snapchat</strong></div>
+        <div class="platform-name"><strong>Snapchat</strong></div>
       </a>
       <a class="btn-platform" href="{{ url_for('happy2_1') }}">
         <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
-        <div><strong>X / Twitter</strong></div>
+        <div class="platform-name"><strong>X / Twitter</strong></div>
       </a>
     </div>
   </div>
@@ -59,4 +59,72 @@
     </ul>
   </div>
 </div>
+
+<style>
+/* Fullscreen container */
+.container-fullscreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  padding: 4px 8px 10px 8px;
+  box-sizing: border-box;
+  background-color: #f8fafc;
+}
+
+/* Cards */
+.card {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  margin-bottom: 6px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 10px 14px;
+  transition: box-shadow 0.2s ease;
+}
+.card:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Top Card */
+.top-card { margin-top: 2px; }
+.top-card h1 { font-size: clamp(26px, 5vw, 32px); font-weight: 800; margin-bottom: 4px; color: #0f172a; }
+.top-card .lead { font-size: clamp(12px, 3vw, 16px); line-height: 1.4; margin-bottom: 8px; }
+
+/* Caption */
+.caption { text-align: left; font-size: clamp(11px, 2.5vw, 14px); line-height: 1.4; color: #334155; margin-top: 2px; }
+.caption-title { font-weight: 700; font-size: clamp(15px, 3vw, 17px); margin-bottom: 4px; }
+
+/* Platforms */
+.platform-card { margin: 2px 0; }
+.platforms { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+.btn-platform {
+  flex: 1 1 calc(33% - 5px);
+  min-width: 90px;
+  max-width: 130px;
+  border-radius: 12px;
+  padding: 8px 5px;
+  text-align: center;
+  transition: transform 0.2s ease;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+.btn-platform:hover { transform: translateY(-2px); }
+
+/* Platform name */
+.platform-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; font-size: clamp(11px, 2.5vw, 13px); text-align: center; }
+
+/* How it Works */
+.how-card { text-align: left; font-size: clamp(11px, 2.5vw, 14px); margin-bottom: 8px; }
+.how-card h3 { font-weight: 700; font-size: clamp(15px, 3vw, 17px); margin-bottom: 3px; }
+.how-card ul { padding-left: 16px; line-height: 1.4; margin: 0; }
+</style>
 {% endblock %}
