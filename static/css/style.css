@@ -28,17 +28,8 @@ body {
   border:1px solid rgba(2,6,23,0.04);
 }
 
-h1 { margin:0 0 8px; font-size:28px; font-weight:900; letter-spacing:-0.02em; }
+h1 { margin:0 0 8px; font-size:28px; }
 p.lead { color:#475569; margin:0 0 14px; }
-
-/* Caption */
-.caption {
-  text-align:left;
-  font-size:14px;
-  line-height:1.4;
-  color:#334155;
-}
-.caption-title { font-weight:700; font-size:16px; margin-bottom:4px; }
 
 /* === Premium Platform Buttons === */
 .platforms {
@@ -49,20 +40,20 @@ p.lead { color:#475569; margin:0 0 14px; }
 }
 
 .btn-platform {
-  flex: 1 1 calc(33.333% - 12px); /* 3 per row */
-  max-width:180px;
+  width:340px;
   display:flex;
   align-items:center;
-  gap:12px;
-  padding:14px 16px;
+  gap:14px;
+  padding:14px 18px;
   border-radius:22px;
   border:1px solid rgba(255,255,255,0.4);
   text-decoration:none;
   color:inherit;
   background:rgba(255,255,255,0.5);
   backdrop-filter:blur(14px);
+  transition:transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
   box-shadow:0 8px 22px rgba(2,6,23,0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
+  perspective:1000px;
 }
 
 .btn-platform:hover {
@@ -76,7 +67,7 @@ p.lead { color:#475569; margin:0 0 14px; }
   box-shadow:0 8px 18px rgba(15,23,42,0.1);
 }
 
-/* Icon Styling */
+/* === Icon Styling (Exact Brand Look + Glow) === */
 .icon-circle {
   width:58px;
   height:58px;
@@ -86,30 +77,70 @@ p.lead { color:#475569; margin:0 0 14px; }
   justify-content:center;
   flex-shrink:0;
   transition:all 0.4s ease;
+  transform-style:preserve-3d;
 }
 
-/* Social Brand Styles with Glow */
-.bg-facebook .icon-circle { background:#fff; box-shadow:0 0 0 4px rgba(24,119,242,0.15),0 0 14px rgba(24,119,242,0.25); }
+/* Facebook */
+.bg-facebook .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(24,119,242,0.15), 0 0 14px rgba(24,119,242,0.25);
+}
 .bg-facebook i { color:#1877F2; }
 
-.bg-instagram .icon-circle { background:#fff; box-shadow:0 0 0 4px rgba(193,53,132,0.15),0 0 14px rgba(225,48,108,0.25); }
-.bg-instagram i { background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:800; }
+/* Instagram */
+.bg-instagram .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(193,53,132,0.15), 0 0 14px rgba(225,48,108,0.25);
+}
+.bg-instagram i {
+  background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-weight:800;
+}
 
-.bg-tiktok .icon-circle { background:#fff; box-shadow:0 0 0 4px rgba(0,0,0,0.1),0 0 16px rgba(255,0,80,0.25),0 0 16px rgba(0,242,234,0.25); }
-.bg-tiktok i { color:#000; text-shadow:-1.8px 0 #00f2ea,1.8px 0 #ff0050; font-weight:800; }
+/* TikTok */
+.bg-tiktok .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(0,0,0,0.1),
+             0 0 16px rgba(255,0,80,0.25),
+             0 0 16px rgba(0,242,234,0.25);
+}
+.bg-tiktok i {
+  color:#000;
+  text-shadow:-1.8px 0 #00f2ea, 1.8px 0 #ff0050;
+  font-weight:800;
+}
 
-.bg-youtube .icon-circle { background:#fff; box-shadow:0 0 0 4px rgba(255,0,0,0.18),0 0 14px rgba(255,0,0,0.28); }
+/* YouTube */
+.bg-youtube .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(255,0,0,0.18), 0 0 14px rgba(255,0,0,0.28);
+}
 .bg-youtube i { color:#FF0000; font-weight:800; }
 
-.bg-snapchat .icon-circle { background:#fff; box-shadow:0 0 0 4px rgba(255,252,0,0.22),0 0 18px rgba(255,252,0,0.35); }
-.bg-snapchat i { color:#FFFC00; -webkit-text-stroke:1.5px #000; font-weight:800; }
+/* Snapchat */
+.bg-snapchat .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(255,252,0,0.22), 0 0 18px rgba(255,252,0,0.35);
+}
+.bg-snapchat i {
+  color:#FFFC00;
+  -webkit-text-stroke:1.5px #000;
+  font-weight:800;
+}
 
-.bg-twitter .icon-circle { background:#fff; box-shadow:0 0 0 4px rgba(0,0,0,0.12),0 0 16px rgba(0,0,0,0.22); }
+/* Twitter / X */
+.bg-twitter .icon-circle {
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(0,0,0,0.12), 0 0 16px rgba(0,0,0,0.22);
+}
 .bg-twitter i { color:#000; font-weight:800; }
 
 .icon-lg { font-size:34px; }
+.notranslate { unicode-bidi:isolate; }
 
-/* Glow Animation */
+/* === Glow Animation + 3D Tilt === */
 .btn-platform:hover .icon-circle {
   animation:pulseGlow 1.8s infinite ease-in-out;
   transform:rotateY(10deg) rotateX(8deg) scale(1.07);
@@ -121,20 +152,110 @@ p.lead { color:#475569; margin:0 0 14px; }
   100% { transform:scale(1) rotateY(0) rotateX(0); }
 }
 
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  body { background:#0f172a; color:#e2e8f0; }
-  .card { background:#1e293b; border-color:rgba(255,255,255,0.05); box-shadow:0 8px 20px rgba(0,0,0,0.5); }
-  .btn-platform { background:rgba(30,41,59,0.85); color:#f8fafc; border-color:rgba(255,255,255,0.08); }
-  .btn-platform:hover { background:rgba(51,65,85,0.9); }
+/* === Soft corner + shadow improvements === */
+.card, .btn-platform {
+  box-shadow:0 10px 25px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.03);
 }
 
-/* Mobile Optimizations */
-@media (max-width:680px) {
-  .wrap { padding:12px; }
-  .card { margin-bottom:12px; width:100%; }
-  .btn-platform { flex:1 1 100%; max-width:none; padding:12px 16px; font-size:14px; }
-  h1 { font-size:24px; }
-  .caption-title { font-size:16px; }
-  .how-card h3 { font-size:16px; }
+/* === Form Styles === */
+.platform-header {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:12px;
+}
+
+.input {
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #e6eef8;
+  margin-bottom:10px;
+  font-size:15px;
+}
+
+.input:focus, input:focus, textarea:focus {
+  outline:none;
+  border-color:#2563eb;
+  box-shadow:0 0 0 3px rgba(37,99,235,0.2);
+}
+
+textarea.input { min-height:120px; resize:vertical; }
+
+input[type="checkbox"], input[type="radio"] {
+  margin-right:6px;
+  accent-color:#2563eb;
+}
+
+.btn {
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.btn-blue { background:#1877F2; color:#fff; }
+.btn-black { background:#111; color:#fff; }
+.btn-yellow { background:#FFDC00; color:#111; }
+
+.btn-submit {
+  background:#2563eb;
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+  padding:12px 32px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:background 0.3s, transform 0.1s;
+}
+.btn-submit:hover { background:#1e40af; }
+.btn-submit:active { transform:scale(0.97); }
+
+.center { display:flex; justify-content:center; }
+pre { white-space:pre-wrap; font-family:inherit; background:transparent; border:none; padding:0; margin:0; }
+
+.admin-grid { display:flex; flex-direction:column; gap:12px; }
+.submission-row { display:flex; gap:12px; align-items:flex-start; padding:12px; border-radius:12px; }
+.submission-meta { min-width:220px; font-size:13px; color:#334155; }
+
+.icon-small {
+  width:48px;
+  height:48px;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  margin-right:8px;
+}
+
+@media(max-width:680px){ .btn-platform { width:100%; } }
+
+h3 {
+  font-size:1.2rem;
+  margin:18px 0 8px;
+  padding-bottom:4px;
+  border-bottom:1px solid #e5e7eb;
+  color:#111827;
+  font-weight:700;
+}
+
+label {
+  display:block;
+  font-weight:500;
+  margin-top:10px;
+  color:#374151;
+}
+
+.terms-box {
+  border:1px solid #d1d5db;
+  border-radius:8px;
+  padding:12px;
+  height:120px;
+  overflow-y:auto;
+  background:#f9fafb;
+  font-size:0.9rem;
+  margin-bottom:10px;
 }
