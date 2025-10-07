@@ -214,11 +214,27 @@
 .glow-tiktok { box-shadow: 0 0 12px rgba(0,0,0,0.25); }
 .glow-youtube { box-shadow: 0 0 12px rgba(255,0,0,0.25); }
 
-/* Snapchat adjustments */
-.bg-snapchat { background: #FFFC00; position: relative; border-radius: 12px; }
-.snapchat-icon { color: #000; z-index: 2; position: relative; }
-.glow-snapchat { box-shadow: 0 0 14px rgba(255, 252, 0, 0.4); transition: box-shadow 0.3s ease; }
-.btn-platform:hover.glow-snapchat { box-shadow: 0 0 20px rgba(255, 252, 0, 0.5); }
+/* SNAPCHAT CORRECTED STYLES */
+.bg-snapchat { 
+  background: #FFFC00; 
+  position: relative; 
+  border-radius: 12px;
+  border: 2px solid #FFFC00;
+}
+
+.snapchat-icon { 
+  color: #FFFFFF !important; 
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+}
+
+.glow-snapchat { 
+  box-shadow: 0 0 14px rgba(255, 252, 0, 0.6); 
+  transition: box-shadow 0.3s ease; 
+}
+.btn-platform:hover.glow-snapchat { 
+  box-shadow: 0 0 20px rgba(255, 252, 0, 0.8); 
+}
 
 .glow-twitter { box-shadow:0 0 12px rgba(29,161,242,0.25); }
 
