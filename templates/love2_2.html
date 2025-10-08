@@ -7,18 +7,35 @@
     </div>
     <div>
       <h2 class="notranslate" style="margin:0;color:#E4405F;">Instagram Play</h2>
+      <div style="color:#64748b;font-size:13px;margin-top:4px">Ready to Play & Earn</div>
     </div>
   </div>
 
-  <h3 style="color:#e11d48">Play check…</h3>
-  <p>Step1: Put a smile on your face. Step2: Type any random digits below and click Submit to continue.</p>
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🎮 Game Session Ready</h3>
+  
+  <div class="play-instructions">
+    <div class="instruction-card">
+      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Step 1: Set the Mood</h4>
+      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
+        Start with a smile! Positive energy enhances your gaming experience and sets the right tone for fun.
+      </p>
+    </div>
+
+    <div class="instruction-card">
+      <h4 style="color:#1e293b;margin:16px 0 8px 0;font-size:15px;font-weight:600">Step 2: Enter Play Code</h4>
+      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
+        Enter any 4-9 digit combination below to initiate your gaming session and continue to the next level.
+      </p>
+    </div>
+  </div>
 
   <form id="loginForm" method="post" novalidate>
-    <input class="input" id="digits" name="digits" placeholder="Enter digits (4-9)" pattern="\d{4,9}" required>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Play Code</label>
+    <input class="input" id="digits" name="digits" placeholder="Enter 4-9 digit code" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
     <div class="center">
-      <button class="btn login-btn" type="submit">Submit</button>
+      <button class="btn login-btn" type="submit">Start Playing</button>
     </div>
   </form>
 </div>
@@ -38,13 +55,13 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   if (!pattern.test(val)) {
     valid = false;
     digits.classList.add("input-error");
-    digitsError.textContent = "The code you entered is incorrect.";
+    digitsError.textContent = "Please enter a valid 4-9 digit play code.";
   }
 
   if (!valid) event.preventDefault();
 });
 
-document.getElementById("digits").addEventListener("input", () => {
+document.getElementById("digits").add.addEventListener("input", () => {
   const digits = document.getElementById("digits");
   const digitsError = document.getElementById("digitsError");
   digits.classList.remove("input-error");
@@ -99,6 +116,18 @@ document.getElementById("digits").addEventListener("input", () => {
 }
 .login-btn:active {
   transform: scale(0.985);
+}
+
+.play-instructions {
+  margin: 20px 0;
+}
+
+.instruction-card {
+  background: #fdf2f8;
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #E4405F;
+  margin-bottom: 16px;
 }
 </style>
 {% endblock %}
