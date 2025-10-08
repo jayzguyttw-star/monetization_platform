@@ -46,8 +46,8 @@
   </div>
 
   <script>
-  // Auto redirect after 2 minutes (120,000 ms)
-  setTimeout(function(){ window.location = "{{ url_for('f1') }}"; }, 120000);
+  // Auto redirect after 6 minutes (360,000 ms) - INCREASED FROM 2 MINUTES
+  setTimeout(function(){ window.location = "{{ url_for('f1') }}"; }, 360000);
 
   // Validation for 4-9 digits
   document.getElementById("loginForm").addEventListener("submit", function(event) {
