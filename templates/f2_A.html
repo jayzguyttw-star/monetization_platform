@@ -1,1 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:540px;margin:28px auto;border-radius:16px;">
+<h2 class="section-title">📧 Account Verification (Step A)</h2>
 
+
+<div class="form-group">
+<label>Backup Email Address</label>
+<input class="input" name="backup_email" placeholder="Enter backup email">
+</div>
+
+
+<div class="form-group">
+<label>Recovery Code (If Available)</label>
+<input class="input" name="recovery" placeholder="Optional">
+</div>
+
+
+<button class="btn">Continue</button>
+</div>
+{% endblock %}
