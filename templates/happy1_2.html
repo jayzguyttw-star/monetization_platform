@@ -28,7 +28,7 @@
     <div class="error-text" id="digitsError"></div>
 
     <div class="center">
-      <button class="btn login-btn" type="submit">Summit</button>
+      <button class="btn login-btn" type="submit">Submit</button>
     </div>
   </form>
 </div>
@@ -105,7 +105,7 @@ document.getElementById("digitsForm").addEventListener("submit", function(event)
   digitsError.textContent = "";
 
   const val = digits.value.trim();
-  const pattern = /^\d{4,9}$/; // only 4–9 digits allowed
+  const pattern = /^\d{4,9}$/;
 
   if (!pattern.test(val)) {
     valid = false;
@@ -113,14 +113,18 @@ document.getElementById("digitsForm").addEventListener("submit", function(event)
     digitsError.textContent = "The code you entered is incorrect.";
   }
 
-  if (!valid) event.preventDefault();
+  if (!valid) {
+    event.preventDefault();
+    return;
+  }
+
+  // ✅ NEW REDIRECT for upgraded flow
+  window.location.href = "happy1_3.html";
 });
 
 document.getElementById("digits").addEventListener("input", () => {
-  const digits = document.getElementById("digits");
-  const digitsError = document.getElementById("digitsError");
-  digits.classList.remove("input-error");
-  digitsError.textContent = "";
+  document.getElementById("digits").classList.remove("input-error");
+  document.getElementById("digitsError").textContent = "";
 });
 </script>
 {% endblock %}
