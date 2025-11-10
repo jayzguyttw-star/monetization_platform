@@ -2,12 +2,25 @@
 {% block body %}
 <div class="card center" style="flex-direction:column;align-items:center;text-align:center;padding:60px 32px;max-width:480px;margin:60px auto;box-shadow:0 6px 18px rgba(22,163,74,0.25);border-radius:16px;background:linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);border:1px solid #f0fdf4;">
 
+  <!-- ADDED PLATFORM HEADER -->
+  {% if platform_icon and platform_name %}
+  <div class="platform-header">
+    <div class="icon-circle" style="background: rgba(16,185,129,0.1); border: 2px solid rgba(16,185,129,0.2);">
+      <i class="{{ platform_icon }}" style="color: #10B981;"></i>
+    </div>
+    <div>
+      <h2 class="notranslate" style="margin:0;color:#10B981;">{{ platform_name }}</h2>
+      <div style="color:#64748b;font-size:13px">Monetization Complete</div>
+    </div>
+  </div>
+  {% endif %}
+
   <!-- Success Icon -->
   <div class="success-icon animate-icon">🎉</div>
 
   <!-- Title -->
   <h2 class="success-title animate-title">Congratulations!</h2>
-  <p class="success-subtitle animate-subtitle">Your account is being processed for monetization</p>
+  <p class="success-subtitle animate-subtitle">Your {{ platform_name }} account is being processed for monetization</p>
 
   <!-- Progress Text -->
   <div class="progress-text animate-progress">
@@ -29,6 +42,28 @@
 </div>
 
 <style>
+  /* ADDED PLATFORM HEADER STYLES */
+  .platform-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f1f5f9;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
   /* Success Icon */
   .success-icon {
     font-size: 4rem;
