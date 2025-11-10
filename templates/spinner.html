@@ -1,231 +1,189 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card center glow-card" style="flex-direction:column;align-items:center;text-align:center;padding:40px 28px;
-     max-width:320px;margin:60px auto;border-radius:20px;position:relative;background:linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);border:1px solid #f1f5f9;">
 
-  <!-- Platform Icon -->
-  <div class="platform-icon animate-icon">
-    {% if platform == 'facebook' %}
-      <i class="fa-brands fa-facebook-f"></i>
-    {% elif platform == 'instagram' %}
-      <i class="fa-brands fa-instagram"></i>
-    {% elif platform == 'tiktok' %}
-      <i class="fa-brands fa-tiktok"></i>
-    {% elif platform == 'snapchat' %}
-      <i class="fa-brands fa-snapchat-ghost"></i>
-    {% elif platform == 'twitter' %}
-      <i class="fa-brands fa-x-twitter"></i>
-    {% else %}
-      <i class="fa-solid fa-shield-check"></i>
-    {% endif %}
+<!-- ✅ Always-visible platform header -->
+<div id="platformHeader" 
+     style="max-width:540px;margin:20px auto 0;display:flex;align-items:center;gap:14px;">
+
+  <div id="platformIcon"
+       style="font-size:32px;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;">
   </div>
-  
-  <!-- Enhanced Spinner -->
+
+  <div>
+    <h2 id="platformName" class="notranslate"
+        style="margin:0;font-size:20px;font-weight:700;color:#111827;"></h2>
+  </div>
+</div>
+
+
+<!-- ✅ Spinner Card -->
+<div class="card center glow-card" style="flex-direction:column;align-items:center;text-align:center;
+     padding:40px 28px;max-width:320px;margin:24px auto;border-radius:20px;position:relative;
+     background:linear-gradient(135deg,#ffffff 0%,#fafbfc 100%);border:1px solid #f1f5f9;">
+
+  <!-- Icon (animated) -->
+  <div class="platform-icon animate-icon">
+    <i id="spinnerIcon" class="fa-solid fa-circle-notch"></i>
+  </div>
+
+  <!-- Spinner -->
   <div class="spinner-container">
     <div class="spinner"></div>
     <div class="spinner-ring"></div>
   </div>
-  
-  <!-- Progress Text -->
+
+  <!-- Text -->
   <p class="processing-text animate-text">Processing your request</p>
-  <p class="platform-text">Please wait...<span class="platform-name">{{ platform|title }}</span></p>
+  <p class="platform-text">Please wait...</p>
+
 </div>
 
+<!-- ✅ Auto Redirect to f1.html -->
 <script>
-  setTimeout(function(){
-    window.location='{{ next_url }}';
-  }, {{ delay*1000 }});
+setTimeout(() => {
+  window.location.href = "f1.html";
+}, 3000); // 3 seconds
+
+/* ✅ Load Platform Branding */
+document.addEventListener("DOMContentLoaded", function () {
+  const brand = JSON.parse(localStorage.getItem("platformBranding"));
+  if (!brand) return;
+
+  // Header Logo
+  document.getElementById("platformIcon").style.background = brand.color;
+  document.getElementById("platformIcon").style.color = "#fff";
+  document.getElementById("platformIcon").innerHTML = `<i class="${brand.icon}" style="font-size:28px;"></i>`;
+  document.getElementById("platformName").textContent = brand.name;
+
+  // Spinner Icon Color
+  const icon = document.getElementById("spinnerIcon");
+  icon.style.color = brand.color;
+
+  // Glow effect
+  document.documentElement.style.setProperty('--spinner-color', brand.color);
+  document.documentElement.style.setProperty('--glow-color', brand.glow);
+});
 </script>
 
 <style>
-  /* Platform-specific colors and glow intensity */
-  {% if platform == 'facebook' %}
-  :root { 
-    --glow-color: rgba(24, 119, 242, 0.25); 
-    --spinner-color: #1877F2; 
-    --glow-blur: 16px;
-    --icon-bg: rgba(24, 119, 242, 0.1);
-  }
-  {% elif platform == 'instagram' %}
-  :root { 
-    --glow-color: rgba(228, 64, 95, 0.25); 
-    --spinner-color: #E4405F; 
-    --glow-blur: 16px;
-    --icon-bg: rgba(228, 64, 95, 0.1);
-  }
-  {% elif platform == 'tiktok' %}
-  :root { 
-    --glow-color: rgba(255, 0, 80, 0.25); 
-    --spinner-color: #FF0050; 
-    --glow-blur: 16px;
-    --icon-bg: rgba(255, 0, 80, 0.1);
-  }
-  {% elif platform == 'snapchat' %}
-  :root { 
-    --glow-color: rgba(255, 252, 0, 0.4); 
-    --spinner-color: #FFFC00; 
-    --glow-blur: 24px;
-    --icon-bg: rgba(255, 252, 0, 0.15);
-  }
-  {% elif platform == 'twitter' %}
-  :root { 
-    --glow-color: rgba(29, 161, 242, 0.25); 
-    --spinner-color: #1DA1F2; 
-    --glow-blur: 16px;
-    --icon-bg: rgba(29, 161, 242, 0.1);
-  }
-  {% else %}
-  :root { 
-    --glow-color: rgba(24, 119, 242, 0.25); 
-    --spinner-color: #1877F2; 
-    --glow-blur: 16px;
-    --icon-bg: rgba(24, 119, 242, 0.1);
-  }
-  {% endif %}
+:root {
+  --spinner-color: #1DA1F2;
+  --glow-color: rgba(29,161,242,0.25);
+}
 
-  /* Platform Icon */
-  .platform-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: var(--icon-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 24px;
-    font-size: 24px;
-    color: var(--spinner-color);
-    opacity: 0;
-    transform: scale(0.8);
-  }
+/* Platform Icon */
+.platform-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  font-size: 26px;
+  color: var(--spinner-color);
+  opacity: 0;
+  transform: scale(0.8);
+}
 
-  .animate-icon {
-    animation: iconAppear 0.8s ease-out forwards;
-  }
+.animate-icon {
+  animation: iconAppear 0.8s ease-out forwards;
+}
 
-  @keyframes iconAppear {
-    0% { opacity: 0; transform: scale(0.8); }
-    70% { transform: scale(1.1); }
-    100% { opacity: 1; transform: scale(1); }
-  }
+@keyframes iconAppear {
+  0% { opacity: 0; transform: scale(0.8); }
+  70% { transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
 
-  /* Enhanced Pulsing glow effect */
-  .glow-card::before {
-    content: "";
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
-    border-radius: 24px;
-    background: var(--glow-color);
-    filter: blur(var(--glow-blur));
-    opacity: 0.6;
-    animation: pulse 2.5s infinite ease-in-out;
-    z-index: -1;
-  }
+/* Glow */
+.glow-card::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 24px;
+  background: var(--glow-color);
+  filter: blur(18px);
+  opacity: 0.6;
+  animation: pulse 2.5s infinite ease-in-out;
+  z-index: -1;
+}
 
-  @keyframes pulse {
-    0%, 100% { 
-      opacity: 0.5; 
-      transform: scale(1); 
-    }
-    50% { 
-      opacity: 0.8; 
-      transform: scale(1.05); 
-    }
-  }
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
 
-  /* Spinner Container */
-  .spinner-container {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 28px;
-  }
+/* Spinner */
+.spinner-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 28px;
+}
 
-  /* Enhanced Spinner */
-  .spinner {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 4px solid transparent;
-    border-top: 4px solid var(--spinner-color);
-    border-right: 4px solid var(--spinner-color);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: spin 1.2s linear infinite;
-  }
+.spinner {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  border-top: 4px solid var(--spinner-color);
+  border-right: 4px solid var(--spinner-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: spin 1.2s linear infinite;
+}
 
-  .spinner-ring {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 2px solid rgba(241, 245, 249, 0.8);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.spinner-ring {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgba(241, 245, 249, 0.8);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-  @keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-  }
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+ 100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
 
-  /* Text Styling */
-  .processing-text {
-    font-size: 18px;
-    font-weight: 600;
-    color: #0f172a;
-    margin-bottom: 8px;
-    opacity: 0;
-  }
+/* Text */
+.processing-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 8px;
+  opacity: 0;
+}
 
-  .platform-text {
-    font-size: 14px;
-    color: #64748b;
-    font-weight: 500;
-    opacity: 0;
-  }
+.platform-text {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+  opacity: 0;
+}
 
-  .platform-name {
-    color: var(--spinner-color);
-    font-weight: 700;
-    text-transform: capitalize;
-  }
+.animate-text {
+  animation: fadeInUp 0.8s ease forwards;
+}
 
-  .animate-text {
-    animation: fadeInUp 0.8s ease forwards;
-    animation-delay: 0.3s;
-  }
+.platform-text {
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.3s;
+}
 
-  .platform-text {
-    animation: fadeInUp 0.8s ease forwards;
-    animation-delay: 0.5s;
-  }
-
-  @keyframes fadeInUp {
-    0% { 
-      opacity: 0; 
-      transform: translateY(10px); 
-    }
-    100% { 
-      opacity: 1; 
-      transform: translateY(0); 
-    }
-  }
-
-  /* Card hover effect */
-  .card {
-    transition: all 0.4s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  }
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(10px); }
+ 100% { opacity: 1; transform: translateY(0); }
+}
 </style>
 {% endblock %}
