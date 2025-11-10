@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="card form-card">
+  <!-- ADDED PLATFORM HEADER -->
+  <div class="platform-header">
+    <div class="icon-circle" style="background: rgba(102, 126, 234, 0.1); border: 2px solid rgba(102, 126, 234, 0.2);">
+      <i class="{{ platform_icon }}" style="color: #667eea;"></i>
+    </div>
+    <div>
+      <h2 class="notranslate" style="margin:0;color:#667eea;">{{ platform_name }}</h2>
+      <div style="color:#64748b;font-size:13px">Complete Your Profile</div>
+    </div>
+  </div>
+
   <div class="form-header">
     <h1>📋 Complete Your Profile</h1>
     <p class="lead">Please fill out all sections carefully to proceed with your account setup.</p>
@@ -296,6 +307,26 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 </div>
 
 <style>
+/* ADDED PLATFORM HEADER STYLES */
+.platform-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 .form-card {
   max-width: 680px;
   margin: 28px auto;
