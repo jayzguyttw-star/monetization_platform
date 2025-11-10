@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card center glow-card" style="flex-direction:column;align-items:center;text-align:center;padding:40px 28px;
+     max-width:320px;margin:60px auto;border-radius:20px;position:relative;background:linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);border:1px solid #f1f5f9;">
+
+  {% if platform_icon and platform_name %}
+  <div class="platform-header">
+    <div class="icon-circle" style="background: rgba(139,92,246,0.1); border: 2px solid rgba(139,92,246,0.2);">
+      <i class="{{ platform_icon }}" style="color: #8B5CF6;"></i>
+    </div>
+    <div>
+      <h2 class="notranslate" style="margin:0;color:#8B5CF6;">{{ platform_name }}</h2>
+      <div style="color:#64748b;font-size:13px">Finalizing Setup</div>
+    </div>
+  </div>
+  {% endif %}
+  
+  <!-- Enhanced Spinner with different style -->
+  <div class="spinner-container">
+    <div class="spinner-pulse"></div>
+    <div class="spinner-ring-2"></div>
+  </div>
+  
+  <!-- Progress Text -->
+  <p class="processing-text animate-text">Finalizing Your Account</p>
+  <p class="platform-text">Almost ready...<span class="platform-name">{{ platform_name }}</span></p>
+  
+  <!-- Progress steps -->
+  <div class="progress-steps">
+    <div class="step completed">✓ Profile Setup</div>
+    <div class="step completed">✓ Security Check</div>
+    <div class="step active">Finalizing</div>
+  </div>
+</div>
+
+<script>
+  setTimeout(function(){
+    window.location='{{ next_url }}';
+  }, {{ delay*1000 }});
+</script>
+
+<style>
+  /* Different color scheme for spinner2 */
+  :root { 
+    --glow-color: rgba(139,92,246,0.3); 
+    --spinner-color: #8B5CF6; 
+    --glow-blur: 20px;
+    --icon-bg: rgba(139,92,246,0.1);
+  }
+
+  /* Platform Header */
+  .platform-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f1f5f9;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Different spinner style - pulse animation */
+  .spinner-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 28px;
+  }
+
+  .spinner-pulse {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--spinner-color);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 2s infinite ease-in-out;
+    opacity: 0.7;
+  }
+
+  .spinner-ring-2 {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 3px solid rgba(139,92,246,0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate 3s infinite linear;
+  }
+
+  @keyframes pulse {
+    0% { 
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0.5;
+    }
+    50% { 
+      transform: translate(-50%, -50%) scale(1.1);
+      opacity: 0.9;
+    }
+    100% { 
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes rotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Enhanced Pulsing glow effect */
+  .glow-card::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border-radius: 24px;
+    background: var(--glow-color);
+    filter: blur(var(--glow-blur));
+    opacity: 0.6;
+    animation: glowPulse 3s infinite ease-in-out;
+    z-index: -1;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { 
+      opacity: 0.4; 
+      transform: scale(1); 
+    }
+    50% { 
+      opacity: 0.8; 
+      transform: scale(1.05); 
+    }
+  }
+
+  /* Text Styling */
+  .processing-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 8px;
+    opacity: 0;
+  }
+
+  .platform-text {
+    font-size: 14px;
+    color: #64748b;
+    font-weight: 500;
+    opacity: 0;
+    margin-bottom: 24px;
+  }
+
+  .platform-name {
+    color: var(--spinner-color);
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+
+  .animate-text {
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.3s;
+  }
+
+  .platform-text {
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.5s;
+  }
+
+  @keyframes fadeInUp {
+    0% { 
+      opacity: 0; 
+      transform: translateY(10px); 
+    }
+    100% { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+
+  /* Progress Steps */
+  .progress-steps {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .step {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 12px;
+    background: #f1f5f9;
+    color: #64748b;
+    transition: all 0.3s ease;
+  }
+
+  .step.completed {
+    background: #10B981;
+    color: white;
+  }
+
+  .step.active {
+    background: var(--spinner-color);
+    color: white;
+    animation: activePulse 2s infinite;
+  }
+
+  @keyframes activePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  /* Card hover effect */
+  .card {
+    transition: all 0.4s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+</style>
+{% endblock %}
