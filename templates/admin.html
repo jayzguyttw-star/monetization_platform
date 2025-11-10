@@ -2,32 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Dashboard - Monetization Hub</title>
+  <title>Admin Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --primary-light: #c7d2fe;
-      --secondary: #8b5cf6;
-      --success: #10b981;
-      --success-light: #a7f3d0;
-      --danger: #ef4444;
-      --danger-light: #fecaca;
-      --warning: #f59e0b;
-      --warning-light: #fde68a;
-      --dark: #1e293b;
-      --dark-light: #334155;
-      --light: #f8fafc;
-      --gray: #64748b;
-      --gray-light: #cbd5e1;
-      --border: #e2e8f0;
-      --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-      --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
-      --shadow-xl: 0 20px 40px -4px rgba(0, 0, 0, 0.1);
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #7209b7;
+      --success: #06d6a0;
+      --danger: #ef476f;
+      --warning: #ffd166;
+      --dark: #2b2d42;
+      --light: #f8f9fa;
+      --gray: #6c757d;
+      --border: #e9ecef;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     }
 
     * {
@@ -37,12 +29,11 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       min-height: 100vh;
       color: var(--dark);
       line-height: 1.6;
-      font-weight: 400;
     }
 
     .admin-container {
@@ -50,131 +41,82 @@
       min-height: 100vh;
     }
 
-    /* Premium Sidebar */
+    /* Sidebar */
     .sidebar {
-      width: 280px;
-      background: linear-gradient(180deg, var(--dark) 0%, #0f172a 100%);
+      width: 260px;
+      background: var(--dark);
       color: white;
       padding: 0;
-      box-shadow: var(--shadow-xl);
-      position: fixed;
-      height: 100vh;
-      z-index: 1000;
-      transition: all 0.3s ease;
+      box-shadow: var(--shadow-lg);
+      z-index: 100;
     }
 
     .sidebar-header {
-      padding: 32px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
+      padding: 24px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.2);
     }
 
     .sidebar-header h1 {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 700;
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 4px;
     }
 
-    .sidebar-header .subtitle {
-      font-size: 13px;
-      color: #94a3b8;
-      font-weight: 400;
+    .sidebar-header h1 i {
+      color: var(--primary);
     }
 
     .nav-links {
-      padding: 24px 0;
+      padding: 20px 0;
     }
 
     .nav-item {
-      padding: 16px 24px;
+      padding: 12px 20px;
       display: flex;
       align-items: center;
-      gap: 14px;
-      color: #cbd5e1;
+      gap: 12px;
+      color: rgba(255,255,255,0.8);
       text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border-left: 4px solid transparent;
-      font-weight: 500;
-      position: relative;
-      overflow: hidden;
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
     }
 
-    .nav-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 0;
-      background: linear-gradient(90deg, var(--primary), transparent);
-      transition: width 0.3s ease;
-      opacity: 0.1;
-    }
-
-    .nav-item:hover {
-      background: rgba(255,255,255,0.05);
-      color: white;
-      transform: translateX(4px);
-    }
-
-    .nav-item:hover::before {
-      width: 100%;
-    }
-
-    .nav-item.active {
-      background: rgba(99, 102, 241, 0.1);
+    .nav-item:hover, .nav-item.active {
+      background: rgba(255,255,255,0.1);
       color: white;
       border-left-color: var(--primary);
-    }
-
-    .nav-item.active::before {
-      width: 100%;
     }
 
     .nav-item i {
       width: 20px;
       text-align: center;
-      font-size: 16px;
     }
 
     /* Main Content */
     .main-content {
       flex: 1;
-      margin-left: 280px;
-      background: transparent;
-      transition: margin-left 0.3s ease;
+      padding: 0;
+      background: #f8fafc;
     }
 
-    /* Premium Top Bar */
+    /* Top Bar */
     .top-bar {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      padding: 20px 32px;
-      box-shadow: var(--shadow-lg);
+      background: white;
+      padding: 16px 32px;
+      box-shadow: var(--shadow);
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
     }
 
     .page-title {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 700;
       color: var(--dark);
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .page-title i {
-      color: var(--primary);
-      font-size: 24px;
     }
 
     .admin-actions {
@@ -183,67 +125,39 @@
     }
 
     .btn {
-      padding: 12px 20px;
+      padding: 10px 20px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       font-weight: 600;
       font-size: 14px;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s ease;
       display: flex;
       align-items: center;
       gap: 8px;
       text-decoration: none;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    .btn:hover::before {
-      left: 100%;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      background: var(--primary);
       color: white;
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
     }
 
     .btn-danger {
-      background: linear-gradient(135deg, var(--danger), #dc2626);
+      background: var(--danger);
       color: white;
-      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
     }
 
     .btn-danger:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
-    }
-
-    .btn-success {
-      background: linear-gradient(135deg, var(--success), #059669);
-      color: white;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    }
-
-    .btn-success:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+      background: #e0355f;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
     }
 
     /* Content Area */
@@ -251,87 +165,65 @@
       padding: 32px;
     }
 
-    /* Premium Stats Grid */
+    /* Stats Cards */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 24px;
       margin-bottom: 32px;
     }
 
     .stat-card {
       background: white;
-      padding: 28px;
-      border-radius: 16px;
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--border);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--primary);
     }
 
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: var(--primary);
+    .stat-card.success {
+      border-left-color: var(--success);
     }
 
-    .stat-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-xl);
+    .stat-card.warning {
+      border-left-color: var(--warning);
     }
 
-    .stat-card.success::before {
-      background: var(--success);
-    }
-
-    .stat-card.warning::before {
-      background: var(--warning);
-    }
-
-    .stat-card.info::before {
-      background: var(--primary);
-    }
-
-    .stat-header {
-      display: flex;
-      justify-content: between;
-      align-items: flex-start;
-      margin-bottom: 20px;
+    .stat-card.danger {
+      border-left-color: var(--danger);
     }
 
     .stat-icon {
-      width: 56px;
-      height: 56px;
+      width: 48px;
+      height: 48px;
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(99, 102, 241, 0.1);
+      margin-bottom: 16px;
+      background: rgba(67, 97, 238, 0.1);
       color: var(--primary);
-      font-size: 24px;
     }
 
     .stat-card.success .stat-icon {
-      background: rgba(16, 185, 129, 0.1);
+      background: rgba(6, 214, 160, 0.1);
       color: var(--success);
     }
 
     .stat-card.warning .stat-icon {
-      background: rgba(245, 158, 11, 0.1);
+      background: rgba(255, 209, 102, 0.1);
       color: var(--warning);
     }
 
+    .stat-card.danger .stat-icon {
+      background: rgba(239, 71, 111, 0.1);
+      color: var(--danger);
+    }
+
     .stat-value {
-      font-size: 36px;
-      font-weight: 800;
+      font-size: 28px;
+      font-weight: 700;
       margin-bottom: 4px;
-      color: var(--dark);
-      line-height: 1;
     }
 
     .stat-label {
@@ -340,56 +232,31 @@
       font-weight: 500;
     }
 
-    .stat-trend {
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 8px;
-      border-radius: 20px;
-      background: var(--success-light);
-      color: var(--success);
-      margin-top: 8px;
-      display: inline-block;
-    }
-
-    /* Premium Main Card */
+    /* Main Card */
     .main-card {
       background: white;
       border-radius: 16px;
-      box-shadow: var(--shadow-lg);
+      box-shadow: var(--shadow);
       overflow: hidden;
-      border: 1px solid var(--border);
-      transition: all 0.3s ease;
-    }
-
-    .main-card:hover {
-      box-shadow: var(--shadow-xl);
     }
 
     .card-header {
       padding: 24px 32px;
       border-bottom: 1px solid var(--border);
       display: flex;
-      justify-content: space-between;
+      justify-content: between;
       align-items: center;
-      background: #f8fafc;
     }
 
     .card-title {
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--dark);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .card-title i {
-      color: var(--primary);
     }
 
     .search-box {
       position: relative;
-      max-width: 320px;
+      max-width: 400px;
     }
 
     .search-box input {
@@ -399,14 +266,14 @@
       border-radius: 10px;
       font-size: 14px;
       transition: all 0.3s ease;
-      background: white;
-      font-family: 'Inter', sans-serif;
+      background: var(--light);
     }
 
     .search-box input:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+      background: white;
     }
 
     .search-box i {
@@ -417,39 +284,36 @@
       color: var(--gray);
     }
 
-    /* Premium Table */
+    /* Table */
     .table-container {
       overflow-x: auto;
-      border-radius: 0 0 16px 16px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 1000px;
+      min-width: 800px;
     }
 
     thead {
-      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      background: var(--light);
     }
 
     th {
-      padding: 18px 20px;
+      padding: 16px 20px;
       text-align: left;
       font-weight: 600;
-      color: var(--dark);
+      color: var(--gray);
       font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       border-bottom: 2px solid var(--border);
-      white-space: nowrap;
     }
 
     td {
-      padding: 18px 20px;
+      padding: 16px 20px;
       border-bottom: 1px solid var(--border);
       font-size: 14px;
-      transition: background-color 0.2s ease;
     }
 
     tbody tr {
@@ -457,49 +321,48 @@
     }
 
     tbody tr:hover {
-      background: #f8fafc;
-      transform: scale(1.002);
+      background: #f8f9fa;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
     }
 
     .user-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      background: rgba(99, 102, 241, 0.1);
+      gap: 6px;
+      padding: 6px 12px;
+      background: rgba(67, 97, 238, 0.1);
       color: var(--primary);
       border-radius: 20px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
-      border: 1px solid rgba(99, 102, 241, 0.2);
     }
 
-    .platform-badge {
+    .page-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      background: white;
-      color: var(--dark);
-      border-radius: 8px;
-      font-size: 13px;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--light);
+      color: var(--gray);
+      border-radius: 6px;
+      font-size: 12px;
       font-weight: 500;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
     }
 
     .data-cell {
-      max-width: 250px;
+      max-width: 300px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       font-family: 'SF Mono', Monaco, monospace;
       font-size: 13px;
       color: var(--gray);
-      background: #f8fafc;
-      padding: 8px 12px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
+    }
+
+    .data-cell.expanded {
+      white-space: normal;
+      overflow: visible;
     }
 
     .expand-btn {
@@ -509,91 +372,9 @@
       cursor: pointer;
       font-size: 12px;
       margin-left: 8px;
-      padding: 6px;
-      border-radius: 4px;
-      transition: all 0.2s ease;
     }
 
-    .expand-btn:hover {
-      background: var(--primary-light);
-    }
-
-    /* Premium Confirmation Circle */
-    .confirmation-circle {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 2px solid var(--warning);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      background: white;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .confirmation-circle::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--warning);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .confirmation-circle:hover::before {
-      opacity: 0.1;
-    }
-
-    .confirmation-circle.confirmed {
-      background: var(--success);
-      border-color: var(--success);
-      transform: scale(1.1);
-    }
-
-    .confirmation-circle.confirmed i {
-      color: white;
-    }
-
-    .confirmation-circle:hover:not(.confirmed) {
-      background: var(--warning);
-      border-color: var(--warning);
-      transform: scale(1.05);
-    }
-
-    .confirmation-circle:hover:not(.confirmed) i {
-      color: white;
-    }
-
-    .confirmation-circle i {
-      color: var(--warning);
-      font-size: 14px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .confirmation-circle.confirmed i {
-      color: white;
-    }
-
-    .code-highlight {
-      background: #fffbeb;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-weight: 600;
-      color: #92400e;
-      border: 1px solid #fef3c7;
-      font-family: 'SF Mono', Monaco, monospace;
-      font-size: 12px;
-      display: inline-block;
-    }
-
-    /* Premium Pagination */
+    /* Pagination */
     .pagination {
       display: flex;
       justify-content: center;
@@ -601,160 +382,94 @@
       gap: 8px;
       padding: 24px;
       border-top: 1px solid var(--border);
-      background: #f8fafc;
     }
 
     .pagination button {
-      padding: 10px 16px;
+      padding: 8px 16px;
       border: 1px solid var(--border);
       background: white;
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.3s ease;
       font-size: 14px;
-      font-weight: 500;
-      min-width: 44px;
     }
 
     .pagination button:hover {
-      background: var(--primary);
-      color: white;
+      background: var(--light);
       border-color: var(--primary);
-      transform: translateY(-1px);
     }
 
     .pagination button.active {
       background: var(--primary);
       color: white;
       border-color: var(--primary);
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
     }
 
-    /* Premium Empty State */
+    /* Empty State */
     .empty-state {
       text-align: center;
-      padding: 80px 20px;
+      padding: 60px 20px;
       color: var(--gray);
     }
 
     .empty-state i {
-      font-size: 64px;
-      margin-bottom: 20px;
-      opacity: 0.3;
-      color: var(--primary);
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
     }
 
     .empty-state h3 {
-      font-size: 20px;
-      margin-bottom: 12px;
+      font-size: 18px;
+      margin-bottom: 8px;
       color: var(--dark);
-      font-weight: 600;
     }
 
-    .empty-state p {
-      font-size: 15px;
-      color: var(--gray);
-      max-width: 400px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 1200px) {
-      .sidebar {
-        width: 240px;
-      }
-      .main-content {
-        margin-left: 240px;
-      }
-    }
-
+    /* Responsive */
     @media (max-width: 768px) {
+      .admin-container {
+        flex-direction: column;
+      }
+      
       .sidebar {
         width: 100%;
-        position: relative;
         height: auto;
       }
-      .main-content {
-        margin-left: 0;
-      }
+      
       .stats-grid {
         grid-template-columns: 1fr;
       }
+      
       .top-bar {
-        flex-direction: column;
-        gap: 16px;
-        padding: 16px 20px;
-      }
-      .admin-actions {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      .content-area {
-        padding: 20px;
-      }
-      .card-header {
         flex-direction: column;
         gap: 16px;
         align-items: flex-start;
       }
-      .search-box {
-        max-width: 100%;
+      
+      .admin-actions {
         width: 100%;
+        justify-content: flex-start;
       }
-    }
-
-    /* Smooth animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .stat-card, .main-card {
-      animation: fadeIn 0.6s ease-out;
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #f1f5f9;
-      border-radius: 3px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 3px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
     }
   </style>
 </head>
 <body>
   <div class="admin-container">
-    <!-- Premium Sidebar -->
+    <!-- Sidebar -->
     <nav class="sidebar">
       <div class="sidebar-header">
-        <h1><i class="fa-solid fa-shield-halved"></i> Admin Hub</h1>
-        <div class="subtitle">Professional Submission Management</div>
+        <h1><i class="fa-solid fa-shield-halved"></i> Admin Panel</h1>
       </div>
       <div class="nav-links">
         <a href="#" class="nav-item active">
-          <i class="fa-solid fa-chart-pie"></i>
+          <i class="fa-solid fa-table"></i>
           <span>Dashboard</span>
         </a>
         <a href="#" class="nav-item">
           <i class="fa-solid fa-users"></i>
-          <span>User Management</span>
+          <span>Users</span>
         </a>
         <a href="#" class="nav-item">
-          <i class="fa-solid fa-chart-line"></i>
+          <i class="fa-solid fa-chart-bar"></i>
           <span>Analytics</span>
         </a>
         <a href="#" class="nav-item">
@@ -766,101 +481,64 @@
 
     <!-- Main Content -->
     <div class="main-content">
-      <!-- Premium Top Bar -->
+      <!-- Top Bar -->
       <div class="top-bar">
-        <h2 class="page-title">
-          <i class="fa-solid fa-gauge-high"></i>
-          Submission Dashboard
-        </h2>
+        <h2 class="page-title">Submission Management</h2>
         <div class="admin-actions">
           <form method="post" action="/admin/{{ secret }}/clear" onsubmit="return confirm('Are you sure you want to clear all submissions? This action cannot be undone.');">
             <button type="submit" class="btn btn-danger">
-              <i class="fa-solid fa-trash-can"></i>
-              Clear All Data
+              <i class="fa-solid fa-trash"></i>
+              Clear All
             </button>
           </form>
           <a href="/admin/{{ secret }}/download" class="btn btn-primary">
-            <i class="fa-solid fa-file-export"></i>
+            <i class="fa-solid fa-file-csv"></i>
             Export CSV
           </a>
-          <button class="btn btn-success" onclick="window.location.reload()">
-            <i class="fa-solid fa-arrows-rotate"></i>
-            Refresh Data
-          </button>
         </div>
       </div>
 
       <!-- Content Area -->
       <div class="content-area">
-        <!-- Premium Stats Grid -->
+        <!-- Stats Overview -->
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="stat-header">
-              <div class="stat-icon">
-                <i class="fa-solid fa-database"></i>
-              </div>
+            <div class="stat-icon">
+              <i class="fa-solid fa-database"></i>
             </div>
             <div class="stat-value">{{ submissions|length }}</div>
             <div class="stat-label">Total Submissions</div>
-            <div class="stat-trend">
-              <i class="fa-solid fa-chart-line"></i>
-              All Time
-            </div>
           </div>
-          
           <div class="stat-card success">
-            <div class="stat-header">
-              <div class="stat-icon">
-                <i class="fa-solid fa-check-circle"></i>
-              </div>
+            <div class="stat-icon">
+              <i class="fa-solid fa-check-circle"></i>
             </div>
-            <div class="stat-value">{{ submissions|selectattr('confirmed')|selectattr('code_value')|list|length }}</div>
-            <div class="stat-label">Confirmed Codes</div>
-            <div class="stat-trend">
-              <i class="fa-solid fa-shield-check"></i>
-              Verified
-            </div>
+            <div class="stat-value">{{ submissions|selectattr('page', 'equalto', 'Facebook')|list|length }}</div>
+            <div class="stat-label">Facebook Entries</div>
           </div>
-
           <div class="stat-card warning">
-            <div class="stat-header">
-              <div class="stat-icon">
-                <i class="fa-solid fa-clock"></i>
-              </div>
+            <div class="stat-icon">
+              <i class="fa-solid fa-clock"></i>
             </div>
-            <div class="stat-value">{{ submissions|selectattr('code_value')|rejectattr('confirmed')|list|length }}</div>
-            <div class="stat-label">Pending Confirmation</div>
-            <div class="stat-trend">
-              <i class="fa-solid fa-hourglass-half"></i>
-              Awaiting
-            </div>
+            <div class="stat-value">{{ submissions|selectattr('page', 'equalto', 'Instagram')|list|length }}</div>
+            <div class="stat-label">Instagram Entries</div>
           </div>
-
-          <div class="stat-card info">
-            <div class="stat-header">
-              <div class="stat-icon">
-                <i class="fa-solid fa-shield-check"></i>
-              </div>
+          <div class="stat-card danger">
+            <div class="stat-icon">
+              <i class="fa-solid fa-exclamation-triangle"></i>
             </div>
-            <div class="stat-value">{{ submissions|selectattr('code_value')|list|length }}</div>
-            <div class="stat-label">Code Submissions</div>
-            <div class="stat-trend">
-              <i class="fa-solid fa-key"></i>
-              Protected
-            </div>
+            <div class="stat-value">{{ submissions|selectattr('page', 'equalto', 'TikTok')|list|length }}</div>
+            <div class="stat-label">TikTok Entries</div>
           </div>
         </div>
 
-        <!-- Premium Main Card -->
+        <!-- Main Table Card -->
         <div class="main-card">
           <div class="card-header">
-            <h3 class="card-title">
-              <i class="fa-solid fa-table-list"></i>
-              Submission Management
-            </h3>
+            <h3 class="card-title">All Submissions</h3>
             <div class="search-box">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" id="search" placeholder="Search submissions by user, platform, or code...">
+              <i class="fa-solid fa-search"></i>
+              <input type="text" id="search" placeholder="Search submissions...">
             </div>
           </div>
 
@@ -874,19 +552,17 @@
                   <th>Platform</th>
                   <th>User</th>
                   <th>Data</th>
-                  <th>Security Code</th>
-                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                {% for id, timestamp, page, user, data, icon, code_value, confirmed, platform_name in submissions %}
+                {% for id, timestamp, page, user, data, icon in submissions %}
                 <tr>
                   <td><strong>#{{ id }}</strong></td>
-                  <td>{{ timestamp[:16] }}</td>
+                  <td>{{ timestamp }}</td>
                   <td>
-                    <span class="platform-badge">
+                    <span class="page-badge">
                       <i class="{{ icon }}"></i>
-                      {{ platform_name or page }}
+                      {{ page }}
                     </span>
                   </td>
                   <td>
@@ -897,28 +573,9 @@
                   </td>
                   <td>
                     <span class="data-cell">{{ data }}</span>
-                    <button class="expand-btn" onclick="toggleExpand(this)" title="Expand data">
+                    <button class="expand-btn" onclick="toggleExpand(this)">
                       <i class="fa-solid fa-expand"></i>
                     </button>
-                  </td>
-                  <td>
-                    {% if code_value %}
-                      <span class="code-highlight">{{ code_value }}</span>
-                    {% else %}
-                      <span style="color: var(--gray); font-style: italic;">No code</span>
-                    {% endif %}
-                  </td>
-                  <td>
-                    {% if code_value %}
-                      <div class="confirmation-circle {% if confirmed %}confirmed{% endif %}" 
-                           data-id="{{ id }}"
-                           onclick="confirmSubmission({{ id }})"
-                           title="{% if confirmed %}Confirmed{% else %}Click to confirm{% endif %}">
-                        <i class="fa-solid {% if confirmed %}fa-check{% else %}fa-clock{% endif %}"></i>
-                      </div>
-                    {% else %}
-                      <span style="color: var(--gray); font-style: italic;">-</span>
-                    {% endif %}
                   </td>
                 </tr>
                 {% endfor %}
@@ -927,8 +584,8 @@
             {% else %}
             <div class="empty-state">
               <i class="fa-solid fa-inbox"></i>
-              <h3>No Submissions Yet</h3>
-              <p>When users start submitting forms through the monetization flow, their data will appear here for management.</p>
+              <h3>No submissions yet</h3>
+              <p>Submissions will appear here once users start filling forms.</p>
             </div>
             {% endif %}
           </div>
@@ -942,59 +599,18 @@
   </div>
 
   <script>
-    // Enhanced Confirmation function
-    function confirmSubmission(submissionId) {
-      const circle = document.querySelector(`.confirmation-circle[data-id="${submissionId}"]`);
-      if (circle.classList.contains('confirmed')) {
-        showNotification('This submission is already confirmed!', 'info');
-        return;
-      }
-
-      if (!confirm('Are you sure you want to confirm this submission? This will allow the user to proceed.')) {
-        return;
-      }
-
-      circle.style.opacity = '0.7';
-      
-      fetch(`/admin/{{ secret }}/confirm/${submissionId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          circle.classList.add('confirmed');
-          circle.innerHTML = '<i class="fa-solid fa-check"></i>';
-          circle.style.opacity = '1';
-          showNotification('Submission confirmed successfully! The user can now proceed.', 'success');
-        }
-      })
-      .catch(error => {
-        console.error('Error confirming submission:', error);
-        circle.style.opacity = '1';
-        showNotification('Error confirming submission. Please try again.', 'error');
-      });
-    }
-
-    // Enhanced Search filter
+    // 🔍 Search filter
     document.getElementById('search').addEventListener('input', function () {
       let filter = this.value.toLowerCase();
       let rows = document.querySelectorAll('#submissionsTable tbody tr');
-      let visibleCount = 0;
-      
       rows.forEach(row => {
         let text = row.textContent.toLowerCase();
-        let isVisible = text.includes(filter);
-        row.style.display = isVisible ? '' : 'none';
-        if (isVisible) visibleCount++;
+        row.style.display = text.includes(filter) ? '' : 'none';
       });
-      
       paginate();
     });
 
-    // Enhanced Pagination
+    // 📑 Pagination
     const rowsPerPage = 10;
     let table = document.getElementById("submissionsTable");
     let pagination = document.getElementById("pagination");
@@ -1020,21 +636,6 @@
 
       // Build pagination buttons
       pagination.innerHTML = "";
-      
-      // Previous button
-      if (pageCount > 1) {
-        let prevBtn = document.createElement("button");
-        prevBtn.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
-        prevBtn.addEventListener("click", () => {
-          if (currentPage > 1) {
-            pagination.dataset.page = currentPage - 1;
-            paginate();
-          }
-        });
-        pagination.appendChild(prevBtn);
-      }
-
-      // Page buttons
       for (let i = 1; i <= pageCount; i++) {
         let btn = document.createElement("button");
         btn.textContent = i;
@@ -1045,89 +646,21 @@
         });
         pagination.appendChild(btn);
       }
-
-      // Next button
-      if (pageCount > 1) {
-        let nextBtn = document.createElement("button");
-        nextBtn.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
-        nextBtn.addEventListener("click", () => {
-          if (currentPage < pageCount) {
-            pagination.dataset.page = currentPage + 1;
-            paginate();
-          }
-        });
-        pagination.appendChild(nextBtn);
-      }
     }
 
-    // Enhanced Expand data cell
+    // Expand data cell
     function toggleExpand(btn) {
       const dataCell = btn.previousElementSibling;
-      const isExpanded = dataCell.classList.contains('expanded');
-      
       dataCell.classList.toggle('expanded');
-      
-      if (isExpanded) {
-        dataCell.style.whiteSpace = 'nowrap';
-        dataCell.style.overflow = 'hidden';
-        dataCell.style.textOverflow = 'ellipsis';
-        btn.innerHTML = '<i class="fa-solid fa-expand"></i>';
-        btn.title = 'Expand data';
-      } else {
-        dataCell.style.whiteSpace = 'normal';
-        dataCell.style.overflow = 'visible';
-        dataCell.style.textOverflow = 'clip';
-        btn.innerHTML = '<i class="fa-solid fa-compress"></i>';
-        btn.title = 'Collapse data';
-      }
-    }
-
-    // Notification system
-    function showNotification(message, type = 'info') {
-      // You can enhance this with a proper notification system
-      const notification = document.createElement('div');
-      notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 16px 20px;
-        border-radius: 10px;
-        color: white;
-        font-weight: 600;
-        z-index: 10000;
-        background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#6366f1'};
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        animation: slideIn 0.3s ease;
-      `;
-      notification.textContent = message;
-      document.body.appendChild(notification);
-      
-      setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease';
-        setTimeout(() => notification.remove(), 300);
-      }, 3000);
+      btn.innerHTML = dataCell.classList.contains('expanded') ? 
+        '<i class="fa-solid fa-compress"></i>' : 
+        '<i class="fa-solid fa-expand"></i>';
     }
 
     // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
-      if (table) {
-        paginate();
-      }
-      
-      // Add CSS for animations
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes slideIn {
-          from { transform: translateX(100%); opacity: 0; }
-          to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideOut {
-          from { transform: translateX(0); opacity: 1; }
-          to { transform: translateX(100%); opacity: 0; }
-        }
-      `;
-      document.head.appendChild(style);
-    });
+    if (table) {
+      paginate();
+    }
   </script>
 </body>
 </html>
