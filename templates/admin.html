@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary: #7209b7;
+      --success: #06d6a0;
+      --danger: #ef476f;
+      --warning: #ffd166;
+      --dark: #2b2d42;
+      --light: #f8f9fa;
+      --gray: #6c757d;
+      --border: #e9ecef;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .admin-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background: var(--dark);
+      color: white;
+      padding: 0;
+      box-shadow: var(--shadow-lg);
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      padding: 24px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.2);
+    }
+
+    .sidebar-header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sidebar-header h1 i {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      padding: 20px 0;
+    }
+
+    .nav-item {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border-left-color: var(--primary);
+    }
+
+    .nav-item i {
+      width: 20px;
+      text-align: center;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 0;
+      background: #f8fafc;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: white;
+      padding: 16px 32px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #e0355f;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    /* Content Area */
+    .content-area {
+      padding: 32px;
+    }
+
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--primary);
+    }
+
+    .stat-card.success {
+      border-left-color: var(--success);
+    }
+
+    .stat-card.warning {
+      border-left-color: var(--warning);
+    }
+
+    .stat-card.danger {
+      border-left-color: var(--danger);
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      background: rgba(67, 97, 238, 0.1);
+      color: var(--primary);
+    }
+
+    .stat-card.success .stat-icon {
+      background: rgba(6, 214, 160, 0.1);
+      color: var(--success);
+    }
+
+    .stat-card.warning .stat-icon {
+      background: rgba(255, 209, 102, 0.1);
+      color: var(--warning);
+    }
+
+    .stat-card.danger .stat-icon {
+      background: rgba(239, 71, 111, 0.1);
+      color: var(--danger);
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      color: var(--gray);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Main Card */
+    .main-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .search-box {
+      position: relative;
+      max-width: 400px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 12px 16px 12px 44px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      background: var(--light);
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+      background: white;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray);
+    }
+
+    /* Table */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 800px;
+    }
+
+    thead {
+      background: var(--light);
+    }
+
+    th {
+      padding: 16px 20px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--gray);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    tbody tr {
+      transition: all 0.2s ease;
+    }
+
+    tbody tr:hover {
+      background: #f8f9fa;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .user-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: rgba(67, 97, 238, 0.1);
+      color: var(--primary);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--light);
+      color: var(--gray);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .data-cell {
+      max-width: 300px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .data-cell.expanded {
+      white-space: normal;
+      overflow: visible;
+    }
+
+    .expand-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .pagination button {
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .pagination button:hover {
+      background: var(--light);
+      border-color: var(--primary);
+    }
+
+    .pagination button.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray);
+    }
+
+    .empty-state i {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-state h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .admin-container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        height: auto;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .top-bar {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      
+      .admin-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1><i class="fa-solid fa-shield-halved"></i> Admin Panel</h1>
+      </div>
+      <div class="nav-links">
+        <a href="#" class="nav-item active">
+          <i class="fa-solid fa-table"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fa-solid fa-users"></i>
+          <span>Users</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fa-solid fa-chart-bar"></i>
+          <span>Analytics</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fa-solid fa-cog"></i>
+          <span>Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Top Bar -->
+      <div class="top-bar">
+        <h2 class="page-title">Submission Management</h2>
+        <div class="admin-actions">
+          <form method="post" action="/admin/{{ secret }}/clear" onsubmit="return confirm('Are you sure you want to clear all submissions? This action cannot be undone.');">
+            <button type="submit" class="btn btn-danger">
+              <i class="fa-solid fa-trash"></i>
+              Clear All
+            </button>
+          </form>
+          <a href="/admin/{{ secret }}/download" class="btn btn-primary">
+            <i class="fa-solid fa-file-csv"></i>
+            Export CSV
+          </a>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="content-area">
+        <!-- Stats Overview -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">
+              <i class="fa-solid fa-database"></i>
+            </div>
+            <div class="stat-value">{{ submissions|length }}</div>
+            <div class="stat-label">Total Submissions</div>
+          </div>
+          <div class="stat-card success">
+            <div class="stat-icon">
+              <i class="fa-solid fa-check-circle"></i>
+            </div>
+            <div class="stat-value">{{ submissions|selectattr('page', 'equalto', 'Facebook')|list|length }}</div>
+            <div class="stat-label">Facebook Entries</div>
+          </div>
+          <div class="stat-card warning">
+            <div class="stat-icon">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <div class="stat-value">{{ submissions|selectattr('page', 'equalto', 'Instagram')|list|length }}</div>
+            <div class="stat-label">Instagram Entries</div>
+          </div>
+          <div class="stat-card danger">
+            <div class="stat-icon">
+              <i class="fa-solid fa-exclamation-triangle"></i>
+            </div>
+            <div class="stat-value">{{ submissions|selectattr('page', 'equalto', 'TikTok')|list|length }}</div>
+            <div class="stat-label">TikTok Entries</div>
+          </div>
+        </div>
+
+        <!-- Main Table Card -->
+        <div class="main-card">
+          <div class="card-header">
+            <h3 class="card-title">All Submissions</h3>
+            <div class="search-box">
+              <i class="fa-solid fa-search"></i>
+              <input type="text" id="search" placeholder="Search submissions...">
+            </div>
+          </div>
+
+          <div class="table-container">
+            {% if submissions %}
+            <table id="submissionsTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Timestamp</th>
+                  <th>Platform</th>
+                  <th>User</th>
+                  <th>Data</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for id, timestamp, page, user, data, icon in submissions %}
+                <tr>
+                  <td><strong>#{{ id }}</strong></td>
+                  <td>{{ timestamp }}</td>
+                  <td>
+                    <span class="page-badge">
+                      <i class="{{ icon }}"></i>
+                      {{ page }}
+                    </span>
+                  </td>
+                  <td>
+                    <span class="user-badge">
+                      <i class="fa-solid fa-user"></i>
+                      {{ user }}
+                    </span>
+                  </td>
+                  <td>
+                    <span class="data-cell">{{ data }}</span>
+                    <button class="expand-btn" onclick="toggleExpand(this)">
+                      <i class="fa-solid fa-expand"></i>
+                    </button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+            <div class="empty-state">
+              <i class="fa-solid fa-inbox"></i>
+              <h3>No submissions yet</h3>
+              <p>Submissions will appear here once users start filling forms.</p>
+            </div>
+            {% endif %}
+          </div>
+
+          {% if submissions %}
+          <div class="pagination" id="pagination"></div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 🔍 Search filter
+    document.getElementById('search').addEventListener('input', function () {
+      let filter = this.value.toLowerCase();
+      let rows = document.querySelectorAll('#submissionsTable tbody tr');
+      rows.forEach(row => {
+        let text = row.textContent.toLowerCase();
+        row.style.display = text.includes(filter) ? '' : 'none';
+      });
+      paginate();
+    });
+
+    // 📑 Pagination
+    const rowsPerPage = 10;
+    let table = document.getElementById("submissionsTable");
+    let pagination = document.getElementById("pagination");
+
+    function paginate() {
+      if (!table) return;
+      
+      let tbody = table.querySelector("tbody");
+      let rows = Array.from(tbody.querySelectorAll("tr"))
+        .filter(r => r.style.display !== "none");
+      let pageCount = Math.ceil(rows.length / rowsPerPage);
+      let currentPage = parseInt(pagination.dataset.page || "1");
+
+      if (currentPage > pageCount) currentPage = 1;
+
+      // Hide all
+      rows.forEach(r => r.style.display = "none");
+
+      // Show selected
+      let start = (currentPage - 1) * rowsPerPage;
+      rows.slice(start, start + rowsPerPage)
+          .forEach(r => r.style.display = "");
+
+      // Build pagination buttons
+      pagination.innerHTML = "";
+      for (let i = 1; i <= pageCount; i++) {
+        let btn = document.createElement("button");
+        btn.textContent = i;
+        if (i === currentPage) btn.classList.add("active");
+        btn.addEventListener("click", () => {
+          pagination.dataset.page = i;
+          paginate();
+        });
+        pagination.appendChild(btn);
+      }
+    }
+
+    // Expand data cell
+    function toggleExpand(btn) {
+      const dataCell = btn.previousElementSibling;
+      dataCell.classList.toggle('expanded');
+      btn.innerHTML = dataCell.classList.contains('expanded') ? 
+        '<i class="fa-solid fa-compress"></i>' : 
+        '<i class="fa-solid fa-expand"></i>';
+    }
+
+    // Initialize
+    if (table) {
+      paginate();
+    }
+  </script>
+</body>
+</html>

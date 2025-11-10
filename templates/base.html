@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ title if title else 'Monetization Hub' }}</title>
+  
+  <!-- FORCE LIGHT MODE META TAGS -->
+  <meta name="color-scheme" content="light only">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="supported-color-schemes" content="light">
+  
+  <!-- GOOGLE TRANSLATE LOADS FIRST -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        autoDisplay: false,
+        layout: google.translate.TranslateElement.InlineLayout.HIDE
+      }, 'google_translate_element');
+      
+      // Better language detection with delay
+      setTimeout(function() {
+        try {
+          var userLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0];
+          var supportedLangs = ['es', 'fr', 'de', 'zh', 'ja', 'ko', 'ru', 'ar', 'pt', 'it']; // Add more as needed
+          
+          if (supportedLangs.includes(userLang)) {
+            var combo = document.querySelector('.goog-te-combo');
+            if(combo && combo.options.length > 1) {
+              combo.value = userLang;
+              combo.dispatchEvent(new Event('change'));
+            }
+          }
+        } catch(e) { 
+          console.warn('Translation detection:', e); 
+        }
+      }, 1500); // Increased delay for better reliability
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- ENHANCED CSS TO HIDE GOOGLE ELEMENTS + FORCE LIGHT MODE -->
+  <style>
+    /* FORCE LIGHT MODE */
+    :root {
+      color-scheme: light only;
+    }
+    
+    html, body {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      forced-color-adjust: none;
+    }
+    
+    /* Override any dark mode styles */
+    @media (prefers-color-scheme: dark) {
+      html, body, .card, .container-fullscreen, .wrap, .form-card {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+      }
+      
+      .card {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border-color: #e5e7eb !important;
+      }
+      
+      .input, textarea, select {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        border-color: #e5e7eb !important;
+      }
+    }
+
+    /* Completely hide all Google Translate elements */
+    .goog-te-banner-frame, 
+    .goog-te-menu-frame, 
+    .goog-te-ftab-frame, 
+    .goog-te-gadget-icon, 
+    .goog-te-menu-value, 
+    .goog-te-balloon-frame, 
+    #goog-gt-tt, 
+    .goog-te-gadget-simple,
+    .goog-te-combo,
+    .goog-logo-link,
+    .goog-te-spinner-pos,
+    .skiptranslate {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+    }
+    
+    /* Ensure body stays at top */
+    body { 
+      top: 0px !important; 
+      position: static !important;
+    }
+    
+    /* Hide the translate element container */
+    #google_translate_element {
+      display: none !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+    }
+    
+    /* Prevent flash of untranslated content */
+    .goog-te-banner-frame.skiptranslate { 
+      display: none !important; 
+    }
+  </style>
+</head>
+<body>
+  <!-- Hidden translate element -->
+  <div id="google_translate_element" style="display:none"></div>
+  
+  <div class="wrap">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="card"><strong>{{ messages[0] }}</strong></div>
+      {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+  </div>
+  
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

