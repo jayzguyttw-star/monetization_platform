@@ -1,48 +1,126 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card center" style="flex-direction:column;align-items:center;text-align:center;padding:60px 32px;max-width:480px;margin:60px auto;box-shadow:0 6px 18px rgba(22,163,74,0.25);border-radius:16px;background:linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);border:1px solid #f0fdf4;">
+<div class="card center" style="flex-direction:column;align-items:center;text-align:center;padding:60px 32px;max-width:520px;margin:60px auto;box-shadow:0 6px 18px rgba(22,163,74,0.25);border-radius:20px;background:linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);border:1px solid #f0fdf4;">
 
-  <!-- ADDED PLATFORM HEADER -->
-  {% if platform_icon and platform_name %}
-  <div class="platform-header">
-    <div class="icon-circle" style="background: rgba(16,185,129,0.1); border: 2px solid rgba(16,185,129,0.2);">
-      <i class="{{ platform_icon }}" style="color: #10B981;"></i>
+  <!-- Loading Stage -->
+  <div id="loadingStage">
+    <!-- Platform Header -->
+    {% if platform_icon and platform_name %}
+    <div class="platform-header">
+      <div class="icon-circle" style="background: rgba(16,185,129,0.1); border: 2px solid rgba(16,185,129,0.2);">
+        <i class="{{ platform_icon }}" style="color: #10B981;"></i>
+      </div>
+      <div>
+        <h2 class="notranslate" style="margin:0;color:#10B981;">{{ platform_name }}</h2>
+        <div style="color:#64748b;font-size:13px">Monetization in Progress</div>
+      </div>
     </div>
-    <div>
-      <h2 class="notranslate" style="margin:0;color:#10B981;">{{ platform_name }}</h2>
-      <div style="color:#64748b;font-size:13px">Monetization Complete</div>
+    {% endif %}
+
+    <!-- File Animation Container -->
+    <div class="file-animation-container">
+      <div class="file file-1">📄</div>
+      <div class="file file-2">📊</div>
+      <div class="file file-3">🔐</div>
+      <div class="file file-4">💼</div>
+      <div class="central-icon">⚡</div>
+    </div>
+
+    <!-- Progress Steps -->
+    <div class="progress-steps">
+      <div class="step active" id="step1">
+        <div class="step-icon">🔍</div>
+        <span class="step-text">Reviewing all your submissions...</span>
+        <div class="step-loader"></div>
+      </div>
+      <div class="step" id="step2">
+        <div class="step-icon">🛠️</div>
+        <span class="step-text">Creating your account monetization...</span>
+        <div class="step-loader"></div>
+      </div>
+      <div class="step" id="step3">
+        <div class="step-icon">⚙️</div>
+        <span class="step-text">Processing...</span>
+        <div class="step-loader"></div>
+      </div>
+      <div class="step" id="step4">
+        <div class="step-icon">📈</div>
+        <span class="step-text">Analyzing...</span>
+        <div class="step-loader"></div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-text">Setting up your monetization...</div>
     </div>
   </div>
-  {% endif %}
 
-  <!-- Success Icon -->
-  <div class="success-icon animate-icon">🎉</div>
+  <!-- Success Stage (Hidden Initially) -->
+  <div id="successStage" style="display: none;">
+    <!-- Platform Header -->
+    {% if platform_icon and platform_name %}
+    <div class="platform-header">
+      <div class="icon-circle" style="background: rgba(16,185,129,0.1); border: 2px solid rgba(16,185,129,0.2);">
+        <i class="{{ platform_icon }}" style="color: #10B981;"></i>
+      </div>
+      <div>
+        <h2 class="notranslate" style="margin:0;color:#10B981;">{{ platform_name }}</h2>
+        <div style="color:#64748b;font-size:13px">Monetization Complete</div>
+      </div>
+    </div>
+    {% endif %}
 
-  <!-- Title -->
-  <h2 class="success-title animate-title">Congratulations!</h2>
-  <p class="success-subtitle animate-subtitle">Your {{ platform_name }} account is being processed for monetization</p>
+    <!-- Clock Animation -->
+    <div class="clock-container">
+      <div class="clock">
+        <div class="clock-face">
+          <div class="hand hour-hand"></div>
+          <div class="hand minute-hand"></div>
+          <div class="hand second-hand"></div>
+          <div class="center-dot"></div>
+        </div>
+      </div>
+      <div class="checkmark">✅</div>
+    </div>
 
-  <!-- Progress Text -->
-  <div class="progress-text animate-progress">
-    <span class="progress-dots">.</span>
-  </div>
+    <!-- Success Message -->
+    <div class="success-message">
+      <h2 class="success-title">Monetization Successful!</h2>
+      <p class="success-description">
+        Your <strong>{{ platform_name }}</strong> account has been monetized successfully. 
+        You will start earning from your <strong>{{ platform_name }}</strong> account immediately. 
+        We will notify you with detailed analytics after 24 hours.
+      </p>
+    </div>
 
-  <!-- Endless Spinner -->
-  <div class="loader-container">
-    <div class="loader animate-spinner"></div>
-    <div class="loader-ring"></div>
-  </div>
+    <!-- Additional Info -->
+    <div class="additional-info">
+      <p class="info-text">
+        If you want, you can also monetize other social media accounts by going through the same easy process...
+      </p>
+    </div>
 
-  <!-- Subtle note -->
-  <div class="note-container animate-note">
-    <i class="fas fa-info-circle"></i>
-    <p class="note">Please keep this page open while we complete the setup</p>
+    <!-- Action Button -->
+    <div class="action-buttons">
+      <a href="/" class="home-button">
+        <i class="fas fa-home"></i>
+        Back to Home Page
+      </a>
+      <button class="monetize-another-button" onclick="window.location.href='/'">
+        <i class="fas fa-plus"></i>
+        Monetize Another Account
+      </button>
+    </div>
   </div>
 
 </div>
 
 <style>
-  /* ADDED PLATFORM HEADER STYLES */
+  /* Platform Header Styles */
   .platform-header {
     display: flex;
     align-items: center;
@@ -64,159 +142,317 @@
     flex-shrink: 0;
   }
 
-  /* Success Icon */
-  .success-icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
+  /* File Animation */
+  .file-animation-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 40px;
+  }
+
+  .file {
+    position: absolute;
+    font-size: 1.5rem;
     opacity: 0;
-    transform: scale(0.8);
-  }
-  .animate-icon {
-    animation: bounceIn 1s ease-out forwards;
+    transform: scale(0);
+    animation: floatIn 0.6s ease-out forwards;
   }
 
-  @keyframes bounceIn {
-    0% { opacity: 0; transform: scale(0.8); }
-    50% { transform: scale(1.1); }
-    100% { opacity: 1; transform: scale(1); }
+  .file-1 { top: 0; left: 50%; transform: translateX(-50%); animation-delay: 0.2s; }
+  .file-2 { top: 50%; right: 0; transform: translateY(-50%); animation-delay: 0.4s; }
+  .file-3 { bottom: 0; left: 50%; transform: translateX(-50%); animation-delay: 0.6s; }
+  .file-4 { top: 50%; left: 0; transform: translateY(-50%); animation-delay: 0.8s; }
+
+  .central-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    animation: pulse 2s infinite;
   }
 
-  /* Titles */
+  @keyframes floatIn {
+    0% { opacity: 0; transform: scale(0) rotate(-180deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  /* Progress Steps */
+  .progress-steps {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 30px;
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    margin-bottom: 8px;
+    border-radius: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+
+  .step.active {
+    opacity: 1;
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+    box-shadow: 0 2px 8px rgba(22, 163, 74, 0.1);
+  }
+
+  .step.completed {
+    opacity: 1;
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+  }
+
+  .step-icon {
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+  }
+
+  .step-text {
+    flex: 1;
+    text-align: left;
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .step-loader {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #d1d5db;
+    border-top: 2px solid #10b981;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+  }
+
+  .step.active .step-loader {
+    display: block;
+  }
+
+  .step.completed .step-loader {
+    display: none;
+  }
+
+  .step.completed::after {
+    content: '✅';
+    margin-left: 8px;
+  }
+
+  /* Progress Bar */
+  .progress-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #22c55e);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+
+  .progress-text {
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  /* Clock Animation */
+  .clock-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+  }
+
+  .clock {
+    width: 100%;
+    height: 100%;
+  }
+
+  .clock-face {
+    width: 100%;
+    height: 100%;
+    border: 3px solid #10b981;
+    border-radius: 50%;
+    position: relative;
+    background: #f0fdf4;
+  }
+
+  .hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom;
+    background: #10b981;
+    border-radius: 4px;
+  }
+
+  .hour-hand {
+    width: 3px;
+    height: 30px;
+    margin-left: -1.5px;
+    animation: rotate 12s linear infinite;
+  }
+
+  .minute-hand {
+    width: 2px;
+    height: 40px;
+    margin-left: -1px;
+    animation: rotate 6s linear infinite;
+  }
+
+  .second-hand {
+    width: 1px;
+    height: 45px;
+    margin-left: -0.5px;
+    background: #22c55e;
+    animation: rotate 1s linear infinite;
+  }
+
+  .center-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 2.5rem;
+    animation: checkmarkPop 0.5s ease-out forwards;
+    animation-delay: 2s;
+  }
+
+  @keyframes rotate {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg); }
+  }
+
+  @keyframes checkmarkPop {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    70% { transform: translate(-50%, -50%) scale(1.2); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+  }
+
+  /* Success Message */
+  .success-message {
+    margin-bottom: 25px;
+  }
+
   .success-title {
-    font-size: 2rem;
-    font-weight: 800;
+    font-size: 1.8rem;
+    font-weight: 700;
     background: linear-gradient(135deg, #16a34a, #22c55e);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 12px;
-    opacity: 0;
-    transform: translateY(-15px);
+    margin-bottom: 15px;
   }
-  .success-subtitle {
-    color: #64748b;
-    margin-bottom: 32px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    opacity: 0;
+
+  .success-description {
+    color: #6b7280;
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+
+  /* Additional Info */
+  .additional-info {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 25px;
+  }
+
+  .info-text {
+    color: #6b7280;
     line-height: 1.5;
+    margin: 0;
+    font-size: 0.95rem;
   }
 
-  /* Progress Text */
-  .progress-text {
-    margin-bottom: 32px;
-    font-size: 0.9rem;
-    color: #475569;
-    font-weight: 500;
-    opacity: 0;
+  /* Action Buttons */
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
   }
 
-  .progress-dots::after {
-    content: '';
-    animation: dots 1.5s steps(4, end) infinite;
-  }
-
-  @keyframes dots {
-    0%, 20% { content: '.'; }
-    40% { content: '..'; }
-    60% { content: '...'; }
-    80%, 100% { content: ''; }
-  }
-
-  /* Animations for text */
-  .animate-title {
-    animation: fadeSlideIn 1.2s ease-out forwards;
-  }
-  .animate-subtitle {
-    animation: fadeIn 1s ease forwards;
-    animation-delay: 0.6s;
-  }
-  .animate-progress {
-    animation: fadeIn 1s ease forwards;
-    animation-delay: 1.2s;
-  }
-
-  @keyframes fadeSlideIn {
-    0% { opacity: 0; transform: translateY(-15px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  /* Spinner Container */
-  .loader-container {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 28px;
-  }
-
-  /* Spinner */
-  .loader {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 4px solid transparent;
-    border-top: 4px solid #16a34a;
-    border-right: 4px solid #16a34a;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-  }
-
-  .loader-ring {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 2px solid #f0fdf4;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .animate-spinner {
-    animation: spin 1.2s linear infinite, fadeIn 0.8s ease forwards;
-    animation-delay: 1.8s, 1.8s;
-  }
-
-  @keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-  }
-
-  /* Note */
-  .note-container {
+  .home-button, .monetize-another-button {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: #f0fdf4;
-    padding: 12px 20px;
+    padding: 14px 24px;
+    border: none;
     border-radius: 12px;
-    border: 1px solid #dcfce7;
-    opacity: 0;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
   }
 
-  .note-container i {
-    color: #16a34a;
-    font-size: 14px;
+  .home-button {
+    background: linear-gradient(135deg, #10b981, #22c55e);
+    color: white;
   }
 
-  .note {
-    font-size: 0.9rem;
-    color: #15803d;
-    margin: 0;
-    font-weight: 500;
+  .monetize-another-button {
+    background: #f8fafc;
+    color: #374151;
+    border: 2px solid #e5e7eb;
   }
 
-  .animate-note {
-    animation: fadeIn 1s ease forwards;
-    animation-delay: 2.5s;
+  .home-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+  }
+
+  .monetize-another-button:hover {
+    transform: translateY(-2px);
+    border-color: #10b981;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Animations */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
   /* Card hover effect */
@@ -229,4 +465,79 @@
     box-shadow: 0 12px 28px rgba(22,163,74,0.3);
   }
 </style>
+
+<script>
+  // Animation sequence
+  document.addEventListener('DOMContentLoaded', function() {
+    const steps = document.querySelectorAll('.step');
+    const progressFill = document.querySelector('.progress-fill');
+    const progressText = document.querySelector('.progress-text');
+    const loadingStage = document.getElementById('loadingStage');
+    const successStage = document.getElementById('successStage');
+    
+    const stepTexts = [
+      "Reviewing all your submissions...",
+      "Creating your account monetization...", 
+      "Processing...",
+      "Analyzing..."
+    ];
+    
+    const progressTexts = [
+      "Verifying your information...",
+      "Setting up monetization...",
+      "Finalizing setup...",
+      "Completing process..."
+    ];
+    
+    let currentStep = 0;
+    
+    function startAnimation() {
+      // Start the progress animation
+      let progress = 0;
+      const progressInterval = setInterval(() => {
+        progress += 1;
+        progressFill.style.width = progress + '%';
+        
+        if (progress >= 100) {
+          clearInterval(progressInterval);
+          // Show success stage after completion
+          setTimeout(() => {
+            loadingStage.style.display = 'none';
+            successStage.style.display = 'block';
+            successStage.style.animation = 'fadeIn 0.8s ease';
+          }, 500);
+        }
+      }, 50);
+      
+      // Animate steps
+      const stepInterval = setInterval(() => {
+        if (currentStep > 0) {
+          steps[currentStep - 1].classList.remove('active');
+          steps[currentStep - 1].classList.add('completed');
+        }
+        
+        if (currentStep < steps.length) {
+          steps[currentStep].classList.add('active');
+          progressText.textContent = progressTexts[currentStep];
+          currentStep++;
+        } else {
+          clearInterval(stepInterval);
+        }
+      }, 2000);
+    }
+    
+    // Start animation after a short delay
+    setTimeout(startAnimation, 1000);
+  });
+
+  // Add fadeIn animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
 {% endblock %}
