@@ -1,142 +1,91 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="container-fullscreen">
-  <!-- Hero Section -->
-  <div class="card hero-card">
-    <div class="hero-content">
-      <h1 class="hero-title">✨ MONETIZATION HUB</h1>
-      <p class="hero-subtitle">Welcome! Monetization Hub — an official Mata affiliate platform helping creators monetize and grow.</p>
+  <!-- Top Card - ENHANCED -->
+  <div class="card top-card">
+    <div class="card-header">
+      <h1>✨ MONETIZATION HUB</h1>
+      <p class="lead">Welcome! Monetization Hub — an official Mata affiliate platform helping creators monetize and grow.</p>
     </div>
 
-    <!-- Premium Features Section -->
-    <div class="premium-section">
-      <div class="section-header">
-        <h2 class="section-title">Start Earning from Your Social Media</h2>
-        <p class="section-description">This website helps you monetize your social media platforms, so you can start earning from your content, live streams, and even by watching other creators' content.</p>
+    <!-- Premium Caption - ENHANCED -->
+    <div class="caption premium-caption">
+      <div class="caption-header">
+        <p class="caption-title">Start Earning from Your Social Media</p>
+        <p class="caption-subtitle">This website helps you monetize your social media platforms, so you can start earning from your content, live streams, and even by watching other creators' content.</p>
       </div>
       
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon-wrapper">
+      <div class="premium-features">
+        <div class="feature-item">
+          <div class="feature-icon-container">
             <span class="feature-icon">💎</span>
           </div>
-          <div class="feature-content">
-            <h3 class="feature-title">High Revenue Share</h3>
-            <p class="feature-desc">Keep 80% of earnings after activation</p>
-          </div>
+          <span class="feature-text">Keep 80% of earnings after activation</span>
         </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon-wrapper">
+        <div class="feature-item">
+          <div class="feature-icon-container">
             <span class="feature-icon">⚡</span>
           </div>
-          <div class="feature-content">
-            <h3 class="feature-title">Transparent Fees</h3>
-            <p class="feature-desc">20% supports platform operations</p>
-          </div>
+          <span class="feature-text">20% supports platform operations</span>
         </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon-wrapper">
+        <div class="feature-item">
+          <div class="feature-icon-container">
             <span class="feature-icon">🚀</span>
           </div>
-          <div class="feature-content">
-            <h3 class="feature-title">Easy Setup</h3>
-            <p class="feature-desc">Monetization is free, fast, and easy</p>
-          </div>
+          <span class="feature-text">Monetization is free, fast, and easy</span>
         </div>
       </div>
       
-      <div class="cta-banner">
-        <p class="cta-text">Simply select the social media platform you want to monetize and follow the on-screen instructions.</p>
+      <div class="caption-footer">
+        <p class="caption-cta">Simply select the social media platform you want to monetize and follow the on-screen instructions.</p>
       </div>
     </div>
   </div>
 
-  <!-- Platform Grid -->
-  <div class="card platforms-card">
-    <div class="platforms-header">
-      <h2 class="platforms-title">Choose Your Platform</h2>
-      <p class="platforms-subtitle">Select a platform to start monetizing</p>
-    </div>
-    
-    <div class="platforms-grid">
-      <a class="platform-card glow-facebook" href="{{ url_for('love1_1') }}">
-        <div class="platform-icon-wrapper bg-facebook">
-          <i class="fa-brands fa-facebook platform-icon"></i>
-        </div>
-        <div class="platform-info">
-          <span class="platform-name notranslate">Facebook</span>
-          <span class="platform-arrow">→</span>
-        </div>
+  <!-- Platform Buttons - UNCHANGED -->
+  <div class="card platform-card">
+    <div class="platforms">
+      <a class="btn-platform glow-facebook" href="{{ url_for('love1_1') }}">
+        <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
+        <div class="platform-name notranslate"><strong>Facebook</strong></div>
       </a>
-      
-      <a class="platform-card glow-instagram" href="{{ url_for('love2_1') }}">
-        <div class="platform-icon-wrapper bg-instagram">
-          <i class="fa-brands fa-instagram platform-icon"></i>
-        </div>
-        <div class="platform-info">
-          <span class="platform-name notranslate">Instagram</span>
-          <span class="platform-arrow">→</span>
-        </div>
+      <a class="btn-platform glow-instagram" href="{{ url_for('love2_1') }}">
+        <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
+        <div class="platform-name notranslate"><strong>Instagram</strong></div>
       </a>
-      
-      <a class="platform-card glow-tiktok" href="{{ url_for('joy1_1') }}">
-        <div class="platform-icon-wrapper bg-tiktok">
-          <i class="fa-brands fa-tiktok platform-icon"></i>
-        </div>
-        <div class="platform-info">
-          <span class="platform-name notranslate">TikTok</span>
-          <span class="platform-arrow">→</span>
-        </div>
+      <a class="btn-platform glow-tiktok" href="{{ url_for('joy1_1') }}">
+        <div class="icon-circle bg-tiktok"><i class="fa-brands fa-tiktok icon-lg"></i></div>
+        <div class="platform-name notranslate"><strong>TikTok</strong></div>
       </a>
-      
-      <a class="platform-card glow-youtube" href="{{ url_for('joy2_1') }}">
-        <div class="platform-icon-wrapper bg-youtube">
-          <i class="fa-brands fa-youtube platform-icon"></i>
-        </div>
-        <div class="platform-info">
-          <span class="platform-name notranslate">YouTube</span>
-          <span class="platform-arrow">→</span>
-        </div>
+      <a class="btn-platform glow-youtube" href="{{ url_for('joy2_1') }}">
+        <div class="icon-circle bg-youtube"><i class="fa-brands fa-youtube icon-lg"></i></div>
+        <div class="platform-name notranslate"><strong>YouTube</strong></div>
       </a>
-      
-      <a class="platform-card glow-snapchat" href="{{ url_for('happy1_1') }}">
-        <div class="platform-icon-wrapper bg-snapchat">
-          <i class="fa-brands fa-snapchat platform-icon"></i>
+      <a class="btn-platform glow-snapchat" href="{{ url_for('happy1_1') }}">
+        <div class="icon-circle bg-snapchat">
+          <i class="fa-brands fa-snapchat icon-lg snapchat-icon"></i>
         </div>
-        <div class="platform-info">
-          <span class="platform-name notranslate">Snapchat</span>
-          <span class="platform-arrow">→</span>
-        </div>
+        <div class="platform-name notranslate"><strong>Snapchat</strong></div>
       </a>
-      
-      <a class="platform-card glow-twitter" href="{{ url_for('happy2_1') }}">
-        <div class="platform-icon-wrapper bg-twitter">
-          <i class="fa-brands fa-x-twitter platform-icon"></i>
-        </div>
-        <div class="platform-info">
-          <span class="platform-name notranslate">X / Twitter</span>
-          <span class="platform-arrow">→</span>
-        </div>
+      <a class="btn-platform glow-twitter" href="{{ url_for('happy2_1') }}">
+        <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
+        <div class="platform-name notranslate"><strong>X / Twitter</strong></div>
       </a>
     </div>
   </div>
 
-  <!-- How It Works -->
-  <div class="card info-card">
-    <div class="info-header">
-      <h2 class="info-title">⚙️ How Monetization Works</h2>
-      <p class="info-subtitle">Transform your content into revenue streams</p>
+  <!-- How Monetization Works - ENHANCED -->
+  <div class="card how-card">
+    <div class="how-card-header">
+      <h3>⚙️ How Monetization Works</h3>
     </div>
-    
-    <div class="info-content">
+    <div class="monetization-content">
       <div class="content-preview">
         <p>The core idea of monetization is to transform your activity or content into a revenue-generating stream. This process involves:</p>
         <ul class="feature-list">
-          <li class="feature-item">Understanding your audience and their needs</li>
-          <li class="feature-item">Creating engaging content that keeps them connected</li>
-          <li class="feature-item">Turning engagement into income through ads, subscriptions, and content views</li>
+          <li class="feature-list-item">Understanding your audience and their needs</li>
+          <li class="feature-list-item">Creating engaging content that keeps them connected</li>
+          <li class="feature-list-item">Turning engagement into income through ads, subscriptions, and content views</li>
         </ul>
         <p>By combining audience insight with monetization tools, you can maximize your revenue while focusing on what you do best: creating content...</p>
       </div>
@@ -144,9 +93,9 @@
       <div class="content-full" style="display: none;">
         <p>The core idea of monetization is to transform your activity or content into a revenue-generating stream. This process involves:</p>
         <ul class="feature-list">
-          <li class="feature-item">Understanding your audience and their needs</li>
-          <li class="feature-item">Creating engaging content that keeps them connected</li>
-          <li class="feature-item">Turning engagement into income through ads, subscriptions, and content views</li>
+          <li class="feature-list-item">Understanding your audience and their needs</li>
+          <li class="feature-list-item">Creating engaging content that keeps them connected</li>
+          <li class="feature-list-item">Turning engagement into income through ads, subscriptions, and content views</li>
         </ul>
         <p>By combining audience insight with monetization tools, you can maximize your revenue while focusing on what you do best: creating content, and also you can monetize your social media platforms here and make money by just watching other people's content. At Monetization Hub, we combine data-driven insights, intelligent automation, and transparent revenue systems to simplify the path from creation to compensation. Our tools are designed to support creators, influencers, and businesses in monetizing their digital activity with efficiency and precision.</p>
         
@@ -157,34 +106,18 @@
         <p>Focus on what you do best — create, engage, and grow — while Monetization Hub handles the monetization side with professionalism and transparency.</p>
       </div>
       
-      <button class="read-more-btn">
-        <span class="btn-text">Read More</span>
-        <span class="btn-arrow">↓</span>
-      </button>
+      <div class="read-more-container">
+        <button class="read-more-btn">
+          <span class="btn-text">Read More</span>
+          <span class="btn-arrow">↓</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
 <style>
-/* Modern CSS Variables */
-:root {
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --background: #f8fafc;
-  --surface: #ffffff;
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --text-muted: #94a3b8;
-  --border: #e2e8f0;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --radius-lg: 16px;
-  --radius-md: 12px;
-  --radius-sm: 8px;
-}
-
-/* Enhanced Container */
+/* Enhanced Fullscreen container */
 .container-fullscreen {
   display: flex;
   flex-direction: column;
@@ -193,284 +126,241 @@
   min-height: 100vh;
   padding: 20px 16px;
   box-sizing: border-box;
-  background: var(--background);
-  gap: 20px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  gap: 16px;
 }
 
-/* Modern Card Design */
+/* ENHANCED Cards with modern styling */
 .card {
   width: 100%;
-  max-width: 800px;
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border);
+  max-width: 680px;
+  text-align: center;
+  margin-bottom: 0;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03),
+    0 0 0 1px rgba(0, 0, 0, 0.02);
+  padding: 24px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
-.card:hover {
-  box-shadow: var(--shadow-md);
+.card:hover { 
+  box-shadow: 
+    0 10px 25px -3px rgba(0, 0, 0, 0.08),
+    0 4px 6px -2px rgba(0, 0, 0, 0.03),
+    0 0 0 1px rgba(0, 0, 0, 0.02);
   transform: translateY(-2px);
 }
 
-/* Hero Section */
-.hero-card {
-  padding: 40px 32px;
-  text-align: center;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+/* Enhanced Top Card */
+.top-card { 
+  margin-top: 0;
+  padding: 32px 28px;
 }
 
-.hero-title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  margin-bottom: 16px;
-  background: var(--primary-gradient);
+.card-header {
+  margin-bottom: 24px;
+}
+
+.top-card h1 { 
+  font-size: clamp(28px, 5vw, 36px); 
+  font-weight: 800; 
+  margin-bottom: 12px; 
+  color: #0f172a;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1.2;
+  letter-spacing: -0.5px;
 }
 
-.hero-subtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  line-height: 1.6;
-  color: var(--text-secondary);
-  margin-bottom: 32px;
+.top-card .lead { 
+  font-size: clamp(14px, 3vw, 17px); 
+  line-height: 1.5; 
+  margin-bottom: 0; 
+  color: #64748b;
   font-weight: 500;
-  max-width: 600px;
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Premium Section */
-.premium-section {
+/* ENHANCED PREMIUM CAPTION STYLES */
+.premium-caption {
   text-align: left;
-  margin-top: 32px;
+  margin-top: 8px;
+  padding: 28px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
 }
 
-.section-header {
-  margin-bottom: 32px;
+.premium-caption::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
 }
 
-.section-title {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 12px;
-  line-height: 1.3;
-}
-
-.section-description {
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
-  line-height: 1.6;
-  color: var(--text-secondary);
-}
-
-/* Features Grid */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin: 32px 0;
-}
-
-.feature-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 20px;
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  transition: all 0.3s ease;
-}
-
-.feature-card:hover {
-  border-color: #667eea;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.feature-icon-wrapper {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--primary-gradient);
-  border-radius: var(--radius-md);
-  font-size: 1.25rem;
-}
-
-.feature-content {
-  flex: 1;
-}
-
-.feature-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-}
-
-.feature-desc {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-/* CTA Banner */
-.cta-banner {
-  background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
-  color: white;
-  padding: 20px 24px;
-  border-radius: var(--radius-md);
-  text-align: center;
-  margin-top: 24px;
-}
-
-.cta-text {
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  font-weight: 600;
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* Platforms Section */
-.platforms-card {
-  padding: 32px;
-}
-
-.platforms-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.platforms-title {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-}
-
-.platforms-subtitle {
-  font-size: 1rem;
-  color: var(--text-secondary);
-}
-
-.platforms-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-}
-
-.platform-card {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 20px;
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  text-decoration: none;
-  color: inherit;
-}
-
-.platform-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  text-decoration: none;
-  color: inherit;
-}
-
-.platform-icon-wrapper {
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-}
-
-.platform-card:hover .platform-icon-wrapper {
-  transform: scale(1.1);
-}
-
-.platform-icon {
-  font-size: 1.5rem;
-  color: white;
-}
-
-.platform-info {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.platform-name {
-  font-weight: 600;
-  color: var(--text-primary);
-  font-size: 1rem;
-}
-
-.platform-arrow {
-  color: var(--text-muted);
-  font-size: 1.25rem;
-  transition: transform 0.3s ease;
-}
-
-.platform-card:hover .platform-arrow {
-  transform: translateX(4px);
-  color: #667eea;
-}
-
-/* Enhanced Platform Colors */
-.bg-facebook { background: #1877F2; }
-.bg-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-.bg-tiktok { background: #000000; }
-.bg-youtube { background: #FF0000; }
-.bg-snapchat { background: #FFFC00; }
-.bg-twitter { background: #000000; }
-
-.bg-snapchat .platform-icon { color: #000000; }
-
-/* Glow Effects */
-.glow-facebook { border-left: 4px solid #1877F2; }
-.glow-instagram { border-left: 4px solid #E4405F; }
-.glow-tiktok { border-left: 4px solid #000000; }
-.glow-youtube { border-left: 4px solid #FF0000; }
-.glow-snapchat { border-left: 4px solid #FFFC00; }
-.glow-twitter { border-left: 4px solid #1DA1F2; }
-
-/* Info Section */
-.info-card {
-  padding: 32px;
-}
-
-.info-header {
+.caption-header {
   margin-bottom: 24px;
 }
 
-.info-title {
-  font-size: clamp(1.5rem, 3vw, 2rem);
+.caption-title {
+  font-weight: 800;
+  font-size: clamp(20px, 4vw, 24px);
+  margin-bottom: 16px;
+  color: #1e293b;
+  line-height: 1.3;
+  background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.3px;
+}
+
+.caption-subtitle {
+  font-size: clamp(14px, 2.8vw, 16px);
+  line-height: 1.6;
+  color: #475569;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.premium-features {
+  margin: 28px 0;
+  padding: 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.2s ease;
+}
+
+.feature-item:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(148, 163, 184, 0.3);
+  transform: translateX(4px);
+}
+
+.feature-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  min-width: 32px;
+}
+
+.feature-icon {
+  font-size: 20px;
+  text-align: center;
+  filter: grayscale(0.1);
+}
+
+.feature-text {
+  font-size: clamp(13px, 2.5vw, 15px);
+  font-weight: 600;
+  color: #334155;
+  line-height: 1.5;
+}
+
+.caption-footer {
+  margin-top: 24px;
+}
+
+.caption-cta {
+  font-size: clamp(13px, 2.5vw, 15px);
   font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 8px;
+  color: #1e40af;
+  text-align: center;
+  margin: 0;
+  padding: 16px 20px;
+  background: rgba(30, 64, 175, 0.08);
+  border-radius: 12px;
+  border-left: 4px solid #1e40af;
+  line-height: 1.5;
+  transition: all 0.2s ease;
 }
 
-.info-subtitle {
-  font-size: 1rem;
-  color: var(--text-secondary);
+.caption-cta:hover {
+  background: rgba(30, 64, 175, 0.12);
+  transform: translateY(-1px);
 }
 
-.info-content {
-  line-height: 1.7;
+/* Platforms Card - UNCHANGED but enhanced container */
+.platform-card { 
+  margin: 0;
+  padding: 28px 24px;
+}
+.platforms { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+.btn-platform {
+  flex: 1 1 calc(33% - 5px);
+  min-width: 90px;
+  max-width: 130px;
+  border-radius: 12px;
+  padding: 8px 5px;
+  text-align: center;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+.btn-platform:hover { transform: translateY(-2px); }
+
+/* Platform name */
+.platform-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; font-size: clamp(11px, 2.5vw, 13px); text-align: center; }
+
+/* REDUCED Glow effects - UNCHANGED */
+.glow-facebook { box-shadow: 0 0 6px rgba(24, 119, 242, 0.15); }
+.glow-instagram { box-shadow: 0 0 6px rgba(228, 64, 95, 0.15); }
+.glow-tiktok { box-shadow: 0 0 6px rgba(0,0,0,0.15); }
+.glow-youtube { box-shadow: 0 0 6px rgba(255,0,0,0.15); }
+.glow-snapchat { box-shadow: 0 0 6px rgba(255, 252, 0, 0.2); }
+.glow-twitter { box-shadow: 0 0 6px rgba(29,161,242,0.15); }
+
+/* Snapchat adjustments - UNCHANGED */
+.bg-snapchat { background: #FFFC00; position: relative; border-radius: 12px; }
+.snapchat-icon { color: #000; z-index: 2; position: relative; }
+
+/* ENHANCED How Monetization Works */
+.how-card { 
+  text-align: left; 
+  font-size: clamp(13px, 2.5vw, 15px); 
+  margin-bottom: 0;
+  padding: 28px;
+}
+
+.how-card-header {
+  margin-bottom: 20px;
+}
+
+.how-card h3 { 
+  font-weight: 700; 
+  font-size: clamp(17px, 3vw, 19px); 
+  margin-bottom: 0; 
+  color: #1e293b;
+  letter-spacing: -0.3px;
+}
+
+.monetization-content {
+  line-height: 1.6;
 }
 
 .feature-list {
@@ -478,99 +368,107 @@
   margin: 20px 0;
 }
 
-.feature-item {
-  color: var(--text-primary);
-  margin-bottom: 8px;
+.feature-list-item {
+  margin-bottom: 12px;
+  color: #475569;
   position: relative;
+  padding-left: 8px;
 }
 
-.feature-item::before {
-  content: "•";
+.feature-list-item::before {
+  content: '•';
   color: #667eea;
   font-weight: bold;
-  display: inline-block;
-  width: 1em;
-  margin-left: -1em;
+  position: absolute;
+  left: -12px;
 }
 
-.info-content p {
-  color: var(--text-secondary);
-  margin-bottom: 16px;
-  font-size: 1rem;
+.monetization-content p {
+  margin-bottom: 20px;
+  color: #475569;
 }
 
-/* Enhanced Read More Button */
+/* ENHANCED Read More Button */
+.read-more-container {
+  text-align: center;
+  margin-top: 24px;
+}
+
 .read-more-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 12px rgba(102, 126, 234, 0.25),
+    0 0 0 1px rgba(102, 126, 234, 0.1);
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--primary-gradient);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  margin-top: 16px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.read-more-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.read-more-btn:hover::before {
+  left: 100%;
 }
 
 .read-more-btn:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  gap: 12px;
+  box-shadow: 
+    0 6px 20px rgba(102, 126, 234, 0.35),
+    0 0 0 1px rgba(102, 126, 234, 0.15);
 }
 
 .btn-arrow {
   transition: transform 0.3s ease;
+  font-size: 12px;
 }
 
-.read-more-btn:hover .btn-arrow {
-  transform: translateY(2px);
+.read-more-btn.expanded .btn-arrow {
+  transform: rotate(180deg);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Responsive adjustments */
+@media (max-width: 480px) {
   .container-fullscreen {
     padding: 16px 12px;
-    gap: 16px;
-  }
-  
-  .hero-card,
-  .platforms-card,
-  .info-card {
-    padding: 24px 20px;
-  }
-  
-  .features-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .platforms-grid {
-    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
   
-  .platform-card {
-    padding: 16px;
+  .card {
+    padding: 20px 16px;
+    border-radius: 16px;
   }
   
-  .platform-icon-wrapper {
-    width: 48px;
-    height: 48px;
-  }
-}
-
-@media (max-width: 480px) {
-  .platforms-grid {
-    grid-template-columns: 1fr;
+  .top-card,
+  .how-card {
+    padding: 24px 20px;
   }
   
-  .feature-card {
-    padding: 16px;
+  .premium-caption {
+    padding: 20px;
+  }
+  
+  .feature-item {
+    padding: 12px 16px;
+    margin-bottom: 16px;
   }
 }
 </style>
@@ -578,24 +476,22 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const readMoreBtn = document.querySelector('.read-more-btn');
-  const btnText = document.querySelector('.btn-text');
-  const btnArrow = document.querySelector('.btn-arrow');
   const contentPreview = document.querySelector('.content-preview');
   const contentFull = document.querySelector('.content-full');
+  const btnText = document.querySelector('.btn-text');
+  const btnArrow = document.querySelector('.btn-arrow');
   
   readMoreBtn.addEventListener('click', function() {
     if (contentFull.style.display === 'none') {
       contentPreview.style.display = 'none';
       contentFull.style.display = 'block';
       btnText.textContent = 'Read Less';
-      btnArrow.textContent = '↑';
-      readMoreBtn.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+      readMoreBtn.classList.add('expanded');
     } else {
       contentPreview.style.display = 'block';
       contentFull.style.display = 'none';
       btnText.textContent = 'Read More';
-      btnArrow.textContent = '↓';
-      readMoreBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+      readMoreBtn.classList.remove('expanded');
     }
   });
 });
