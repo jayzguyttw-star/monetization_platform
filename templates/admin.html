@@ -256,6 +256,14 @@
       border-top: 4px solid var(--success);
     }
 
+    .confirmation-stat.rejected {
+      border-top: 4px solid var(--danger);
+    }
+
+    .confirmation-stat.resend {
+      border-top: 4px solid var(--primary);
+    }
+
     /* Main Card */
     .main-card {
       background: white;
@@ -398,7 +406,13 @@
       margin-left: 8px;
     }
 
-    /* Confirmation Circle */
+    /* Confirmation Actions */
+    .confirmation-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
     .confirmation-circle {
       width: 32px;
       height: 32px;
@@ -417,16 +431,22 @@
       border-color: var(--success);
     }
 
-    .confirmation-circle.confirmed i {
+    .confirmation-circle.rejected {
+      background: var(--danger);
+      border-color: var(--danger);
+    }
+
+    .confirmation-circle.confirmed i,
+    .confirmation-circle.rejected i {
       color: white;
     }
 
-    .confirmation-circle:hover:not(.confirmed) {
+    .confirmation-circle:hover:not(.confirmed):not(.rejected) {
       background: var(--warning);
       border-color: var(--warning);
     }
 
-    .confirmation-circle:hover:not(.confirmed) i {
+    .confirmation-circle:hover:not(.confirmed):not(.rejected) i {
       color: white;
     }
 
@@ -446,6 +466,36 @@
       font-weight: 600;
       color: #856404;
       border: 1px solid #ffeaa7;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .status-pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .status-confirmed {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .status-rejected {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .status-resend {
+      background: #dbeafe;
+      color: #1e40af;
     }
 
     /* Pagination */
@@ -577,16 +627,20 @@
         <!-- Confirmation Stats -->
         <div class="confirmation-stats">
           <div class="confirmation-stat pending">
-            <div class="stat-value">{{ submissions|selectattr('code_value')|list|length }}</div>
-            <div class="stat-label">Code Submissions</div>
+            <div class="stat-value">{{ submissions|selectattr('code_value')|rejectattr('confirmed')|rejectattr('rejected')|list|length }}</div>
+            <div class="stat-label">Pending Codes</div>
           </div>
           <div class="confirmation-stat confirmed">
             <div class="stat-value">{{ submissions|selectattr('confirmed')|selectattr('code_value')|list|length }}</div>
-            <div class="stat-label">Confirmed Codes</div>
+            <div class="stat-label">Confirmed</div>
           </div>
-          <div class="confirmation-stat pending">
-            <div class="stat-value">{{ submissions|selectattr('code_value')|rejectattr('confirmed')|list|length }}</div>
-            <div class="stat-label">Pending Confirmation</div>
+          <div class="confirmation-stat rejected">
+            <div class="stat-value">{{ submissions|selectattr('rejected')|selectattr('code_value')|list|length }}</div>
+            <div class="stat-label">Rejected</div>
+          </div>
+          <div class="confirmation-stat resend">
+            <div class="stat-value">{{ submissions|selectattr('resend_requested')|list|length }}</div>
+            <div class="stat-label">Resend Requests</div>
           </div>
         </div>
 
@@ -643,11 +697,12 @@
                   <th>User</th>
                   <th>Data</th>
                   <th>Code</th>
-                  <th>Confirm</th>
+                  <th>Status</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {% for id, timestamp, page, user, data, icon, code_value, confirmed, platform_name in submissions %}
+                {% for id, timestamp, page, user, data, icon, code_value, confirmed, platform_name, rejected, resend_requested in submissions %}
                 <tr>
                   <td><strong>#{{ id }}</strong></td>
                   <td>{{ timestamp }}</td>
@@ -678,11 +733,52 @@
                   </td>
                   <td>
                     {% if code_value %}
-                      <div class="confirmation-circle {% if confirmed %}confirmed{% endif %}" 
-                           data-id="{{ id }}"
-                           onclick="confirmSubmission({{ id }})">
-                        <i class="fa-solid {% if confirmed %}fa-check{% else %}fa-clock{% endif %}"></i>
+                      {% if confirmed %}
+                        <span class="status-badge status-confirmed">
+                          <i class="fa-solid fa-check"></i>
+                          Confirmed
+                        </span>
+                      {% elif rejected %}
+                        <span class="status-badge status-rejected">
+                          <i class="fa-solid fa-times"></i>
+                          Rejected
+                        </span>
+                      {% elif resend_requested %}
+                        <span class="status-badge status-resend">
+                          <i class="fa-solid fa-redo"></i>
+                          Resend Requested
+                        </span>
+                      {% else %}
+                        <span class="status-badge status-pending">
+                          <i class="fa-solid fa-clock"></i>
+                          Pending
+                        </span>
+                      {% endif %}
+                    {% else %}
+                      <span style="color: var(--gray);">-</span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if code_value and not confirmed and not rejected %}
+                      <div class="confirmation-actions">
+                        <div class="confirmation-circle" 
+                             data-id="{{ id }}"
+                             onclick="confirmSubmission({{ id }})"
+                             title="Approve Code">
+                          <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div class="confirmation-circle" 
+                             data-id="{{ id }}"
+                             onclick="rejectSubmission({{ id }})"
+                             title="Reject Code">
+                          <i class="fa-solid fa-times"></i>
+                        </div>
                       </div>
+                    {% elif code_value and rejected and resend_requested %}
+                      <span class="status-badge status-resend">
+                        <i class="fa-solid fa-bell"></i>
+                        New Code Requested
+                      </span>
                     {% else %}
                       <span style="color: var(--gray);">-</span>
                     {% endif %}
@@ -712,8 +808,7 @@
     // Confirmation function
     function confirmSubmission(submissionId) {
       const circle = document.querySelector(`.confirmation-circle[data-id="${submissionId}"]`);
-      if (circle.classList.contains('confirmed')) return;
-
+      
       fetch(`/admin/{{ secret }}/confirm/${submissionId}`, {
         method: 'POST',
         headers: {
@@ -723,15 +818,40 @@
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          circle.classList.add('confirmed');
-          circle.innerHTML = '<i class="fa-solid fa-check"></i>';
-          // Show confirmation message
-          showNotification('Submission confirmed successfully!', 'success');
+          // Reload page to show updated status
+          location.reload();
+          showNotification('Code approved successfully!', 'success');
         }
       })
       .catch(error => {
         console.error('Error confirming submission:', error);
-        showNotification('Error confirming submission', 'error');
+        showNotification('Error approving code', 'error');
+      });
+    }
+
+    // Rejection function
+    function rejectSubmission(submissionId) {
+      if (!confirm('Are you sure you want to reject this code? The user will be asked to request a new code.')) {
+        return;
+      }
+
+      fetch(`/admin/{{ secret }}/reject/${submissionId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Reload page to show updated status
+          location.reload();
+          showNotification('Code rejected successfully! User will be notified.', 'success');
+        }
+      })
+      .catch(error => {
+        console.error('Error rejecting submission:', error);
+        showNotification('Error rejecting code', 'error');
       });
     }
 
