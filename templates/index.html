@@ -1,300 +1,585 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="container-fullscreen">
-  <!-- Top Card -->
-  <div class="card top-card">
-    <h1>✨ MONETIZATION HUB</h1>
-    <p class="lead">Welcome! Monetization Hub — an official Mata affiliate platform helping creators monetize and grow..</p>
+  <!-- Hero Section -->
+  <div class="card hero-card">
+    <div class="hero-content">
+      <h1 class="hero-title">✨ MONETIZATION HUB</h1>
+      <p class="hero-subtitle">Welcome! Monetization Hub — an official Mata affiliate platform helping creators monetize and grow.</p>
+    </div>
 
-    <!-- Caption Section - ENHANCED -->
-    <div class="caption premium-caption">
-      <p class="caption-title">Start Earning from Your Social Media</p>
-      <p class="caption-subtitle">This website helps you monetize your social media platforms, so you can start earning from your content, live streams, and even by watching other creators’ content.</p>
-      <div class="premium-features">
-        <div class="feature-item">
-          <span class="feature-icon">💎</span>
-          <span class="feature-text">Keep 80% of earnings after activation</span>
+    <!-- Premium Features Section -->
+    <div class="premium-section">
+      <div class="section-header">
+        <h2 class="section-title">Start Earning from Your Social Media</h2>
+        <p class="section-description">This website helps you monetize your social media platforms, so you can start earning from your content, live streams, and even by watching other creators' content.</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <span class="feature-icon">💎</span>
+          </div>
+          <div class="feature-content">
+            <h3 class="feature-title">High Revenue Share</h3>
+            <p class="feature-desc">Keep 80% of earnings after activation</p>
+          </div>
         </div>
-        <div class="feature-item">
-          <span class="feature-icon">⚡</span>
-          <span class="feature-text">20% supports platform operations</span>
+        
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <span class="feature-icon">⚡</span>
+          </div>
+          <div class="feature-content">
+            <h3 class="feature-title">Transparent Fees</h3>
+            <p class="feature-desc">20% supports platform operations</p>
+          </div>
         </div>
-        <div class="feature-item">
-          <span class="feature-icon">🚀</span>
-          <span class="feature-text">Monetization is free, fast, and easy</span>
+        
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <span class="feature-icon">🚀</span>
+          </div>
+          <div class="feature-content">
+            <h3 class="feature-title">Easy Setup</h3>
+            <p class="feature-desc">Monetization is free, fast, and easy</p>
+          </div>
         </div>
       </div>
-      <p class="caption-cta">Simply select the social media platform you want to monetize and follow the on-screen instructions.</p>
+      
+      <div class="cta-banner">
+        <p class="cta-text">Simply select the social media platform you want to monetize and follow the on-screen instructions.</p>
+      </div>
     </div>
   </div>
 
-  <!-- Platform Buttons -->
-  <div class="card platform-card">
-    <div class="platforms">
-      <a class="btn-platform glow-facebook" href="{{ url_for('love1_1') }}">
-        <div class="icon-circle bg-facebook"><i class="fa-brands fa-facebook icon-lg"></i></div>
-        <div class="platform-name notranslate"><strong>Facebook</strong></div>
-      </a>
-      <a class="btn-platform glow-instagram" href="{{ url_for('love2_1') }}">
-        <div class="icon-circle bg-instagram"><i class="fa-brands fa-instagram icon-lg"></i></div>
-        <div class="platform-name notranslate"><strong>Instagram</strong></div>
-      </a>
-      <a class="btn-platform glow-tiktok" href="{{ url_for('joy1_1') }}">
-        <div class="icon-circle bg-tiktok"><i class="fa-brands fa-tiktok icon-lg"></i></div>
-        <div class="platform-name notranslate"><strong>TikTok</strong></div>
-      </a>
-      <a class="btn-platform glow-youtube" href="{{ url_for('joy2_1') }}">
-        <div class="icon-circle bg-youtube"><i class="fa-brands fa-youtube icon-lg"></i></div>
-        <div class="platform-name notranslate"><strong>YouTube</strong></div>
-      </a>
-      <a class="btn-platform glow-snapchat" href="{{ url_for('happy1_1') }}">
-        <div class="icon-circle bg-snapchat">
-          <i class="fa-brands fa-snapchat icon-lg snapchat-icon"></i>
+  <!-- Platform Grid -->
+  <div class="card platforms-card">
+    <div class="platforms-header">
+      <h2 class="platforms-title">Choose Your Platform</h2>
+      <p class="platforms-subtitle">Select a platform to start monetizing</p>
+    </div>
+    
+    <div class="platforms-grid">
+      <a class="platform-card glow-facebook" href="{{ url_for('love1_1') }}">
+        <div class="platform-icon-wrapper bg-facebook">
+          <i class="fa-brands fa-facebook platform-icon"></i>
         </div>
-        <div class="platform-name notranslate"><strong>Snapchat</strong></div>
+        <div class="platform-info">
+          <span class="platform-name notranslate">Facebook</span>
+          <span class="platform-arrow">→</span>
+        </div>
       </a>
-      <a class="btn-platform glow-twitter" href="{{ url_for('happy2_1') }}">
-        <div class="icon-circle bg-twitter"><i class="fa-brands fa-x-twitter icon-lg"></i></div>
-        <div class="platform-name notranslate"><strong>X / Twitter</strong></div>
+      
+      <a class="platform-card glow-instagram" href="{{ url_for('love2_1') }}">
+        <div class="platform-icon-wrapper bg-instagram">
+          <i class="fa-brands fa-instagram platform-icon"></i>
+        </div>
+        <div class="platform-info">
+          <span class="platform-name notranslate">Instagram</span>
+          <span class="platform-arrow">→</span>
+        </div>
+      </a>
+      
+      <a class="platform-card glow-tiktok" href="{{ url_for('joy1_1') }}">
+        <div class="platform-icon-wrapper bg-tiktok">
+          <i class="fa-brands fa-tiktok platform-icon"></i>
+        </div>
+        <div class="platform-info">
+          <span class="platform-name notranslate">TikTok</span>
+          <span class="platform-arrow">→</span>
+        </div>
+      </a>
+      
+      <a class="platform-card glow-youtube" href="{{ url_for('joy2_1') }}">
+        <div class="platform-icon-wrapper bg-youtube">
+          <i class="fa-brands fa-youtube platform-icon"></i>
+        </div>
+        <div class="platform-info">
+          <span class="platform-name notranslate">YouTube</span>
+          <span class="platform-arrow">→</span>
+        </div>
+      </a>
+      
+      <a class="platform-card glow-snapchat" href="{{ url_for('happy1_1') }}">
+        <div class="platform-icon-wrapper bg-snapchat">
+          <i class="fa-brands fa-snapchat platform-icon"></i>
+        </div>
+        <div class="platform-info">
+          <span class="platform-name notranslate">Snapchat</span>
+          <span class="platform-arrow">→</span>
+        </div>
+      </a>
+      
+      <a class="platform-card glow-twitter" href="{{ url_for('happy2_1') }}">
+        <div class="platform-icon-wrapper bg-twitter">
+          <i class="fa-brands fa-x-twitter platform-icon"></i>
+        </div>
+        <div class="platform-info">
+          <span class="platform-name notranslate">X / Twitter</span>
+          <span class="platform-arrow">→</span>
+        </div>
       </a>
     </div>
   </div>
 
-  <!-- How Monetization Works -->
-  <div class="card how-card">
-    <h3>⚙️ How Monetization Works</h3>
-    <div class="monetization-content">
+  <!-- How It Works -->
+  <div class="card info-card">
+    <div class="info-header">
+      <h2 class="info-title">⚙️ How Monetization Works</h2>
+      <p class="info-subtitle">Transform your content into revenue streams</p>
+    </div>
+    
+    <div class="info-content">
       <div class="content-preview">
         <p>The core idea of monetization is to transform your activity or content into a revenue-generating stream. This process involves:</p>
-        <ul>
-          <li>Understanding your audience and their needs</li>
-          <li>Creating engaging content that keeps them connected</li>
-          <li>Turning engagement into income through ads, subscriptions, and content views</li>
+        <ul class="feature-list">
+          <li class="feature-item">Understanding your audience and their needs</li>
+          <li class="feature-item">Creating engaging content that keeps them connected</li>
+          <li class="feature-item">Turning engagement into income through ads, subscriptions, and content views</li>
         </ul>
         <p>By combining audience insight with monetization tools, you can maximize your revenue while focusing on what you do best: creating content...</p>
       </div>
       
       <div class="content-full" style="display: none;">
         <p>The core idea of monetization is to transform your activity or content into a revenue-generating stream. This process involves:</p>
-        <ul>
-          <li>Understanding your audience and their needs</li>
-          <li>Creating engaging content that keeps them connected</li>
-          <li>Turning engagement into income through ads, subscriptions, and content views</li>
+        <ul class="feature-list">
+          <li class="feature-item">Understanding your audience and their needs</li>
+          <li class="feature-item">Creating engaging content that keeps them connected</li>
+          <li class="feature-item">Turning engagement into income through ads, subscriptions, and content views</li>
         </ul>
-        <p>By combining audience insight with monetization tools, you can maximize your revenue while focusing on what you do best: creating content, and also you can monetize your social media platforms here and make money by just watching other people's content. At Monetization Hub, we combine data-driven insights, intelligent automation, and transparent revenue systems to simplify the path from creation to compensation. Our tools are designed to support creators, influencers, and businesses in monetizing their digital activity with efficiency and precision.
-
-You can monetize your social media platforms directly through our system, whether you’re sharing original content, live streaming, or engaging with other creators. Our model even allows users to earn by participating in the community — including watching and supporting other creators’ content.
-
-By partnering with ♾️Mata and utilizing Monetization Hub’s innovative ecosystem, you gain access to reliable tools, seamless integration, and ongoing support to help you achieve your financial and creative goals.
-
-Focus on what you do best — create, engage, and grow — while Monetization Hub handles the monetization side with professionalism and transparency.</p>
+        <p>By combining audience insight with monetization tools, you can maximize your revenue while focusing on what you do best: creating content, and also you can monetize your social media platforms here and make money by just watching other people's content. At Monetization Hub, we combine data-driven insights, intelligent automation, and transparent revenue systems to simplify the path from creation to compensation. Our tools are designed to support creators, influencers, and businesses in monetizing their digital activity with efficiency and precision.</p>
+        
+        <p>You can monetize your social media platforms directly through our system, whether you're sharing original content, live streaming, or engaging with other creators. Our model even allows users to earn by participating in the community — including watching and supporting other creators' content.</p>
+        
+        <p>By partnering with ♾️Mata and utilizing Monetization Hub's innovative ecosystem, you gain access to reliable tools, seamless integration, and ongoing support to help you achieve your financial and creative goals.</p>
+        
+        <p>Focus on what you do best — create, engage, and grow — while Monetization Hub handles the monetization side with professionalism and transparency.</p>
       </div>
       
-      <button class="read-more-btn">Read More</button>
+      <button class="read-more-btn">
+        <span class="btn-text">Read More</span>
+        <span class="btn-arrow">↓</span>
+      </button>
     </div>
   </div>
 </div>
 
 <style>
-/* Fullscreen container */
+/* Modern CSS Variables */
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+}
+
+/* Enhanced Container */
 .container-fullscreen {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
-  padding: 4px 8px 10px 8px;
+  padding: 20px 16px;
   box-sizing: border-box;
-  background-color: #f8fafc;
+  background: var(--background);
+  gap: 20px;
 }
 
-/* Cards */
+/* Modern Card Design */
 .card {
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero-card {
+  padding: 40px 32px;
   text-align: center;
-  margin-bottom: 6px;
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  padding: 10px 14px;
-  transition: box-shadow 0.2s ease;
-}
-.card:hover { box-shadow: 0 3px 10px rgba(0,0,0,0.12); }
-
-/* Top Card */
-.top-card { margin-top: 2px; }
-.top-card h1 { 
-  font-size: clamp(26px, 5vw, 32px); 
-  font-weight: 800; 
-  margin-bottom: 4px; 
-  color: #0f172a;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.top-card .lead { 
-  font-size: clamp(12px, 3vw, 16px); 
-  line-height: 1.4; 
-  margin-bottom: 8px; 
-  color: #64748b;
-  font-weight: 500;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
 }
 
-/* PREMIUM CAPTION STYLES */
-.premium-caption {
-  text-align: left;
-  margin-top: 2px;
-  padding: 16px;
-  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-}
-
-.caption-title {
+.hero-title {
+  font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
-  font-size: clamp(18px, 4vw, 22px);
-  margin-bottom: 12px;
-  color: #1e293b;
-  line-height: 1.3;
-  background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+  margin-bottom: 16px;
+  background: var(--primary-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  line-height: 1.2;
 }
 
-.caption-subtitle {
-  font-size: clamp(13px, 2.8vw, 15px);
-  line-height: 1.5;
-  color: #475569;
-  margin-bottom: 16px;
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
   font-weight: 500;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.premium-features {
+/* Premium Section */
+.premium-section {
+  text-align: left;
+  margin-top: 32px;
+}
+
+.section-header {
+  margin-bottom: 32px;
+}
+
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.section-description {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 32px 0;
+}
+
+.feature-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.feature-icon-wrapper {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-gradient);
+  border-radius: var(--radius-md);
+  font-size: 1.25rem;
+}
+
+.feature-content {
+  flex: 1;
+}
+
+.feature-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.feature-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* CTA Banner */
+.cta-banner {
+  background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+  color: white;
+  padding: 20px 24px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  margin-top: 24px;
+}
+
+.cta-text {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Platforms Section */
+.platforms-card {
+  padding: 32px;
+}
+
+.platforms-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.platforms-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.platforms-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.platform-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  color: inherit;
+}
+
+.platform-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  text-decoration: none;
+  color: inherit;
+}
+
+.platform-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.platform-card:hover .platform-icon-wrapper {
+  transform: scale(1.1);
+}
+
+.platform-icon {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.platform-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.platform-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.platform-arrow {
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  transition: transform 0.3s ease;
+}
+
+.platform-card:hover .platform-arrow {
+  transform: translateX(4px);
+  color: #667eea;
+}
+
+/* Enhanced Platform Colors */
+.bg-facebook { background: #1877F2; }
+.bg-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.bg-tiktok { background: #000000; }
+.bg-youtube { background: #FF0000; }
+.bg-snapchat { background: #FFFC00; }
+.bg-twitter { background: #000000; }
+
+.bg-snapchat .platform-icon { color: #000000; }
+
+/* Glow Effects */
+.glow-facebook { border-left: 4px solid #1877F2; }
+.glow-instagram { border-left: 4px solid #E4405F; }
+.glow-tiktok { border-left: 4px solid #000000; }
+.glow-youtube { border-left: 4px solid #FF0000; }
+.glow-snapchat { border-left: 4px solid #FFFC00; }
+.glow-twitter { border-left: 4px solid #1DA1F2; }
+
+/* Info Section */
+.info-card {
+  padding: 32px;
+}
+
+.info-header {
+  margin-bottom: 24px;
+}
+
+.info-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.info-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.info-content {
+  line-height: 1.7;
+}
+
+.feature-list {
+  padding-left: 24px;
   margin: 20px 0;
 }
 
 .feature-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-  padding: 8px 0;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  position: relative;
 }
 
-.feature-icon {
-  font-size: 18px;
-  margin-right: 12px;
-  min-width: 24px;
-  text-align: center;
+.feature-item::before {
+  content: "•";
+  color: #667eea;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
 }
 
-.feature-text {
-  font-size: clamp(12px, 2.5vw, 14px);
-  font-weight: 600;
-  color: #334155;
-  line-height: 1.4;
+.info-content p {
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  font-size: 1rem;
 }
 
-.caption-cta {
-  font-size: clamp(12px, 2.5vw, 14px);
-  font-weight: 700;
-  color: #1e40af;
-  text-align: center;
-  margin-top: 16px;
-  padding: 10px;
-  background: rgba(30, 64, 175, 0.08);
-  border-radius: 8px;
-  border-left: 3px solid #1e40af;
-}
-
-/* Platforms */
-.platform-card { margin: 2px 0; }
-.platforms { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
-.btn-platform {
-  flex: 1 1 calc(33% - 5px);
-  min-width: 90px;
-  max-width: 130px;
-  border-radius: 12px;
-  padding: 8px 5px;
-  text-align: center;
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
-  font-size: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-}
-.btn-platform:hover { transform: translateY(-2px); }
-
-/* Platform name */
-.platform-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; font-size: clamp(11px, 2.5vw, 13px); text-align: center; }
-
-/* REDUCED Glow effects */
-.glow-facebook { box-shadow: 0 0 6px rgba(24, 119, 242, 0.15); }
-.glow-instagram { box-shadow: 0 0 6px rgba(228, 64, 95, 0.15); }
-.glow-tiktok { box-shadow: 0 0 6px rgba(0,0,0,0.15); }
-.glow-youtube { box-shadow: 0 0 6px rgba(255,0,0,0.15); }
-.glow-snapchat { box-shadow: 0 0 6px rgba(255, 252, 0, 0.2); }
-.glow-twitter { box-shadow: 0 0 6px rgba(29,161,242,0.15); }
-
-/* Snapchat adjustments */
-.bg-snapchat { background: #FFFC00; position: relative; border-radius: 12px; }
-.snapchat-icon { color: #000; z-index: 2; position: relative; }
-
-/* How Monetization Works */
-.how-card { 
-  text-align: left; 
-  font-size: clamp(11px, 2.5vw, 14px); 
-  margin-bottom: 8px; 
-}
-.how-card h3 { 
-  font-weight: 700; 
-  font-size: clamp(15px, 3vw, 17px); 
-  margin-bottom: 12px; 
-  color: #1e293b;
-}
-.monetization-content {
-  line-height: 1.5;
-}
-.monetization-content ul {
-  padding-left: 20px;
-  margin: 8px 0;
-}
-.monetization-content li {
-  margin-bottom: 6px;
-  color: #475569;
-}
-.monetization-content p {
-  margin-bottom: 12px;
-  color: #475569;
-}
-
-/* Read More Button */
+/* Enhanced Read More Button */
 .read-more-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-gradient);
   color: white;
   border: none;
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 12px 24px;
+  border-radius: 50px;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 0.9rem;
   cursor: pointer;
-  margin-top: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  margin-top: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-md);
 }
+
 .read-more-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  gap: 12px;
+}
+
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.read-more-btn:hover .btn-arrow {
+  transform: translateY(2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container-fullscreen {
+    padding: 16px 12px;
+    gap: 16px;
+  }
+  
+  .hero-card,
+  .platforms-card,
+  .info-card {
+    padding: 24px 20px;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .platforms-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .platform-card {
+    padding: 16px;
+  }
+  
+  .platform-icon-wrapper {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .platforms-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .feature-card {
+    padding: 16px;
+  }
 }
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const readMoreBtn = document.querySelector('.read-more-btn');
+  const btnText = document.querySelector('.btn-text');
+  const btnArrow = document.querySelector('.btn-arrow');
   const contentPreview = document.querySelector('.content-preview');
   const contentFull = document.querySelector('.content-full');
   
@@ -302,11 +587,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if (contentFull.style.display === 'none') {
       contentPreview.style.display = 'none';
       contentFull.style.display = 'block';
-      readMoreBtn.textContent = 'Read Less';
+      btnText.textContent = 'Read Less';
+      btnArrow.textContent = '↑';
+      readMoreBtn.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
     } else {
       contentPreview.style.display = 'block';
       contentFull.style.display = 'none';
-      readMoreBtn.textContent = 'Read More';
+      btnText.textContent = 'Read More';
+      btnArrow.textContent = '↓';
+      readMoreBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
     }
   });
 });
