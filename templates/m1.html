@@ -7,53 +7,82 @@
     <div class="floating-file" style="--delay:0s;">📄</div>
     <div class="floating-file" style="--delay:1s;">📊</div>
     <div class="floating-file" style="--delay:2s;">🔐</div>
-    <div class="floating-file" style="--delay:3s;">💼</div>
+    <div class="floating-file" style="--delay:3s;">💰</div>
   </div>
-
-  <!-- ADDED PLATFORM HEADER -->
-  {% if platform_icon and platform_name %}
-  <div class="platform-header">
-    <div class="icon-circle" style="background: rgba(16,185,129,0.1); border: 2px solid rgba(16,185,129,0.2);">
-      <i class="{{ platform_icon }}" style="color: #10B981;"></i>
-    </div>
-    <div>
-      <h2 class="notranslate" style="margin:0;color:#10B981;">{{ platform_name }}</h2>
-      <div style="color:#64748b;font-size:13px">Monetization Portal</div>
-    </div>
-  </div>
-  {% endif %}
 
   <!-- Stage 1: Loading Animation -->
-  <div id="stage1" class="stage active">
-    <!-- Loading Spinner -->
-    <div class="loading-spinner">
-      <div class="spinner-ring"></div>
-      <div class="spinner-core"></div>
+  <div id="stage-loading" class="stage active">
+    <!-- Platform Header -->
+    {% if platform_icon and platform_name %}
+    <div class="platform-header">
+      <div class="icon-circle" style="background: rgba(16,185,129,0.1); border: 2px solid rgba(16,185,129,0.2);">
+        <i class="{{ platform_icon }}" style="color: #10B981;"></i>
+      </div>
+      <div>
+        <h2 class="notranslate" style="margin:0;color:#10B981;">{{ platform_name }}</h2>
+        <div style="color:#64748b;font-size:13px">Monetization Setup</div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Animated Files Assembly -->
+    <div class="files-assembly">
+      <div class="file-item" data-delay="0">📄</div>
+      <div class="file-item" data-delay="1">📊</div>
+      <div class="file-item" data-delay="2">🔐</div>
+      <div class="file-item" data-delay="3">💰</div>
+      <div class="assembly-center">⚡</div>
     </div>
 
-    <!-- Animated Progress Text -->
-    <div class="progress-container">
-      <div class="progress-text" id="progressText">Reviewing your submission</div>
-      <div class="progress-dots">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+    <!-- Progress Steps -->
+    <div class="progress-steps">
+      <div class="step active" id="step1">
+        <div class="step-icon">⏳</div>
+        <div class="step-text">Reviewing your submission</div>
+        <div class="step-loader"></div>
+      </div>
+      <div class="step" id="step2">
+        <div class="step-icon">👤</div>
+        <div class="step-text">Creating account monetization</div>
+        <div class="step-loader"></div>
+      </div>
+      <div class="step" id="step3">
+        <div class="step-icon">⚙️</div>
+        <div class="step-text">Processing setup</div>
+        <div class="step-loader"></div>
+      </div>
+      <div class="step" id="step4">
+        <div class="step-icon">🔍</div>
+        <div class="step-text">Analyzing profile</div>
+        <div class="step-loader"></div>
       </div>
     </div>
 
-    <!-- File Assembly Animation -->
-    <div class="file-assembly">
-      <div class="file-part" data-part="1">📄</div>
-      <div class="file-part" data-part="2">📊</div>
-      <div class="file-part" data-part="3">🔐</div>
-      <div class="file-part" data-part="4">💼</div>
-      <div class="file-complete">✅</div>
+    <!-- Loading Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-text">Initializing setup...</div>
     </div>
   </div>
 
-  <!-- Stage 2: Completion Animation -->
-  <div id="stage2" class="stage">
-    <!-- Clock Animation -->
+  <!-- Stage 2: Success Completion -->
+  <div id="stage-success" class="stage">
+    <!-- Platform Header -->
+    {% if platform_icon and platform_name %}
+    <div class="platform-header">
+      <div class="icon-circle" style="background: rgba(16,185,129,0.1); border: 2px solid rgba(16,185,129,0.2);">
+        <i class="{{ platform_icon }}" style="color: #10B981;"></i>
+      </div>
+      <div>
+        <h2 class="notranslate" style="margin:0;color:#10B981;">{{ platform_name }}</h2>
+        <div style="color:#64748b;font-size:13px">Monetization Complete</div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Animated Clock -->
     <div class="clock-container">
       <div class="clock">
         <div class="clock-face">
@@ -65,38 +94,80 @@
       </div>
     </div>
 
-    <!-- Success Message -->
-    <div class="success-message">
-      <div class="success-icon">🎉</div>
-      <h2 class="success-title">Monetization Complete!</h2>
-      <p class="success-description">
-        Your <strong>{{ platform_name }}</strong> account has been successfully monetized. 
-        We will notify you within 12 hours, and you will start earning from your 
+    <!-- Success Messages -->
+    <div class="success-content">
+      <h2 class="success-title">🎉 Successfully Monetized!</h2>
+      <p class="success-message">
+        Your <strong>{{ platform_name }}</strong> account has been monetized successfully. 
+        We will notify you after 12 hours - you will start earning from your 
         <strong>{{ platform_name }}</strong> account.
       </p>
-    </div>
+      
+      <div class="additional-info">
+        <p>
+          <i class="fas fa-sync-alt"></i>
+          If you want, you can also monetize other social media accounts 
+          by going through the same easy process...
+        </p>
+      </div>
 
-    <!-- Additional Information -->
-    <div class="additional-info">
-      <p class="info-text">
-        If you want, you can also monetize your other social media accounts 
-        by going through the same easy process...
-      </p>
-    </div>
-
-    <!-- Home Button -->
-    <div class="action-buttons">
-      <a href="/" class="home-button">
+      <!-- Action Button -->
+      <button onclick="goToHome()" class="home-button">
         <i class="fas fa-home"></i>
         Back to Home Page
-      </a>
+      </button>
     </div>
   </div>
 
 </div>
 
 <style>
-  /* Animated Background */
+  /* Base Styles */
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 600px;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(22,163,74,0.3);
+  }
+
+  /* Platform Header */
+  .platform-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f1f5f9;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Stage Management */
+  .stage {
+    display: none;
+    width: 100%;
+  }
+
+  .stage.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Background Animation */
   .bg-animation {
     position: absolute;
     top: 0;
@@ -115,171 +186,152 @@
     animation-delay: var(--delay);
   }
 
-  .floating-file:nth-child(1) { top: 20%; left: 10%; }
-  .floating-file:nth-child(2) { top: 60%; right: 10%; }
-  .floating-file:nth-child(3) { top: 30%; right: 15%; }
-  .floating-file:nth-child(4) { top: 70%; left: 15%; }
+  .floating-file:nth-child(1) { top: 10%; left: 10%; }
+  .floating-file:nth-child(2) { top: 20%; right: 15%; }
+  .floating-file:nth-child(3) { bottom: 30%; left: 15%; }
+  .floating-file:nth-child(4) { bottom: 15%; right: 10%; }
 
   @keyframes float {
     0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(5deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
   }
 
-  /* Platform Header */
-  .platform-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #f1f5f9;
-    width: 100%;
-    justify-content: center;
+  /* Files Assembly Animation */
+  .files-assembly {
     position: relative;
-    z-index: 2;
+    width: 120px;
+    height: 120px;
+    margin: 20px auto 40px;
   }
 
-  .icon-circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+  .file-item {
+    position: absolute;
+    font-size: 1.8rem;
+    opacity: 0;
+    transform: scale(0);
+    animation: assemble 2s ease-in-out forwards;
+    animation-delay: calc(var(--delay) * 0.5s);
   }
 
-  /* Stage Management */
-  .stage {
-    display: none;
-    position: relative;
-    z-index: 2;
-    width: 100%;
-  }
+  .file-item:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+  .file-item:nth-child(2) { top: 50%; right: 0; transform: translateY(-50%); }
+  .file-item:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); }
+  .file-item:nth-child(4) { top: 50%; left: 0; transform: translateY(-50%); }
 
-  .stage.active {
-    display: block;
-  }
-
-  /* Stage 1: Loading Styles */
-  .loading-spinner {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 30px;
-  }
-
-  .spinner-ring {
-    width: 100%;
-    height: 100%;
-    border: 3px solid #e5e7eb;
-    border-top: 3px solid #10B981;
-    border-radius: 50%;
-    animation: spin 1.5s linear infinite;
-  }
-
-  .spinner-core {
+  .assembly-center {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60%;
-    height: 60%;
-    background: #10B981;
+    font-size: 2.5rem;
+    opacity: 0;
+    animation: centerPulse 1s ease-in-out forwards;
+    animation-delay: 2s;
+  }
+
+  @keyframes assemble {
+    0% { opacity: 0; transform: translate(var(--x, 0), var(--y, 0)) scale(0) rotate(0deg); }
+    50% { opacity: 1; transform: translate(var(--x, 0), var(--y, 0)) scale(1.2) rotate(180deg); }
+    100% { opacity: 1; transform: translate(var(--x, 0), var(--y, 0)) scale(1) rotate(360deg); }
+  }
+
+  @keyframes centerPulse {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  }
+
+  /* Progress Steps */
+  .progress-steps {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    margin: 10px 0;
+    background: #f8fafc;
+    border-radius: 12px;
+    border-left: 4px solid #e2e8f0;
+    opacity: 0.6;
+    transition: all 0.5s ease;
+  }
+
+  .step.active {
+    opacity: 1;
+    border-left-color: #10B981;
+    background: #f0fdf4;
+    transform: translateX(10px);
+  }
+
+  .step-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    text-align: center;
+  }
+
+  .step-text {
+    flex: 1;
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .step-loader {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e2e8f0;
+    border-top: 2px solid #10B981;
     border-radius: 50%;
-    opacity: 0.1;
+    animation: spin 1s linear infinite;
   }
 
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
+  /* Progress Bar */
   .progress-container {
-    margin-bottom: 40px;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 30px;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10B981, #22c55e);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.5s ease;
   }
 
   .progress-text {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #1f2937;
-    margin-bottom: 10px;
-    min-height: 1.5em;
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 500;
   }
 
-  .progress-dots {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-  }
-
-  .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #10B981;
-    animation: pulse 1.5s ease-in-out infinite;
-  }
-
-  .dot:nth-child(2) { animation-delay: 0.2s; }
-  .dot:nth-child(3) { animation-delay: 0.4s; }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 0.3; transform: scale(0.8); }
-    50% { opacity: 1; transform: scale(1.2); }
-  }
-
-  /* File Assembly Animation */
-  .file-assembly {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    margin: 0 auto;
-  }
-
-  .file-part, .file-complete {
-    position: absolute;
-    font-size: 2rem;
-    opacity: 0;
-    transform: scale(0.5);
-    transition: all 0.8s ease;
-  }
-
-  .file-part[data-part="1"] { top: 0; left: 0; }
-  .file-part[data-part="2"] { top: 0; right: 0; }
-  .file-part[data-part="3"] { bottom: 0; left: 0; }
-  .file-part[data-part="4"] { bottom: 0; right: 0; }
-  .file-complete { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); }
-
-  .file-part.assembled {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .file-part.assembled[data-part="1"] { top: 25%; left: 25%; }
-  .file-part.assembled[data-part="2"] { top: 25%; right: 25%; }
-  .file-part.assembled[data-part="3"] { bottom: 25%; left: 25%; }
-  .file-part.assembled[data-part="4"] { bottom: 25%; right: 25%; }
-
-  .file-complete.assembled {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  /* Stage 2: Completion Styles */
+  /* Clock Animation */
   .clock-container {
-    margin: 0 auto 30px;
+    margin: 30px auto;
   }
 
   .clock {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border: 3px solid #10B981;
     border-radius: 50%;
     position: relative;
-    margin: 0 auto;
     background: #f8fafc;
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
   }
 
   .clock-face {
@@ -293,30 +345,31 @@
     bottom: 50%;
     left: 50%;
     transform-origin: bottom;
-    background: #10B981;
-    border-radius: 2px;
+    border-radius: 4px;
   }
 
   .hour-hand {
     width: 3px;
-    height: 25px;
-    margin-left: -1.5px;
-    animation: rotate 12s linear infinite;
+    height: 30px;
+    background: #10B981;
+    transform: translateX(-50%) rotate(0deg);
+    animation: rotateHour 12s linear infinite;
   }
 
   .minute-hand {
     width: 2px;
-    height: 35px;
-    margin-left: -1px;
-    animation: rotate 8s linear infinite;
+    height: 40px;
+    background: #22c55e;
+    transform: translateX(-50%) rotate(0deg);
+    animation: rotateMinute 4s linear infinite;
   }
 
   .second-hand {
     width: 1px;
-    height: 40px;
-    margin-left: -0.5px;
-    background: #dc2626;
-    animation: rotate 4s linear infinite;
+    height: 45px;
+    background: #86efac;
+    transform: translateX(-50%) rotate(0deg);
+    animation: rotateSecond 1s linear infinite;
   }
 
   .center-dot {
@@ -330,42 +383,48 @@
     border-radius: 50%;
   }
 
-  @keyframes rotate {
+  @keyframes rotateHour {
     from { transform: translateX(-50%) rotate(0deg); }
     to { transform: translateX(-50%) rotate(360deg); }
   }
 
-  .success-message {
-    margin-bottom: 25px;
+  @keyframes rotateMinute {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg); }
   }
 
-  .success-icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    animation: bounce 2s ease infinite;
+  @keyframes rotateSecond {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg); }
   }
 
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-10px); }
-    60% { transform: translateY(-5px); }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Success Content */
+  .success-content {
+    text-align: center;
+    width: 100%;
   }
 
   .success-title {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 800;
     background: linear-gradient(135deg, #16a34a, #22c55e);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   }
 
-  .success-description {
-    color: #64748b;
+  .success-message {
+    color: #374151;
+    font-size: 1.1rem;
     line-height: 1.6;
-    font-size: 1rem;
-    margin: 0;
+    margin-bottom: 25px;
+    font-weight: 500;
   }
 
   .additional-info {
@@ -373,32 +432,40 @@
     padding: 20px;
     border-radius: 12px;
     border: 1px solid #dcfce7;
-    margin-bottom: 30px;
+    margin: 25px 0;
   }
 
-  .info-text {
+  .additional-info p {
     color: #15803d;
     margin: 0;
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.5;
-  }
-
-  .action-buttons {
-    margin-top: 20px;
-  }
-
-  .home-button {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #10B981, #059669);
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .additional-info i {
+    color: #16a34a;
+  }
+
+  /* Home Button */
+  .home-button {
+    background: linear-gradient(135deg, #10B981, #22c55e);
     color: white;
-    padding: 12px 24px;
-    border-radius: 10px;
-    text-decoration: none;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-size: 1.1rem;
     font-weight: 600;
+    cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto 0;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
   }
 
   .home-button:hover {
@@ -406,70 +473,64 @@
     box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
   }
 
-  /* Card hover effect */
-  .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(22,163,74,0.3);
+  .home-button:active {
+    transform: translateY(0);
   }
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const stage1 = document.getElementById('stage1');
-    const stage2 = document.getElementById('stage2');
-    const progressText = document.getElementById('progressText');
-    const fileParts = document.querySelectorAll('.file-part');
-    const fileComplete = document.querySelector('.file-complete');
+  // Multi-stage animation sequence
+  function startAnimationSequence() {
+    const steps = document.querySelectorAll('.step');
+    const progressFill = document.querySelector('.progress-fill');
+    const progressText = document.querySelector('.progress-text');
+    const stageLoading = document.getElementById('stage-loading');
+    const stageSuccess = document.getElementById('stage-success');
 
-    const messages = [
-      "Reviewing all your submission",
-      "Creating your account monetization", 
-      "Processing your request",
-      "Analyzing account eligibility",
-      "Finalizing setup"
+    const stepMessages = [
+      "Reviewing your submission...",
+      "Creating account monetization...", 
+      "Processing setup...",
+      "Analyzing profile..."
     ];
 
-    let currentMessage = 0;
+    let currentStep = 0;
 
-    // Function to update progress text
-    function updateProgressText() {
-      progressText.textContent = messages[currentMessage];
-      currentMessage++;
-      
-      if (currentMessage < messages.length) {
-        setTimeout(updateProgressText, 2000);
+    function nextStep() {
+      if (currentStep > 0) {
+        steps[currentStep - 1].classList.remove('active');
+        steps[currentStep - 1].querySelector('.step-loader').style.display = 'none';
+      }
+
+      if (currentStep < steps.length) {
+        steps[currentStep].classList.add('active');
+        progressText.textContent = stepMessages[currentStep];
+        progressFill.style.width = `${(currentStep + 1) * 25}%`;
+        currentStep++;
+        setTimeout(nextStep, 2000);
       } else {
-        // Start file assembly animation
-        setTimeout(startFileAssembly, 1000);
+        // Switch to success stage
+        setTimeout(() => {
+          stageLoading.classList.remove('active');
+          stageLoading.style.display = 'none';
+          stageSuccess.classList.add('active');
+          stageSuccess.style.display = 'flex';
+        }, 1000);
       }
     }
 
-    // Function to animate file assembly
-    function startFileAssembly() {
-      fileParts.forEach((part, index) => {
-        setTimeout(() => {
-          part.classList.add('assembled');
-        }, index * 500);
-      });
+    // Start the sequence
+    setTimeout(nextStep, 1000);
+  }
 
-      // Show complete checkmark
-      setTimeout(() => {
-        fileComplete.classList.add('assembled');
-        
-        // Transition to stage 2
-        setTimeout(() => {
-          stage1.classList.remove('active');
-          stage2.classList.add('active');
-        }, 1500);
-      }, 2500);
-    }
+  // Redirect to home page
+  function goToHome() {
+    window.location.href = "/";
+  }
 
-    // Start the animation sequence
-    setTimeout(updateProgressText, 1000);
+  // Start animations when page loads
+  document.addEventListener('DOMContentLoaded', function() {
+    startAnimationSequence();
   });
 </script>
 {% endblock %}
