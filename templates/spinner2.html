@@ -1,35 +1,51 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card center glow-card" style="flex-direction:column;align-items:center;text-align:center;padding:40px 28px;
-     max-width:320px;margin:60px auto;border-radius:20px;position:relative;background:linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);border:1px solid #f1f5f9;">
-
-  {% if platform_icon and platform_name %}
-  <div class="platform-header">
-    <div class="icon-circle" style="background: rgba(139,92,246,0.1); border: 2px solid rgba(139,92,246,0.2);">
-      <i class="{{ platform_icon }}" style="color: #8B5CF6;"></i>
+<div class="premium-container">
+  <div class="premium-finalize-card">
+    {% if platform_icon and platform_name %}
+    <div class="platform-header">
+      <div class="platform-badge">
+        <div class="platform-icon-wrapper">
+          <i class="{{ platform_icon }} platform-finalize-icon"></i>
+        </div>
+      </div>
+      <div class="platform-info">
+        <h2 class="platform-title">{{ platform_name }}</h2>
+        <div class="platform-subtitle">Finalizing Setup</div>
+      </div>
     </div>
-    <div>
-      <h2 class="notranslate" style="margin:0;color:#8B5CF6;">{{ platform_name }}</h2>
-      <div style="color:#64748b;font-size:13px">Finalizing Setup</div>
+    {% endif %}
+    
+    <!-- Premium Spinner -->
+    <div class="premium-spinner-container">
+      <div class="spinner-orbital">
+        <div class="orbital-ring"></div>
+        <div class="spinner-core-2"></div>
+        <div class="energy-pulse"></div>
+      </div>
     </div>
-  </div>
-  {% endif %}
-  
-  <!-- Enhanced Spinner with different style -->
-  <div class="spinner-container">
-    <div class="spinner-pulse"></div>
-    <div class="spinner-ring-2"></div>
-  </div>
-  
-  <!-- Progress Text -->
-  <p class="processing-text animate-text">Finalizing Your Account</p>
-  <p class="platform-text">Almost ready...<span class="platform-name">{{ platform_name }}</span></p>
-  
-  <!-- Progress steps -->
-  <div class="progress-steps">
-    <div class="step completed">✓ Profile Setup</div>
-    <div class="step completed">✓ Security Check</div>
-    <div class="step active">Finalizing</div>
+    
+    <!-- Progress Text - UNCHANGED CAPTIONS -->
+    <div class="progress-content-final">
+      <p class="processing-text-final">Finalizing Your Account</p>
+      <p class="platform-text-final">Almost ready...<span class="platform-name-final">{{ platform_name }}</span></p>
+    </div>
+    
+    <!-- Progress steps - UNCHANGED CAPTIONS -->
+    <div class="progress-steps-final">
+      <div class="step-final completed-final">
+        <span class="step-icon">✓</span>
+        <span class="step-text">Profile Setup</span>
+      </div>
+      <div class="step-final completed-final">
+        <span class="step-icon">✓</span>
+        <span class="step-text">Security Check</span>
+      </div>
+      <div class="step-final active-final">
+        <span class="step-icon">⟳</span>
+        <span class="step-text">Finalizing</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -40,153 +56,291 @@
 </script>
 
 <style>
-  /* Different color scheme for spinner2 */
+  /* Premium Color Scheme - Purple Theme */
   :root { 
-    --glow-color: rgba(139,92,246,0.3); 
-    --spinner-color: #8B5CF6; 
-    --glow-blur: 20px;
-    --icon-bg: rgba(139,92,246,0.1);
+    --primary-purple: #8B5CF6;
+    --purple-glow: rgba(139, 92, 246, 0.15);
+    --purple-light: rgba(139, 92, 246, 0.08);
+    --purple-gradient: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    --purple-shadow: rgba(139, 92, 246, 0.25);
+  }
+
+  /* Premium Container */
+  .premium-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+  }
+
+  /* Premium Card */
+  .premium-finalize-card {
+    position: relative;
+    max-width: 440px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 48px 40px 40px;
+    text-align: center;
+    box-shadow: 
+      0 8px 25px -5px rgba(0, 0, 0, 0.08),
+      0 4px 12px -3px rgba(0, 0, 0, 0.04),
+      0 0 0 1px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .premium-finalize-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 15px 35px -8px rgba(0, 0, 0, 0.12),
+      0 6px 18px -4px rgba(0, 0, 0, 0.06),
+      0 0 0 1px rgba(0, 0, 0, 0.02);
   }
 
   /* Platform Header */
   .platform-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
+    gap: 20px;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
     border-bottom: 1px solid #f1f5f9;
-    width: 100%;
     justify-content: center;
   }
 
-  .icon-circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .platform-badge {
     flex-shrink: 0;
   }
 
-  /* Different spinner style - pulse animation */
-  .spinner-container {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 28px;
-  }
-
-  .spinner-pulse {
+  .platform-icon-wrapper {
     width: 70px;
     height: 70px;
-    border-radius: 50%;
-    background: var(--spinner-color);
+    background: var(--purple-light);
+    border: 2px solid rgba(139, 92, 246, 0.15);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: gentleFloat 4s ease-in-out infinite;
+  }
+
+  .platform-finalize-icon {
+    font-size: 28px;
+    color: var(--primary-purple);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  }
+
+  .platform-info {
+    text-align: left;
+  }
+
+  .platform-title {
+    margin: 0;
+    color: var(--primary-purple);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+
+  .platform-subtitle {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  @keyframes gentleFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-3px) rotate(1deg); }
+    66% { transform: translateY(2px) rotate(-1deg); }
+  }
+
+  /* Premium Spinner */
+  .premium-spinner-container {
+    margin: 0 auto 48px;
+    position: relative;
+    width: 140px;
+    height: 140px;
+  }
+
+  .spinner-orbital {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .orbital-ring {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: pulse 2s infinite ease-in-out;
-    opacity: 0.7;
+    width: 100px;
+    height: 100px;
+    border: 3px solid transparent;
+    border-top: 3px solid var(--primary-purple);
+    border-right: 3px solid rgba(139, 92, 246, 0.3);
+    border-radius: 50%;
+    animation: orbitalSpin 2s linear infinite;
   }
 
-  .spinner-ring-2 {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    border: 3px solid rgba(139,92,246,0.2);
+  .spinner-core-2 {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: rotate 3s infinite linear;
+    width: 24px;
+    height: 24px;
+    background: var(--purple-gradient);
+    border-radius: 50%;
+    animation: coreGlow 2s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
   }
 
-  @keyframes pulse {
-    0% { 
-      transform: translate(-50%, -50%) scale(0.8);
-      opacity: 0.5;
-    }
-    50% { 
-      transform: translate(-50%, -50%) scale(1.1);
-      opacity: 0.9;
-    }
-    100% { 
-      transform: translate(-50%, -50%) scale(0.8);
-      opacity: 0.5;
-    }
+  .energy-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border: 2px solid rgba(139, 92, 246, 0.1);
+    border-radius: 50%;
+    animation: energyWave 3s ease-out infinite;
   }
 
-  @keyframes rotate {
+  @keyframes orbitalSpin {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
     100% { transform: translate(-50%, -50%) rotate(360deg); }
   }
 
-  /* Enhanced Pulsing glow effect */
-  .glow-card::before {
-    content: "";
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
-    border-radius: 24px;
-    background: var(--glow-color);
-    filter: blur(var(--glow-blur));
-    opacity: 0.6;
-    animation: glowPulse 3s infinite ease-in-out;
-    z-index: -1;
-  }
-
-  @keyframes glowPulse {
+  @keyframes coreGlow {
     0%, 100% { 
-      opacity: 0.4; 
-      transform: scale(1); 
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
     }
     50% { 
-      opacity: 0.8; 
-      transform: scale(1.05); 
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
     }
   }
 
-  /* Text Styling */
-  .processing-text {
-    font-size: 18px;
-    font-weight: 600;
-    color: #0f172a;
-    margin-bottom: 8px;
-    opacity: 0;
+  @keyframes energyWave {
+    0% {
+      width: 120px;
+      height: 120px;
+      opacity: 1;
+      border-width: 2px;
+    }
+    100% {
+      width: 140px;
+      height: 140px;
+      opacity: 0;
+      border-width: 1px;
+    }
   }
 
-  .platform-text {
-    font-size: 14px;
+  /* Progress Content - UNCHANGED CAPTIONS */
+  .progress-content-final {
+    margin-bottom: 32px;
+    animation: contentReveal 0.8s ease forwards;
+  }
+
+  .processing-text-final {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+  }
+
+  .platform-text-final {
+    font-size: 15px;
     color: #64748b;
     font-weight: 500;
-    opacity: 0;
-    margin-bottom: 24px;
+    margin: 0;
   }
 
-  .platform-name {
-    color: var(--spinner-color);
+  .platform-name-final {
+    color: var(--primary-purple);
     font-weight: 700;
     text-transform: capitalize;
   }
 
-  .animate-text {
-    animation: fadeInUp 0.8s ease forwards;
-    animation-delay: 0.3s;
+  /* Progress Steps - UNCHANGED CAPTIONS */
+  .progress-steps-final {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
   }
 
-  .platform-text {
-    animation: fadeInUp 0.8s ease forwards;
-    animation-delay: 0.5s;
+  .step-final {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: #f8fafc;
+    color: #64748b;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
   }
 
-  @keyframes fadeInUp {
+  .step-final.completed-final {
+    background: var(--purple-gradient);
+    color: white;
+    border-color: var(--primary-purple);
+    animation: stepComplete 0.6s ease;
+  }
+
+  .step-final.active-final {
+    background: var(--primary-purple);
+    color: white;
+    border-color: var(--primary-purple);
+    animation: activeStep 2s ease-in-out infinite;
+  }
+
+  .step-icon {
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .active-final .step-icon {
+    animation: spinIcon 1.5s linear infinite;
+  }
+
+  @keyframes stepComplete {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes activeStep {
+    0%, 100% { 
+      transform: scale(1);
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+    }
+    50% { 
+      transform: scale(1.03);
+      box-shadow: 0 4px 16px rgba(139, 92, 246, 0.4);
+    }
+  }
+
+  @keyframes spinIcon {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes contentReveal {
     0% { 
       opacity: 0; 
-      transform: translateY(10px); 
+      transform: translateY(15px); 
     }
     100% { 
       opacity: 1; 
@@ -194,48 +348,57 @@
     }
   }
 
-  /* Progress Steps */
-  .progress-steps {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 20px;
-  }
-
-  .step {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 6px 10px;
-    border-radius: 12px;
-    background: #f1f5f9;
-    color: #64748b;
-    transition: all 0.3s ease;
-  }
-
-  .step.completed {
-    background: #10B981;
-    color: white;
-  }
-
-  .step.active {
-    background: var(--spinner-color);
-    color: white;
-    animation: activePulse 2s infinite;
-  }
-
-  @keyframes activePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-  }
-
-  /* Card hover effect */
-  .card {
-    transition: all 0.4s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  /* Responsive Design */
+  @media (max-width: 480px) {
+    .premium-container {
+      padding: 16px;
+    }
+    
+    .premium-finalize-card {
+      padding: 40px 24px 32px;
+      border-radius: 24px;
+    }
+    
+    .platform-header {
+      flex-direction: column;
+      text-align: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    
+    .platform-info {
+      text-align: center;
+    }
+    
+    .platform-icon-wrapper {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .platform-finalize-icon {
+      font-size: 24px;
+    }
+    
+    .premium-spinner-container {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 40px;
+    }
+    
+    .processing-text-final {
+      font-size: 18px;
+    }
+    
+    .progress-steps-final {
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+    
+    .step-final {
+      width: 140px;
+      justify-content: center;
+    }
   }
 </style>
 {% endblock %}
