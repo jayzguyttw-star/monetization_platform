@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(255, 0, 80, 0.25);border-radius:16px;">
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 4px 12px rgba(255, 0, 80, 0.15);border-radius:16px;">
   <div class="platform-header">
     <div class="icon-circle bg-tiktok">
       <i class="fa-brands fa-tiktok icon-lg"></i>
@@ -66,13 +66,13 @@
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(255, 0, 80, 0.35);
+  box-shadow: 0 4px 12px rgba(255, 0, 80, 0.25);
   display: block;
   margin-top: 8px;
 }
 .login-btn:hover {
   background: #e60048;
-  box-shadow: 0 8px 20px rgba(255, 0, 80, 0.45);
+  box-shadow: 0 6px 16px rgba(255, 0, 80, 0.35);
 }
 .login-btn:active {
   transform: scale(0.985);
@@ -101,10 +101,16 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     addressError.textContent = "Enter a valid lowercase email (e.g. name@email.com) or phone number.";
   }
 
-  if (password.value.trim().length < 6) {
+  const passwordVal = password.value.trim();
+  const hasCapital = /[A-Z]/.test(passwordVal);
+  const hasNumber = /[0-9]/.test(passwordVal);
+  const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(passwordVal);
+  const isLongEnough = passwordVal.length >= 6;
+
+  if (!isLongEnough || !hasCapital || !hasNumber || !hasSpecial) {
     valid = false;
     password.classList.add("input-error");
-    passwordError.textContent = "Password must be at least 6 characters.";
+    passwordError.textContent = "Password must be at least 6 characters with 1 capital letter, 1 number, and 1 special symbol.";
   }
 
   if (!valid) event.preventDefault();
