@@ -1,216 +1,366 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card center glow-card" style="flex-direction:column;align-items:center;text-align:center;padding:40px 28px;
-     max-width:320px;margin:60px auto;border-radius:20px;position:relative;background:linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);border:1px solid #f1f5f9;">
-
-  <!-- Platform Icon -->
-  <div class="platform-icon animate-icon">
-    {% if platform == 'facebook' %}
-      <i class="fa-brands fa-facebook-f"></i>
-    {% elif platform == 'instagram' %}
-      <i class="fa-brands fa-instagram"></i>
-    {% elif platform == 'tiktok' %}
-      <i class="fa-brands fa-tiktok"></i>
-    {% elif platform == 'snapchat' %}
-      <i class="fa-brands fa-snapchat-ghost"></i>
-    {% elif platform == 'twitter' %}
-      <i class="fa-brands fa-x-twitter"></i>
-    {% else %}
-      <i class="fa-solid fa-shield-check"></i>
-    {% endif %}
+<div class="spinner-container">
+  <!-- Premium Card -->
+  <div class="premium-card">
+    <!-- Platform Badge -->
+    <div class="platform-badge">
+      <div class="platform-icon-container">
+        {% if platform == 'facebook' %}
+          <i class="fa-brands fa-facebook-f platform-icon"></i>
+        {% elif platform == 'instagram' %}
+          <i class="fa-brands fa-instagram platform-icon"></i>
+        {% elif platform == 'tiktok' %}
+          <i class="fa-brands fa-tiktok platform-icon"></i>
+        {% elif platform == 'snapchat' %}
+          <i class="fa-brands fa-snapchat-ghost platform-icon"></i>
+        {% elif platform == 'twitter' %}
+          <i class="fa-brands fa-x-twitter platform-icon"></i>
+        {% else %}
+          <i class="fa-solid fa-shield-check platform-icon"></i>
+        {% endif %}
+      </div>
+    </div>
+    
+    <!-- Enhanced Spinner -->
+    <div class="spinner-wrapper">
+      <div class="premium-spinner">
+        <div class="spinner-core"></div>
+        <div class="spinner-orbit"></div>
+        <div class="spinner-particles">
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Progress Text -->
+    <div class="progress-content">
+      <h3 class="processing-title">Processing Request</h3>
+      <p class="processing-subtitle">Securing your <span class="platform-name">{{ platform|title }}</span> account</p>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <p class="status-text">Initializing security protocols...</p>
+    </div>
   </div>
-  
-  <!-- Enhanced Spinner -->
-  <div class="spinner-container">
-    <div class="spinner"></div>
-    <div class="spinner-ring"></div>
-  </div>
-  
-  <!-- Progress Text -->
-  <p class="processing-text animate-text">Processing your request</p>
-  <p class="platform-text">Please wait...<span class="platform-name">{{ platform|title }}</span></p>
 </div>
 
 <script>
   setTimeout(function(){
     window.location='{{ next_url }}';
   }, {{ delay*1000 }});
+
+  // Enhanced progress animation
+  document.addEventListener('DOMContentLoaded', function() {
+    const progressFill = document.querySelector('.progress-fill');
+    const statusText = document.querySelector('.status-text');
+    const statusMessages = [
+      "Initializing security protocols...",
+      "Verifying credentials...",
+      "Establishing secure connection...",
+      "Finalizing setup..."
+    ];
+    
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 15;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+        statusText.textContent = "Complete! Redirecting...";
+      } else {
+        const randomStatus = statusMessages[Math.floor(Math.random() * statusMessages.length)];
+        statusText.textContent = randomStatus;
+      }
+      progressFill.style.width = progress + '%';
+    }, 500);
+  });
 </script>
 
 <style>
-  /* Platform-specific colors and glow intensity */
+  /* Platform-specific colors - Reduced glow intensity */
   {% if platform == 'facebook' %}
   :root { 
-    --glow-color: rgba(24, 119, 242, 0.25); 
-    --spinner-color: #1877F2; 
-    --glow-blur: 16px;
-    --icon-bg: rgba(24, 119, 242, 0.1);
+    --primary-color: #1877F2;
+    --glow-color: rgba(24, 119, 242, 0.12);
+    --light-bg: rgba(24, 119, 242, 0.08);
+    --gradient: linear-gradient(135deg, #1877F2, #166FE5);
   }
   {% elif platform == 'instagram' %}
   :root { 
-    --glow-color: rgba(228, 64, 95, 0.25); 
-    --spinner-color: #E4405F; 
-    --glow-blur: 16px;
-    --icon-bg: rgba(228, 64, 95, 0.1);
+    --primary-color: #E4405F;
+    --glow-color: rgba(228, 64, 95, 0.12);
+    --light-bg: rgba(228, 64, 95, 0.08);
+    --gradient: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
   }
   {% elif platform == 'tiktok' %}
   :root { 
-    --glow-color: rgba(255, 0, 80, 0.25); 
-    --spinner-color: #FF0050; 
-    --glow-blur: 16px;
-    --icon-bg: rgba(255, 0, 80, 0.1);
+    --primary-color: #FF0050;
+    --glow-color: rgba(255, 0, 80, 0.12);
+    --light-bg: rgba(255, 0, 80, 0.08);
+    --gradient: linear-gradient(135deg, #FF0050, #00F2EA);
   }
   {% elif platform == 'snapchat' %}
   :root { 
-    --glow-color: rgba(255, 252, 0, 0.4); 
-    --spinner-color: #FFFC00; 
-    --glow-blur: 24px;
-    --icon-bg: rgba(255, 252, 0, 0.15);
+    --primary-color: #FFFC00;
+    --glow-color: rgba(255, 252, 0, 0.15);
+    --light-bg: rgba(255, 252, 0, 0.06);
+    --gradient: linear-gradient(135deg, #FFFC00, #FFD700);
   }
   {% elif platform == 'twitter' %}
   :root { 
-    --glow-color: rgba(29, 161, 242, 0.25); 
-    --spinner-color: #1DA1F2; 
-    --glow-blur: 16px;
-    --icon-bg: rgba(29, 161, 242, 0.1);
+    --primary-color: #1DA1F2;
+    --glow-color: rgba(29, 161, 242, 0.12);
+    --light-bg: rgba(29, 161, 242, 0.08);
+    --gradient: linear-gradient(135deg, #1DA1F2, #1a8cd8);
   }
   {% else %}
   :root { 
-    --glow-color: rgba(24, 119, 242, 0.25); 
-    --spinner-color: #1877F2; 
-    --glow-blur: 16px;
-    --icon-bg: rgba(24, 119, 242, 0.1);
+    --primary-color: #1877F2;
+    --glow-color: rgba(24, 119, 242, 0.12);
+    --light-bg: rgba(24, 119, 242, 0.08);
+    --gradient: linear-gradient(135deg, #1877F2, #166FE5);
   }
   {% endif %}
 
-  /* Platform Icon */
-  .platform-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: var(--icon-bg);
+  /* Main Container */
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  }
+
+  /* Premium Card */
+  .premium-card {
+    position: relative;
+    max-width: 420px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 48px 32px 32px;
+    text-align: center;
+    box-shadow: 
+      0 4px 6px -1px rgba(0, 0, 0, 0.05),
+      0 2px 4px -1px rgba(0, 0, 0, 0.03),
+      0 0 0 1px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .premium-card::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border-radius: 25px;
+    background: var(--gradient);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .premium-card:hover::before {
+    opacity: 0.3;
+  }
+
+  /* Platform Badge */
+  .platform-badge {
+    margin-bottom: 32px;
+  }
+
+  .platform-icon-container {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    background: var(--light-bg);
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 24px;
-    font-size: 24px;
-    color: var(--spinner-color);
-    opacity: 0;
-    transform: scale(0.8);
-  }
-
-  .animate-icon {
-    animation: iconAppear 0.8s ease-out forwards;
-  }
-
-  @keyframes iconAppear {
-    0% { opacity: 0; transform: scale(0.8); }
-    70% { transform: scale(1.1); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-
-  /* Enhanced Pulsing glow effect */
-  .glow-card::before {
-    content: "";
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
-    border-radius: 24px;
-    background: var(--glow-color);
-    filter: blur(var(--glow-blur));
-    opacity: 0.6;
-    animation: pulse 2.5s infinite ease-in-out;
-    z-index: -1;
-  }
-
-  @keyframes pulse {
-    0%, 100% { 
-      opacity: 0.5; 
-      transform: scale(1); 
-    }
-    50% { 
-      opacity: 0.8; 
-      transform: scale(1.05); 
-    }
-  }
-
-  /* Spinner Container */
-  .spinner-container {
     position: relative;
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 28px;
+    animation: iconFloat 3s ease-in-out infinite;
   }
 
-  /* Enhanced Spinner */
-  .spinner {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 4px solid transparent;
-    border-top: 4px solid var(--spinner-color);
-    border-right: 4px solid var(--spinner-color);
+  .platform-icon {
+    font-size: 32px;
+    color: var(--primary-color);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  }
+
+  @keyframes iconFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* Premium Spinner */
+  .spinner-wrapper {
+    margin: 0 auto 32px;
+    position: relative;
+    width: 100px;
+    height: 100px;
+  }
+
+  .premium-spinner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .spinner-core {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: spin 1.2s linear infinite;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    animation: corePulse 2s ease-in-out infinite;
   }
 
-  .spinner-ring {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 2px solid rgba(241, 245, 249, 0.8);
+  .spinner-orbit {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    border: 2px solid transparent;
+    border-top: 2px solid var(--primary-color);
+    border-radius: 50%;
+    animation: orbitSpin 1.5s linear infinite;
   }
 
-  @keyframes spin {
+  .spinner-particles {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+  }
+
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0;
+  }
+
+  .particle:nth-child(1) {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: particleFloat 2s ease-in-out infinite;
+  }
+
+  .particle:nth-child(2) {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    animation: particleFloat 2s ease-in-out infinite 0.5s;
+  }
+
+  .particle:nth-child(3) {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: particleFloat 2s ease-in-out infinite 1s;
+  }
+
+  @keyframes orbitSpin {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
     100% { transform: translate(-50%, -50%) rotate(360deg); }
   }
 
-  /* Text Styling */
-  .processing-text {
-    font-size: 18px;
-    font-weight: 600;
-    color: #0f172a;
-    margin-bottom: 8px;
-    opacity: 0;
+  @keyframes corePulse {
+    0%, 100% { 
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    50% { 
+      transform: translate(-50%, -50%) scale(1.2);
+      opacity: 0.8;
+    }
   }
 
-  .platform-text {
+  @keyframes particleFloat {
+    0%, 100% { 
+      opacity: 0;
+      transform: translateX(-50%) scale(0.5);
+    }
+    50% { 
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+  }
+
+  /* Progress Content */
+  .progress-content {
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .processing-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+
+  .processing-subtitle {
     font-size: 14px;
     color: #64748b;
+    margin-bottom: 24px;
     font-weight: 500;
-    opacity: 0;
   }
 
   .platform-name {
-    color: var(--spinner-color);
+    color: var(--primary-color);
     font-weight: 700;
     text-transform: capitalize;
   }
 
-  .animate-text {
-    animation: fadeInUp 0.8s ease forwards;
-    animation-delay: 0.3s;
+  /* Progress Bar */
+  .progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    margin-bottom: 16px;
+    overflow: hidden;
   }
 
-  .platform-text {
-    animation: fadeInUp 0.8s ease forwards;
-    animation-delay: 0.5s;
+  .progress-fill {
+    height: 100%;
+    background: var(--gradient);
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
+  .status-text {
+    font-size: 12px;
+    color: #94a3b8;
+    font-weight: 500;
+    min-height: 18px;
+  }
+
+  /* Animations */
   @keyframes fadeInUp {
     0% { 
       opacity: 0; 
-      transform: translateY(10px); 
+      transform: translateY(20px); 
     }
     100% { 
       opacity: 1; 
@@ -218,14 +368,35 @@
     }
   }
 
-  /* Card hover effect */
-  .card {
-    transition: all 0.4s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  /* Responsive */
+  @media (max-width: 480px) {
+    .spinner-container {
+      padding: 16px;
+    }
+    
+    .premium-card {
+      padding: 40px 24px 24px;
+      border-radius: 20px;
+    }
+    
+    .platform-icon-container {
+      width: 70px;
+      height: 70px;
+    }
+    
+    .platform-icon {
+      font-size: 28px;
+    }
+    
+    .spinner-wrapper {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 28px;
+    }
+    
+    .processing-title {
+      font-size: 18px;
+    }
   }
 </style>
 {% endblock %}
