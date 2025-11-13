@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="premium-container">
-  <div class="premium-finalize-card">
+  <div class="premium-finalize-card" style="box-shadow: 0 8px 25px -5px {{ platform_shadow_color|default('rgba(0, 0, 0, 0.08)') }}, 0 4px 12px -3px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);">
     {% if platform_icon and platform_name %}
     <div class="platform-header">
-      <div class="platform-badge">
-        <div class="platform-icon-wrapper">
-          <i class="{{ platform_icon }} platform-finalize-icon"></i>
-        </div>
+      <!-- EXACT SOCIAL MEDIA LOGO STYLING -->
+      <div class="icon-circle {{ platform_bg_class|default('bg-twitter') }}">
+        <i class="{{ platform_icon }} icon-lg"></i>
       </div>
       <div class="platform-info">
-        <h2 class="platform-title">{{ platform_name }}</h2>
+        <h2 class="platform-title" style="color: {{ platform_color|default('#8B5CF6') }};">{{ platform_name }}</h2>
         <div class="platform-subtitle">Finalizing Setup</div>
       </div>
     </div>
@@ -84,10 +83,6 @@
     border-radius: 28px;
     padding: 48px 40px 40px;
     text-align: center;
-    box-shadow: 
-      0 8px 25px -5px rgba(0, 0, 0, 0.08),
-      0 4px 12px -3px rgba(0, 0, 0, 0.04),
-      0 0 0 1px rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.9);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -111,28 +106,70 @@
     justify-content: center;
   }
 
-  .platform-badge {
-    flex-shrink: 0;
-  }
-
-  .platform-icon-wrapper {
-    width: 70px;
-    height: 70px;
-    background: var(--purple-light);
-    border: 2px solid rgba(139, 92, 246, 0.15);
-    border-radius: 20px;
+  /* EXACT SOCIAL MEDIA LOGO STYLING FROM YOUR CSS */
+  .icon-circle {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    flex-shrink: 0;
+    transition: all 0.4s ease;
     animation: gentleFloat 4s ease-in-out infinite;
   }
 
-  .platform-finalize-icon {
-    font-size: 28px;
-    color: var(--primary-purple);
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  /* Platform-specific styles matching your design */
+  .bg-facebook .icon-circle {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(24,119,242,0.15), 0 0 14px rgba(24,119,242,0.25);
   }
+  .bg-facebook i { color: #1877F2; }
+
+  .bg-instagram .icon-circle {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(193,53,132,0.15), 0 0 14px rgba(225,48,108,0.25);
+  }
+  .bg-instagram i {
+    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+  }
+
+  .bg-tiktok .icon-circle {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.1), 0 0 16px rgba(255,0,80,0.25), 0 0 16px rgba(0,242,234,0.25);
+  }
+  .bg-tiktok i {
+    color: #000;
+    text-shadow: -1.8px 0 #00f2ea, 1.8px 0 #ff0050;
+    font-weight: 800;
+  }
+
+  .bg-youtube .icon-circle {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(255,0,0,0.18), 0 0 14px rgba(255,0,0,0.28);
+  }
+  .bg-youtube i { color: #FF0000; font-weight: 800; }
+
+  .bg-snapchat .icon-circle {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(255,252,0,0.22), 0 0 18px rgba(255,252,0,0.35);
+  }
+  .bg-snapchat i {
+    color: #FFFC00;
+    -webkit-text-stroke: 1.5px #000;
+    font-weight: 800;
+  }
+
+  .bg-twitter .icon-circle {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.12), 0 0 16px rgba(0,0,0,0.22);
+  }
+  .bg-twitter i { color: #000; font-weight: 800; }
+
+  .icon-lg { font-size: 28px; }
 
   .platform-info {
     text-align: left;
@@ -140,7 +177,6 @@
 
   .platform-title {
     margin: 0;
-    color: var(--primary-purple);
     font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.3px;
@@ -370,13 +406,13 @@
       text-align: center;
     }
     
-    .platform-icon-wrapper {
-      width: 60px;
-      height: 60px;
+    .icon-circle {
+      width: 58px;
+      height: 58px;
     }
     
-    .platform-finalize-icon {
-      font-size: 24px;
+    .icon-lg {
+      font-size: 28px;
     }
     
     .premium-spinner-container {
