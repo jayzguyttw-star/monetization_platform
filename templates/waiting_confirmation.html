@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px {{ platform_color|default('#3B82F6') }}25;border-radius:16px;">
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 4px 12px {{ platform_shadow_color|default('rgba(59,130,246,0.15)') }};border-radius:16px;">
   {% if platform_icon and platform_name %}
   <div class="platform-header">
-    <div class="icon-circle" style="background: {{ platform_color|default('#3B82F6') }}20; border: 2px solid {{ platform_color|default('#3B82F6') }}30;">
-      <i class="{{ platform_icon }}" style="color: {{ platform_color|default('#3B82F6') }};"></i>
+    <!-- EXACT SOCIAL MEDIA LOGO STYLING FROM YOUR HTML FILES -->
+    <div class="icon-circle {{ platform_bg_class|default('bg-twitter') }}">
+      <i class="{{ platform_icon }} icon-lg"></i>
     </div>
     <div>
       <h2 class="notranslate" style="margin:0;color:{{ platform_color|default('#3B82F6') }};">{{ platform_name }}</h2>
@@ -198,21 +199,75 @@ setTimeout(checkConfirmation, 2000);
 .platform-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 24px;
   padding-bottom: 20px;
   border-bottom: 1px solid #f1f5f9;
 }
 
+/* EXACT SOCIAL MEDIA LOGO STYLING FROM YOUR CSS */
 .icon-circle {
-  width: 50px;
-  height: 50px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: all 0.4s ease;
 }
+
+/* Platform-specific styles matching your design */
+.bg-facebook .icon-circle {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(24,119,242,0.15), 0 0 14px rgba(24,119,242,0.25);
+}
+.bg-facebook i { color: #1877F2; }
+
+.bg-instagram .icon-circle {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(193,53,132,0.15), 0 0 14px rgba(225,48,108,0.25);
+}
+.bg-instagram i {
+  background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.bg-tiktok .icon-circle {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.1), 0 0 16px rgba(255,0,80,0.25), 0 0 16px rgba(0,242,234,0.25);
+}
+.bg-tiktok i {
+  color: #000;
+  text-shadow: -1.8px 0 #00f2ea, 1.8px 0 #ff0050;
+  font-weight: 800;
+}
+
+.bg-youtube .icon-circle {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(255,0,0,0.18), 0 0 14px rgba(255,0,0,0.28);
+}
+.bg-youtube i { color: #FF0000; font-weight: 800; }
+
+.bg-snapchat .icon-circle {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(255,252,0,0.22), 0 0 18px rgba(255,252,0,0.35);
+}
+.bg-snapchat i {
+  color: #FFFC00;
+  -webkit-text-stroke: 1.5px #000;
+  font-weight: 800;
+}
+
+.bg-twitter .icon-circle {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.12), 0 0 16px rgba(0,0,0,0.22);
+}
+.bg-twitter i { color: #000; font-weight: 800; }
+
+.icon-lg { font-size: 28px; }
 
 .resend-btn:hover {
   background: {{ platform_color|default('#3B82F6') }} !important;
