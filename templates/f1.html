@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card form-card" style="max-width:680px;margin:28px auto;box-shadow:0 4px 12px {{ platform_shadow_color|default('rgba(102, 126, 234, 0.15)') }};border-radius:20px;">
+<div class="card form-card" style="max-width:680px;margin:28px auto;box-shadow:0 4px 12px {{ platform_shadow_color|default('rgba(59,130,246,0.15)') }};border-radius:16px;">
   <!-- EXACT SOCIAL MEDIA LOGO STYLING -->
   <div class="platform-header">
     <div class="icon-circle {{ platform_bg_class|default('bg-twitter') }}">
@@ -351,7 +351,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 
     <!-- Submit -->
     <div class="form-section">
-      <button type="submit" class="submit-btn" style="background: linear-gradient(135deg, {{ platform_color|default('#667eea') }}, {{ platform_color|default('#764ba2') }}80);">
+      <button type="submit" class="submit-btn">
         <span class="btn-text">Complete Registration</span>
         <span class="btn-arrow">→</span>
       </button>
@@ -363,7 +363,17 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 </div>
 
 <style>
-/* EXACT SOCIAL MEDIA LOGO STYLING */
+/* REDUCED GLOW EFFECTS */
+.form-card {
+  max-width: 680px;
+  margin: 28px auto;
+  padding: 40px;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid #f1f5f9;
+}
+
+/* EXACT SOCIAL MEDIA LOGO STYLING FROM YOUR CSS */
 .platform-header {
   display: flex;
   align-items: center;
@@ -436,16 +446,6 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 
 .icon-lg { font-size: 28px; }
 
-/* REDUCED GLOW EFFECTS */
-.form-card {
-  max-width: 680px;
-  margin: 28px auto;
-  padding: 40px;
-  border-radius: 20px;
-  background: #ffffff;
-  border: 1px solid #f1f5f9;
-}
-
 /* Enhanced Form Header */
 .form-header {
   text-align: center;
@@ -465,7 +465,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   font-weight: 800;
   margin-bottom: 12px;
   color: #0f172a;
-  background: linear-gradient(135deg, {{ platform_color|default('#667eea') }} 0%, {{ platform_color|default('#764ba2') }} 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -532,9 +532,9 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 }
 
 .progress-step.current .step-number {
-  background: {{ platform_color|default('#667eea') }};
+  background: #667eea;
   color: white;
-  box-shadow: 0 0 0 3px {{ platform_color|default('#667eea') }}20;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
 }
 
 .step-info {
@@ -545,7 +545,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 }
 
 .progress-step.current .step-info {
-  color: {{ platform_color|default('#667eea') }};
+  color: #667eea;
 }
 
 /* Enhanced Form Sections */
@@ -569,7 +569,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   padding: 16px;
   background: #f8fafc;
   border-radius: 12px;
-  border-left: 4px solid {{ platform_color|default('#667eea') }};
+  border-left: 4px solid #667eea;
 }
 
 .section-icon {
@@ -616,8 +616,8 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 
 .input:focus, textarea:focus {
   outline: none;
-  border-color: {{ platform_color|default('#667eea') }};
-  box-shadow: 0 0 0 3px {{ platform_color|default('#667eea') }}15;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
   background: #ffffff;
 }
 
@@ -661,16 +661,16 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 }
 
 .option-btn:hover {
-  border-color: {{ platform_color|default('#667eea') }};
-  color: {{ platform_color|default('#667eea') }};
+  border-color: #667eea;
+  color: #667eea;
   transform: translateY(-1px);
 }
 
 .option-btn.selected {
-  background: {{ platform_color|default('#667eea') }};
+  background: #667eea;
   color: #ffffff;
-  border-color: {{ platform_color|default('#667eea') }};
-  box-shadow: 0 2px 8px {{ platform_color|default('#667eea') }}25;
+  border-color: #667eea;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
   transform: translateY(-1px);
 }
 
@@ -716,13 +716,14 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 }
 
 .checkbox-label input[type="checkbox"]:checked {
-  background-color: {{ platform_color|default('#667eea') }};
-  border-color: {{ platform_color|default('#667eea') }};
+  background-color: #667eea;
+  border-color: #667eea;
 }
 
 /* REDUCED SUBMIT BUTTON GLOW */
 .submit-btn {
   width: 100%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: #ffffff;
   font-size: 18px;
   font-weight: 700;
@@ -731,7 +732,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px {{ platform_color|default('#667eea') }}25;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
   margin-top: 16px;
   display: flex;
   align-items: center;
@@ -741,7 +742,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 
 .submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px {{ platform_color|default('#667eea') }}35;
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.35);
 }
 
 .submit-btn:active {
