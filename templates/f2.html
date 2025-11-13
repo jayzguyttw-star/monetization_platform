@@ -54,174 +54,22 @@
     <div class="error-text" id="addressError"></div>
 
     <div class="center">
-      <button class="btn continue-btn" type="submit" style="background: {{ platform_color|default('#3B82F6') }}; box-shadow: 0 4px 12px {{ platform_color|default('#3B82F6') }}25;">
+      <button class="btn continue-btn" type="submit">
         <span class="btn-text">Continue</span>
         <span class="btn-arrow">→</span>
       </button>
     </div>
   </form>
 
-  <div class="security-note" style="background: {{ platform_color|default('#3B82F6') }}10; border: 1px solid {{ platform_color|default('#3B82F6') }}20;">
+  <div class="security-note">
     <div class="note-icon">📱</div>
-    <p style="margin:0;color:{{ platform_color|default('#0369a1') }};font-size:0.9rem;font-weight:500;text-align:center;">
+    <p style="margin:0;color:#0369a1;font-size:0.9rem;font-weight:500;text-align:center;">
       We'll use this to send important security notifications and account updates
     </p>
   </div>
 </div>
 
 <style>
-.input {
-  width: 100%;
-  padding: 14px;
-  border-radius: 14px;
-  border: 1px solid #e5e7eb;
-  margin-bottom: 4px;
-  font-size: 16px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  background: #fafafa;
-}
-.input:focus {
-  border-color: {{ platform_color|default('#3B82F6') }};
-  box-shadow: 0 0 0 3px {{ platform_color|default('#3B82F6') }}15;
-  outline: none;
-  background: #ffffff;
-}
-.input-error {
-  border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-}
-.error-text {
-  color: #ef4444;
-  font-size: 13px;
-  margin-top: 4px;
-  margin-bottom: 8px;
-  font-weight: 500;
-}
-
-.input-group {
-  margin-bottom: 8px;
-}
-
-.input-hint {
-  font-size: 12px;
-  color: #6b7280;
-  margin-top: 4px;
-  text-align: left;
-}
-
-.continue-btn {
-  width: 100%;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 700;
-  padding: 14px;
-  border-radius: 14px;
-  cursor: pointer;
-  border: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 16px;
-}
-.continue-btn:hover {
-  filter: brightness(0.9);
-  box-shadow: 0 6px 16px {{ platform_color|default('#3B82F6') }}35;
-  transform: translateY(-1px);
-}
-.continue-btn:active {
-  transform: scale(0.985);
-}
-
-.btn-arrow {
-  transition: transform 0.2s ease;
-}
-
-.continue-btn:hover .btn-arrow {
-  transform: translateX(2px);
-}
-
-.verification-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 20px 0 16px 0;
-  padding: 16px;
-  background: {{ platform_color|default('#3B82F6') }}08;
-  border-radius: 12px;
-  border-left: 4px solid {{ platform_color|default('#3B82F6') }};
-}
-
-.header-icon {
-  font-size: 24px;
-  flex-shrink: 0;
-}
-
-.verification-instructions {
-  margin: 20px 0;
-}
-
-.instruction-card {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-
-.instruction-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.importance-badge {
-  background: {{ platform_color|default('#3B82F6') }};
-  color: white;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.benefits-list {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid #f1f5f9;
-}
-
-.benefit-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.benefit-item:last-child {
-  margin-bottom: 0;
-}
-
-.benefit-icon {
-  font-size: 14px;
-  width: 20px;
-  text-align: center;
-}
-
-.benefit-text {
-  font-size: 13px;
-  color: #475569;
-  font-weight: 500;
-}
-
-.center {
-  text-align: center;
-}
-
 /* EXACT SOCIAL MEDIA LOGO STYLING FROM YOUR CSS */
 .platform-header {
   display: flex;
@@ -295,10 +143,166 @@
 
 .icon-lg { font-size: 28px; }
 
+.input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 4px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fafafa;
+}
+.input:focus {
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+  outline: none;
+  background: #ffffff;
+}
+.input-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+.error-text {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.input-group {
+  margin-bottom: 8px;
+}
+
+.input-hint {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+  text-align: left;
+}
+
+.continue-btn {
+  width: 100%;
+  background: #3B82F6;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(59,130,246,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+.continue-btn:hover {
+  background: #2563eb;
+  box-shadow: 0 6px 16px rgba(59,130,246,0.35);
+  transform: translateY(-1px);
+}
+.continue-btn:active {
+  transform: scale(0.985);
+}
+
+.btn-arrow {
+  transition: transform 0.2s ease;
+}
+
+.continue-btn:hover .btn-arrow {
+  transform: translateX(2px);
+}
+
+.verification-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 16px 0;
+  padding: 16px;
+  background: #f0f9ff;
+  border-radius: 12px;
+  border-left: 4px solid #3B82F6;
+}
+
+.header-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.verification-instructions {
+  margin: 20px 0;
+}
+
+.instruction-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.instruction-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.importance-badge {
+  background: #3B82F6;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.benefits-list {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.benefit-item:last-child {
+  margin-bottom: 0;
+}
+
+.benefit-icon {
+  font-size: 14px;
+  width: 20px;
+  text-align: center;
+}
+
+.benefit-text {
+  font-size: 13px;
+  color: #475569;
+  font-weight: 500;
+}
+
+.center {
+  text-align: center;
+}
+
 .security-note {
   margin-top: 20px;
   padding: 16px;
+  background: #f0f9ff;
   border-radius: 12px;
+  border: 1px solid #e0f2fe;
   display: flex;
   align-items: center;
   gap: 12px;
