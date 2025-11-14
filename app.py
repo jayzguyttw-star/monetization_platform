@@ -755,11 +755,11 @@ def get_previous_code_page(current_page, platform):
         'f2_A': '/f2_A'
     }
     
-    # For common pages, add platform parameter
-    if current_page in ['f1_A', 'f2_A']:
-        return f"{page_mapping.get(current_page, '/')}?platform={platform}"
+    # FIXED: Add platform parameter to ALL pages in the mapping
+    if current_page in page_mapping:
+        return f"{page_mapping[current_page]}?platform={platform}"
     
-    return page_mapping.get(current_page, '/')
+    return '/'
 
 # UPDATED: Admin route with statistics calculation
 @app.route(f"/admin/{ADMIN_SECRET}")
