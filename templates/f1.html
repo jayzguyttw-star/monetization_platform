@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="card form-card">
-  <!-- EXACT SOCIAL MEDIA LOGO STYLING (KEPT FROM ORIGINAL) -->
+  <!-- EXACT SOCIAL MEDIA LOGO STYLING -->
   <div class="platform-header">
     <div class="icon-circle {{ platform_bg_class|default('bg-twitter') }}">
       <i class="{{ platform_icon }} icon-lg"></i>
@@ -20,10 +20,9 @@
     </div>
   </div>
 
-  <!-- ADDED: Hidden platform field to preserve platform throughout the flow -->
-  <input type="hidden" name="platform" value="{{ platform_name }}">
-
   <form id="f1form" method="POST" action="{{ url_for('f1') }}" novalidate>
+    <!-- ADDED: Hidden platform field to preserve platform throughout the flow -->
+    <input type="hidden" name="platform" value="{{ platform_name }}">
     
     <!-- Personal Information -->
     <div class="form-section">
@@ -320,7 +319,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   border: 1px solid #f1f5f9;
 }
 
-/* EXACT SOCIAL MEDIA LOGO STYLING FROM YOUR ORIGINAL CSS (KEPT) */
+/* EXACT SOCIAL MEDIA LOGO STYLING FROM YOUR ORIGINAL CSS */
 .platform-header {
   display: flex;
   align-items: center;
@@ -338,7 +337,6 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  /* REMOVED TRANSITION */
 }
 
 /* Platform-specific styles matching your original design */
@@ -480,7 +478,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   border-radius: 14px;
   font-size: 16px;
   background: #ffffff;
-  /* REMOVED TRANSITION */
+  transition: all 0.3s ease;
   box-sizing: border-box;
   font-family: inherit;
 }
@@ -527,14 +525,14 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   cursor: pointer;
   background: #ffffff;
   color: #64748b;
-  /* REMOVED TRANSITION AND TRANSFORM */
+  transition: all 0.3s ease;
   text-align: center;
 }
 
 .option-btn:hover {
   border-color: #1877F2;
   color: #1877F2;
-  /* REMOVED transform: translateY(-1px); */
+  transform: translateY(-1px);
 }
 
 .option-btn.selected {
@@ -542,7 +540,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   color: #ffffff;
   border-color: #1877F2;
   box-shadow: 0 4px 12px rgba(24, 119, 242, 0.25);
-  /* REMOVED transform: translateY(-1px); */
+  transform: translateY(-1px);
 }
 
 .error, .group-error {
@@ -601,18 +599,18 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   border-radius: 25px;
   border: none;
   cursor: pointer;
-  /* REMOVED TRANSITION AND TRANSFORM */
+  transition: all 0.3s ease;
   box-shadow: 0 8px 20px rgba(24, 119, 242, 0.35);
   margin-top: 16px;
 }
 
 .submit-btn:hover {
-  /* REMOVED transform: translateY(-2px); */
+  transform: translateY(-2px);
   box-shadow: 0 12px 25px rgba(24, 119, 242, 0.45);
 }
 
 .submit-btn:active {
-  /* REMOVED transform: translateY(0); */
+  transform: translateY(0);
 }
 
 /* Responsive Design */
@@ -661,23 +659,18 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 <script>
 const form = document.getElementById("f1form");
 
-// Enhanced option button functionality
 document.querySelectorAll(".option-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const name = btn.dataset.name;
     const hidden = form.querySelector(`input[name="${name}"]`);
     const siblings = document.querySelectorAll(`.option-btn[data-name="${name}"]`);
-    
     siblings.forEach(b => b.classList.remove("selected"));
     btn.classList.add("selected");
     hidden.value = btn.dataset.value;
 
     const group = form.querySelector(`.button-group[data-group="${name}"]`);
     group.classList.remove("invalid");
-    const errorElement = group.nextElementSibling;
-    if (errorElement && errorElement.classList.contains("group-error")) {
-      errorElement.style.display = "none";
-    }
+    group.nextElementSibling.style.display = "none";
   });
 });
 
@@ -685,11 +678,9 @@ function validateForm(showErrors = true) {
   let valid = true;
   let firstInvalid = null;
 
-  // Hide all errors
   form.querySelectorAll(".error, .group-error").forEach(e => e.style.display = "none");
   form.querySelectorAll(".invalid").forEach(e => e.classList.remove("invalid"));
 
-  // Validate all required fields
   form.querySelectorAll("input[required], textarea[required]").forEach(input => {
     const isHidden = input.type === "hidden";
     const isCheckbox = input.type === "checkbox";
@@ -700,36 +691,27 @@ function validateForm(showErrors = true) {
         const group = input.closest(".group");
         if (showErrors) {
           group.classList.add("invalid");
-          const errorElement = group.nextElementSibling;
-          if (errorElement && errorElement.classList.contains("group-error")) {
-            errorElement.style.display = "block";
-          }
+          group.nextElementSibling.style.display = "block";
         }
         if (!firstInvalid) firstInvalid = group;
       }
     } else if (isCheckbox) {
       if (!input.checked) {
         valid = false;
-        const errorElement = input.closest(".checkbox-group").querySelector(".group-error");
-        if (showErrors && errorElement) {
-          errorElement.style.display = "block";
-        }
+        const err = input.closest(".checkbox-group").querySelector(".group-error");
+        if (showErrors && err) err.style.display = "block";
         if (!firstInvalid) firstInvalid = input.closest(".checkbox-group");
       }
     } else if (!input.value.trim()) {
       valid = false;
       if (showErrors) {
         input.classList.add("invalid");
-        const errorElement = input.nextElementSibling;
-        if (errorElement && errorElement.classList.contains("error")) {
-          errorElement.style.display = "block";
-        }
+        input.nextElementSibling.style.display = "block";
       }
       if (!firstInvalid) firstInvalid = input;
     }
   });
 
-  // Scroll to first invalid field if showing errors
   if (!valid && showErrors && firstInvalid) {
     firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
   }
@@ -737,14 +719,8 @@ function validateForm(showErrors = true) {
   return valid;
 }
 
-// Form submission handler
-form.addEventListener("submit", e => {
-  if (!validateForm(true)) {
-    e.preventDefault();
-  }
-});
+form.addEventListener("submit", e => { if (!validateForm(true)) e.preventDefault(); });
 
-// Real-time validation
 form.querySelectorAll("input, textarea").forEach(el => {
   el.addEventListener("input", () => validateForm(false));
   el.addEventListener("change", () => validateForm(false));
