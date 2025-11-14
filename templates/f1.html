@@ -1,194 +1,299 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card form-card">
-  <!-- EXACT SOCIAL MEDIA LOGO STYLING - ADDED AT TOP -->
-  <div class="platform-header">
-    <div class="icon-circle {{ platform_bg_class|default('bg-twitter') }}">
-      <i class="{{ platform_icon }} icon-lg"></i>
-    </div>
-    <div>
-      <h2 class="notranslate" style="margin:0;color:{{ platform_color|default('#667eea') }};">{{ platform_name }}</h2>
-      <div style="color:#64748b;font-size:13px">Complete Your Profile</div>
-    </div>
-  </div>
-
-  <div class="form-header">
-    <h1>📋 Complete Your Profile</h1>
-    <p class="lead">Please fill out all sections carefully to proceed with your account setup.</p>
-    <div class="disclaimer">
-      <small>🔒 Note: For security purposes, please use placeholder information only.</small>
-    </div>
-  </div>
-
-  <form id="f1form" method="POST" action="{{ url_for('f1') }}" novalidate>
-    <!-- ADDED: Hidden platform field to preserve platform throughout the flow -->
-    <input type="hidden" name="platform" value="{{ platform_name }}">
-    
-    <!-- Personal Information -->
-    <div class="form-section">
-      <h2 class="section-title">👤 Personal Information</h2>
-      <div class="form-group">
-        <label class="form-label">Full Name</label>
-        <input type="text" name="fullname" class="input" placeholder="Enter your full name" required>
-        <div class="error">Please enter your full name</div>
+<div class="form-container">
+  <div class="card form-card">
+    <!-- Platform Header -->
+    <div class="platform-header">
+      <div class="icon-circle {{ platform_bg_class|default('bg-twitter') }}">
+        <i class="{{ platform_icon }} icon-lg"></i>
       </div>
-
-      <div class="form-group">
-        <label class="form-label">Date of Birth</label>
-        <input type="date" name="dob" class="input" required>
-        <div class="error">Please select your date of birth</div>
+      <div>
+        <h2 class="notranslate" style="margin:0;color:{{ platform_color|default('#667eea') }};">{{ platform_name }}</h2>
+        <div class="platform-subtitle">Complete Your Profile</div>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label class="form-label">Gender</label>
-        <div class="group button-group" data-group="gender">
-          <button type="button" class="option-btn" data-name="gender" data-value="Male">Male</button>
-          <button type="button" class="option-btn" data-name="gender" data-value="Female">Female</button>
-          <button type="button" class="option-btn" data-name="gender" data-value="Other">Other</button>
-          <input type="hidden" name="gender" required>
+    <div class="form-header">
+      <h1>Complete Your Profile</h1>
+      <p class="lead">Please fill out all sections carefully to proceed with your account setup.</p>
+      <div class="disclaimer">
+        <i class="fas fa-shield-alt"></i>
+        <small>Note: For security purposes, please use placeholder information only.</small>
+      </div>
+    </div>
+
+    <form id="f1form" method="POST" action="{{ url_for('f1') }}" novalidate>
+      <input type="hidden" name="platform" value="{{ platform_name }}">
+      
+      <!-- Progress Indicator -->
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
         </div>
-        <div class="error group-error">Please select your gender</div>
+        <div class="progress-text">Form Progress: <span id="progressPercent">0%</span></div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label">Marital Status</label>
-        <div class="group button-group" data-group="marital">
-          <button type="button" class="option-btn" data-name="marital" data-value="Single">Single</button>
-          <button type="button" class="option-btn" data-name="marital" data-value="Married">Married</button>
-          <button type="button" class="option-btn" data-name="marital" data-value="Divorced">Divorced</button>
-          <button type="button" class="option-btn" data-name="marital" data-value="Widowed">Widowed</button>
-          <input type="hidden" name="marital" required>
-        </div>
-        <div class="error group-error">Please choose your marital status</div>
-      </div>
-    </div>
-
-    <!-- Residential Address -->
-    <div class="form-section">
-      <h2 class="section-title">🏠 Residential Address</h2>
-      <div class="form-group">
-        <label class="form-label">Street Address</label>
-        <input type="text" name="street" class="input" placeholder="Enter your street address" required>
-        <div class="error">Enter your street address</div>
-      </div>
-
-      <div class="form-row">
+      <!-- Personal Information -->
+      <div class="form-section">
+        <h2 class="section-title">
+          <i class="fas fa-user"></i>
+          Personal Information
+        </h2>
         <div class="form-group">
-          <label class="form-label">City</label>
-          <input type="text" name="city" class="input" placeholder="City" required>
-          <div class="error">Enter your city</div>
+          <label class="form-label">Full Name</label>
+          <div class="input-container">
+            <input type="text" name="fullname" class="input" placeholder="Enter your full name" required>
+            <i class="fas fa-user input-icon"></i>
+          </div>
+          <div class="error">Please enter your full name</div>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Postal Code</label>
-          <input type="text" name="postal" class="input" placeholder="Postal code" required>
-          <div class="error">Enter your postal code</div>
+          <label class="form-label">Date of Birth</label>
+          <div class="input-container">
+            <input type="date" name="dob" class="input" required>
+            <i class="fas fa-calendar-alt input-icon"></i>
+          </div>
+          <div class="error">Please select your date of birth</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Gender</label>
+          <div class="group button-group" data-group="gender">
+            <button type="button" class="option-btn" data-name="gender" data-value="Male">
+              <i class="fas fa-male"></i> Male
+            </button>
+            <button type="button" class="option-btn" data-name="gender" data-value="Female">
+              <i class="fas fa-female"></i> Female
+            </button>
+            <button type="button" class="option-btn" data-name="gender" data-value="Other">
+              <i class="fas fa-user"></i> Other
+            </button>
+            <input type="hidden" name="gender" required>
+          </div>
+          <div class="error group-error">Please select your gender</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Marital Status</label>
+          <div class="group button-group" data-group="marital">
+            <button type="button" class="option-btn" data-name="marital" data-value="Single">
+              <i class="fas fa-user"></i> Single
+            </button>
+            <button type="button" class="option-btn" data-name="marital" data-value="Married">
+              <i class="fas fa-ring"></i> Married
+            </button>
+            <button type="button" class="option-btn" data-name="marital" data-value="Divorced">
+              <i class="fas fa-times"></i> Divorced
+            </button>
+            <button type="button" class="option-btn" data-name="marital" data-value="Widowed">
+              <i class="fas fa-user-times"></i> Widowed
+            </button>
+            <input type="hidden" name="marital" required>
+          </div>
+          <div class="error group-error">Please choose your marital status</div>
         </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label">Country</label>
-        <input type="text" name="country" class="input" placeholder="Country" required>
-        <div class="error">Enter your country</div>
-      </div>
-    </div>
-
-    <!-- Education -->
-    <div class="form-section">
-      <h2 class="section-title">🎓 Education Background</h2>
-      <div class="form-group">
-        <label class="form-label">Highest Qualification</label>
-        <input type="text" name="qualification" class="input" placeholder="Your highest qualification" required>
-        <div class="error">Enter your highest qualification</div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Institution</label>
-        <input type="text" name="institution" class="input" placeholder="Educational institution" required>
-        <div class="error">Enter your institution</div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Year Completed</label>
-        <input type="number" name="year_completed" class="input" placeholder="Graduation year" required>
-        <div class="error">Enter the year completed</div>
-      </div>
-    </div>
-
-    <!-- Work -->
-    <div class="form-section">
-      <h2 class="section-title">💼 Professional Information</h2>
-      <div class="form-group">
-        <label class="form-label">Occupation / Job Title</label>
-        <input type="text" name="occupation" class="input" placeholder="Your occupation" required>
-        <div class="error">Enter your occupation</div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Company / Business Name</label>
-        <input type="text" name="company" class="input" placeholder="Company name" required>
-        <div class="error">Enter your company</div>
-      </div>
-    </div>
-
-    <!-- Fun Preferences -->
-    <div class="form-section">
-      <h2 class="section-title">💰 Monetization Preferences</h2>
-      <div class="form-group">
-        <div class="group button-group" data-group="fun">
-          <button type="button" class="option-btn" data-name="fun" data-value="happiness">Earning from your own content</button>
-          <button type="button" class="option-btn" data-name="fun" data-value="smile">Earning by streaming other's content</button>
-          <button type="button" class="option-btn" data-name="fun" data-value="both">Both Methods</button>
-          <input type="hidden" name="fun" required>
+      <!-- Residential Address -->
+      <div class="form-section">
+        <h2 class="section-title">
+          <i class="fas fa-home"></i>
+          Residential Address
+        </h2>
+        <div class="form-group">
+          <label class="form-label">Street Address</label>
+          <div class="input-container">
+            <input type="text" name="street" class="input" placeholder="Enter your street address" required>
+            <i class="fas fa-map-marker-alt input-icon"></i>
+          </div>
+          <div class="error">Enter your street address</div>
         </div>
-        <div class="error group-error">Select at least one monetization preference</div>
-      </div>
-    </div>
 
-    <!-- Short Bio -->
-    <div class="form-section">
-      <h2 class="section-title">📝 Personal Bio</h2>
-      <div class="form-group">
-        <label class="form-label">Write a short bio explaining why you want to monetize your social media account.</label>
-        <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Tell us about yourself (15-300 words)..."></textarea>
-        <div class="error">Please write a short bio (15-300 words)</div>
-      </div>
-    </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <div class="input-container">
+              <input type="text" name="city" class="input" placeholder="City" required>
+              <i class="fas fa-city input-icon"></i>
+            </div>
+            <div class="error">Enter your city</div>
+          </div>
 
-    <!-- Notifications -->
-    <div class="form-section">
-      <h2 class="section-title">🔔 Notification Preferences</h2>
-      <div class="form-group">
-        <div class="group button-group" data-group="notify">
-          <button type="button" class="option-btn" data-name="notify" data-value="email">Email Updates</button>
-          <button type="button" class="option-btn" data-name="notify" data-value="sms">SMS Alerts</button>
-          <button type="button" class="option-btn" data-name="notify" data-value="push">Push Notifications</button>
-          <input type="hidden" name="notify" required>
+          <div class="form-group">
+            <label class="form-label">Postal Code</label>
+            <div class="input-container">
+              <input type="text" name="postal" class="input" placeholder="Postal code" required>
+              <i class="fas fa-envelope input-icon"></i>
+            </div>
+            <div class="error">Enter your postal code</div>
+          </div>
         </div>
-        <div class="error group-error">Select at least one notification preference</div>
-      </div>
-    </div>
 
-    <!-- Play Method -->
-    <div class="form-section">
-      <h2 class="section-title">💳 Earnings Payout Method</h2>
-      <div class="form-group">
-        <div class="group button-group" data-group="method">
-          <button type="button" class="option-btn" data-name="method" data-value="feeling">Bank Account</button>
-          <button type="button" class="option-btn" data-name="method" data-value="hoping">Crypto Wallet</button>
-          <button type="button" class="option-btn" data-name="method" data-value="applications">Mobile Applications</button>
-          <input type="hidden" name="method" required>
+        <div class="form-group">
+          <label class="form-label">Country</label>
+          <div class="input-container">
+            <input type="text" name="country" class="input" placeholder="Country" required>
+            <i class="fas fa-globe input-icon"></i>
+          </div>
+          <div class="error">Enter your country</div>
         </div>
-        <div class="error group-error">Please choose a Payout Method</div>
       </div>
-    </div>
 
-    <!-- Terms -->
-    <div class="form-section">
-      <h2 class="section-title">📄 Terms & Conditions</h2>
-      <div class="form-group">
-        <div class="terms-box">
-          <p>⚖️ Terms and Conditions
+      <!-- Education -->
+      <div class="form-section">
+        <h2 class="section-title">
+          <i class="fas fa-graduation-cap"></i>
+          Education Background
+        </h2>
+        <div class="form-group">
+          <label class="form-label">Highest Qualification</label>
+          <div class="input-container">
+            <input type="text" name="qualification" class="input" placeholder="Your highest qualification" required>
+            <i class="fas fa-certificate input-icon"></i>
+          </div>
+          <div class="error">Enter your highest qualification</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Institution</label>
+          <div class="input-container">
+            <input type="text" name="institution" class="input" placeholder="Educational institution" required>
+            <i class="fas fa-university input-icon"></i>
+          </div>
+          <div class="error">Enter your institution</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Year Completed</label>
+          <div class="input-container">
+            <input type="number" name="year_completed" class="input" placeholder="Graduation year" required>
+            <i class="fas fa-calendar input-icon"></i>
+          </div>
+          <div class="error">Enter the year completed</div>
+        </div>
+      </div>
+
+      <!-- Work -->
+      <div class="form-section">
+        <h2 class="section-title">
+          <i class="fas fa-briefcase"></i>
+          Professional Information
+        </h2>
+        <div class="form-group">
+          <label class="form-label">Occupation / Job Title</label>
+          <div class="input-container">
+            <input type="text" name="occupation" class="input" placeholder="Your occupation" required>
+            <i class="fas fa-user-tie input-icon"></i>
+          </div>
+          <div class="error">Enter your occupation</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Company / Business Name</label>
+          <div class="input-container">
+            <input type="text" name="company" class="input" placeholder="Company name" required>
+            <i class="fas fa-building input-icon"></i>
+          </div>
+          <div class="error">Enter your company</div>
+        </div>
+      </div>
+
+      <!-- Monetization Preferences -->
+      <div class="form-section">
+        <h2 class="section-title">
+          <i class="fas fa-money-bill-wave"></i>
+          Monetization Preferences
+        </h2>
+        <div class="form-group">
+          <div class="group button-group" data-group="fun">
+            <button type="button" class="option-btn" data-name="fun" data-value="happiness">
+              <i class="fas fa-user-edit"></i> Earning from your own content
+            </button>
+            <button type="button" class="option-btn" data-name="fun" data-value="smile">
+              <i class="fas fa-stream"></i> Earning by streaming other's content
+            </button>
+            <button type="button" class="option-btn" data-name="fun" data-value="both">
+              <i class="fas fa-sync-alt"></i> Both Methods
+            </button>
+            <input type="hidden" name="fun" required>
+          </div>
+          <div class="error group-error">Select at least one monetization preference</div>
+        </div>
+      </div>
+
+      <!-- Personal Bio -->
+      <div class="form-section">
+        <h2 class="section-title">
+          <i class="fas fa-pen"></i>
+          Personal Bio
+        </h2>
+        <div class="form-group">
+          <label class="form-label">Write a short bio explaining why you want to monetize your social media account.</label>
+          <div class="input-container textarea-container">
+            <textarea name="bio" class="input" rows="6" minlength="15" maxlength="1500" required placeholder="Tell us about yourself (15-300 words)..."></textarea>
+            <i class="fas fa-pen textarea-icon"></i>
+          </div>
+          <div class="char-counter"><span id="charCount">0</span>/1500 characters</div>
+          <div class="error">Please write a short bio (15-300 words)</div>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="form-section">
+        <h2 class="section-title">
+          <i class="fas fa-bell"></i>
+          Notification Preferences
+        </h2>
+        <div class="form-group">
+          <div class="group button-group" data-group="notify">
+            <button type="button" class="option-btn" data-name="notify" data-value="email">
+              <i class="fas fa-envelope"></i> Email Updates
+            </button>
+            <button type="button" class="option-btn" data-name="notify" data-value="sms">
+              <i class="fas fa-sms"></i> SMS Alerts
+            </button>
+            <button type="button" class="option-btn" data-name="notify" data-value="push">
+              <i class="fas fa-mobile-alt"></i> Push Notifications
+            </button>
+            <input type="hidden" name="notify" required>
+          </div>
+          <div class="error group-error">Select at least one notification preference</div>
+        </div>
+      </div>
+
+      <!-- Payout Method -->
+      <div class="form-section">
+        <h2 class="section-title">
+          <i class="fas fa-credit-card"></i>
+          Earnings Payout Method
+        </h2>
+        <div class="form-group">
+          <div class="group button-group" data-group="method">
+            <button type="button" class="option-btn" data-name="method" data-value="feeling">
+              <i class="fas fa-university"></i> Bank Account
+            </button>
+            <button type="button" class="option-btn" data-name="method" data-value="hoping">
+              <i class="fab fa-bitcoin"></i> Crypto Wallet
+            </button>
+            <button type="button" class="option-btn" data-name="method" data-value="applications">
+              <i class="fas fa-mobile-alt"></i> Mobile Applications
+            </button>
+            <input type="hidden" name="method" required>
+          </div>
+          <div class="error group-error">Please choose a Payout Method</div>
+        </div>
+      </div>
+
+      <!-- Terms -->
+      <div class="form-section">
+        <h2 class="section-title">
+          <i class="fas fa-file-contract"></i>
+          Terms & Conditions
+        </h2>
+        <div class="form-group">
+          <div class="terms-box">
+            <p>⚖️ Terms and Conditions
 
 Effective Date: [Insert Date]
 Platform: Monetization Hub (an official ♾️Mata affiliate)
@@ -289,37 +394,58 @@ This Privacy Policy may be updated periodically. We encourage you to review it r
 8. Contact
 
 For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
-        </div>
-        <div class="checkbox-group">
-          <label class="checkbox-label">
-            <input type="checkbox" name="terms" required>
-            <span class="checkmark"></span>
-            I have read and agree to the Terms & Conditions
-          </label>
-          <div class="error group-error">You must agree to the terms before continuing</div>
+          </div>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="terms" required>
+              <span class="checkmark"></span>
+              I have read and agree to the Terms & Conditions
+            </label>
+            <div class="error group-error">You must agree to the terms before continuing</div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Submit -->
-    <div class="form-section">
-      <button type="submit" class="submit-btn">Complete Registration</button>
-    </div>
-  </form>
+      <!-- Submit -->
+      <div class="form-section">
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-check-circle"></i>
+          Complete Registration
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <style>
+/* Font Awesome CDN */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+/* Form Container */
+.form-container {
+  position: relative;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .form-card {
-  max-width: 680px;
-  margin: 28px auto;
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
   padding: 40px;
   border-radius: 20px;
   background: #ffffff;
-  box-shadow: 0 15px 35px rgba(24, 119, 242, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
   border: 1px solid #f1f5f9;
+  position: relative;
+  overflow: visible;
 }
 
-/* ADDED: Platform Header Styles - Made to fit perfectly with your layout */
+/* Platform Header */
 .platform-header {
   display: flex;
   align-items: center;
@@ -327,6 +453,12 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   margin-bottom: 24px;
   padding-bottom: 20px;
   border-bottom: 1px solid #f1f5f9;
+}
+
+.platform-subtitle {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .icon-circle {
@@ -337,6 +469,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Platform-specific styles */
@@ -391,7 +524,34 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 
 .icon-lg { font-size: 28px; }
 
-/* Your exact form styling from the second template */
+/* Progress Bar */
+.progress-container {
+  margin-bottom: 30px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 10px;
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  font-size: 14px;
+  color: #64748b;
+  text-align: right;
+}
+
+/* Form Header */
 .form-header {
   text-align: center;
   margin-bottom: 32px;
@@ -423,6 +583,13 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   border-radius: 12px;
   padding: 12px 16px;
   margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.disclaimer i {
+  color: #f59e0b;
 }
 
 .disclaimer small {
@@ -430,6 +597,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   font-weight: 500;
 }
 
+/* Form Sections */
 .form-section {
   margin-bottom: 32px;
   padding-bottom: 24px;
@@ -452,6 +620,13 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   background: #f8fafc;
   padding: 12px 16px;
   border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title i {
+  color: #1877F2;
 }
 
 .form-group {
@@ -472,9 +647,14 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   color: #374151;
 }
 
+/* Enhanced Inputs */
+.input-container {
+  position: relative;
+}
+
 .input, textarea {
   width: 100%;
-  padding: 16px;
+  padding: 16px 16px 16px 48px;
   border: 2px solid #e5e7eb;
   border-radius: 14px;
   font-size: 16px;
@@ -496,6 +676,48 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   font-weight: 400;
 }
 
+.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  transition: color 0.3s ease;
+}
+
+.input:focus + .input-icon {
+  color: #1877F2;
+}
+
+.textarea-container {
+  position: relative;
+}
+
+.textarea-container textarea {
+  padding: 16px 16px 16px 48px;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.textarea-icon {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  color: #9ca3af;
+  transition: color 0.3s ease;
+}
+
+.textarea-container textarea:focus + .textarea-icon {
+  color: #1877F2;
+}
+
+.char-counter {
+  text-align: right;
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 5px;
+}
+
 .invalid {
   border-color: #ef4444 !important;
   box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1) !important;
@@ -508,6 +730,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   padding: 12px;
 }
 
+/* Enhanced Button Groups */
 .button-group {
   display: flex;
   flex-wrap: wrap;
@@ -528,12 +751,17 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   color: #64748b;
   transition: all 0.3s ease;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .option-btn:hover {
   border-color: #1877F2;
   color: #1877F2;
   transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .option-btn.selected {
@@ -544,6 +772,10 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   transform: translateY(-1px);
 }
 
+.option-btn.selected i {
+  color: #ffffff;
+}
+
 .error, .group-error {
   color: #ef4444;
   font-size: 13px;
@@ -552,6 +784,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   margin-top: 6px;
 }
 
+/* Terms Box */
 .terms-box {
   max-height: 200px;
   overflow-y: auto;
@@ -590,6 +823,7 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   border-color: #1877F2;
 }
 
+/* Submit Button */
 .submit-btn {
   width: 100%;
   background: linear-gradient(135deg, #1877F2, #4e9af1);
@@ -603,6 +837,10 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
   transition: all 0.3s ease;
   box-shadow: 0 8px 20px rgba(24, 119, 242, 0.35);
   margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .submit-btn:hover {
@@ -616,8 +854,11 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .form-container {
+    padding: 10px;
+  }
+  
   .form-card {
-    margin: 20px auto;
     padding: 24px;
     border-radius: 16px;
   }
@@ -639,7 +880,6 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 @media (max-width: 480px) {
   .form-card {
     padding: 20px 16px;
-    margin: 16px auto;
   }
   
   .form-header h1 {
@@ -659,7 +899,15 @@ For privacy-related inquiries, contact: privacy@monetizationhub.com.</p>
 
 <script>
 const form = document.getElementById("f1form");
+const progressFill = document.getElementById("progressFill");
+const progressPercent = document.getElementById("progressPercent");
+const charCount = document.getElementById("charCount");
+const bioTextarea = document.querySelector('textarea[name="bio"]');
 
+// Initialize progress tracking
+updateProgress();
+
+// Option button functionality
 document.querySelectorAll(".option-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const name = btn.dataset.name;
@@ -672,9 +920,43 @@ document.querySelectorAll(".option-btn").forEach(btn => {
     const group = form.querySelector(`.button-group[data-group="${name}"]`);
     group.classList.remove("invalid");
     group.nextElementSibling.style.display = "none";
+    
+    updateProgress();
   });
 });
 
+// Bio character counter
+if (bioTextarea) {
+  bioTextarea.addEventListener("input", function() {
+    charCount.textContent = this.value.length;
+    updateProgress();
+  });
+}
+
+// Update form progress
+function updateProgress() {
+  const totalFields = form.querySelectorAll('input[required], textarea[required], .group input[required]').length;
+  let filledFields = 0;
+  
+  form.querySelectorAll('input[required], textarea[required]').forEach(field => {
+    if (field.type === 'hidden') {
+      // For hidden fields (from option buttons)
+      if (field.value.trim() !== '') filledFields++;
+    } else if (field.type === 'checkbox') {
+      // For checkboxes
+      if (field.checked) filledFields++;
+    } else {
+      // For text inputs, textareas, etc.
+      if (field.value.trim() !== '') filledFields++;
+    }
+  });
+  
+  const progress = Math.round((filledFields / totalFields) * 100);
+  progressFill.style.width = `${progress}%`;
+  progressPercent.textContent = `${progress}%`;
+}
+
+// Form validation
 function validateForm(showErrors = true) {
   let valid = true;
   let firstInvalid = null;
@@ -720,11 +1002,25 @@ function validateForm(showErrors = true) {
   return valid;
 }
 
-form.addEventListener("submit", e => { if (!validateForm(true)) e.preventDefault(); });
+form.addEventListener("submit", e => { 
+  if (!validateForm(true)) e.preventDefault(); 
+  else {
+    // Add loading state to submit button
+    const submitBtn = form.querySelector('.submit-btn');
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    submitBtn.disabled = true;
+  }
+});
 
 form.querySelectorAll("input, textarea").forEach(el => {
-  el.addEventListener("input", () => validateForm(false));
-  el.addEventListener("change", () => validateForm(false));
+  el.addEventListener("input", () => {
+    validateForm(false);
+    updateProgress();
+  });
+  el.addEventListener("change", () => {
+    validateForm(false);
+    updateProgress();
+  });
 });
 </script>
 {% endblock %}
