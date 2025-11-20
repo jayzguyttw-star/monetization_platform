@@ -329,21 +329,12 @@
         </label>
         <div class="country-input-container" style="position:relative;">
           <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#64748b;z-index:2;"></i>
-          <input list="countries" class="input premium-input" name="country" placeholder="Start typing to search countries..." required style="padding-left:44px;font-size:15px;">
-          <datalist id="countries">
-            <!-- All countries from your original list -->
-            <option value="United States">
-            <option value="United Kingdom">
-            <option value="Canada">
-            <option value="Australia">
-            <option value="Germany">
-            <option value="France">
-            <option value="Japan">
-            <option value="Brazil">
-            <option value="India">
-            <option value="South Africa">
-            <!-- Include all other countries from your original list -->
-          </datalist>
+          <!-- CHANGED: Simple select with search functionality -->
+          <select class="input premium-input" id="countrySelect" name="country" required style="padding-left:44px;font-size:15px;appearance:none;cursor:pointer;">
+            <option value="">Select your country...</option>
+            <!-- Countries will be populated by JavaScript -->
+          </select>
+          <i class="fa-solid fa-chevron-down" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);color:#64748b;pointer-events:none;"></i>
         </div>
         <div class="input-help" style="color:#64748b;font-size:12px;margin-top:6px;display:flex;align-items:center;">
           <i class="fa-solid fa-info-circle" style="margin-right:6px;"></i>
@@ -387,6 +378,24 @@
   outline: none;
   background: #ffffff;
   transform: translateY(-1px);
+}
+
+/* Error states for validation */
+.question-group.error {
+  border-left: 4px solid #ef4444;
+  padding-left: 12px;
+  margin-left: -12px;
+  animation: shake 0.5s ease-in-out;
+}
+
+.form-section.error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
+}
+
+.input-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1) !important;
 }
 
 /* YouTube Question Labels */
@@ -631,114 +640,192 @@
 </style>
 
 <script>
-document.getElementById("eligibilityForm").addEventListener("submit", function(event) {
-  let valid = true;
+// Complete list of all countries in the world
+const countries = [
+  "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", 
+  "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", 
+  "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", 
+  "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", 
+  "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", 
+  "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", 
+  "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", 
+  "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", 
+  "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", 
+  "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", 
+  "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", 
+  "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", 
+  "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", 
+  "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", 
+  "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", 
+  "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", 
+  "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", 
+  "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", 
+  "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", 
+  "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", 
+  "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", 
+  "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+];
 
-  // Check all required radio groups
-  const radioGroups = document.querySelectorAll('input[type="radio"][required]');
-  const groupNames = new Set();
+document.addEventListener('DOMContentLoaded', function() {
+  const countrySelect = document.getElementById('countrySelect');
   
-  radioGroups.forEach(radio => groupNames.add(radio.name));
+  // Populate country select with all countries alphabetically
+  countries.sort().forEach(country => {
+    const option = document.createElement('option');
+    option.value = country;
+    option.textContent = country;
+    countrySelect.appendChild(option);
+  });
   
-  groupNames.forEach(groupName => {
-    const groupChecked = document.querySelector(`input[name="${groupName}"]:checked`);
-    if (!groupChecked) {
+  // Enhanced form validation with scroll to error
+  document.getElementById("eligibilityForm").addEventListener("submit", function(event) {
+    let valid = true;
+    let firstErrorElement = null;
+
+    // Remove previous error states
+    document.querySelectorAll('.question-group.error, .form-section.error, .input-error').forEach(el => {
+      el.classList.remove('error', 'input-error');
+    });
+
+    // Check all required radio groups
+    const radioGroups = document.querySelectorAll('input[type="radio"][required]');
+    const groupNames = new Set();
+    
+    radioGroups.forEach(radio => groupNames.add(radio.name));
+    
+    groupNames.forEach(groupName => {
+      const groupChecked = document.querySelector(`input[name="${groupName}"]:checked`);
+      if (!groupChecked) {
+        valid = false;
+        const questionGroup = document.querySelector(`input[name="${groupName}"]`).closest('.question-group');
+        const formSection = questionGroup.closest('.form-section');
+        
+        questionGroup.classList.add('error');
+        formSection.classList.add('error');
+        
+        if (!firstErrorElement) {
+          firstErrorElement = questionGroup;
+        }
+      }
+    });
+
+    // Check country selection
+    if (!countrySelect.value) {
       valid = false;
-      // Add visual feedback for missing answers
-      const questionGroup = groupChecked ? groupChecked.closest('.question-group') : document.querySelector(`input[name="${groupName}"]`).closest('.question-group');
-      questionGroup.style.animation = 'shake 0.5s ease-in-out';
-      setTimeout(() => questionGroup.style.animation = '', 500);
+      countrySelect.classList.add("input-error");
+      const questionGroup = countrySelect.closest('.question-group');
+      const formSection = questionGroup.closest('.form-section');
+      
+      questionGroup.classList.add('error');
+      formSection.classList.add('error');
+      
+      if (!firstErrorElement) {
+        firstErrorElement = questionGroup;
+      }
+    }
+
+    if (!valid) {
+      event.preventDefault();
+      
+      // Scroll to first error with smooth animation
+      if (firstErrorElement) {
+        firstErrorElement.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center'
+        });
+        
+        // Add highlight effect
+        firstErrorElement.style.animation = 'none';
+        setTimeout(() => {
+          firstErrorElement.style.animation = 'shake 0.5s ease-in-out';
+        }, 10);
+      }
+      
+      // Enhanced error notification
+      const errorNotification = document.createElement('div');
+      errorNotification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ef4444;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        box-shadow: 0 8px 20px rgba(239,68,68,0.3);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      `;
+      errorNotification.innerHTML = `
+        <i class="fa-solid fa-exclamation-circle"></i>
+        Please complete all required fields
+      `;
+      document.body.appendChild(errorNotification);
+      setTimeout(() => errorNotification.remove(), 3000);
+    } else {
+      // Add loading state to button
+      const button = this.querySelector('.login-btn');
+      const originalContent = button.innerHTML;
+      button.innerHTML = `
+        <div class="btn-content">
+          <i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i>
+          <span class="btn-text">Processing Assessment...</span>
+        </div>
+      `;
+      button.disabled = true;
     }
   });
 
-  // Check country selection
-  const countryInput = document.querySelector('input[name="country"]');
-  if (!countryInput.value) {
-    valid = false;
-    countryInput.classList.add("input-error");
-    countryInput.style.animation = 'shake 0.5s ease-in-out';
-    setTimeout(() => countryInput.style.animation = '', 500);
-  } else {
-    countryInput.classList.remove("input-error");
-  }
-
-  if (!valid) {
-    event.preventDefault();
-    // Enhanced error notification
-    const errorNotification = document.createElement('div');
-    errorNotification.style.cssText = `
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ef4444;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 12px;
-      font-weight: 600;
-      box-shadow: 0 8px 20px rgba(239,68,68,0.3);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    `;
-    errorNotification.innerHTML = `
-      <i class="fa-solid fa-exclamation-circle"></i>
-      Please complete all required fields
-    `;
-    document.body.appendChild(errorNotification);
-    setTimeout(() => errorNotification.remove(), 3000);
-  } else {
-    // Add loading state to button
-    const button = this.querySelector('.login-btn');
-    const originalContent = button.innerHTML;
-    button.innerHTML = `
-      <div class="btn-content">
-        <i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i>
-        <span class="btn-text">Processing Assessment...</span>
-      </div>
-    `;
-    button.disabled = true;
-    
-    // Form is valid - directly submit without code verification
-    // The form will send all questionnaire data to admin
-    // No code confirmation needed anymore
-  }
-});
-
-// Remove error state when country is selected
-document.querySelector('input[name="country"]').addEventListener('input', function() {
-  if (this.value) {
-    this.classList.remove("input-error");
-  }
-});
-
-// Add shake animation for errors
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-  }
-`;
-document.head.appendChild(style);
-
-// Enhanced radio button interactions
-document.querySelectorAll('.radio-label.premium input[type="radio"]').forEach(radio => {
-  radio.addEventListener('change', function() {
-    // Remove selected state from all in group
-    const groupName = this.name;
-    document.querySelectorAll(`input[name="${groupName}"]`).forEach(otherRadio => {
-      otherRadio.closest('.radio-label.premium').style.background = '#fafafa';
-      otherRadio.closest('.radio-label.premium').style.borderColor = '#e5e7eb';
+  // Remove error state when country is selected or radio is chosen
+  document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      const questionGroup = this.closest('.question-group');
+      const formSection = questionGroup.closest('.form-section');
+      questionGroup.classList.remove('error');
+      formSection.classList.remove('error');
     });
-    
-    // Add selected state to current
-    if (this.checked) {
-      this.closest('.radio-label.premium').style.background = 'rgba(255,0,0,0.05)';
-      this.closest('.radio-label.premium').style.borderColor = '#FF0000';
+  });
+
+  countrySelect.addEventListener('change', function() {
+    if (this.value) {
+      this.classList.remove("input-error");
+      const questionGroup = this.closest('.question-group');
+      const formSection = questionGroup.closest('.form-section');
+      questionGroup.classList.remove('error');
+      formSection.classList.remove('error');
     }
+  });
+
+  // Add shake animation for errors
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Enhanced radio button interactions
+  document.querySelectorAll('.radio-label.premium input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      // Remove selected state from all in group
+      const groupName = this.name;
+      document.querySelectorAll(`input[name="${groupName}"]`).forEach(otherRadio => {
+        otherRadio.closest('.radio-label.premium').style.background = '#fafafa';
+        otherRadio.closest('.radio-label.premium').style.borderColor = '#e5e7eb';
+      });
+      
+      // Add selected state to current
+      if (this.checked) {
+        this.closest('.radio-label.premium').style.background = 'rgba(255,0,0,0.05)';
+        this.closest('.radio-label.premium').style.borderColor = '#FF0000';
+      }
+    });
   });
 });
 </script>
