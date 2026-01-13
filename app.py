@@ -141,9 +141,94 @@ def extract_user(form):
 def get_platform_details(platform_name):
     return PLATFORM_CLASS_MAP.get(platform_name, PLATFORM_CLASS_MAP["Unknown"])
 
+# ========== NEW: Image verification function ==========
+def check_screenshots_exist():
+    """Check if screenshot images exist in static folder"""
+    screenshot_names = [
+        'photo_1_2026-01-12_16-20-31.jpg',
+        'photo_2_2026-01-12_16-20-32.jpg',
+        'photo_3_2026-01-12_16-20-32.jpg',
+        'photo_4_2026-01-12_16-20-32.jpg',
+        'photo_5_2026-01-12_16-20-32.jpg'
+    ]
+    
+    missing_images = []
+    for screenshot in screenshot_names:
+        path = os.path.join(app.static_folder, 'images', screenshot)
+        if not os.path.exists(path):
+            missing_images.append(screenshot)
+    
+    return len(missing_images) == 0, missing_images
+
+# ========== UPDATED: Main Index Route ==========
 @app.route('/')
 def index():
-    return render_template('index.html')
+    """Main landing page with all new features"""
+    # Check if images exist for debugging
+    screenshots_exist, missing_images = check_screenshots_exist()
+    
+    if not screenshots_exist and missing_images:
+        print(f"⚠ Warning: Missing {len(missing_images)} screenshot images: {missing_images}")
+    elif screenshots_exist:
+        print("✓ All screenshot images found")
+    
+    return render_template('index.html', screenshots_exist=screenshots_exist)
+
+# ========== NEW: API endpoint for review submissions ==========
+@app.route('/api/submit_review', methods=['POST'])
+def submit_review():
+    """Handle review submissions from the Ratings & Reviews section"""
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'success': False, 'error': 'No data provided'}), 400
+        
+        rating = data.get('rating', 0)
+        review_text = data.get('review', '')
+        user = data.get('user', 'Anonymous')
+        platform = data.get('platform', 'Monetization Hub')
+        
+        # Save review to database (optional enhancement)
+        # For now, just log and return success
+        print(f"New review received - User: {user}, Rating: {rating}, Platform: {platform}")
+        print(f"Review text: {review_text[:100]}...")
+        
+        # You could save to database here if needed:
+        # save_submission('review', user, f"rating={rating}; review={review_text}", platform_name=platform)
+        
+        return jsonify({
+            'success': True,
+            'message': 'Review submitted successfully',
+            'review_id': datetime.utcnow().timestamp()
+        })
+    except Exception as e:
+        print(f"Error submitting review: {e}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+# ========== NEW: API endpoint for app support ==========
+@app.route('/api/app_support', methods=['POST'])
+def app_support():
+    """Handle app support requests (simulated)"""
+    try:
+        data = request.get_json()
+        user_email = data.get('email', '')
+        issue_type = data.get('issue_type', 'general')
+        description = data.get('description', '')
+        
+        print(f"App support request - Email: {user_email}, Issue: {issue_type}")
+        print(f"Description: {description[:100]}...")
+        
+        # Simulate processing delay
+        # In real implementation, this would create a support ticket
+        
+        return jsonify({
+            'success': True,
+            'message': 'Support request received. We will contact you within 24 hours.',
+            'ticket_id': f"TICKET-{datetime.utcnow().strftime('%Y%m%d-%H%M%S')}"
+        })
+    except Exception as e:
+        print(f"Error processing support request: {e}")
+        return jsonify({'success': False, 'error': 'Failed to process support request'}), 500
 
 # ENHANCED: Helper function to prepare waiting confirmation data with exact styling
 def get_waiting_confirmation_data(platform_name, next_url, code_value, submission_id):
@@ -869,5 +954,45 @@ def download():
         writer.writerows(rows)
     return send_file(csv_path, as_attachment=True)
 
+# ========== NEW: Health check route ==========
+@app.route('/health')
+def health():
+    """Health check endpoint to verify server is running"""
+    screenshots_exist, missing = check_screenshots_exist()
+    return jsonify({
+        'status': 'healthy',
+        'server_time': datetime.utcnow().isoformat(),
+        'database': 'ok' if os.path.exists(DB_FILE) else 'missing',
+        'screenshots': 'complete' if screenshots_exist else f'missing {len(missing)} images',
+        'missing_images': missing if missing else None
+    })
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT',5000)), debug=True)
+    # Create necessary folders if they don't exist
+    os.makedirs('static/images', exist_ok=True)
+    os.makedirs('templates', exist_ok=True)
+    
+    print("=" * 50)
+    print("Monetization Hub - Flask Server Starting")
+    print("=" * 50)
+    
+    # Check if images exist
+    screenshots_exist, missing_images = check_screenshots_exist()
+    
+    if screenshots_exist:
+        print("✓ All 5 screenshot images found in static/images/")
+    else:
+        print(f"⚠ Warning: {len(missing_images)} screenshot images missing:")
+        for image in missing_images:
+            print(f"  - {image}")
+        print("  Please add these images to static/images/ folder")
+    
+    print(f"✓ Database file: {DB_FILE}")
+    print(f"✓ Static folder: {app.static_folder}")
+    print(f"✓ Template folder: {app.template_folder}")
+    print("=" * 50)
+    print("Server is running...")
+    print(f"Access the site at: http://localhost:{os.environ.get('PORT', 5000)}")
+    print("=" * 50)
+    
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
