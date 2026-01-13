@@ -178,7 +178,7 @@
     </div>
   </div>
 
-  <!-- NEW: Reviews Carousel Card with ALL 12 REVIEWS -->
+  <!-- NEW: Reviews Carousel Card -->
   <div class="card reviews-carousel-card">
     <div class="carousel-header">
       <h4>Most Helpful Review → <span class="swipe-hint">(swipe right to see more)</span></h4>
@@ -245,66 +245,6 @@
           <div class="review-rating">★★★★☆ · 7 months ago</div>
           <p class="review-text">Everything works well so far. Support replied when I needed help.</p>
         </div>
-        
-        <!-- Review 7 -->
-        <div class="review-item">
-          <div class="reviewer-info">
-            <span class="reviewer-name">👤 Daniel P.</span>
-            <span class="verified-badge">✔️ Verified User</span>
-          </div>
-          <div class="review-rating">★★★★★ · 7 months ago</div>
-          <p class="review-text">Easy setup and very user-friendly. I recommend it to new creators.</p>
-        </div>
-        
-        <!-- Review 8 -->
-        <div class="review-item">
-          <div class="reviewer-info">
-            <span class="reviewer-name">👤 Faith L.</span>
-            <span class="verified-badge">✔️ Verified User</span>
-          </div>
-          <div class="review-rating">★★★★★ · 6 months ago</div>
-          <p class="review-text">I love the transparency. They clearly explain how earnings are shared.</p>
-        </div>
-        
-        <!-- Review 9 -->
-        <div class="review-item">
-          <div class="reviewer-info">
-            <span class="reviewer-name">👤 John E.</span>
-            <span class="verified-badge">✔️ Verified User</span>
-          </div>
-          <div class="review-rating">★★★★☆ · 5 months ago</div>
-          <p class="review-text">Nice platform. Just needs a few more features but it's good.</p>
-        </div>
-        
-        <!-- Review 10 -->
-        <div class="review-item">
-          <div class="reviewer-info">
-            <span class="reviewer-name">👤 Naomi W.</span>
-            <span class="verified-badge">✔️ Verified User</span>
-          </div>
-          <div class="review-rating">★★★★★ · 4 months ago</div>
-          <p class="review-text">Simple, clean, and effective. No issues so far.</p>
-        </div>
-        
-        <!-- Review 11 -->
-        <div class="review-item">
-          <div class="reviewer-info">
-            <span class="reviewer-name">👤 Victor A.</span>
-            <span class="verified-badge">✔️ Verified User</span>
-          </div>
-          <div class="review-rating">★★★★★ · 3 months ago</div>
-          <p class="review-text">The monetization system is straightforward. Everything feels automated.</p>
-        </div>
-        
-        <!-- Review 12 -->
-        <div class="review-item">
-          <div class="reviewer-info">
-            <span class="reviewer-name">👤 Linda C.</span>
-            <span class="verified-badge">✔️ Verified User</span>
-          </div>
-          <div class="review-rating">★★★★★ · 2 months ago</div>
-          <p class="review-text">Very helpful platform for social media users. Glad I tried it.</p>
-        </div>
       </div>
     </div>
     
@@ -315,47 +255,46 @@
       <span class="carousel-dot"></span>
       <span class="carousel-dot"></span>
       <span class="carousel-dot"></span>
-      <span class="carousel-dot"></span>
-      <span class="carousel-dot"></span>
-      <span class="carousel-dot"></span>
-      <span class="carousel-dot"></span>
-      <span class="carousel-dot"></span>
-      <span class="carousel-dot"></span>
     </div>
   </div>
 
-  <!-- NEW: Screenshots Preview Card with FIXED IMAGE PATHS -->
+  <!-- NEW: Screenshots Preview Card with YOUR IMAGES -->
   <div class="card screenshots-card">
     <div class="screenshots-header">
       <h4>🔍 Preview <span class="swipe-hint">(Swipe right to view app screenshots)</span></h4>
     </div>
     
     <div class="screenshots-container">
-      <!-- Your actual image files - FIXED: Using direct paths -->
-      <img src="/static/images/photo_1_2026-01-12_16-20-31.jpg" 
+      <!-- Your actual image files -->
+      <img src="{{ url_for('static', filename='images/photo_1_2026-01-12_16-20-31.jpg') }}" 
            class="screenshot-img" 
            alt="Monetization Hub Dashboard"
-           loading="lazy">
+           loading="lazy"
+           onerror="this.onerror=null; this.style.display='none';">
       
-      <img src="/static/images/photo_2_2026-01-12_16-20-32.jpg" 
+      <img src="{{ url_for('static', filename='images/photo_2_2026-01-12_16-20-32.jpg') }}" 
            class="screenshot-img" 
            alt="Earnings Overview"
-           loading="lazy">
+           loading="lazy"
+           onerror="this.onerror=null; this.style.display='none';">
       
-      <img src="/static/images/photo_3_2026-01-12_16-20-32.jpg" 
+      <img src="{{ url_for('static', filename='images/photo_3_2026-01-12_16-20-32.jpg') }}" 
            class="screenshot-img" 
            alt="Platform Integration"
-           loading="lazy">
+           loading="lazy"
+           onerror="this.onerror=null; this.style.display='none';">
       
-      <img src="/static/images/photo_4_2026-01-12_16-20-32.jpg" 
+      <img src="{{ url_for('static', filename='images/photo_4_2026-01-12_16-20-32.jpg') }}" 
            class="screenshot-img" 
            alt="Analytics Screen"
-           loading="lazy">
+           loading="lazy"
+           onerror="this.onerror=null; this.style.display='none';">
       
-      <img src="/static/images/photo_5_2026-01-12_16-20-32.jpg" 
+      <img src="{{ url_for('static', filename='images/photo_5_2026-01-12_16-20-32.jpg') }}" 
            class="screenshot-img" 
            alt="Withdrawal Process"
-           loading="lazy">
+           loading="lazy"
+           onerror="this.onerror=null; this.style.display='none';">
     </div>
     
     <!-- Optional caption -->
@@ -1083,16 +1022,18 @@
 }
 
 /* Fallback for broken images */
-.screenshot-img:before {
-  content: "📱";
-  font-size: 24px;
+.screenshot-placeholder {
+  min-width: 200px;
+  height: 120px;
+  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
   color: #64748b;
-  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
-  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  border: 2px dashed #94a3b8;
 }
 
 /* ============= APP INFORMATION ============= */
@@ -1413,7 +1354,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Reviews carousel dots - UPDATED for 12 reviews
+  // Reviews carousel dots
   const carouselDots = document.querySelectorAll('.carousel-dot');
   const reviewsTrack = document.getElementById('reviewsTrack');
   
@@ -1444,11 +1385,11 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
 
-    // Auto-scroll carousel every 5 seconds - UPDATED for 12 reviews
+    // Auto-scroll carousel every 5 seconds
     let currentCarouselIndex = 0;
-    const totalReviews = 12; // Changed from 6 to 12
+    const totalReviews = 6;
     
-    let autoScroll = setInterval(() => {
+    const autoScroll = setInterval(() => {
       currentCarouselIndex = (currentCarouselIndex + 1) % totalReviews;
       const itemWidth = 280 + 16;
       
@@ -1498,12 +1439,8 @@ document.addEventListener('DOMContentLoaded', function() {
   screenshotImages.forEach(img => {
     img.addEventListener('error', function() {
       console.log('Failed to load image:', this.src);
-      // Create fallback placeholder
+      // Hide broken image
       this.style.display = 'none';
-      const placeholder = document.createElement('div');
-      placeholder.className = 'screenshot-placeholder';
-      placeholder.textContent = '📱 App Screenshot';
-      this.parentNode.appendChild(placeholder);
     });
     
     // Optional: Add click to enlarge feature
