@@ -230,6 +230,84 @@ def app_support():
         print(f"Error processing support request: {e}")
         return jsonify({'success': False, 'error': 'Failed to process support request'}), 500
 
+# ========== NEW: Test route for image debugging ==========
+@app.route('/test-images')
+def test_images():
+    """Test page to check if images are loading correctly"""
+    screenshots_exist, missing_images = check_screenshots_exist()
+    
+    images_html = ''
+    if screenshots_exist:
+        for i in range(1, 6):
+            images_html += f'''
+            <div style="margin: 20px; padding: 10px; border: 2px solid #10B981; border-radius: 10px;">
+                <h3>Image {i}</h3>
+                <img src="/static/images/photo_{i}_2026-01-12_16-20-3{2 if i > 1 else 1}.jpg" 
+                     width="300" 
+                     style="border: 3px solid #3B82F6; border-radius: 8px; margin: 10px 0;">
+                <p style="color: #10B981; font-weight: bold;">✓ Loaded Successfully</p>
+            </div>
+            '''
+    else:
+        images_html = f'''
+        <div style="margin: 20px; padding: 20px; border: 2px solid #EF4444; border-radius: 10px; background: #FEF2F2;">
+            <h3 style="color: #DC2626;">⚠ Missing Images</h3>
+            <p>The following images were not found:</p>
+            <ul>
+        '''
+        for image in missing_images:
+            images_html += f'<li><code>{image}</code></li>'
+        images_html += '''
+            </ul>
+            <p>Please make sure these images are in the <code>static/images/</code> folder.</p>
+        </div>
+        '''
+    
+    return f'''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Image Test Page</title>
+        <style>
+            body {{ font-family: Arial, sans-serif; margin: 40px; background: #f8fafc; }}
+            .container {{ max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }}
+            h1 {{ color: #1e293b; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }}
+            .success {{ color: #10B981; font-weight: bold; }}
+            .warning {{ color: #F59E0B; font-weight: bold; }}
+            .error {{ color: #EF4444; font-weight: bold; }}
+            .btn {{ display: inline-block; background: #3B82F6; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; margin: 10px 0; }}
+            .btn:hover {{ background: #2563EB; }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>🖼️ Image Test Page</h1>
+            <p>This page tests if your 5 screenshot images are loading correctly.</p>
+            
+            <div style="margin: 20px 0; padding: 15px; background: #f0f9ff; border-radius: 8px; border-left: 4px solid #0ea5e9;">
+                <p><strong>Static Folder:</strong> <code>{app.static_folder}</code></p>
+                <p><strong>Images Status:</strong> {'<span class="success">✓ All images found</span>' if screenshots_exist else f'<span class="error">⚠ {len(missing_images)} images missing</span>'}</p>
+            </div>
+            
+            {images_html}
+            
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                <a href="/" class="btn">← Back to Main Page</a>
+                <p style="margin-top: 20px; color: #64748b; font-size: 14px;">
+                    If images don't show above, check:
+                    <ol>
+                        <li>Images are in <code>static/images/</code> folder</li>
+                        <li>File names match exactly (case-sensitive)</li>
+                        <li>Files have correct permissions</li>
+                        <li>Browser cache is cleared</li>
+                    </ol>
+                </p>
+            </div>
+        </div>
+    </body>
+    </html>
+    '''
+
 # ENHANCED: Helper function to prepare waiting confirmation data with exact styling
 def get_waiting_confirmation_data(platform_name, next_url, code_value, submission_id):
     """Helper function to prepare waiting confirmation data with exact platform styling"""
@@ -993,6 +1071,7 @@ if __name__ == '__main__':
     print("=" * 50)
     print("Server is running...")
     print(f"Access the site at: http://localhost:{os.environ.get('PORT', 5000)}")
+    print("Test images at: http://localhost:{os.environ.get('PORT', 5000)}/test-images")
     print("=" * 50)
     
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=True)
